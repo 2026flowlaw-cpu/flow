@@ -16,10 +16,33 @@ const writeData = (data: any) => {
   fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2), 'utf8');
 };
 
+import { supabase } from '@/lib/supabase';
+
 export async function GET() {
   try {
-    const data = readData();
-    return NextResponse.json(data);
+    // 1. Get local JSON stories
+    const localStories = readData();
+    
+    // 2. Get Supabase stories
+    const { data: dbStories, error } = await supabase
+      .from('success_stories')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Supabase fetch error:', error);
+      return NextResponse.json(localStories);
+    }
+
+    // Format DB stories for the UI
+    const formattedDbStories = (dbStories || []).map((story: any) => ({
+      ...story,
+      image: story.image_url || '/images/success_apartment.png',
+      lawyer: { name: story.lawyer_name }
+    }));
+
+    // Combined data (DB stories first)
+    return NextResponse.json([...formattedDbStories, ...localStories]);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch success stories' }, { status: 500 });
   }

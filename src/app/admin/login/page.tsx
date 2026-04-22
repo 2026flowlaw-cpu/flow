@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
@@ -14,38 +14,50 @@ export default function AdminLoginPage() {
 
   const router = useRouter();
 
+  useEffect(() => {
+    // 세션이 이미 있는지 확인
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        router.push('/admin/dashboard');
+      }
+    };
+    checkSession();
+  }, [router]);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setErrorMessage(null);
 
+    console.log('로그인 시도:', email);
+
     try {
       if (!supabase) {
-        throw new Error('수파베이스 클라이언트가 초기화되지 않았습니다. 환경 변수를 확인해주세요.');
+        setErrorMessage('수파베이스 클라이언트 설정 오류');
+        return;
       }
+
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
-      console.log('Login Response:', { data, error });
+      console.log('수파베이스 응답:', { data, error });
 
       if (error) {
-        // Show detailed error from Supabase
-        setErrorMessage(error.message === 'Invalid login credentials' 
-          ? '이메일 또는 비밀번호가 올바르지 않습니다.' 
-          : error.message);
-        console.error('Supabase Login Error:', error.message);
+        // 상세 에러 노출 (영문 그대로 노출하여 원인 파악)
+        setErrorMessage(`로그인 실패: ${error.message} (${error.status})`);
         return;
       }
 
       if (data.user) {
-        console.log('Login Success! User:', data.user);
+        console.log('로그인 성공!');
         router.push('/admin/dashboard');
       }
     } catch (err: any) {
-      console.error('Unexpected Login Error:', err);
-      setErrorMessage(err.message || '로그인 처리 중 알 수 없는 오류가 발생했습니다.');
+      console.error('로그인 에러:', err);
+      setErrorMessage(`오류 발생: ${err.message || '알 수 없는 에러'}`);
     } finally {
       setIsLoading(false);
     }
@@ -86,7 +98,12 @@ export default function AdminLoginPage() {
             />
           </div>
 
-          {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+          {errorMessage && (
+            <div className={styles.errorBox}>
+               <p className={styles.error}>{errorMessage}</p>
+               <p className={styles.help}>* 비밀번호가 맞는데 안된다면 수파베이스에서 유저 Confirm을 확인해주세요.</p>
+            </div>
+          )}
 
           <button type="submit" className={styles.loginBtn} disabled={isLoading}>
             {isLoading ? '인증 중...' : '로그인'}

@@ -51,7 +51,12 @@ const menuData: MenuItem[] = [
     title: '성공사례',
     href: '/success-stories',
     subItems: [
-      { name: '주요 성공사례', href: '/success-stories' },
+      { name: '플로우 소식', href: '/news/flow' },
+      { name: '성공사례', href: '/success-stories' },
+      { name: '언론보도', href: '/news/press' },
+      { name: '유튜브', href: 'https://youtube.com', isExternal: true },
+      { name: '법률칼럼', href: '/columns' },
+      { name: '네이버 블로그', href: 'https://blog.naver.com', isExternal: true },
     ]
   },
   {

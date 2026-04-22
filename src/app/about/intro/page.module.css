@@ -1,0 +1,263 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sub-Hero Section */
+.subHero {
+  position: relative;
+  height: 50vh;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  color: white;
+  margin-top: 80px; /* Offset for sticky header */
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(10, 27, 57, 0.8) 0%, rgba(10, 27, 57, 0.3) 100%);
+  z-index: 1;
+}
+
+.heroContainer {
+  position: relative;
+  z-index: 2;
+}
+
+.heroTitle {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.heroSubtitle {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* Greetings Section */
+.greetingsGrid {
+  display: flex;
+  gap: 60px;
+}
+
+.sideLabel {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--accent);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  border-right: 1px solid var(--border);
+  padding-right: 20px;
+  letter-spacing: 5px;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 40px;
+}
+
+.textBlock {
+  font-size: 17px;
+  line-height: 2;
+  color: #444;
+}
+
+.textBlock p {
+  margin-bottom: 24px;
+}
+
+.signature {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.signature span {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.signature strong {
+  font-size: 20px;
+  color: var(--primary);
+}
+
+/* Dark Section (Vision) */
+.darkSection {
+  background: var(--primary);
+  color: white;
+  padding: 100px 0;
+}
+
+.centerTitle {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 60px;
+  color: var(--accent);
+}
+
+.visionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.visionCard {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.visionCard:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-10px);
+}
+
+.visionNumber {
+  font-size: 48px;
+  font-weight: 800;
+  color: rgba(197, 160, 89, 0.3);
+  margin-bottom: 20px;
+}
+
+.visionCard h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--accent);
+}
+
+.visionCard p {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* Philosophy Section */
+.philosophyHeader {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.philosophyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.philosophyItem {
+  text-align: center;
+}
+
+.icon {
+  font-size: 40px;
+  margin-bottom: 24px;
+}
+
+.philosophyItem h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--primary);
+}
+
+.philosophyItem p {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Split Section (Reason) */
+.splitSection {
+  display: flex;
+  min-height: 600px;
+}
+
+.splitImage {
+  flex: 1;
+  position: relative;
+}
+
+.splitContent {
+  flex: 1;
+  background: var(--bg-soft);
+  display: flex;
+  align-items: center;
+  padding: 80px;
+}
+
+.contentInner {
+  max-width: 500px;
+}
+
+/* Accent Section (Differentiation) */
+.accentSection {
+  padding: 100px 0;
+  background: linear-gradient(rgba(10, 27, 57, 0.03), rgba(10, 27, 57, 0.03));
+}
+
+.differentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.diffSubtitle {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.diffList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.diffItem {
+  background: white;
+  padding: 30px;
+  border-left: 4px solid var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.diffItem strong {
+  display: block;
+  font-size: 18px;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.diffItem p {
+  font-size: 15px;
+  color: #666;
+}
+
+@media (max-width: 1024px) {
+  .visionGrid, .philosophyGrid, .differentGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .splitSection {
+    flex-direction: column;
+  }
+  .splitImage {
+    height: 400px;
+  }
+  .splitContent {
+    padding: 40px 20px;
+  }
+}

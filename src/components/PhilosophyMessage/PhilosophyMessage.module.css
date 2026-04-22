@@ -1,0 +1,116 @@
+.section {
+  position: relative;
+  padding: 100px 0;
+  background-image: url('/images/philosophy_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 1;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--primary);
+}
+
+.content {
+  max-width: 600px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 32px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.8;
+  opacity: 0.9;
+  margin-bottom: 40px;
+}
+
+.button {
+  background: var(--primary);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 4px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: var(--accent);
+  transform: translateX(5px);
+}
+
+.statsBox {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 60px;
+  border-radius: 1000px;
+  text-align: center;
+  width: 320px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+
+.statsLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: #3B82F6;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.number {
+  font-size: 84px;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.numberSuffix {
+  font-size: 20px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.statsText {
+  font-size: 16px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    gap: 60px;
+    text-align: center;
+  }
+  .statsBox {
+    width: 280px;
+    height: 280px;
+    padding: 40px;
+  }
+}

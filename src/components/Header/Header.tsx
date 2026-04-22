@@ -1,0 +1,139 @@
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import styles from './Header.module.css';
+
+const menuData = [
+  {
+    title: '회사소개',
+    href: '/about/intro',
+    subItems: [
+      { name: '법무법인 일신', href: '/about/intro' },
+      { name: '대표인사말', href: '/about/greetings' },
+      { name: '오시는길', href: '/about/location' },
+    ]
+  },
+  {
+    title: '구성원소개',
+    href: '/lawyers/profiles',
+    subItems: [
+      { name: '변호사 소개', href: '/lawyers/profiles' },
+    ]
+  },
+  {
+    title: '업무분야',
+    href: '#practice',
+    subItems: [
+      { name: '집단소송', href: '#practice' },
+      { name: '하자소송', href: '#practice' },
+      { name: '부동산분쟁', href: '#practice' },
+      { name: '건설분쟁', href: '#practice' },
+    ]
+  },
+  {
+    title: '성공사례',
+    href: '/success-stories',
+    subItems: [
+      { name: '주요 성공사례', href: '/success-stories' },
+    ]
+  },
+  {
+    title: '상담게시판',
+    href: '/consult',
+    subItems: [
+      { name: '상담신청', href: '/consult' },
+    ]
+  }
+];
+
+const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close menu when a link is clicked
+  const handleLinkClick = () => {
+    setHoveredIndex(null);
+  };
+
+  // Close menu on navigation
+  useEffect(() => {
+    setHoveredIndex(null);
+  }, [pathname]);
+
+  const shouldBeSolid = isScrolled || hoveredIndex !== null || !isHomePage;
+
+  return (
+    <header 
+      className={`${styles.header} ${shouldBeSolid ? styles.solid : styles.transparent}`}
+      onMouseLeave={() => setHoveredIndex(null)}
+    >
+      <div className={`${styles.container} container`}>
+        <Link href="/" className={styles.logo} onClick={handleLinkClick}>
+          <span className={styles.logoText}>법무법인 <span className="accent-text">일신</span></span>
+        </Link>
+        <nav className={styles.nav}>
+          {menuData.map((item, index) => (
+            <div 
+              key={index} 
+              className={`${styles.navItem} ${hoveredIndex === index ? styles.hovered : ''}`}
+              onMouseEnter={() => setHoveredIndex(index)}
+            >
+              <Link 
+                href={item.href} 
+                className={styles.navLink}
+                onClick={handleLinkClick}
+              >
+                {item.title}
+              </Link>
+              <div 
+                className={`${styles.dropdown} ${hoveredIndex === index ? styles.showDropdown : ''}`}
+              >
+                <div className={styles.dropdownContent}>
+                  {item.subItems.map((sub, sIndex) => (
+                    <Link 
+                      key={sIndex} 
+                      href={sub.href} 
+                      className={styles.subLink}
+                      target={sub.isExternal ? "_blank" : undefined}
+                      onClick={handleLinkClick}
+                    >
+                      {sub.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </nav>
+        <div className={styles.actions}>
+          <Link href="/admin/login" className={styles.loginBtn} onClick={handleLinkClick}>
+            로그인
+          </Link>
+          <Link href="/consult" className={styles.consultButton} onClick={handleLinkClick}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>상담예약</span>
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;

@@ -1,0 +1,108 @@
+.hero {
+  position: relative;
+  height: 90vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  background-image: url('/location_hero_bg_1776063926973.png');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(10, 27, 57, 0.8) 0%, rgba(10, 27, 57, 0.2) 100%);
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+.kicker {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 24px;
+  display: block;
+}
+
+.title {
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 40px;
+}
+
+.title span {
+  font-size: 32px;
+  font-weight: 400;
+  display: block;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+}
+
+.primaryBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 16px 40px;
+  font-size: 16px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.secondaryBtn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 16px 40px;
+  font-size: 16px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.primaryBtn:hover, .secondaryBtn:hover {
+  background: white;
+  color: #0A1B39;
+  border-color: white;
+}
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 70vh;
+    min-height: 500px;
+  }
+  .title {
+    font-size: 42px;
+  }
+  .title span {
+    font-size: 20px;
+  }
+  .actions {
+    flex-direction: column;
+  }
+}

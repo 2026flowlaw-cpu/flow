@@ -1,0 +1,28 @@
+.vision {
+  padding: 120px 0;
+  background-color: #0A1B39;
+  text-align: center;
+  color: white;
+}
+
+.kicker {
+  font-size: 14px;
+  font-weight: 700;
+  color: #C5A059;
+  letter-spacing: 4px;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 32px;
+  }
+}

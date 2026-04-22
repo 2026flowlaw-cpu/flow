@@ -1,0 +1,160 @@
+.ctaSection {
+  padding: 80px 0 120px;
+  background-color: #ffffff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.card {
+  position: relative;
+  padding: 50px;
+  border-radius: 24px;
+  text-decoration: none;
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  min-height: 280px;
+}
+
+/* Kakao Card */
+.kakaoCard {
+  background: linear-gradient(135deg, #FEE500 0%, #F9E000 100%);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.kakaoCard .label {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.kakaoCard .title {
+  color: #3C1E1E;
+}
+
+.kakaoCard .text {
+  color: rgba(60, 30, 30, 0.7);
+}
+
+.kakaoCard .actionBtn {
+  background-color: #3C1E1E;
+  color: #ffffff;
+}
+
+/* Phone Card */
+.phoneCard {
+  background: linear-gradient(135deg, #0A1B39 0%, #1a2c4d 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.phoneCard .label {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.phoneCard .title {
+  color: #ffffff;
+}
+
+.phoneCard .text {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.phoneCard .actionBtn {
+  background: linear-gradient(135deg, #C5A059 0%, #D4AF37 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+}
+
+/* Common Card Elements */
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.text {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 80%;
+}
+
+.actionBtn {
+  margin-top: 30px;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+  transition: all 0.3s ease;
+}
+
+/* Icon Background Decor */
+.card::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 180px;
+  opacity: 0.05;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+.kakaoCard::after { content: '💬'; }
+.phoneCard::after { content: '📞'; }
+
+/* Hover Effects */
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.12);
+}
+
+.card:hover::after {
+  transform: scale(1.2) rotate(-5deg);
+  opacity: 0.1;
+}
+
+.card:hover .actionBtn {
+  transform: translateX(5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 30px;
+    min-height: auto;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .text {
+    max-width: 100%;
+  }
+}

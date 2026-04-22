@@ -1,0 +1,45 @@
+.gallery {
+  padding: 80px 0;
+  background-color: white;
+}
+
+.grid {
+  display: flex;
+  height: 600px;
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.item {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.item:hover .image {
+  transform: scale(1.05);
+}
+
+.img1 { background-image: url('/office_hallway_premium_1776064223861.png'); }
+.img2 { background-image: url('/office_interior_gallery_1776063960533.png'); background-position: left; }
+.img3 { background-image: url('/office_interior_gallery_1776063960533.png'); background-position: right; }
+
+@media (max-width: 768px) {
+  .grid {
+    flex-direction: column;
+    height: auto;
+  }
+  .item {
+    height: 400px;
+  }
+}

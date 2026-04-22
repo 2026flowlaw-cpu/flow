@@ -1,0 +1,204 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--background);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--primary);
+  color: white;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(10, 27, 57, 0.9) 0%, rgba(10, 27, 57, 0.4) 100%);
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+}
+
+.heroTitle {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.heroSubtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 1px;
+}
+
+/* Greetings Section */
+.greetings {
+  padding: 120px 0;
+}
+
+.greetingsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.imageArea {
+  position: relative;
+  height: 600px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.ceoImage {
+  object-fit: cover;
+}
+
+.imageDecoration {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 200px;
+  height: 200px;
+  border: 2px solid var(--accent);
+  z-index: -1;
+}
+
+.contentArea {
+  padding: 20px 0;
+}
+
+.mainQuote {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 40px;
+  color: var(--primary);
+  position: relative;
+}
+
+.mainQuote::before {
+  content: '"';
+  position: absolute;
+  top: -40px;
+  left: -20px;
+  font-size: 80px;
+  color: rgba(197, 160, 89, 0.2);
+  font-family: serif;
+}
+
+.messageBody {
+  font-size: 16px;
+  line-height: 2;
+  color: #444;
+}
+
+.messageBody p {
+  margin-bottom: 24px;
+}
+
+.signatureArea {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.signatureRank {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.signatureName {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.signatureImg {
+  height: 40px;
+  width: auto;
+  opacity: 0.8;
+}
+
+/* Philosophy Cards */
+.philosophyBanner {
+  background-color: var(--bg-soft);
+  padding: 100px 0;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.valueCard {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.valueCard:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-md);
+}
+
+.valueIcon {
+  font-size: 40px;
+  margin-bottom: 24px;
+  color: var(--accent);
+}
+
+.valueTitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--primary);
+}
+
+.valueDesc {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .greetingsGrid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  .imageArea {
+    height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 36px;
+  }
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+  .mainQuote {
+    font-size: 24px;
+  }
+}

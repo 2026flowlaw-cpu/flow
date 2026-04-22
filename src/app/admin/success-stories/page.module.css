@@ -1,0 +1,156 @@
+.container {
+  padding: 40px;
+}
+
+.header {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addBtn {
+  padding: 12px 24px;
+  background: #0A1B39;
+  color: white;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.addBtn:hover {
+  background: #1a2c4d;
+  box-shadow: 0 4px 12px rgba(10, 27, 57, 0.2);
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0A1B39;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #64748b;
+  font-size: 15px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  background: #f8fafc;
+  padding: 16px 24px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.thumbnail {
+  position: relative;
+  width: 80px;
+  height: 50px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #eee;
+  border: 1px solid #e2e8f0;
+}
+
+.storyTitle {
+  font-weight: 700;
+  color: #0A1B39;
+  font-size: 15px;
+  max-width: 400px;
+  line-height: 1.4;
+}
+
+.categoryTag {
+  display: inline-block;
+  background: #f1f5f9;
+  color: #475569;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  background: #ecfdf5;
+  color: #059669;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.rowActions {
+  display: flex;
+  gap: 8px;
+}
+
+.editBtn {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #f1f5f9;
+  color: #475569;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.editBtn:hover {
+  background: #e2e8f0;
+  color: #0F172A;
+}
+
+.deleteBtn {
+  padding: 6px 12px;
+  background: #fef2f2;
+  color: #ef4444;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.deleteBtn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.center {
+  text-align: center;
+  padding: 40px !important;
+  color: #64748b;
+}

@@ -11,6 +11,8 @@ const categories = ['전체보기', '아파트 하자', '오피스텔/상가', '
 
 import { supabase } from '@/lib/supabase';
 
+export const dynamic = 'force-dynamic';
+
 async function getSuccessStories() {
   const DATA_PATH = path.join(process.cwd(), 'src/data/success-stories.json');
   let localStories = [];
@@ -36,7 +38,7 @@ async function getSuccessStories() {
     const formattedDbStories = (dbStories || []).map((story: any) => ({
       ...story,
       image: story.image_url || '/images/success_apartment.png',
-      displayId: `Case #${story.id.substring(0, 8).toUpperCase()}`,
+      displayId: `Case #DB-${story.id}`,
       lawyer: { name: story.lawyer_name }
     }));
 

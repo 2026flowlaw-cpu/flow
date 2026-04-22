@@ -1,15 +1,57 @@
-"use client";
-
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import { supabase } from '@/lib/supabase';
 import styles from './page.module.css';
 
-// Mock data fetcher
-const getCaseData = (id: string) => {
+export const dynamic = 'force-dynamic';
+
+async function getCaseData(id: string) {
+  // 1. Try to fetch from Supabase (if it's a numeric ID)
+  if (!isNaN(Number(id))) {
+    const { data, error } = await supabase
+      .from('success_stories')
+      .select('*')
+      .eq('id', Number(id))
+      .single();
+    
+    if (!error && data) {
+      return {
+        id: `Case #${data.id}`,
+        badge: data.badge || '승소',
+        title: data.title,
+        image: data.image_url || '/images/success_apartment.png',
+        category: data.category,
+        lawyer_name: data.lawyer_name,
+        overview: {
+          text1: data.description,
+          text2: data.content
+        },
+        strategies: [
+          {
+            title: '철저한 법리 검토',
+            desc: '해당 분야 전문 변호사가 직접 판례를 분석하여 최선의 결과를 도출했습니다.',
+            icon: (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            )
+          }
+        ],
+        verdict: {
+          label: 'FINAL VERDICT',
+          title: data.badge,
+          compensation: '상세 판결 완료',
+          defectItems: '입증 완료'
+        }
+      };
+    }
+  }
+
+  // 2. Fallback to hardcoded mock data for original cases
   const cases: Record<string, any> = {
     '2024-002': {
       id: 'Case No. 2023-가합-589212',
@@ -32,28 +74,6 @@ const getCaseData = (id: string) => {
               <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
             </svg>
           )
-        },
-        {
-          title: '시공 도면과 실제 시공 간의 불일치 규명',
-          desc: '준공 도면과 실제 시공 상태를 비교 분석하여 설계와 다르게 시공된 \'오시공\' 및 \'미시공\' 항목을 124건 이상 확보하여 증거의 객관성을 확보하였습니다.',
-          icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-              <polyline points="10 9 9 9 8 9"></polyline>
-            </svg>
-          )
-        },
-        {
-          title: '법리적 인과관계의 철저한 입증',
-          desc: '시공사가 주장하는 \'관리 부실\' 주장을 반박하기 위해, 하자의 형태가 시간의 경과가 아닌 초기 공사 단계의 구조적 결함에서 기인했음을 대법원 판례를 근거로 강력하게 피력하였습니다.',
-          icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-          )
         }
       ],
       verdict: {
@@ -65,21 +85,15 @@ const getCaseData = (id: string) => {
     }
   };
 
-  // Convert slug back if needed
   const key = id.replace('Case-', '');
-  return cases[key] || cases['2024-002']; // Default to first case
-};
+  return cases[key] || cases['2024-002'];
+}
 
-const relatedCases = [
-  { category: 'CONSTRUCTION', title: '판교 신도시 상가 누수 책임 손해배상 성공사례' },
-  { category: 'STRUCTURAL', title: '서울숲 지식산업센터 균열 보수 청구 기각 방어' },
-  { category: 'ELECTRICAL', title: '동탄 OO아파트 소방 시설 미시공 보수 소송' }
-];
+export default async function CaseDetailPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const { id } = await paramsPromise;
+  const data = await getCaseData(id);
 
-export default function CaseDetailPage() {
-  const params = useParams();
-  const id = params.id as string;
-  const data = getCaseData(id);
+  if (!data) notFound();
 
   return (
     <div className={styles.page}>
@@ -118,10 +132,8 @@ export default function CaseDetailPage() {
 
         {/* Content Layout */}
         <div className={styles.contentGrid}>
-          {/* Main Content */}
           <div className={styles.mainContent}>
             
-            {/* 01 Case Overview */}
             <section className={styles.section}>
               <div className={styles.sectionHeader}>
                 <span className={styles.sectionNumber}>01</span>
@@ -129,15 +141,15 @@ export default function CaseDetailPage() {
               </div>
               <div className={styles.overviewBox}>
                 <p className={styles.overviewText}>{data.overview.text1}</p>
-                <p className={styles.overviewText}>{data.overview.text2}</p>
+                <div className={styles.contentDivider}></div>
+                <p className={styles.overviewText} style={{ whiteSpace: 'pre-wrap' }}>{data.overview.text2}</p>
               </div>
             </section>
 
-            {/* 02 Strategy */}
             <section className={styles.section}>
               <div className={styles.sectionHeader}>
                 <span className={styles.sectionNumber}>02</span>
-                <h2 className={styles.sectionTitle}>일신의 대응 전략</h2>
+                <h2 className={styles.sectionTitle}>대응 전략</h2>
               </div>
               <div className={styles.strategyList}>
                 {data.strategies.map((s: any, i: number) => (
@@ -152,11 +164,10 @@ export default function CaseDetailPage() {
               </div>
             </section>
 
-            {/* 03 Results */}
             <section className={styles.section}>
               <div className={styles.sectionHeader}>
                 <span className={styles.sectionNumber}>03</span>
-                <h2 className={styles.sectionTitle}>판결 결과</h2>
+                <h2 className={styles.sectionTitle}>결과 보고</h2>
               </div>
               <div className={styles.resultBox}>
                 <div className={styles.resultInner}>
@@ -168,27 +179,24 @@ export default function CaseDetailPage() {
                       <span className={styles.statValue}>{data.verdict.compensation}</span>
                     </div>
                     <div>
-                      <span className={styles.statLabel}>DEFECT ITEMS</span>
-                      <span className={styles.statValue}>{data.verdict.defectItems}</span>
+                      <span className={styles.statLabel}>CASE CATEGORY</span>
+                      <span className={styles.statValue}>{data.category || '기타'}</span>
                     </div>
                   </div>
                 </div>
               </div>
             </section>
-
           </div>
 
-          {/* Sidebar */}
           <aside className={styles.sidebar}>
             <div className={styles.sidebarSection}>
-              <h3 className={styles.sidebarTitle}>Related Cases</h3>
-              <div className={styles.relatedList}>
-                {relatedCases.map((rc, i) => (
-                  <div key={i} className={styles.relatedItem}>
-                    <span className={styles.relatedCategory}>{rc.category}</span>
-                    <h4 className={styles.relatedTitle}>{rc.title}</h4>
-                  </div>
-                ))}
+              <h3 className={styles.sidebarTitle}>담당 변호사</h3>
+              <div className={styles.lawyerCard}>
+                <div className={styles.lawyerAvatar}>{data.lawyer_name?.[0] || '일'}</div>
+                <div>
+                  <h4 className={styles.lawyerName}>{data.lawyer_name || '법무법인 일신'}</h4>
+                  <p className={styles.lawyerRole}>건설 하자 전문 변호사</p>
+                </div>
               </div>
             </div>
 
@@ -197,7 +205,7 @@ export default function CaseDetailPage() {
               <p className={styles.ctaDesc}>
                 일신의 건설 특화 변호사들이 구조적인 해결책을 제시합니다.
               </p>
-              <button className={styles.ctaBtn}>무료 법률 상담 신청</button>
+              <Link href="/consult" className={styles.ctaBtn}>무료 법률 상담 신청</Link>
             </div>
           </aside>
         </div>

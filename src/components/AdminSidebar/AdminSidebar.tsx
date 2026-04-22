@@ -10,6 +10,7 @@ const menuItems = [
   { name: '상담 내역 확인', href: '/admin/consultations', icon: '📞' },
   { name: '성공사례 관리', href: '/admin/success-stories', icon: '🏆' },
   { name: '변호사 관리', href: '/admin/lawyers', icon: '🤵‍♂️' },
+  { name: '유튜브 관리', href: '/admin/youtube', icon: '🎬' },
   { name: '칼럼 관리', href: '/admin/columns', icon: '✍️' },
 ];
 

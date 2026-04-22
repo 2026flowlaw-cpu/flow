@@ -1,42 +1,43 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '@/components/Header/Header';
 import RealFooter from '@/components/Footer/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './page.module.css';
 
-const sections = [
-  {
-    theme: 'light',
-    title: '하자소송',
-    videos: [
-      { id: 'v1', title: '아파트 \'하자 소송\' 하는 게 이득일까?', desc: '아파트 하자 소송 하는 게 이득일까?', youtubeId: 'VIDEO_ID_1' },
-      { id: 'v2', title: '아파트 \'하자 소송\' 하는 게 이득일까?', desc: '아파트 하자 소송 하는 게 이득일까?', youtubeId: 'VIDEO_ID_2' },
-    ]
-  },
-  {
-    theme: 'dark',
-    title: '하자소송',
-    videos: [
-      { id: 'v3', title: '아파트 \'하자 소송\' 하는 게 이득일까?', desc: '아파트 하자 소송 하는 게 이득일까?', youtubeId: 'VIDEO_ID_3' },
-      { id: 'v4', title: '아파트 \'하자 소송\' 하는 게 이득일까?', desc: '아파트 하자 소송 하는 게 이득일까?', youtubeId: 'VIDEO_ID_4' },
-      { id: 'v5', title: '아파트 \'하자 소송\' 하는 게 이득일까?', desc: '아파트 하자 소송 하는 게 이득일까?', youtubeId: 'VIDEO_ID_5' },
-      { id: 'v6', title: '아파트 \'하자 소송\' 하는 게 이득일까?', desc: '아파트 하자 소송 하는 게 이득일까?', youtubeId: 'VIDEO_ID_6' },
-    ]
-  },
-  {
-    theme: 'light',
-    title: '하자소송',
-    videos: [
-      { id: 'v7', title: '아파트 \'하자 소송\' 하는 게 이득일까?', desc: '아파트 하자 소송 하는 게 이득일까?', youtubeId: 'VIDEO_ID_7' },
-      { id: 'v8', title: '아파트 \'하자 소송\' 하는 게 이득일까?', desc: '아파트 하자 소송 하는 게 이득일까?', youtubeId: 'VIDEO_ID_8' },
-    ]
-  }
-];
-
 export default function YouTubePage() {
+  const [videos, setVideos] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch('/api/youtube');
+        const data = await res.json();
+        setVideos(data || []);
+      } catch (err) {
+        console.error('Failed to load videos:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
+  // Group videos by categories (similar to the design layout)
+  // We can also alternate themes manually or let the DB decide
+  // For matching the design exact 3-section layout, we can partition the data
+  const groupedVideos = videos.reduce((acc: any, video: any) => {
+    const cat = video.category || '하자소송';
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(video);
+    return acc;
+  }, {});
+
+  const categories = Object.keys(groupedVideos);
+
   return (
     <div className={styles.page}>
       <Header />
@@ -61,38 +62,56 @@ export default function YouTubePage() {
           <div className={styles.heroOverlay}></div>
         </section>
 
-        {/* Dynamic Sections */}
-        {sections.map((section, sIdx) => (
-          <section key={sIdx} className={`${styles.section} ${section.theme === 'dark' ? styles.darkTheme : ''}`}>
-            <div className="container">
-              <h2 className={styles.sectionHeading}>{section.title}</h2>
-              <div className={styles.grid}>
-                {section.videos.map((video) => (
-                  <div key={video.id} className={styles.videoCard}>
-                    <div className={styles.thumbnailArea}>
-                      <Image 
-                        src="/images/success_apartment.png" 
-                        alt={video.title}
-                        fill
-                        className={styles.thumbImg}
-                      />
-                      <div className={styles.playIcon}>
-                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                          <circle cx="30" cy="30" r="30" fill="white" fillOpacity="0.8"/>
-                          <path d="M40 30L25 38.6603L25 21.3397L40 30Z" fill="#0A1B39"/>
-                        </svg>
+        {/* Dynamic Sections from DB */}
+        {isLoading ? (
+          <div style={{ padding: '100px 0', textAlign: 'center', fontSize: '20px' }}>영상을 불러오는 중입니다...</div>
+        ) : categories.length > 0 ? (
+          categories.map((cat, idx) => (
+            <section 
+              key={cat} 
+              className={`${styles.section} ${groupedVideos[cat][0]?.theme === 'dark' ? styles.darkTheme : ''}`}
+            >
+              <div className="container">
+                <h2 className={styles.sectionHeading}>{cat}</h2>
+                <div className={styles.grid}>
+                  {groupedVideos[cat].map((video: any) => (
+                    <a 
+                      key={video.id} 
+                      href={`https://www.youtube.com/watch?v=${video.youtube_id}`} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.videoCard}
+                    >
+                      <div className={styles.thumbnailArea}>
+                        <Image 
+                          src={`https://img.youtube.com/vi/${video.youtube_id}/maxresdefault.jpg`} 
+                          alt={video.title}
+                          fill
+                          className={styles.thumbImg}
+                        />
+                        <div className={styles.playIcon}>
+                          <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <circle cx="30" cy="30" r="30" fill="white" fillOpacity="0.8"/>
+                            <path d="M40 30L25 38.6603L25 21.3397L40 30Z" fill="#0A1B39"/>
+                          </svg>
+                        </div>
                       </div>
-                    </div>
-                    <div className={styles.videoMeta}>
-                      <h3 className={styles.videoTitle}>{video.title}</h3>
-                      <p className={styles.videoDesc}>{video.desc}</p>
-                    </div>
-                  </div>
-                ))}
+                      <div className={styles.videoMeta}>
+                        <h3 className={styles.videoTitle}>{video.title}</h3>
+                        <p className={styles.videoDesc}>{video.description || '플로우 법률 사무소 영상 콘텐츠'}</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
-        ))}
+            </section>
+          ))
+        ) : (
+          <div style={{ padding: '100px 0', textAlign: 'center' }}>
+            <p style={{ fontSize: '20px', color: '#666' }}>아직 등록된 영상이 없습니다.</p>
+            <p style={{ marginTop: '10px' }}>관리자 페이지에서 영상을 등록해주세요.</p>
+          </div>
+        )}
 
         {/* Partner Logos */}
         <section className={styles.partnerSection}>

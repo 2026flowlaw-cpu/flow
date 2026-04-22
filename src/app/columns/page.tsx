@@ -5,7 +5,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '../success-stories/page.module.css'; // Reusing styles
+import styles from './page.module.css';
 
 export default function ColumnsPage() {
   const [columns, setColumns] = useState<any[]>([]);
@@ -48,35 +48,39 @@ export default function ColumnsPage() {
 
         <div className="container">
           {isLoading ? (
-            <div style={{ padding: '100px 0', textAlign: 'center' }}>칼럼을 불러오는 중입니다...</div>
+            <div style={{ padding: '100px 0', textAlign: 'center', fontSize: '20px' }}>일신의 가치 있는 지식들을 불러오는 중입니다...</div>
           ) : columns.length > 0 ? (
             <div className={styles.grid}>
               {columns.map((col) => (
                 <Link href={`/columns/${col.id}`} key={col.id} className={styles.card}>
                   <div className={styles.cardImage}>
                     <Image 
-                      src={col.image_url || '/images/success_apartment.png'} 
+                      src={col.image_url || '/images/philosophy_bg.png'} 
                       alt={col.title}
                       fill
+                      style={{ objectFit: 'cover' }}
                     />
+                    <div className={styles.cardOverlay}>
+                       <span>칼럼 읽기</span>
+                    </div>
                   </div>
                   <div className={styles.cardContent}>
-                    <div className={styles.cardTop}>
-                      <span className={styles.cardCategory}>{col.category}</span>
-                      <span className={styles.cardDate}>{new Date(col.created_at).toLocaleDateString()}</span>
-                    </div>
+                    <span className={styles.cardCategory}>{col.category}</span>
                     <h3 className={styles.cardTitle}>{col.title}</h3>
                     <p className={styles.cardDescription}>{col.summary || '상세 내용을 확인하세요.'}</p>
                     <div className={styles.cardFooter}>
-                      <span className={styles.lawyerName}>{col.author_name}</span>
-                      <span className={styles.moreBtn}>자세히 보기 →</span>
+                      <span className={styles.lawyerName}>by {col.author_name}</span>
+                      <span className={styles.cardDate}>{new Date(col.created_at).toLocaleDateString()}</span>
                     </div>
                   </div>
                 </Link>
               ))}
             </div>
           ) : (
-            <div style={{ padding: '100px 0', textAlign: 'center' }}>아직 등록된 법률칼럼이 없습니다.</div>
+            <div style={{ padding: '100px 0', textAlign: 'center' }}>
+              <p style={{ fontSize: '20px', color: '#666' }}>아직 등록된 법률칼럼이 없습니다.</p>
+              <p style={{ marginTop: '10px' }}>전문가들의 조언이 곧 준비될 예정입니다.</p>
+            </div>
           )}
         </div>
       </main>

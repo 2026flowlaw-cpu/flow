@@ -48,7 +48,7 @@ const menuData: MenuItem[] = [
     ]
   },
   {
-    title: '성공사례',
+    title: '플로우 소식',
     href: '/success-stories',
     subItems: [
       { name: '플로우 소식', href: '/news/flow' },

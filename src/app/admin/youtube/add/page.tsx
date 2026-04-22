@@ -13,6 +13,7 @@ export default function AdminYouTubeAddPage() {
     category: '하자소송',
     theme: 'light'
   });
+  const [statusMsg, setStatusMsg] = useState<{ type: 'error' | 'success' | '', text: string }>({ type: '', text: '' });
   const [isSaving, setIsSaving] = useState(false);
 
   // Helper to extract YouTube ID from URL
@@ -26,10 +27,10 @@ export default function AdminYouTubeAddPage() {
     const url = e.target.value;
     const id = extractId(url);
     setFormData(prev => ({ ...prev, youtube_id: id }));
+    setStatusMsg({ type: '', text: '' });
 
     if (id && id.length === 11) {
       try {
-        // Fetch Title from YouTube oEmbed API
         const res = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${id}&format=json`);
         if (res.ok) {
           const data = await res.json();
@@ -47,8 +48,12 @@ export default function AdminYouTubeAddPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.title || !formData.youtube_id) return alert('필수 항목을 입력해주세요.');
+    if (!formData.title || !formData.youtube_id) {
+      setStatusMsg({ type: 'error', text: '필수 항목을 입력해주세요.' });
+      return;
+    }
     setIsSaving(true);
+    setStatusMsg({ type: '', text: '저장 중...' });
     
     try {
       const res = await fetch('/api/youtube', {
@@ -60,13 +65,16 @@ export default function AdminYouTubeAddPage() {
       const result = await res.json();
 
       if (res.ok) {
-        alert('영상이 등록되었습니다.');
-        router.push('/admin/youtube');
+        setStatusMsg({ type: 'success', text: '영상이 성공적으로 등록되었습니다!' });
+        setTimeout(() => router.push('/admin/youtube'), 1500);
       } else {
-        alert(`등록 실패: ${result.error || '알 수 없는 오류'}\n(수파베이스에 youtube_videos 테이블이 있는지 확인해주세요!)`);
+        setStatusMsg({ 
+          type: 'error', 
+          text: `등록 실패: ${result.error || '알 수 없는 오류'} (수파베이스 테이블을 확인해주세요.)` 
+        });
       }
     } catch (err: any) {
-      alert('오류가 발생했습니다: ' + err.message);
+      setStatusMsg({ type: 'error', text: '오류 발생: ' + err.message });
     } finally {
       setIsSaving(false);
     }
@@ -154,6 +162,21 @@ export default function AdminYouTubeAddPage() {
               onChange={(e) => setFormData({...formData, description: e.target.value})}
             ></textarea>
           </div>
+
+          {/* Status Message Display */}
+          {statusMsg.text && (
+            <div style={{ 
+              marginTop: '20px', 
+              padding: '15px', 
+              borderRadius: '6px',
+              backgroundColor: statusMsg.type === 'error' ? '#fff5f5' : '#f0fff4',
+              color: statusMsg.type === 'error' ? '#ff4d4d' : '#2f855a',
+              border: `1px solid ${statusMsg.type === 'error' ? '#ffe3e3' : '#c6f6d5'}`,
+              fontWeight: '600'
+            }}>
+              {statusMsg.text}
+            </div>
+          )}
         </div>
 
         <div className={styles.actions}>

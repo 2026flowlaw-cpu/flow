@@ -16,9 +16,11 @@ export default function YouTubePage() {
       try {
         const res = await fetch('/api/youtube');
         const data = await res.json();
-        setVideos(data || []);
+        // Defensive check: ensure data is an array
+        setVideos(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error('Failed to load videos:', err);
+        setVideos([]);
       } finally {
         setIsLoading(false);
       }
@@ -26,10 +28,8 @@ export default function YouTubePage() {
     fetchData();
   }, []);
 
-  // Group videos by categories (similar to the design layout)
-  // We can also alternate themes manually or let the DB decide
-  // For matching the design exact 3-section layout, we can partition the data
-  const groupedVideos = videos.reduce((acc: any, video: any) => {
+  // Group videos by categories (defensive check added)
+  const groupedVideos = (Array.isArray(videos) ? videos : []).reduce((acc: any, video: any) => {
     const cat = video.category || '하자소송';
     if (!acc[cat]) acc[cat] = [];
     acc[cat].push(video);

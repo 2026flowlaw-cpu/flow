@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import Image from 'next/image';
-import Link from 'next/link';
 import fs from 'fs';
 import path from 'path';
 import styles from './page.module.css';
@@ -52,7 +52,7 @@ export default async function LawyerDetailPage({ params }: PageProps) {
                   <span className={styles.title}>{lawyer.title}</span>
                 </div>
                 <div className={styles.mainExperience}>
-                  {lawyer.experience.map((exp, idx) => (
+                  {lawyer.experience.map((exp: string, idx: number) => (
                     <p key={idx} className={styles.expLine}>{exp}</p>
                   ))}
                 </div>
@@ -61,7 +61,7 @@ export default async function LawyerDetailPage({ params }: PageProps) {
                   <div className={styles.listSection}>
                     <h2 className={styles.listTitle}>약력</h2>
                     <ul className={styles.list}>
-                      {lawyer.history.map((item, idx) => (
+                      {lawyer.history.map((item: string, idx: number) => (
                         <li key={idx}>{item}</li>
                       ))}
                     </ul>
@@ -70,7 +70,7 @@ export default async function LawyerDetailPage({ params }: PageProps) {
                   <div className={styles.listSection}>
                     <h2 className={styles.listTitle}>학력 및 주요활동</h2>
                     <ul className={styles.list}>
-                      {lawyer.activities.map((item, idx) => (
+                      {lawyer.activities.map((item: string, idx: number) => (
                         <li key={idx}>{item}</li>
                       ))}
                     </ul>
@@ -87,7 +87,7 @@ export default async function LawyerDetailPage({ params }: PageProps) {
             <div className="container">
               <h2 className={styles.sectionTitle}>관련된 사건 블로그</h2>
               <div className={styles.blogGrid}>
-                {lawyer.blogs.map((blog, idx) => (
+                {lawyer.blogs.map((blog: any, idx: number) => (
                   <div key={idx} className={styles.blogCard}>
                     <div className={styles.blogContent}>
                       <h3 className={styles.blogCardTitle}>{blog.title}</h3>
@@ -110,34 +110,7 @@ export default async function LawyerDetailPage({ params }: PageProps) {
           </section>
         )}
 
-        {/* Inquiry Section (reused from profile list page) */}
-        <section className={styles.inquirySection}>
-          <div className="container">
-            <div className={styles.inquiryGrid}>
-              <div className={styles.inquiryText}>
-                <h2 className={styles.inquiryTitle}>법무법인 플로우가<br />함께 하겠습니다</h2>
-                <div className={styles.snsIcons}>
-                  <div className={styles.iconCircle}>📱</div>
-                  <div className={styles.iconCircle}>💬</div>
-                  <div className={styles.iconCircle}>📞</div>
-                </div>
-              </div>
-              <div className={styles.inquiryForm}>
-                <div className={styles.formRow}>
-                  <input type="text" placeholder="성함" className={styles.input} />
-                  <input type="text" placeholder="연락처" className={styles.input} />
-                </div>
-                <div className={styles.formRow}>
-                  <input type="text" placeholder="지역" className={styles.input} />
-                </div>
-                <div className={styles.formRow}>
-                  <textarea placeholder="내용" className={styles.textarea}></textarea>
-                </div>
-                <button className={styles.submitBtn}>상담신청</button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <InquiryForm />
       </main>
 
       <Footer />

@@ -38,7 +38,7 @@ const menuData: MenuItem[] = [
     title: '업무분야',
     href: '#practice',
     subItems: [
-      { name: '분양계약해제센터', href: '#practice' },
+      { name: '분양계약해제센터', href: '/practice/resale-cancellation' },
       { name: '전세사기센터', href: '#practice' },
       { name: '부동산분쟁센터', href: '#practice' },
       { name: '건설분쟁센터', href: '#practice' },

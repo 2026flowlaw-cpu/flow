@@ -1,0 +1,221 @@
+.page {
+  background-color: var(--background);
+}
+
+.hero {
+  position: relative;
+  height: 60vh;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: url('https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+  color: white;
+  padding-top: 80px;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10, 27, 57, 0.8), rgba(10, 27, 57, 0.9));
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.label {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.title span {
+  color: var(--accent);
+}
+
+.description {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  line-height: 1.8;
+  word-break: keep-all;
+}
+
+.painSection {
+  padding: 100px 0;
+  background-color: #fcfcfc;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.sectionTitle {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.sectionSubtitle {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.painGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.painCard {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  border-left: 4px solid var(--accent);
+  transition: transform 0.3s ease;
+}
+
+.painCard:hover {
+  transform: translateY(-10px);
+}
+
+.painCard p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #444;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.serviceSection {
+  padding: 100px 0;
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.serviceCard {
+  padding: 30px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.serviceCard:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-lg);
+}
+
+.cardIndex {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+
+.cardTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.cardDesc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.strengthSection {
+  padding: 100px 0;
+  background-color: var(--primary);
+  color: white;
+}
+
+.strengthGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.strengthTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+
+.strengthTitle span {
+  color: var(--accent);
+}
+
+.strengthList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.strengthItem h4 {
+  font-size: 1.3rem;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.strengthItem p {
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+.strengthImage {
+  position: relative;
+}
+
+.imagePlaceholder {
+  aspect-ratio: 4/5;
+  background-color: var(--primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--accent);
+  border-radius: 20px;
+}
+
+.imagePlaceholder span {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--accent);
+  opacity: 0.3;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .strengthGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+}

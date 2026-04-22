@@ -25,7 +25,7 @@ export default function AboutIntroPage() {
             <div className={styles.heroContent}>
               <h1 className={styles.heroTitle}>
                 하자소송,<br />
-                법무법인 플로우가 함께합니다.
+                법무법인 일신가 함께합니다.
               </h1>
               <p className={styles.heroSubtitle}>
                 철학이 담긴 전문적인 변론으로 의뢰인의 가치를 증명합니다.
@@ -42,21 +42,21 @@ export default function AboutIntroPage() {
               <div className={styles.greetingsContent}>
                 <h2 className={styles.sectionTitle}>"모든 사안에는 그 사안만의 해결책이 있습니다."</h2>
                 <div className={styles.textBlock}>
-                  <p>법무법인 플로우를 찾아주신 의뢰인 여러분, 안녕하십니까.</p>
+                  <p>법무법인 일신를 찾아주신 의뢰인 여러분, 안녕하십니까.</p>
                   <p>
                     많은 분들이 건설 분쟁과 하자 소송이라는 예기치 못한 어려움 앞에서 막막해하십니다. 
                     복잡한 도면과 공사 기록, 난해한 법리 지식이 얽혀 있는 건설 소송은 일반적인 법리만으로는 해결하기 어려운 분야입니다.
                   </p>
                   <p>
-                    저희 법무법인 플로우는 단순한 법률 자문을 넘어, 건설 현장의 실무 경험과 정교한 계산사 수행팀의 시너지를 통해 
+                    저희 법무법인 일신는 단순한 법률 자문을 넘어, 건설 현장의 실무 경험과 정교한 계산사 수행팀의 시너지를 통해 
                     의뢰인이 잃어버린 권리를 완벽하게 되찾아 드리는 것을 사명으로 삼고 있습니다.
                   </p>
                   <p>
                     의뢰인의 고민 앞에 가장 낮은 자세로 경청하고, 결과 앞에서는 가장 당당한 법률 전문가가 되겠습니다.
                   </p>
                   <div className={styles.signature}>
-                    <span>법무법인 플로우 대표변호사</span>
-                    <strong>김플로우 드림</strong>
+                    <span>법무법인 일신 대표변호사</span>
+                    <strong>김일신 드림</strong>
                   </div>
                 </div>
               </div>
@@ -92,7 +92,7 @@ export default function AboutIntroPage() {
         <section className="section">
           <div className="container">
             <div className={styles.philosophyHeader}>
-              <h2 className={styles.sectionTitle}>법무법인 플로우의 3대 경영 철학</h2>
+              <h2 className={styles.sectionTitle}>법무법인 일신의 3대 경영 철학</h2>
             </div>
             <div className={styles.philosophyGrid}>
               <div className={styles.philosophyItem}>
@@ -126,7 +126,7 @@ export default function AboutIntroPage() {
           </div>
           <div className={styles.splitContent}>
             <div className={styles.contentInner}>
-              <h2 className={styles.sectionTitle}>법무법인 플로우의 존재 이유</h2>
+              <h2 className={styles.sectionTitle}>법무법인 일신의 존재 이유</h2>
               <div className={styles.textBlock}>
                 <p>우리는 단순히 법조문을 읽는 사람이 아닙니다.</p>
                 <p>
@@ -134,7 +134,7 @@ export default function AboutIntroPage() {
                   또 누군가에게는 공정한 건설 문태를 정착시키기 위한 투쟁의 최전선에 서 있습니다.
                 </p>
                 <p>
-                  법무법인 플로우의 존재 이유는 명확합니다. 
+                  법무법인 일신의 존재 이유는 명확합니다. 
                   가장 힘든 순간에 가장 믿음직한 방패가 되어 드리는 것, 
                   그것이 우리가 존재하는 이유이자 유일한 가치입니다.
                 </p>
@@ -148,7 +148,7 @@ export default function AboutIntroPage() {
           <div className="container">
             <div className={styles.differentGrid}>
               <div className={styles.diffHeader}>
-                <h2 className={styles.sectionTitle}>왜 법무법인 플로우인가?</h2>
+                <h2 className={styles.sectionTitle}>왜 법무법인 일신인가?</h2>
                 <p className={styles.diffSubtitle}>우리가 압도적인 성과를 내는 이유입니다.</p>
               </div>
               <div className={styles.diffList}>

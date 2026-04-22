@@ -49,7 +49,7 @@ export default function GreetingsPage() {
               
               <div className={styles.messageBody}>
                 <p>
-                  안녕하십니까. 법무법인 플로우 대표변호사 정미우입니다.
+                  안녕하십니까. 법무법인 일신 대표변호사 정미우입니다.
                 </p>
                 <p>
                   집은 우리 삶의 가장 소중한 쉼터이자 자산입니다. 
@@ -57,7 +57,7 @@ export default function GreetingsPage() {
                   개인이 거대 시공사나 건설사를 상대로 권리를 주장하는 것은 결코 쉬운 일이 아닙니다.
                 </p>
                 <p>
-                  법무법인 플로우는 바로 그 지점에서 출발했습니다. 
+                  법무법인 일신는 바로 그 지점에서 출발했습니다. 
                   우리는 건설 소송이라는 특수한 분야에서 법률적 지식뿐만 아니라, 
                   현장을 꿰뚫어 보는 정밀한 기술적 분석과 수천 건의 판례 데이터베이스를 통해 
                   압도적인 승소 전략을 제시합니다.
@@ -68,14 +68,14 @@ export default function GreetingsPage() {
                   의뢰인의 입장에서 가장 먼저 고민하고, 결과 앞에서는 가장 당당한 법률 전문가가 되겠습니다.
                 </p>
                 <p>
-                  법무법인 플로우의 '플로우(Flow)'는 끊임없이 의뢰인의 편에서 흐르는 진정성을 의미합니다. 
+                  법무법인 일신의 '일신(Ilshin)'는 끊임없이 의뢰인의 편에서 흐르는 진정성을 의미합니다. 
                   여러분의 든든한 법률 동반자로서 최선을 다하겠습니다. 
                   감사합니다.
                 </p>
               </div>
               
               <div className={styles.signatureArea}>
-                <span className={styles.signatureRank}>법무법인 플로우 대표변호사</span>
+                <span className={styles.signatureRank}>법무법인 일신 대표변호사</span>
                 <div className={styles.signatureName}>
                   정 미 우 <span style={{ fontWeight: 400, color: '#999' }}>(인)</span>
                 </div>

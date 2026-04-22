@@ -224,7 +224,7 @@ const ConsultPage = () => {
                 </div>
                 <div>
                   <p className={styles.infoLabel}>Email</p>
-                  <p className={styles.infoText}>contact@lawfirmflow.com</p>
+                  <p className={styles.infoText}>contact@lawilshin.com</p>
                 </div>
               </div>
             </div>
@@ -247,7 +247,7 @@ const ConsultPage = () => {
               <h4 className={styles.brandTitle}>Architectural Anchor</h4>
               <p className={styles.brandText}>
                 단순한 변호를 넘어, 건축 구조와 하자의 본질을 꿰뚫어 봅니다. 
-                플로우는 건물의 생애주기를 이해하는 법률가들이 모여, 흔들리지 않는 권리의 기준을 제시합니다.
+                일신는 건물의 생애주기를 이해하는 법률가들이 모여, 흔들리지 않는 권리의 기준을 제시합니다.
               </p>
             </div>
 

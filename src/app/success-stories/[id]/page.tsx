@@ -18,12 +18,12 @@ const getCaseData = (id: string) => {
       image: '/images/success_apartment.png',
       overview: {
         text1: "본 사건의 의뢰인들은 인천 송도국제도시에 위치한 'OO아파트' 입주자대표회의로, 준공 후 3년 차에 접어들며 단지 내 지하주차장 균열, 외벽 누수, 그리고 공용부분 승강기 오작동 등 심각한 구조적 하자가 발생하여 시공사에 보수를 요청하였습니다.",
-        text2: "그러나 시공사는 '관리 부실'을 이유로 면책을 주장하며 보수를 거부하였고, 입주민들은 생활의 안전을 위협받는 긴박한 상황에서 법무법인 플로우를 찾았습니다."
+        text2: "그러나 시공사는 '관리 부실'을 이유로 면책을 주장하며 보수를 거부하였고, 입주민들은 생활의 안전을 위협받는 긴박한 상황에서 법무법인 일신를 찾았습니다."
       },
       strategies: [
         {
           title: '기술 전문가 합동 현장 진단',
-          desc: '법무법인 플로우와 파트너십을 맺은 건축구조 기술사들과 함께 현장을 직접 정밀 진단했습니다. 단순 육안 검사를 넘어 균열의 깊이와 철근 부식 상태를 데이터화하여 시공 단계에서의 결함을 입증했습니다.',
+          desc: '법무법인 일신와 파트너십을 맺은 건축구조 기술사들과 함께 현장을 직접 정밀 진단했습니다. 단순 육안 검사를 넘어 균열의 깊이와 철근 부식 상태를 데이터화하여 시공 단계에서의 결함을 입증했습니다.',
           icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -137,7 +137,7 @@ export default function CaseDetailPage() {
             <section className={styles.section}>
               <div className={styles.sectionHeader}>
                 <span className={styles.sectionNumber}>02</span>
-                <h2 className={styles.sectionTitle}>플로우의 대응 전략</h2>
+                <h2 className={styles.sectionTitle}>일신의 대응 전략</h2>
               </div>
               <div className={styles.strategyList}>
                 {data.strategies.map((s: any, i: number) => (
@@ -195,7 +195,7 @@ export default function CaseDetailPage() {
             <div className={styles.sidebarCTA}>
               <h3 className={styles.ctaTitle}>유사한 문제로 고민 중이신가요?</h3>
               <p className={styles.ctaDesc}>
-                플로우의 건설 특화 변호사들이 구조적인 해결책을 제시합니다.
+                일신의 건설 특화 변호사들이 구조적인 해결책을 제시합니다.
               </p>
               <button className={styles.ctaBtn}>무료 법률 상담 신청</button>
             </div>

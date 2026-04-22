@@ -22,9 +22,9 @@ const connections = [
   {
     number: '03',
     title: '종합 법률 대응 시스템',
-    desc: '중개와 기술, 법률이 하나로 결합된 플로우만의 원스톱 시스템으로 의뢰인에게 가장 효율적인 해결책을 제시합니다.',
+    desc: '중개와 기술, 법률이 하나로 결합된 일신만의 원스톱 시스템으로 의뢰인에게 가장 효율적인 해결책을 제시합니다.',
     image: '/premium_connectivity.png',
-    overlay: '플로우는 각 분야의 경계를 허물고,\n의뢰인을 위해 최상의 결과를 설계합니다.'
+    overlay: '일신는 각 분야의 경계를 허물고,\n의뢰인을 위해 최상의 결과를 설계합니다.'
   }
 ];
 
@@ -35,7 +35,7 @@ const OrganicConnectivity = () => {
     <section className={styles.section}>
       <div className="container">
         <div className={styles.titleWrapper}>
-          <span className={styles.kicker}>The Flow Ecosystem</span>
+          <span className={styles.kicker}>The Ilshin Ecosystem</span>
           <h2 className={styles.title}>법률, 중개, 기술이 결합된<br />유기적인 원스톱 네트워크</h2>
         </div>
 

@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from 'react';
@@ -17,6 +16,19 @@ const menuItems = [
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+
+  const handleLogout = async () => {
+    try {
+      const { supabase } = await import('@/lib/supabase');
+      if (supabase) {
+        await supabase.auth.signOut();
+      }
+      window.location.href = '/admin/login';
+    } catch (error) {
+      console.error('Logout failed:', error);
+      window.location.href = '/admin/login';
+    }
+  };
 
   return (
     <aside className={styles.sidebar}>
@@ -41,7 +53,7 @@ export default function AdminSidebar() {
       </nav>
 
       <div className={styles.footer}>
-        <button onClick={() => window.location.href = '/admin/login'} className={styles.logoutBtn}>
+        <button onClick={handleLogout} className={styles.logoutBtn}>
           로그아웃
         </button>
       </div>

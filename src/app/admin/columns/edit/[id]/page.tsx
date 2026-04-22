@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from '../../youtube/admin-youtube.module.css';
+import styles from '../../../youtube/admin-youtube.module.css';
 
 export default function AdminColumnEditPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
   const router = useRouter();

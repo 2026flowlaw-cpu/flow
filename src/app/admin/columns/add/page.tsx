@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from '../youtube/admin-youtube.module.css';
+import styles from '../../youtube/admin-youtube.module.css';
 
 export default function AdminColumnAddPage() {
   const router = useRouter();

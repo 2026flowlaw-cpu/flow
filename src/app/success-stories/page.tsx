@@ -33,7 +33,7 @@ async function getSuccessStories() {
     if (error) throw error;
     
     // Combine both (DB stories come first as they are newer)
-    const formattedDbStories = (dbStories || []).map(story => ({
+    const formattedDbStories = (dbStories || []).map((story: any) => ({
       ...story,
       image: story.image_url || '/images/success_apartment.png',
       displayId: `Case #${story.id.substring(0, 8).toUpperCase()}`,

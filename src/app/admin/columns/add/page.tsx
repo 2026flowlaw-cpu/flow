@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../../youtube/admin-youtube.module.css';
 
+import { uploadImage } from '@/lib/upload';
+
 export default function AdminColumnAddPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -14,8 +16,16 @@ export default function AdminColumnAddPage() {
     author_name: '대표변호사',
     image_url: ''
   });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
   const [statusMsg, setStatusMsg] = useState<{ type: 'error' | 'success' | '', text: string }>({ type: '', text: '' });
   const [isSaving, setIsSaving] = useState(false);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,15 +33,25 @@ export default function AdminColumnAddPage() {
       setStatusMsg({ type: 'error', text: '제목과 내용을 모두 입력해주세요.' });
       return;
     }
+    
     setIsSaving(true);
     setStatusMsg({ type: '', text: '저장 중...' });
     
     try {
+      let finalImageUrl = formData.image_url;
+
+      // Upload image if selected
+      if (selectedFile) {
+        setStatusMsg({ type: '', text: '사진 업로드 중...' });
+        finalImageUrl = await uploadImage(selectedFile);
+      }
+
       const res = await fetch('/api/columns', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, image_url: finalImageUrl })
       });
+// ... (rest stays logic similar)
 
       const result = await res.json();
 
@@ -77,13 +97,15 @@ export default function AdminColumnAddPage() {
           </div>
 
           <div className={styles.inputGroup}>
-            <label>대표 이미지 URL</label>
+            <label>대표 이미지 *</label>
             <input 
-              type="text" 
-              placeholder="예: /images/success_apartment.png"
-              value={formData.image_url}
-              onChange={(e) => setFormData({...formData, image_url: e.target.value})}
+              type="file" 
+              accept="image/*"
+              onChange={handleFileChange}
+              style={{ padding: '8px' }}
             />
+            {selectedFile && <p className={styles.helpText}>선택된 파일: {selectedFile.name}</p>}
+            <p className={styles.helpText}>컴퓨터의 사진 파일을 직접 업로드합니다.</p>
           </div>
 
           <div className={styles.inputGroup}>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../../../youtube/admin-youtube.module.css';
+import { uploadImage } from '@/lib/upload';
 
 export default function AdminColumnEditPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
@@ -18,6 +19,7 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
     author_name: '대표변호사',
     image_url: ''
   });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [statusMsg, setStatusMsg] = useState<{ type: 'error' | 'success' | '', text: string }>({ type: '', text: '' });
   const [isSaving, setIsSaving] = useState(false);
@@ -52,16 +54,29 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
     fetchColumn();
   }, [colId, router]);
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
-    setStatusMsg({ type: '', text: '수정 중...' });
+    setStatusMsg({ type: '', text: '수정 사항 저장 중...' });
     
     try {
+      let finalImageUrl = formData.image_url;
+
+      if (selectedFile) {
+        setStatusMsg({ type: '', text: '새 이미지 업로드 중...' });
+        finalImageUrl = await uploadImage(selectedFile);
+      }
+
       const res = await fetch('/api/columns', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, image_url: finalImageUrl })
       });
 
       if (res.ok) {
@@ -104,12 +119,17 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
           </div>
 
           <div className={styles.inputGroup}>
-            <label>대표 이미지 URL</label>
+            <label>대표 이미지 (변경시에만 선택)</label>
             <input 
-              type="text" 
-              value={formData.image_url}
-              onChange={(e) => setFormData({...formData, image_url: e.target.value})}
+              type="file" 
+              accept="image/*"
+              onChange={handleFileChange}
+              style={{ padding: '8px' }}
             />
+            {formData.image_url && !selectedFile && (
+              <p className={styles.helpText}>현재 설정된 이미지가 있습니다. 파일을 선택하면 교체됩니다.</p>
+            )}
+            {selectedFile && <p className={styles.helpText}>선택된 새 파일: {selectedFile.name}</p>}
           </div>
 
           <div className={styles.inputGroup}>

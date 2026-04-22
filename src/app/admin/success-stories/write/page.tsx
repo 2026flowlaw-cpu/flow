@@ -52,13 +52,13 @@ export default function SuccessStoryWritePage() {
       const filePath = `success-images/${fileName}`;
 
       const { error: uploadError, data } = await supabase.storage
-        .from('images')
+        .from('success-stories')
         .upload(filePath, file);
 
       if (uploadError) throw uploadError;
 
       const { data: { publicUrl } } = supabase.storage
-        .from('images')
+        .from('success-stories')
         .getPublicUrl(filePath);
 
       setFormData(prev => ({ ...prev, image_url: publicUrl }));

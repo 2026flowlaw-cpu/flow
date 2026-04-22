@@ -9,14 +9,41 @@ import styles from './page.module.css';
 
 const categories = ['전체보기', '아파트 하자', '오피스텔/상가', '일반건축물', '손해배상'];
 
+import { supabase } from '@/lib/supabase';
+
 async function getSuccessStories() {
   const DATA_PATH = path.join(process.cwd(), 'src/data/success-stories.json');
+  let localStories = [];
+  
+  // 1. Get local JSON stories
   try {
     const jsonData = fs.readFileSync(DATA_PATH, 'utf8');
-    return JSON.parse(jsonData);
+    localStories = JSON.parse(jsonData);
   } catch (error) {
-    console.error('Failed to load success stories:', error);
-    return [];
+    console.error('Failed to load local success stories:', error);
+  }
+
+  // 2. Get Supabase stories
+  try {
+    const { data: dbStories, error } = await supabase
+      .from('success_stories')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    
+    // Combine both (DB stories come first as they are newer)
+    const formattedDbStories = (dbStories || []).map(story => ({
+      ...story,
+      image: story.image_url || '/images/success_apartment.png',
+      displayId: `Case #${story.id.substring(0, 8).toUpperCase()}`,
+      lawyer: { name: story.lawyer_name }
+    }));
+
+    return [...formattedDbStories, ...localStories];
+  } catch (error) {
+    console.error('Failed to load DB success stories:', error);
+    return localStories;
   }
 }
 

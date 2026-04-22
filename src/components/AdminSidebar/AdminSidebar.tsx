@@ -7,8 +7,8 @@ import styles from './AdminSidebar.module.css';
 
 const menuItems = [
   { name: '대시보드', href: '/admin/dashboard', icon: '📊' },
-  { name: '변호사 관리', href: '/admin/lawyers', icon: '🤵‍♂️' },
-  { name: '칼럼 관리', href: '/admin/columns', icon: '✍️' },
+  { name: '성공사례 작성', href: '/admin/success-stories/write', icon: '📝' },
+  { name: '상담 내역 확인', href: '/admin/consultations', icon: '📞' },
   { name: '성공사례 관리', href: '/admin/success-stories', icon: '🏆' },
 ];
 

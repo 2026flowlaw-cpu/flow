@@ -5,7 +5,19 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
 
-const menuData = [
+interface SubItem {
+  name: string;
+  href: string;
+  isExternal?: boolean;
+}
+
+interface MenuItem {
+  title: string;
+  href: string;
+  subItems: SubItem[];
+}
+
+const menuData: MenuItem[] = [
   {
     title: '회사소개',
     href: '/about/intro',

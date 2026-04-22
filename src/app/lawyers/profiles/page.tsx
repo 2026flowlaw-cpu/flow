@@ -6,16 +6,17 @@ import Footer from '@/components/Footer/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './page.module.css';
+import { Lawyer } from '@/constants/lawyers';
 
 export default async function LawyersPage() {
   // Read data directly on the server
   const DATA_PATH = path.join(process.cwd(), 'src/data/lawyers.json');
-  let lawyers = [];
+  let lawyers: any[] = [];
   try {
     const jsonData = fs.readFileSync(DATA_PATH, 'utf8');
     const allLawyers = JSON.parse(jsonData);
     // Use summary data for the listing
-    lawyers = allLawyers.map((l: any) => ({
+    lawyers = allLawyers.map((l: Lawyer) => ({
       id: l.id,
       slug: l.slug,
       name: l.name,
@@ -43,7 +44,7 @@ export default async function LawyersPage() {
         <section className="section">
           <div className="container">
             <div className={styles.lawyerGrid}>
-              {lawyers.map((lawyer) => (
+              {lawyers.map((lawyer: any) => (
                 <Link 
                   key={lawyer.id} 
                   href={`/lawyers/profiles/${lawyer.slug}`} 

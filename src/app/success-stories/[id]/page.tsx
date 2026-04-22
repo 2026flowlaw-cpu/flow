@@ -10,7 +10,7 @@ import styles from './page.module.css';
 
 // Mock data fetcher
 const getCaseData = (id: string) => {
-  const cases = {
+  const cases: Record<string, any> = {
     '2024-002': {
       id: 'Case No. 2023-가합-589212',
       badge: 'FULL WIN',
@@ -140,7 +140,7 @@ export default function CaseDetailPage() {
                 <h2 className={styles.sectionTitle}>플로우의 대응 전략</h2>
               </div>
               <div className={styles.strategyList}>
-                {data.strategies.map((s, i) => (
+                {data.strategies.map((s: any, i: number) => (
                   <div key={i} className={styles.strategyItem}>
                     <div className={styles.strategyIcon}>{s.icon}</div>
                     <div className={styles.strategyContent}>

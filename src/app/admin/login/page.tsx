@@ -28,18 +28,23 @@ export default function AdminLoginPage() {
         password,
       });
 
+      console.log('Login Response:', { data, error });
+
       if (error) {
         // Show detailed error from Supabase
         setErrorMessage(error.message === 'Invalid login credentials' 
           ? '이메일 또는 비밀번호가 올바르지 않습니다.' 
           : error.message);
+        console.error('Supabase Login Error:', error.message);
         return;
       }
 
       if (data.user) {
+        console.log('Login Success! User:', data.user);
         router.push('/admin/dashboard');
       }
     } catch (err: any) {
+      console.error('Unexpected Login Error:', err);
       setErrorMessage(err.message || '로그인 처리 중 알 수 없는 오류가 발생했습니다.');
     } finally {
       setIsLoading(false);

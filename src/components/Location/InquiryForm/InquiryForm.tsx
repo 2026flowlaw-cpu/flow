@@ -22,6 +22,9 @@ const InquiryForm = () => {
     
     setLoading(true);
     try {
+      if (!supabase) {
+        throw new Error('Supabase client is not initialized. Please check your environment variables.');
+      }
       const { error } = await supabase
         .from('consultations')
         .insert([{

@@ -186,21 +186,30 @@
   }
 }
 
-.loginBtn {
-  font-size: 14px;
-  color: #666;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
-  margin-right: 20px;
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.header.solid .loginBtn {
-  color: #333;
+.loginBtn {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.solid .loginBtn {
+  color: var(--text-muted);
 }
 
 .loginBtn:hover {
-  color: #0A1B39;
+  color: white;
+}
+
+.solid .loginBtn:hover {
+  color: var(--primary);
 }
 
 @media (max-width: 1024px) {

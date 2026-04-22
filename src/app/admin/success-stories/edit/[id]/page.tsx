@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import styles from '../../add/page.module.css'; // Reusing add page styles
 
-export default function AdminSuccessStoryEditPage({ params }: { params: Promise<{ id: string }> }) {
+export default function AdminSuccessStoryEditPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const unwrappedParams = React.use(params);
-  const storyId = unwrappedParams.id;
+  const params = React.use(paramsPromise);
+  const storyId = params.id;
   
   const [formData, setFormData] = useState({
     id: '',
@@ -17,6 +17,7 @@ export default function AdminSuccessStoryEditPage({ params }: { params: Promise<
     category: '아파트 하자',
     title: '',
     description: '',
+    content: '',
     badge: '승소 (FULL WIN)',
     lawyerName: '',
   });
@@ -37,19 +38,20 @@ export default function AdminSuccessStoryEditPage({ params }: { params: Promise<
         // Fetch Story
         const sRes = await fetch('/api/success-stories');
         const sData = await sRes.json();
-        const currentStory = sData.find((s: any) => s.id === storyId);
+        const currentStory = sData.find((s: any) => s.id.toString() === storyId.toString());
         
         if (currentStory) {
           setFormData({
-            id: currentStory.id,
-            displayId: currentStory.displayId || '',
+            id: currentStory.id.toString(),
+            displayId: currentStory.displayId || `Case #DB-${currentStory.id}`,
             category: currentStory.category,
             title: currentStory.title,
-            description: currentStory.description,
+            description: currentStory.description || '',
+            content: currentStory.content || currentStory.description || '',
             badge: currentStory.badge,
-            lawyerName: currentStory.lawyer?.name || '',
+            lawyerName: currentStory.lawyer?.name || currentStory.lawyer_name || '',
           });
-          setImagePreview(currentStory.image);
+          setImagePreview(currentStory.image || currentStory.image_url);
         } else {
           alert('사례를 찾을 수 없습니다.');
           router.push('/admin/success-stories');
@@ -80,14 +82,9 @@ export default function AdminSuccessStoryEditPage({ params }: { params: Promise<
     setIsSaving(true);
     
     try {
-      const selectedLawyer = lawyers.find(l => l.name === formData.lawyerName);
       const payload = {
         ...formData,
         image: imagePreview,
-        lawyer: {
-          name: formData.lawyerName,
-          initials: selectedLawyer ? selectedLawyer.name.substring(0, 2).toUpperCase() : 'JD'
-        }
       };
 
       const res = await fetch('/api/success-stories', {
@@ -101,7 +98,8 @@ export default function AdminSuccessStoryEditPage({ params }: { params: Promise<
         router.push('/admin/success-stories');
         router.refresh();
       } else {
-        alert('수정 실패');
+        const errorData = await res.json();
+        alert('수정 실패: ' + (errorData.error || '알 수 없는 오류'));
       }
     } catch (err) {
       alert('수정 중 오류가 발생했습니다.');
@@ -159,7 +157,7 @@ export default function AdminSuccessStoryEditPage({ params }: { params: Promise<
             <div className={styles.card}>
               <h2 className={styles.cardTitle}>상태 정보</h2>
               <div className={styles.inputGroup}>
-                <label>사례 일련번호 (수정 불가)</label>
+                <label>사례 ID (수정 불가)</label>
                 <input 
                   type="text" 
                   value={formData.id}
@@ -171,7 +169,6 @@ export default function AdminSuccessStoryEditPage({ params }: { params: Promise<
                 <label>표시 ID</label>
                 <input 
                   type="text" 
-                  placeholder="예: Case #2024-001"
                   value={formData.displayId}
                   onChange={(e) => setFormData({...formData, displayId: e.target.value})}
                 />
@@ -205,25 +202,34 @@ export default function AdminSuccessStoryEditPage({ params }: { params: Promise<
                   <option>오피스텔/상가</option>
                   <option>일반건축물</option>
                   <option>손해배상</option>
+                  <option>전세사기</option>
+                  <option>분양계약해제</option>
                 </select>
               </div>
               <div className={styles.inputGroup}>
                 <label>사례 제목</label>
                 <input 
                   type="text" 
-                  placeholder="사례의 핵심 내용을 입력하세요"
                   value={formData.title}
                   onChange={(e) => setFormData({...formData, title: e.target.value})}
                   required
                 />
               </div>
               <div className={styles.inputGroup}>
-                <label>사례 요약 설명</label>
+                <label>요약 설명 (목록 노출용)</label>
                 <textarea 
-                  rows={5}
-                  placeholder="사건의 개요 및 결과를 요약하여 입력하세요..."
+                  rows={3}
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
+                  required
+                ></textarea>
+              </div>
+              <div className={styles.inputGroup}>
+                <label>상세 내용 (본문)</label>
+                <textarea 
+                  rows={10}
+                  value={formData.content}
+                  onChange={(e) => setFormData({...formData, content: e.target.value})}
                   required
                 ></textarea>
               </div>
@@ -233,6 +239,7 @@ export default function AdminSuccessStoryEditPage({ params }: { params: Promise<
                   value={formData.lawyerName}
                   onChange={(e) => setFormData({...formData, lawyerName: e.target.value})}
                 >
+                  <option value="">담당 변호사 선택</option>
                   {lawyers.map(l => (
                     <option key={l.name} value={l.name}>{l.name}</option>
                   ))}

@@ -88,9 +88,9 @@ export default function SuccessStoryWritePage() {
 
       alert('성공사례가 등록되었습니다.');
       router.push('/success-stories');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving:', error);
-      alert('저장 중 오류가 발생했습니다.');
+      alert('저장 중 오류가 발생했습니다: ' + (error.message || '알 수 없는 오류'));
     } finally {
       setIsLoading(false);
     }

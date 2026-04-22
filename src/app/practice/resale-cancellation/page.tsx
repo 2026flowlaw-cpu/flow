@@ -149,7 +149,7 @@ const ResaleCancellationPage = () => {
       {/* Experience Section */}
       <section className={styles.experienceSection}>
         <div className={styles.expOverlay}></div>
-        <div className="container" style={{ position: 'relative', z-index: 2 }}>
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className={styles.centerTextWhite}>
             <span className={styles.whiteTag}>경험하지 않은 사건은 없습니다</span>
             <h2 className={styles.hugeTitle}>그 사건 이미 이겨봤습니다</h2>

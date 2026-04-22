@@ -22,9 +22,27 @@ export default function AdminYouTubeAddPage() {
     return (match && match[2].length === 11) ? match[2] : url;
   };
 
-  const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const id = extractId(e.target.value);
-    setFormData({ ...formData, youtube_id: id });
+  const handleUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const url = e.target.value;
+    const id = extractId(url);
+    setFormData(prev => ({ ...prev, youtube_id: id }));
+
+    if (id && id.length === 11) {
+      try {
+        // Fetch Title from YouTube oEmbed API
+        const res = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${id}&format=json`);
+        if (res.ok) {
+          const data = await res.json();
+          setFormData(prev => ({ 
+            ...prev, 
+            title: data.title || prev.title,
+            description: data.author_name ? `${data.author_name} - 유튜브 영상` : prev.description
+          }));
+        }
+      } catch (err) {
+        console.error('Failed to fetch YouTube metadata:', err);
+      }
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,14 +57,16 @@ export default function AdminYouTubeAddPage() {
         body: JSON.stringify(formData)
       });
 
+      const result = await res.json();
+
       if (res.ok) {
         alert('영상이 등록되었습니다.');
         router.push('/admin/youtube');
       } else {
-        alert('등록 실패');
+        alert(`등록 실패: ${result.error || '알 수 없는 오류'}\n(수파베이스에 youtube_videos 테이블이 있는지 확인해주세요!)`);
       }
-    } catch (err) {
-      alert('오류가 발생했습니다.');
+    } catch (err: any) {
+      alert('오류가 발생했습니다: ' + err.message);
     } finally {
       setIsSaving(false);
     }

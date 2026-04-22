@@ -16,19 +16,10 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.15);
 
-  /* Spacing & Layout */
+  /* Base Layout Utility */
   --container-max-width: 1200px;
   --section-padding: 80px 20px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0A0A0A;
-    --foreground: #EDEDED;
-    --text-muted: #A0A0A0;
-    --border: #333333;
-    --glass-bg: rgba(10, 10, 10, 0.85);
-  }
+  color-scheme: light;
 }
 
 * {

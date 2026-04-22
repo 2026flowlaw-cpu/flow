@@ -2,10 +2,11 @@
   background-color: var(--background);
 }
 
+/* Hero Section */
 .hero {
   position: relative;
-  height: 60vh;
-  min-height: 500px;
+  height: 70vh;
+  min-height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,13 +19,13 @@
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(10, 27, 57, 0.8), rgba(10, 27, 57, 0.9));
+  background: linear-gradient(to bottom, rgba(10, 27, 57, 0.85), rgba(10, 27, 57, 0.95));
 }
 
 .heroContent {
   position: relative;
   z-index: 1;
-  max-width: 900px;
+  max-width: 1000px;
   padding: 0 20px;
 }
 
@@ -34,188 +35,435 @@
   font-weight: 700;
   color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
+  letter-spacing: 3px;
+  margin-bottom: 25px;
 }
 
-.title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 800;
+.mainTitle {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 900;
   line-height: 1.2;
-  margin-bottom: 24px;
+  margin-bottom: 30px;
 }
 
-.title span {
+.mainTitle span {
   color: var(--accent);
+  display: block;
+  font-size: 0.7em;
+  margin-top: 10px;
 }
 
-.description {
-  font-size: 1.1rem;
+.heroCatch {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #fff;
   opacity: 0.9;
-  line-height: 1.8;
-  word-break: keep-all;
+  letter-spacing: -0.5px;
 }
 
+/* Pain Points Bubble */
 .painSection {
-  padding: 100px 0;
-  background-color: #fcfcfc;
+  padding: 80px 0;
+  background-color: #f8f9fa;
 }
 
-.sectionHeader {
-  text-align: center;
-  margin-bottom: 60px;
+.painGridExpanded {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.sectionTitle {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: var(--primary);
-  margin-bottom: 16px;
-}
-
-.sectionSubtitle {
-  color: var(--text-muted);
-  font-size: 1.1rem;
-}
-
-.painGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-
-.painCard {
+.painBubble {
   background: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: var(--shadow-md);
-  border-left: 4px solid var(--accent);
-  transition: transform 0.3s ease;
+  padding: 25px 40px;
+  border-radius: 50px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
 }
 
-.painCard:hover {
-  transform: translateY(-10px);
+.painBubble:hover {
+  transform: translateX(10px);
+  border-color: var(--accent);
 }
 
-.painCard p {
-  font-size: 1.1rem;
+.emoji {
+  font-size: 2rem;
+}
+
+.painBubble p {
+  font-size: 1.15rem;
   font-weight: 600;
   color: #444;
-  font-style: italic;
-  line-height: 1.6;
+  margin: 0;
 }
 
-.serviceSection {
-  padding: 100px 0;
+/* Specialized Section */
+.specSection {
+  padding: 120px 0;
+  text-align: center;
 }
 
-.serviceGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px;
+.accentBox {
+  max-width: 900px;
+  margin: 0 auto 80px;
 }
 
-.serviceCard {
-  padding: 30px;
-  border: 1px solid #eee;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.serviceCard:hover {
-  border-color: var(--accent);
-  box-shadow: var(--shadow-lg);
-}
-
-.cardIndex {
-  font-size: 12px;
-  font-weight: 800;
+.subText {
   color: var(--accent);
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: block;
   margin-bottom: 15px;
 }
 
-.cardTitle {
-  font-size: 1.4rem;
+.specTitle {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.divider {
+  width: 60px;
+  height: 4px;
+  background-color: var(--accent);
+  margin: 30px auto;
+}
+
+.specLead {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  color: #555;
+  word-break: keep-all;
+}
+
+.caseNavigation {
+  background-color: #fff;
+  padding: 60px;
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
+}
+
+.navTitle {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.navSub {
+  color: #888;
+  margin-bottom: 40px;
+}
+
+.tagGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.caseTag {
+  padding: 18px;
+  background: #f1f3f6;
+  border-radius: 12px;
+  font-weight: 700;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.caseTag:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* Strength Light */
+.strengthSectionLight {
+  padding: 100px 0;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+}
+
+.centerText {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tagLine {
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.mainHeading {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--primary);
+  margin: 20px 0 40px;
+}
+
+.contentWrap p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.accentText {
+  padding: 30px;
+  background-color: #f9f4e8;
+  border-radius: 15px;
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 12px;
 }
 
-.cardDesc {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  line-height: 1.6;
+/* FAQ Section */
+.faqSection {
+  padding: 120px 0;
+  background-color: #fdfdfd;
 }
 
-.strengthSection {
-  padding: 100px 0;
-  background-color: var(--primary);
+.goldLabel {
+  color: var(--accent);
+  font-weight: 900;
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.faqList {
+  max-width: 900px;
+  margin: 60px auto 0;
+}
+
+.faqItem {
+  border-bottom: 1px solid #eee;
+  padding: 20px 0;
+  cursor: pointer;
+}
+
+.faqQuestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #222;
+  padding: 10px 0;
+}
+
+.qMark {
+  color: var(--accent);
+  margin-right: 15px;
+  font-size: 1.5rem;
+}
+
+.faqAnswer {
+  padding: 25px 40px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin-top: 15px;
+  line-height: 1.7;
+  color: #555;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Experience Dark */
+.experienceSection {
+  position: relative;
+  padding: 150px 0;
   color: white;
+  background: url('https://images.unsplash.com/photo-1582408921715-18e7806365c1?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat fixed;
 }
 
-.strengthGrid {
+.expOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(10, 27, 57, 0.9);
+}
+
+.centerTextWhite {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.whiteTag {
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.hugeTitle {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin: 20px 0;
+}
+
+.dividerGold {
+  width: 100px;
+  height: 2px;
+  background-color: var(--accent);
+  margin: 40px auto;
+}
+
+.quote {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 50px;
+}
+
+.expDetail p {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  opacity: 0.9;
+  margin-bottom: 30px;
+}
+
+.finalCall {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin-top: 50px;
+}
+
+/* Tech Section */
+.techSection {
+  padding: 120px 0;
+}
+
+.gridTwo {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.2fr 0.8fr;
   gap: 80px;
   align-items: center;
 }
 
-.strengthTitle {
-  font-size: 2.5rem;
+.techLabel {
+  color: var(--accent);
   font-weight: 800;
-  margin-bottom: 40px;
-}
-
-.strengthTitle span {
-  color: var(--accent);
-}
-
-.strengthList {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.strengthItem h4 {
-  font-size: 1.3rem;
-  color: var(--accent);
   margin-bottom: 10px;
+  display: block;
 }
 
-.strengthItem p {
-  opacity: 0.8;
-  line-height: 1.6;
-}
-
-.strengthImage {
-  position: relative;
-}
-
-.imagePlaceholder {
-  aspect-ratio: 4/5;
-  background-color: var(--primary-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--accent);
-  border-radius: 20px;
-}
-
-.imagePlaceholder span {
+.techTitle {
   font-size: 3rem;
   font-weight: 900;
-  color: var(--accent);
-  opacity: 0.3;
-  text-align: center;
+  color: var(--primary);
 }
 
-@media (max-width: 768px) {
-  .strengthGrid {
-    grid-template-columns: 1fr;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-  }
+.techQuote {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin: 30px 0;
+}
+
+.techDesc {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.techHighlight {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.techCard {
+  background: #f8f9fa;
+  padding: 50px;
+  border-radius: 30px;
+  border: 1px solid #eee;
+}
+
+.techCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  color: var(--primary);
+}
+
+.techCard ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.techCard li {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #444;
+  display: flex;
+  align-items: center;
+}
+
+.techCard li::before {
+  content: '✓';
+  color: var(--accent);
+  margin-right: 15px;
+  font-weight: 900;
+}
+
+/* Philosophy Section */
+.philSection {
+  padding: 100px 0;
+  background-color: #f8f9fa;
+}
+
+.philBox {
+  background: white;
+  padding: 80px;
+  border-radius: 40px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid #eee;
+}
+
+.philLabel {
+  color: #888;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.philTitle {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--primary);
+}
+
+.philQuote {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+  margin: 40px 0;
+}
+
+.philContent p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+@media (max-width: 992px) {
+  .gridTwo { grid-template-columns: 1fr; gap: 40px; }
+  .philBox { padding: 40px 20px; }
+  .hugeTitle { font-size: 2.5rem; }
+  .specTitle { font-size: 2.2rem; }
 }

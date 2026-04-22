@@ -123,13 +123,21 @@
   gap: 10px;
 }
 
-.editBtn, .deleteBtn {
+.editBtn, .deleteBtn, .viewBtn {
   padding: 6px 12px;
   border-radius: 4px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.viewBtn {
+  background: #eef2ff;
+  color: #4f46e5;
+  border: 1px solid #e0e7ff;
 }
 
 .editBtn {

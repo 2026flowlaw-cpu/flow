@@ -87,6 +87,14 @@ export default function AdminYouTubeListingPage() {
                     <td>{video.theme === 'dark' ? '딥 블루' : '화이트'}</td>
                     <td>
                       <div className={styles.rowActions}>
+                        <a 
+                          href={`https://www.youtube.com/watch?v=${video.youtube_id}`} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className={styles.viewBtn}
+                        >
+                          보기
+                        </a>
                         <Link href={`/admin/youtube/edit/${video.id}`} className={styles.editBtn}>
                           수정
                         </Link>

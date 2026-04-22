@@ -89,6 +89,14 @@ export default function AdminSuccessStoriesListingPage() {
                     <td><span className={styles.badge}>{story.badge}</span></td>
                     <td>
                       <div className={styles.rowActions}>
+                        <a 
+                          href={`/success-stories/${story.id}`} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className={styles.viewBtn}
+                        >
+                          보기
+                        </a>
                         <Link href={`/admin/success-stories/edit/${story.id}`} className={styles.editBtn}>
                           수정
                         </Link>

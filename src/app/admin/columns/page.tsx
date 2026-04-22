@@ -89,6 +89,14 @@ export default function AdminColumnsListingPage() {
                     <td>{new Date(col.created_at).toLocaleDateString()}</td>
                     <td>
                       <div className={styles.rowActions}>
+                        <a 
+                          href={`/columns/${col.id}`} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className={styles.viewBtn}
+                        >
+                          보기
+                        </a>
                         <Link href={`/admin/columns/edit/${col.id}`} className={styles.editBtn}>
                           수정
                         </Link>

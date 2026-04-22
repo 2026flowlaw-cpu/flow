@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import styles from '../admin-youtube.module.css';
+import styles from './admin-youtube.module.css';
 
 export default function AdminYouTubeListingPage() {
   const [videos, setVideos] = useState<any[]>([]);

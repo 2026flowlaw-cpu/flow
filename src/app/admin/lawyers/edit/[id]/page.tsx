@@ -28,19 +28,20 @@ export default function AdminLawyerEditPage({ params: paramsPromise }: { params:
       try {
         const res = await fetch('/api/lawyers');
         const data = await res.json();
-        const lawyer = data.find((l: any) => l.slug === params.id);
+        const decodedId = decodeURIComponent(params.id);
+        const lawyer = data.find((l: any) => l.slug === decodedId || l.name === decodedId);
         
         if (lawyer) {
           setFormData({
             id: lawyer.id,
-            name: lawyer.name,
-            title: lawyer.title,
-            slug: lawyer.slug,
-            experience: lawyer.experience.join('\n'),
-            history: lawyer.history.join('\n'),
-            activities: lawyer.activities.join('\n'),
+            name: lawyer.name || '',
+            title: lawyer.title || '',
+            slug: lawyer.slug || '',
+            experience: (lawyer.experience || []).join('\n'),
+            history: (lawyer.history || []).join('\n'),
+            activities: (lawyer.activities || []).join('\n'),
           });
-          setImagePreview(lawyer.image);
+          setImagePreview(lawyer.image || null);
         }
       } catch (error) {
         console.error('Failed to fetch lawyer:', error);

@@ -18,16 +18,8 @@ const writeData = (data: any) => {
 export async function GET() {
   try {
     const data = readData();
-    // Return only necessary fields for listing (Optimization)
-    const summaryData = data.map((l: any) => ({
-      id: l.id,
-      slug: l.slug,
-      name: l.name,
-      title: l.title,
-      image: l.image,
-      experience: l.experience ? l.experience.slice(0, 3) : []
-    }));
-    return NextResponse.json(summaryData);
+    // Return full data so the edit page can access all fields like history and activities
+    return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
   }

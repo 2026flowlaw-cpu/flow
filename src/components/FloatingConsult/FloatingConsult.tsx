@@ -1,8 +1,16 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './FloatingConsult.module.css';
 
 const FloatingConsult = () => {
+  const pathname = usePathname();
+  
+  // Hide on admin pages
+  if (pathname?.startsWith('/admin')) return null;
+
   return (
     <div className={styles.floating}>
       <Link href="/consult" className={styles.button}>

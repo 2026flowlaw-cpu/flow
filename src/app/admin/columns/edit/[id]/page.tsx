@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../../../youtube/admin-youtube.module.css';
 import { uploadImage } from '@/lib/upload';
+import Editor from '@/components/Editor/Editor';
 
 export default function AdminColumnEditPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
@@ -143,12 +144,10 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
 
           <div className={styles.inputGroup}>
             <label>상세 내용 (본문) *</label>
-            <textarea 
-              rows={15}
+            <Editor 
               value={formData.content}
-              onChange={(e) => setFormData({...formData, content: e.target.value})}
-              required
-            ></textarea>
+              onChange={(val) => setFormData({...formData, content: val})}
+            />
           </div>
 
           <div className={styles.themeToggle}>

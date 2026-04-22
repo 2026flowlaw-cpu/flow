@@ -62,11 +62,10 @@ export default function ColumnDetailPage({ params: paramsPromise }: { params: Pr
 
         {/* Floating Article Content */}
         <article className={styles.article}>
-          <div className={styles.content}>
-            {column.content.split('\n').map((line: string, i: number) => (
-              <p key={i}>{line || '\u00A0'}</p>
-            ))}
-          </div>
+          <div 
+            className={`${styles.content} ql-editor`}
+            dangerouslySetInnerHTML={{ __html: column.content }} 
+          />
 
           <footer className={styles.footerArea}>
             <div className={styles.consultBox}>

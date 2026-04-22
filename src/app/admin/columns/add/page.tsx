@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import styles from '../../youtube/admin-youtube.module.css';
 
 import { uploadImage } from '@/lib/upload';
+import Editor from '@/components/Editor/Editor';
 
 export default function AdminColumnAddPage() {
   const router = useRouter();
@@ -120,13 +121,10 @@ export default function AdminColumnAddPage() {
 
           <div className={styles.inputGroup}>
             <label>상세 내용 (본문) *</label>
-            <textarea 
-              rows={15}
-              placeholder="칼럼의 전체 내용을 입력하세요..."
+            <Editor 
               value={formData.content}
-              onChange={(e) => setFormData({...formData, content: e.target.value})}
-              required
-            ></textarea>
+              onChange={(val) => setFormData({...formData, content: val})}
+            />
           </div>
 
           <div className={styles.themeToggle}>

@@ -1,56 +1,58 @@
-import React from 'react';
+"use client";
+
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Header from '@/components/Header/Header';
 import RealFooter from '@/components/Footer/Footer';
-import fs from 'fs';
-import path from 'path';
+import { supabase } from '@/lib/supabase';
 import styles from './page.module.css';
 
-const categories = ['전체보기', '아파트 하자', '오피스텔/상가', '일반건축물', '손해배상'];
+const categories = ['전체보기', '아파트 하자', '오피스텔/상가', '일반건축물', '손해배상', '전세사기', '분양계약해제'];
 
-import { supabase } from '@/lib/supabase';
+export default function SuccessStoriesPage() {
+  const [activeCategory, setActiveCategory] = useState('전체보기');
+  const [allCases, setAllCases] = useState<any[]>([]);
+  const [filteredCases, setFilteredCases] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-export const dynamic = 'force-dynamic';
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true);
+      try {
+        // 1. Fetch from Supabase
+        const { data: dbStories, error } = await supabase
+          .from('success_stories')
+          .select('*')
+          .order('created_at', { ascending: false });
 
-async function getSuccessStories() {
-  const DATA_PATH = path.join(process.cwd(), 'src/data/success-stories.json');
-  let localStories = [];
-  
-  // 1. Get local JSON stories
-  try {
-    const jsonData = fs.readFileSync(DATA_PATH, 'utf8');
-    localStories = JSON.parse(jsonData);
-  } catch (error) {
-    console.error('Failed to load local success stories:', error);
-  }
+        if (error) throw error;
 
-  // 2. Get Supabase stories
-  try {
-    const { data: dbStories, error } = await supabase
-      .from('success_stories')
-      .select('*')
-      .order('created_at', { ascending: false });
+        const formattedDbStories = (dbStories || []).map((story: any) => ({
+          ...story,
+          image: story.image_url || '/images/success_apartment.png',
+          displayId: `Case #DB-${story.id}`,
+          lawyer: { name: story.lawyer_name }
+        }));
 
-    if (error) throw error;
-    
-    // Combine both (DB stories come first as they are newer)
-    const formattedDbStories = (dbStories || []).map((story: any) => ({
-      ...story,
-      image: story.image_url || '/images/success_apartment.png',
-      displayId: `Case #DB-${story.id}`,
-      lawyer: { name: story.lawyer_name }
-    }));
+        setAllCases(formattedDbStories);
+        setFilteredCases(formattedDbStories);
+      } catch (error) {
+        console.error('Failed to load success stories:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
 
-    return [...formattedDbStories, ...localStories];
-  } catch (error) {
-    console.error('Failed to load DB success stories:', error);
-    return localStories;
-  }
-}
-
-export default async function SuccessStoriesPage() {
-  const successCases = await getSuccessStories();
+  useEffect(() => {
+    if (activeCategory === '전체보기') {
+      setFilteredCases(allCases);
+    } else {
+      setFilteredCases(allCases.filter(c => c.category === activeCategory));
+    }
+  }, [activeCategory, allCases]);
 
   return (
     <div className={styles.page}>
@@ -76,15 +78,15 @@ export default async function SuccessStoriesPage() {
           />
         </section>
 
-        {/* Filter (Note: Server Component filter can be added via Query Params if needed, 
-            but for now we display all or keep simple) */}
         <div className="container">
+          {/* Filter Tabs */}
           <div className={styles.filterContainer}>
             <div className={styles.filterTabs}>
               {categories.map((cat) => (
                 <button 
                   key={cat} 
-                  className={`${styles.filterTab} ${cat === '전체보기' ? styles.activeTab : ''}`}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`${styles.filterTab} ${cat === activeCategory ? styles.activeTab : ''}`}
                 >
                   {cat}
                 </button>
@@ -94,8 +96,10 @@ export default async function SuccessStoriesPage() {
 
           {/* Grid */}
           <div className={styles.grid}>
-            {successCases.length > 0 ? (
-              successCases.map((item: any, index: number) => (
+            {isLoading ? (
+              <div className={styles.loading}>로딩 중...</div>
+            ) : filteredCases.length > 0 ? (
+              filteredCases.map((item: any, index: number) => (
                 <Link href={`/success-stories/${item.id}`} key={index} className={styles.card}>
                   <div className={styles.cardImageWrapper}>
                     <Image src={item.image} alt={item.title} fill style={{ objectFit: 'cover' }} />
@@ -107,7 +111,7 @@ export default async function SuccessStoriesPage() {
                       <span className={styles.caseId}>{item.displayId}</span>
                     </div>
                     <h3 className={styles.cardTitle}>{item.title}</h3>
-                    <p className={styles.cardDesc}>{item.description.substring(0, 150)}...</p>
+                    <p className={styles.cardDesc}>{(item.description || '').substring(0, 150)}...</p>
                     
                     <div className={styles.lawyerProfile}>
                       <div className={styles.lawyerInfo}>
@@ -125,7 +129,7 @@ export default async function SuccessStoriesPage() {
                 </Link>
               ))
             ) : (
-              <div className={styles.noData}>등록된 성공사례가 없습니다.</div>
+              <div className={styles.noData}>해당 카테고리의 성공사례가 없습니다.</div>
             )}
           </div>
         </div>

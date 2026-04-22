@@ -39,12 +39,12 @@ const menuData: MenuItem[] = [
     href: '#practice',
     subItems: [
       { name: '분양계약해제센터', href: '/practice/resale-cancellation' },
-      { name: '전세사기센터', href: '#practice' },
-      { name: '부동산분쟁센터', href: '#practice' },
-      { name: '건설분쟁센터', href: '#practice' },
-      { name: '민사일반센터', href: '#practice' },
-      { name: '에듀법률센터', href: '#practice' },
-      { name: '형사소송센터', href: '#practice' },
+      { name: '전세사기센터', href: '/practice/jeonse-fraud' },
+      { name: '부동산분쟁센터', href: '/practice/real-estate-dispute' },
+      { name: '건설분쟁센터', href: '/practice/construction-dispute' },
+      { name: '민사일반센터', href: '/practice/general-civil' },
+      { name: '에듀법률센터', href: '/practice/edu-law' },
+      { name: '형사소송센터', href: '/practice/criminal-law' },
     ]
   },
   {

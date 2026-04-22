@@ -1,0 +1,229 @@
+/* Unified styles for YouTube Admin pages */
+.container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: #0A1B39;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111;
+}
+
+.subtitle {
+  color: #666;
+  margin-top: 8px;
+}
+
+.addBtn {
+  background-color: #0A1B39;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.addBtn:hover {
+  opacity: 0.9;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  margin-bottom: 30px;
+  border: 1px solid #eee;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 12px;
+}
+
+/* Table styles */
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  padding: 15px;
+  border-bottom: 2px solid #eee;
+  font-size: 14px;
+  color: #666;
+}
+
+.table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.thumbnail {
+  width: 100px;
+  height: 60px;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.categoryTag {
+  background: #f0f4f8;
+  color: #4a76a8;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.storyTitle {
+  font-weight: 600;
+  color: #111;
+}
+
+.rowActions {
+  display: flex;
+  gap: 10px;
+}
+
+.editBtn, .deleteBtn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.editBtn {
+  background: #f0f4f8;
+  color: #0A1B39;
+  border: none;
+}
+
+.deleteBtn {
+  background: #fff5f5;
+  color: #ff4d4d;
+  border: 1px solid #ffe3e3;
+}
+
+/* Form styles */
+.inputGroup {
+  margin-bottom: 20px;
+}
+
+.inputGroup label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+.inputGroup input, .inputGroup select, .inputGroup textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.helpText {
+  font-size: 12px;
+  color: #888;
+  margin-top: 6px;
+}
+
+.themeToggle {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.cancelBtn {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 12px 30px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.saveBtn {
+  background: #0A1B39;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.saveBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.loading {
+  padding: 100px;
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+}
+
+.center {
+  text-align: center;
+  padding: 40px;
+}

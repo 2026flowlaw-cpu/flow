@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from '../add/page.module.css'; // Reusing common form styles
+import styles from '../admin-youtube.module.css';
 
 export default function AdminYouTubeAddPage() {
   const router = useRouter();

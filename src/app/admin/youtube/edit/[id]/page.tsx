@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from '../../add/page.module.css';
+import styles from '../../admin-youtube.module.css';
 
 export default function AdminYouTubeEditPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
   const router = useRouter();

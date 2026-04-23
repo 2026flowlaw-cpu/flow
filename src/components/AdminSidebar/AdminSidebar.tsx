@@ -12,6 +12,7 @@ const menuItems = [
   { name: '변호사 관리', href: '/admin/lawyers', icon: '🤵‍♂️' },
   { name: '유튜브 관리', href: '/admin/youtube', icon: '🎬' },
   { name: '칼럼 관리', href: '/admin/columns', icon: '✍️' },
+  { name: '언론보도 관리', href: '/admin/press-releases', icon: '📰' },
 ];
 
 export default function AdminSidebar() {

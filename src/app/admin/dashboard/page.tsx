@@ -100,94 +100,55 @@ export default function AdminDashboardMainPage() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '32px' }}>
-        {/* 최근 상담 신청 (언론보도 옆으로 이동 & 디테일 강화) */}
-        <div style={{ background: 'white', padding: '35px', borderRadius: '24px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.05)', border: '1px solid #f1f5f9' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#0A1B39' }}>최근 상담 접수 현황 (디테일)</h2>
-            <Link href="/admin/consultations" style={{ color: '#4f46e5', textDecoration: 'none', fontSize: '14px', fontWeight: 700 }}>전체보기 →</Link>
-          </div>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {isConsultArray && consultations.length > 0 ? (
-              consultations.slice(0, 4).map((item: any, i: number) => (
-                <div key={i} style={{ 
-                  padding: '24px', borderRadius: '18px', background: '#fcfcfc', 
-                  border: '1px solid #f1f5f9', display: 'flex', transition: 'all 0.2s', cursor: 'default'
-                }}>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
-                        <span style={{ fontWeight: 800, fontSize: '17px', color: '#1e293b' }}>{item.name} 님</span>
-                        <span style={{ 
-                            fontSize: '11px', padding: '3px 10px', borderRadius: '6px', fontWeight: 800,
-                            background: item.status === '대기중' ? '#ffebee' : '#e8f5e9',
-                            color: item.status === '대기중' ? '#ef4444' : '#22c55e'
-                        }}>{item.status}</span>
-                    </div>
-                    <div style={{ display: 'flex', gap: '20px', marginBottom: '12px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#64748b' }}>
-                            <Phone size={14} /> {item.phone}
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#64748b' }}>
-                            <Book size={14} /> {item.case_type}
-                        </div>
-                    </div>
-                    <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: '1.5', display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                        {item.details || '내용이 없습니다.'}
-                    </p>
-                  </div>
-                  <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                      <p style={{ fontSize: '12px', color: '#94a3b8' }}>{new Date(item.created_at).toLocaleDateString()}</p>
-                      <Link href="/admin/consultations" style={{ color: '#0A1B39', fontSize: '12px', fontWeight: 800, marginTop: '8px', textDecoration: 'none' }}>상세내용 🔍</Link>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div style={{ textAlign: 'center', padding: '60px 0', color: '#94a3b8' }}>새로 접수된 상담이 없습니다.</div>
-            )}
+      {/* 최근 상담 신청 (전체 너비로 확장하여 최우선 노출) */}
+      <div style={{ background: 'white', padding: '35px', borderRadius: '24px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.05)', border: '1px solid #f1f5f9' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
+          <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#0A1B39' }}>실시간 상담 접수 현황</h2>
+          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+            <span style={{ fontSize: '13px', color: '#64748b' }}>최근 6건 표시</span>
+            <Link href="/admin/consultations" style={{ color: '#4f46e5', textDecoration: 'none', fontSize: '14px', fontWeight: 700, padding: '8px 16px', background: '#eef2ff', borderRadius: '10px' }}>전체 관리 페이지로 이동 →</Link>
           </div>
         </div>
-
-        {/* 언론보도 최근 내역 */}
-        <div style={{ background: 'white', padding: '35px', borderRadius: '24px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.05)', border: '1px solid #f1f5f9' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#0A1B39' }}>언론보도 소식</h2>
-            <Link href="/admin/press-releases/add" style={{ 
-              background: '#bd9d62', color: 'white', padding: '8px 18px', borderRadius: '10px', 
-              textDecoration: 'none', fontSize: '13px', fontWeight: 800 
-            }}>+ 뉴스 등록</Link>
-          </div>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            {isPressArray && pressReleases.length > 0 ? (
-              pressReleases.slice(0, 4).map((item: any) => (
-                <div key={item.id} style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-                  <div style={{ width: '100px', height: '65px', position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid #eee', flexShrink: 0 }}>
-                      <img src={item.image_url || '/images/hero_bg.png'} alt="news" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
+          {isConsultArray && consultations.length > 0 ? (
+            consultations.slice(0, 6).map((item: any, i: number) => (
+              <div key={i} style={{ 
+                padding: '24px', borderRadius: '18px', background: '#fcfcfc', 
+                border: '1px solid #f1f5f9', display: 'flex', transition: 'all 0.2s'
+              }}>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
+                      <span style={{ fontWeight: 800, fontSize: '17px', color: '#1e293b' }}>{item.name} 님</span>
+                      <span style={{ 
+                          fontSize: '11px', padding: '3px 10px', borderRadius: '6px', fontWeight: 800,
+                          background: item.status === '대기중' ? '#ffebee' : '#e8f5e9',
+                          color: item.status === '대기중' ? '#ef4444' : '#22c55e'
+                      }}>{item.status}</span>
                   </div>
-                  <div style={{ flex: 1, overflow: 'hidden' }}>
-                    <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#1e293b', marginBottom: '6px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.title}</h4>
-                    <p style={{ fontSize: '12px', color: '#bd9d62', fontWeight: 600 }}>{item.press_name} | {item.publish_date}</p>
+                  <div style={{ display: 'flex', gap: '20px', marginBottom: '12px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#64748b' }}>
+                          <Phone size={14} /> {item.phone}
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#64748b' }}>
+                          <FileText size={14} /> {item.case_type}
+                      </div>
                   </div>
+                  <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: '1.5', display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      {item.details || '내용이 없습니다.'}
+                  </p>
                 </div>
-              ))
-            ) : (
-              <div style={{ textAlign: 'center', padding: '60px 0', color: '#94a3b8' }}>등록된 소식이 없습니다.</div>
-            )}
-          </div>
-          
-          <Link href="/admin/press-releases" style={{ 
-            marginTop: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', 
-            background: '#f1f5f9', color: '#0A1B39', padding: '16px', borderRadius: '16px', 
-            textDecoration: 'none', fontSize: '14px', fontWeight: 800 
-          }}>
-            언론보도 전체 관리 <ArrowRight size={18} />
-          </Link>
+                <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <p style={{ fontSize: '12px', color: '#94a3b8' }}>{new Date(item.created_at).toLocaleDateString()}</p>
+                    <Link href="/admin/consultations" style={{ color: '#0A1B39', fontSize: '12px', fontWeight: 800, marginTop: '8px', textDecoration: 'none' }}>문의 상세 🔍</Link>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div style={{ gridColumn: 'span 2', textAlign: 'center', padding: '60px 0', color: '#94a3b8' }}>새로 접수된 상담이 없습니다.</div>
+          )}
         </div>
       </div>
     </div>
   );
 }
-
-// 아이콘 매칭을 위한 Book import 누락 수정 (lucide-react엔 없으므로 FileText로 대체)
-const Book = FileText;

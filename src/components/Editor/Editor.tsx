@@ -2,10 +2,13 @@
 
 import React, { useMemo } from 'react';
 import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css';
+import 'react-quill-new/dist/quill.snow.css';
 
 // 에디터를 클라이언트 환경에서만 부르도록 안전하게 설정 (next.js ssr 충돌 방지)
-const ReactQuill = dynamic(() => import('react-quill'), { 
+const ReactQuill = dynamic(async () => {
+  const { default: RQ } = await import('react-quill-new');
+  return RQ;
+}, { 
   ssr: false, 
   loading: () => <p style={{ padding: '20px', color: '#888' }}>에디터를 불러오는 중입니다...</p> 
 });

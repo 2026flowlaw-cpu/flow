@@ -1,29 +1,17 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import styles from '../youtube/admin-youtube.module.css'; // 공통 스타일 재사용
+import React, { useState } from 'react';
+import styles from '../youtube/admin-youtube.module.css';
+import useSWR from 'swr';
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function AdminConsultationsPage() {
-  const [consultations, setConsultations] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [selectedItem, setSelectedItem] = useState<any | null>(null); // 팝업창에 띄울 데이터
+  const { data: consultations, error, mutate } = useSWR('/api/consultations', fetcher);
+  const isLoading = !consultations && !error;
+  const [selectedItem, setSelectedItem] = useState<any | null>(null);
 
-  const fetchConsultations = async () => {
-    setIsLoading(true);
-    try {
-      const res = await fetch('/api/consultations');
-      const data = await res.json();
-      setConsultations(Array.isArray(data) ? data : []);
-    } catch (error) {
-      console.error('Failed to fetch consultations:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchConsultations();
-  }, []);
+  const fetchConsultations = () => mutate();
 
   const handleDelete = async (id: string, name: string) => {
     if (confirm(`'${name}' 님의 상담 내역을 파기하시겠습니까? (이 작업은 되돌릴 수 없습니다)`)) {

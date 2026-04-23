@@ -1,30 +1,18 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './admin-youtube.module.css';
+import useSWR from 'swr';
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function AdminYouTubeListingPage() {
-  const [videos, setVideos] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data: videos, error, mutate } = useSWR('/api/youtube', fetcher);
+  const isLoading = !videos && !error;
 
-  const fetchVideos = async () => {
-    setIsLoading(true);
-    try {
-      const res = await fetch('/api/youtube');
-      const data = await res.json();
-      setVideos(data || []);
-    } catch (error) {
-      console.error('Failed to fetch videos:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchVideos();
-  }, []);
+  const fetchVideos = () => mutate();
 
   const handleDelete = async (id: string, title: string) => {
     if (confirm(`'${title}' 영상을 정말로 삭제하시겠습니까?`)) {

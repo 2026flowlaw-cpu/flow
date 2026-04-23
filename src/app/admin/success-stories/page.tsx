@@ -1,30 +1,20 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './page.module.css';
+import useSWR from 'swr';
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function AdminSuccessStoriesListingPage() {
-  const [stories, setStories] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data: stories, error, mutate } = useSWR('/api/success-stories', fetcher);
+  const isLoading = !stories && !error;
 
-  const fetchStories = async () => {
-    setIsLoading(true);
-    try {
-      const res = await fetch('/api/success-stories');
-      const data = await res.json();
-      setStories(data);
-    } catch (error) {
-      console.error('Failed to fetch stories:', error);
-    } finally {
-      setIsLoading(false);
-    }
+  const fetchStories = () => {
+    mutate(); // Revalidate data
   };
-
-  useEffect(() => {
-    fetchStories();
-  }, []);
 
   const handleDelete = async (id: string, title: string) => {
     if (confirm(`'${title}' 사례를 정말로 삭제하시겠습니까?`)) {

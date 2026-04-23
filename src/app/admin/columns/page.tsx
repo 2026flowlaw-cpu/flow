@@ -1,30 +1,18 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../youtube/admin-youtube.module.css';
+import useSWR from 'swr';
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function AdminColumnsListingPage() {
-  const [columns, setColumns] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data: columns, error, mutate } = useSWR('/api/columns', fetcher);
+  const isLoading = !columns && !error;
 
-  const fetchColumns = async () => {
-    setIsLoading(true);
-    try {
-      const res = await fetch('/api/columns');
-      const data = await res.json();
-      setColumns(data || []);
-    } catch (error) {
-      console.error('Failed to fetch columns:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchColumns();
-  }, []);
+  const fetchColumns = () => mutate();
 
   const handleDelete = async (id: string, title: string) => {
     if (confirm(`'${title}' 칼럼을 정말로 삭제하시겠습니까?`)) {

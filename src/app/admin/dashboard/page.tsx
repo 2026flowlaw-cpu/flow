@@ -1,13 +1,141 @@
-import React from 'react';
+"use client";
 
-export default function AdminDashboardPage() {
+import React from 'react';
+import useSWR from 'swr';
+import { 
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
+  LineChart, Line, AreaChart, Area 
+} from 'recharts';
+import { 
+  Users, MessageSquare, AlertCircle, CheckCircle2, 
+  TrendingUp, Calendar, ArrowRight 
+} from 'lucide-react';
+import Link from 'next/link';
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+// 시뮬레이션용 GA4 방문자 데이터 (실제 연동 시 API 데이터로 대체)
+const visitorData = [
+  { name: '04.17', visitors: 120, pageviews: 450 },
+  { name: '04.18', visitors: 210, pageviews: 890 },
+  { name: '04.19', visitors: 180, pageviews: 620 },
+  { name: '04.20', visitors: 340, pageviews: 1200 },
+  { name: '04.21', visitors: 290, pageviews: 1100 },
+  { name: '04.22', visitors: 420, pageviews: 1540 },
+  { name: '04.23', visitors: 380, pageviews: 1420 },
+];
+
+export default function AdminDashboardMainPage() {
+  const { data: consultations, error } = useSWR('/api/consultations', fetcher);
+
+  // 상담 통계 계산
+  const totalCount = consultations?.length || 0;
+  const pendingCount = consultations?.filter((c: any) => c.status === '대기중').length || 0;
+  const completedCount = consultations?.filter((c: any) => c.status === '상담완료').length || 0;
+  const todayCount = consultations?.filter((c: any) => {
+    const today = new Date().toISOString().split('T')[0];
+    return c.created_at.startsWith(today);
+  }).length || 0;
+
+  const stats = [
+    { label: '전체 상담 신청', value: totalCount, icon: MessageSquare, color: '#4f46e5' },
+    { label: '오늘 신규 문의', value: todayCount, icon: TrendingUp, color: '#bd9d62' },
+    { label: '현재 대기 중', value: pendingCount, icon: AlertCircle, color: '#ef4444' },
+    { label: '상담 완료 건수', value: completedCount, icon: CheckCircle2, color: '#22c55e' },
+  ];
+
   return (
-    <div style={{ padding: '40px', background: '#f5f7fb', minHeight: '100vh' }}>
-      <h1 style={{ color: '#0A1B39', marginBottom: '20px' }}>관리자 대시보드</h1>
-      <p style={{ color: '#666' }}>상태: 로그인 성공</p>
-      <div style={{ marginTop: '40px', padding: '20px', background: 'white', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
-        <p>환영합니다, 관리자님! 여기에서 칼럼, 성공사례, 변호사 프로필을 관리하실 수 있습니다.</p>
-        <p style={{ marginTop: '20px', fontSize: '14px', color: '#999' }}>(곧 기능이 업데이트될 예정입니다.)</p>
+    <div style={{ padding: '40px', background: '#f8fafc', minHeight: '100vh' }}>
+      <div style={{ marginBottom: '40px' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: 800, color: '#0A1B39', marginBottom: '8px' }}>관리자 대시보드</h1>
+        <p style={{ color: '#64748b' }}>법무법인 일신 웹사이트의 주요 활동 지표를 한눈에 확인하세요.</p>
+      </div>
+
+      {/* 통계 카드 그리드 */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', marginBottom: '40px' }}>
+        {stats.map((stat, i) => (
+          <div key={i} style={{ 
+            background: 'white', padding: '24px', borderRadius: '16px', 
+            boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', gap: '20px'
+          }}>
+            <div style={{ background: `${stat.color}15`, padding: '12px', borderRadius: '12px' }}>
+              <stat.icon size={28} color={stat.color} />
+            </div>
+            <div>
+              <p style={{ fontSize: '14px', color: '#64748b', fontWeight: 600, marginBottom: '4px' }}>{stat.label}</p>
+              <h3 style={{ fontSize: '24px', fontWeight: 800, color: '#1e293b' }}>{stat.value}</h3>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
+        {/* 방문자 통계 그래프 (GA4 대체용) */}
+        <div style={{ background: 'white', padding: '32px', borderRadius: '20px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.05)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#0A1B39' }}>방문자 추이 (GA4)</h2>
+            <div style={{ fontSize: '14px', color: '#64748b' }}>최근 7일 지표</div>
+          </div>
+          <div style={{ width: '100%', height: '350px' }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={visitorData}>
+                <defs>
+                  <linearGradient id="colorVis" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#4f46e5" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} dy={10} />
+                <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} />
+                <Tooltip 
+                  contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px rgba(0,0,0,0.1)' }}
+                />
+                <Area type="monotone" dataKey="visitors" stroke="#4f46e5" strokeWidth={3} fillOpacity={1} fill="url(#colorVis)" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* 최근 상담 신청 요약 */}
+        <div style={{ background: 'white', padding: '32px', borderRadius: '20px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.05)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#0A1B39' }}>최근 상담 신청</h2>
+            <Link href="/admin/consultations" style={{ fontSize: '13px', color: '#4f46e5', textDecoration: 'none', fontWeight: 600 }}>전체보기</Link>
+          </div>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {consultations?.slice(0, 5).map((item: any, i: number) => (
+              <div key={i} style={{ 
+                padding: '16px', borderRadius: '12px', background: '#f8fafc', 
+                border: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+              }}>
+                <div>
+                  <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#1e293b', marginBottom: '4px' }}>{item.name} 님</h4>
+                  <p style={{ fontSize: '12px', color: '#64748b' }}>{item.case_type}</p>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <span style={{ 
+                    fontSize: '11px', padding: '4px 8px', borderRadius: '4px', fontWeight: 700,
+                    background: item.status === '대기중' ? '#ffebee' : '#e8f5e9',
+                    color: item.status === '대기중' ? '#ef4444' : '#22c55e'
+                  }}>
+                    {item.status}
+                  </span>
+                  <p style={{ fontSize: '10px', color: '#94a3b8', marginTop: '6px' }}>{new Date(item.created_at).toLocaleDateString()}</p>
+                </div>
+              </div>
+            )) || <p style={{ textAlign: 'center', color: '#94a3b8', padding: '40px 0' }}>데이터가 없습니다.</p>}
+          </div>
+
+          <Link href="/admin/consultations" style={{ 
+            marginTop: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', 
+            background: '#0A1B39', color: 'white', padding: '14px', borderRadius: '12px', 
+            textDecoration: 'none', fontSize: '14px', fontWeight: 700 
+          }}>
+            상담 내역 전체 관리하러 가기 <ArrowRight size={18} />
+          </Link>
+        </div>
       </div>
     </div>
   );

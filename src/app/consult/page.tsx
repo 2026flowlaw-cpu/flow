@@ -93,56 +93,6 @@ const ConsultPage = () => {
             {isSubmitted ? (
               <div className={styles.successMessage}>
                 <div className={styles.successIcon}>
-                  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                  </svg>
-                </div>
-                <h3>상담 신청이 완료되었습니다</h3>
-                <p>담당 변호사가 확인 후 빠른 시일 내에 연락드리겠습니다.</p>
-                <button onClick={() => setIsSubmitted(false)} className={styles.submitBtn}>
-                  추가 문의하기
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>의뢰인 성함</label>
-                    <input name="name" type="text" className={styles.input} placeholder="성함을 입력하세요" required onChange={handleInputChange} />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>연락처</label>
-                    <input name="phone" type="tel" className={styles.input} placeholder="010-0000-0000" required onChange={handleInputChange} />
-                  </div>
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.label}>이메일 주소</label>
-                  <input name="email" type="email" className={styles.input} placeholder="example@ilshin.com" onChange={handleInputChange} />
-                </div>
-
-                <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>사건 유형</label>
-                    <select name="case_type" className={styles.select} required onChange={handleInputChange}>
-                      <option value="">사건 유형을 선택하세요</option>
-                      <option value="apartment">아파트 하자 소송</option>
-                      <option value="commercial">오피스텔/상가 하자</option>
-                      <option value="building">일반건축물 하자</option>
-                      <option value="damages">손해배상 전담</option>
-                      <option value="etc">기타 법률 상담</option>
-                    </select>
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>부동산 명칭/위치</label>
-                    <input name="location" type="text" className={styles.input} placeholder="소재지 또는 건물명" onChange={handleInputChange} />
-                  </div>
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.label}>상세 내용</label>
-                  <textarea name="details" className={styles.textarea} placeholder="사건에 대한 상세한 내용을 기재해 주세요." onChange={handleInputChange}></textarea>
                 </div>
 
                 <div className={styles.formRow}>

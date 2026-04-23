@@ -29,13 +29,15 @@ export default function AdminDashboardMainPage() {
   const { data: consultations } = useSWR('/api/consultations', fetcher);
   const { data: pressReleases } = useSWR('/api/press-releases', fetcher);
 
-  // 상담 통계 계산
-  const totalCount = consultations?.length || 0;
-  const pendingCount = consultations?.filter((c: any) => c.status === '대기중').length || 0;
-  const completedCount = consultations?.filter((c: any) => c.status === '상담완료').length || 0;
+  // 상담 통계 계산 (안전하게 배열인지 확인 후 계산)
+  const isConsultArray = Array.isArray(consultations);
+  const totalCount = isConsultArray ? consultations.length : 0;
+  const pendingCount = isConsultArray ? consultations.filter((c: any) => c.status === '대기중').length : 0;
+  const completedCount = isConsultArray ? consultations.filter((c: any) => c.status === '상담완료').length : 0;
   
-  // 언론보도 통계
-  const totalPressCount = pressReleases?.length || 0;
+  // 언론보도 통계 (안전하게 배열인지 확인 후 계산)
+  const isPressArray = Array.isArray(pressReleases);
+  const totalPressCount = isPressArray ? pressReleases.length : 0;
 
   const stats = [
     { label: '전체 상담 신청', value: totalCount, icon: MessageSquare, color: '#4f46e5' },
@@ -105,7 +107,7 @@ export default function AdminDashboardMainPage() {
           </div>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {consultations?.slice(0, 5).map((item: any, i: number) => (
+            {isConsultArray && consultations.length > 0 ? consultations.slice(0, 5).map((item: any, i: number) => (
               <div key={i} style={{ 
                 padding: '16px', borderRadius: '12px', background: '#f8fafc', 
                 border: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
@@ -148,7 +150,7 @@ export default function AdminDashboardMainPage() {
           </div>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
-            {pressReleases?.slice(0, 3).map((item: any) => (
+            {isPressArray && pressReleases.length > 0 ? pressReleases.slice(0, 3).map((item: any) => (
               <div key={item.id} style={{ display: 'flex', gap: '15px', alignItems: 'center', padding: '15px', background: '#fcfcfc', border: '1px solid #eee', borderRadius: '12px' }}>
                 <div style={{ width: '60px', height: '40px', position: 'relative', borderRadius: '4px', overflow: 'hidden' }}>
                     <Image src={item.image_url || '/images/hero_bg.png'} alt="news" fill style={{ objectFit: 'cover' }} />

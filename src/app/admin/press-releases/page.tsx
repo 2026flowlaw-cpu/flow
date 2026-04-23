@@ -33,7 +33,7 @@ export default function AdminPressListingPage() {
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>언론보도 관리</h1>
-          <p className={styles.subtitle}>법무법인 일신의 방송 출연 및 언론 기사 내역을 관리합니다.</p>
+          <p className={styles.subtitle}>법무법인 플로우의 방송 출연 및 언론 기사 내역을 관리합니다.</p>
         </div>
         <Link href="/admin/press-releases/add" className={styles.addBtn}>
           + 새 기사 등록하기

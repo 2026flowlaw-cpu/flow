@@ -17,7 +17,7 @@ const reviews: Review[] = [
     author: '김*현 님',
     tag: '하자소송 전문 대응',
     rating: 5,
-    content: '신축 아파트 입주 후 발견된 무수한 하자들 때문에 막막했습니다. 일신의 기술법인 연계 시스템 덕분에 *정밀한 진단 보고서*를 확보할 수 있었고, 결국 예상보다 훨씬 높은 판결금을 받을 수 있었습니다. 진심으로 감사드립니다.',
+    content: '신축 아파트 입주 후 발견된 무수한 하자들 때문에 막막했습니다. 플로우의 기술법인 연계 시스템 덕분에 *정밀한 진단 보고서*를 확보할 수 있었고, 결국 예상보다 훨씬 높은 판결금을 받을 수 있었습니다. 진심으로 감사드립니다.',
     date: '2024.03.15',
     isFeatured: true
   },
@@ -34,7 +34,7 @@ const reviews: Review[] = [
     author: '박*우 님',
     tag: '분양계약 해제',
     rating: 5,
-    content: '복잡한 분양 계약 해제 문제를 명쾌하게 풀어주셨습니다. 다른 곳에서는 부정적이었는데, 일신에서는 *차별화된 법리 해석*으로 성공적인 결과를 만들어주셨네요.',
+    content: '복잡한 분양 계약 해제 문제를 명쾌하게 풀어주셨습니다. 다른 곳에서는 부정적이었는데, 플로우에서는 *차별화된 법리 해석*으로 성공적인 결과를 만들어주셨네요.',
     date: '2024.02.28'
   },
   {
@@ -63,7 +63,7 @@ const CustomerReviews = () => {
       <div className="container">
         <div className={styles.header}>
           <span className={styles.kicker}>Voices of Trust</span>
-          <h2 className={styles.title}>의뢰인이 직접 경험한 일신</h2>
+          <h2 className={styles.title}>의뢰인이 직접 경험한 플로우</h2>
         </div>
 
         <div className={styles.grid}>

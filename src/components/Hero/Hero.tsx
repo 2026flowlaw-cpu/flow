@@ -11,7 +11,7 @@ const Hero = () => {
           <p className={styles.subheading}>CONSTRUCTION DEFECT LAW FIRM ILSHIN</p>
           <h1 className={styles.title}>
             하자소송의 명확한 해답,<br />
-            법무법인 일신
+            법무법인 플로우
           </h1>
           <p className={styles.description}>
             건설 소송 분석 및 전략 수립에 특화된 풍부한 실무 경험과<br />

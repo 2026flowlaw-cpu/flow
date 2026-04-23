@@ -65,7 +65,7 @@ export default function SuccessStoriesPage() {
             <span className={styles.heroSubtitle}>OUR TRACK RECORD</span>
             <h1 className={styles.heroTitle}>주요 성공사례</h1>
             <p className={styles.heroText}>
-              법무법인 일신은 건설 하자 소송의 정밀한 분석과 압도적인 전문성으로 의뢰인의 권익을 완벽하게 보호합니다.
+              법무법인 플로우은 건설 하자 소송의 정밀한 분석과 압도적인 전문성으로 의뢰인의 권익을 완벽하게 보호합니다.
             </p>
           </div>
           <div className={styles.heroBg}></div>
@@ -137,9 +137,9 @@ export default function SuccessStoriesPage() {
         {/* CTA Section */}
         <section className={styles.ctaWrapper}>
           <div className="container">
-            <h2 className={styles.ctaTitle}>당신의 재산권을 보호하는 정당한 사유, 법무법인 일신</h2>
+            <h2 className={styles.ctaTitle}>당신의 재산권을 보호하는 정당한 사유, 법무법인 플로우</h2>
             <p className={styles.ctaText}>
-              수많은 성공 사례가 증명합니다. 법무법인 일신은 건설 소송의<br />
+              수많은 성공 사례가 증명합니다. 법무법인 플로우은 건설 소송의<br />
               처음부터 끝까지 의뢰인과 함께하며 최선의 결과를 만들어냅니다.
             </p>
             <div className={styles.ctaBtns}>

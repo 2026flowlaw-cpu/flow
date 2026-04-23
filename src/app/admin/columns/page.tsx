@@ -35,7 +35,7 @@ export default function AdminColumnsListingPage() {
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>법률칼럼 관리</h1>
-          <p className={styles.subtitle}>일신 법률 사무소의 전문성이 담긴 칼럼을 관리합니다.</p>
+          <p className={styles.subtitle}>플로우 법률 사무소의 전문성이 담긴 칼럼을 관리합니다.</p>
         </div>
         <Link href="/admin/columns/add" className={styles.addBtn}>
           + 칼럼 작성하기

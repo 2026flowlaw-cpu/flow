@@ -55,7 +55,7 @@ const InquiryForm = () => {
       <div className={`${styles.container} container`}>
         <div className={styles.left}>
           <h2 className={styles.heading}>
-            법무법인 일신이<br />
+            법무법인 플로우이<br />
             함께 하겠습니다
           </h2>
           <div className={styles.socials}>

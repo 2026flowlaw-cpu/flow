@@ -27,7 +27,7 @@ const ConstructionDisputePage = () => {
             <span>승소의 설계도</span>가 다릅니다.
           </h1>
           <p className={styles.description}>
-            법무법인 일신은 대한민국 대표 건설 로펌입니다. <br />
+            법무법인 플로우은 대한민국 대표 건설 로펌입니다. <br />
             수많은 아파트 단지의 하자를 진단하고 승소시킨 압도적 경험을 제공합니다.
           </p>
         </div>

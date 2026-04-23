@@ -28,7 +28,7 @@ const JeonseFraudPage = () => {
           </h1>
           <p className={styles.description}>
             시간이 지체될수록 자산 회수는 어려워집니다. <br />
-            법무법인 일신의 전세사기 전담팀이 가장 빠르고 강력한 보전 조치를 시작합니다.
+            법무법인 플로우의 전세사기 전담팀이 가장 빠르고 강력한 보전 조치를 시작합니다.
           </p>
         </div>
       </section>

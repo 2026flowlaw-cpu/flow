@@ -47,7 +47,7 @@ export default function AdminDashboardMainPage() {
       <div style={{ marginBottom: '40px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
         <div>
           <h1 style={{ fontSize: '32px', fontWeight: 800, color: '#0A1B39', marginBottom: '8px' }}>관리자 대시보드</h1>
-          <p style={{ color: '#64748b' }}>법무법인 일신 웹사이트의 실시간 현황을 보고합니다.</p>
+          <p style={{ color: '#64748b' }}>법무법인 플로우 웹사이트의 실시간 현황을 보고합니다.</p>
         </div>
         <div style={{ background: 'white', padding: '10px 20px', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', fontSize: '14px', color: '#64748b', fontWeight: 600 }}>
           <TrendingUp size={16} style={{ marginRight: '8px', color: '#22c55e' }} /> 실시간 데이터 동기화 중

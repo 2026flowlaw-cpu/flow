@@ -68,7 +68,7 @@ export default function ConsultPage() {
             <p className={styles.heroTag}>PROFESSIONAL LEGAL SHIELD</p>
             <h1>신속한 법률 지원,<br />변호사와 바로 연결됩니다.</h1>
             <p className={styles.heroDesc}>
-              하자소송의 정밀한 분석부터 전략적 대응까지, 법무법인 일신이 귀하의 권리를 단단하게 보호합니다.
+              하자소송의 정밀한 분석부터 전략적 대응까지, 법무법인 플로우이 귀하의 권리를 단단하게 보호합니다.
             </p>
           </div>
         </div>

@@ -68,7 +68,7 @@ export default function AdminLoginPage() {
       <div className={styles.loginCard}>
         <div className={styles.logoArea}>
           <Link href="/" className={styles.logo}>
-            법무법인 <span className={styles.accent}>일신</span>
+            법무법인 <span className={styles.accent}>플로우</span>
           </Link>
           <p className={styles.subtitle}>ADMIN CONSOLE</p>
         </div>
@@ -111,7 +111,7 @@ export default function AdminLoginPage() {
         </form>
 
         <div className={styles.footer}>
-          <p>© 2026 Law Firm Ilshin. All rights reserved.</p>
+          <p>© 2026 Law Firm Flow. All rights reserved.</p>
         </div>
       </div>
     </div>

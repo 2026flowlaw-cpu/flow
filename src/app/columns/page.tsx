@@ -35,7 +35,7 @@ export default function ColumnsPage() {
         <section className={styles.hero}>
           <div className={styles.heroContent}>
             <h1>법률칼럼</h1>
-            <p>법무법인 일신의 전문적인 법률 지식과 조언을 나누어 드립니다.</p>
+            <p>법무법인 플로우의 전문적인 법률 지식과 조언을 나누어 드립니다.</p>
           </div>
           <Image 
             src="/images/philosophy_bg.png" 
@@ -48,7 +48,7 @@ export default function ColumnsPage() {
 
         <div className="container">
           {isLoading ? (
-            <div style={{ padding: '100px 0', textAlign: 'center', fontSize: '20px' }}>일신의 가치 있는 지식들을 불러오는 중입니다...</div>
+            <div style={{ padding: '100px 0', textAlign: 'center', fontSize: '20px' }}>플로우의 가치 있는 지식들을 불러오는 중입니다...</div>
           ) : columns.length > 0 ? (
             <div className={styles.grid}>
               {columns.map((col) => (

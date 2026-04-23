@@ -22,7 +22,7 @@ const menuData: MenuItem[] = [
     title: '회사소개',
     href: '/about/intro',
     subItems: [
-      { name: '법무법인 일신', href: '/about/intro' },
+      { name: '법무법인 플로우', href: '/about/intro' },
       { name: '대표인사말', href: '/about/greetings' },
       { name: '오시는길', href: '/about/location' },
     ]
@@ -100,7 +100,7 @@ const Header = () => {
     >
       <div className={`${styles.container} container`}>
         <Link href="/" className={styles.logo} onClick={handleLinkClick}>
-          <span className={styles.logoText}>법무법인 <span className="accent-text">일신</span></span>
+          <span className={styles.logoText}>법무법인 <span className="accent-text">플로우</span></span>
         </Link>
         <nav className={styles.nav}>
           {menuData.map((item, index) => (

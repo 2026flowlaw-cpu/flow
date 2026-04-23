@@ -80,7 +80,7 @@ export default async function LawyersPage() {
           <div className="container">
             <div className={styles.inquiryGrid}>
               <div className={styles.inquiryText}>
-                <h2 className={styles.inquiryTitle}>법무법인 일신이<br />함께 하겠습니다</h2>
+                <h2 className={styles.inquiryTitle}>법무법인 플로우이<br />함께 하겠습니다</h2>
                 <div className={styles.snsIcons}>
                   <div className={styles.iconCircle}>📱</div>
                   <div className={styles.iconCircle}>💬</div>

@@ -27,7 +27,7 @@ const SuccessStories = () => {
       <div className="container">
         <div className={styles.header}>
           <h2 className={styles.title}>성공 사례</h2>
-          <p className={styles.subtitle}>법무법인 일신의 실력으로 증명된 기록입니다.</p>
+          <p className={styles.subtitle}>법무법인 플로우의 실력으로 증명된 기록입니다.</p>
         </div>
         <div className={styles.list}>
           {stories.map((story, index) => (

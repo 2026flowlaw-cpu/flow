@@ -35,7 +35,7 @@ export default function AdminSidebar() {
     <aside className={styles.sidebar}>
       <div className={styles.logoArea}>
         <Link href="/" className={styles.logo}>
-          법무법인 <span className={styles.accent}>일신</span>
+          법무법인 <span className={styles.accent}>플로우</span>
         </Link>
         <p className={styles.label}>ADMIN</p>
       </div>

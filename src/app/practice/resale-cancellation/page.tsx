@@ -50,7 +50,7 @@ const ResaleCancellationPage = () => {
           <span className={styles.label}>Real Estate Law Firm ILSHIN</span>
           <h1 className={styles.mainTitle}>
             분양계약해제 전문 로펌<br />
-            <span>법무법인 일신 강남분사무소</span>
+            <span>법무법인 플로우 강남분사무소</span>
           </h1>
           <p className={styles.heroCatch}>
             "혼자 고민은 그만, 정당한 사유가 있다면 여러분도 해제할 수 있습니다"
@@ -81,7 +81,7 @@ const ResaleCancellationPage = () => {
             <div className={styles.divider}></div>
             <p className={styles.specLead}>
               분양계약해제 사건은 단순하지 않습니다.<br />
-              법무법인 일신 강남분사무소는 발생 가능한 모든 케이스를 축적하고 있습니다.
+              법무법인 플로우 강남분사무소는 발생 가능한 모든 케이스를 축적하고 있습니다.
             </p>
           </div>
 

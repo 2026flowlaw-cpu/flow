@@ -23,7 +23,7 @@ const LocationMap = () => {
           <div className={styles.info}>
             <div className={styles.addressBox}>
               <span className={styles.label}>주소</span>
-              <p className={styles.address}>서울특별시 서초구 서초중앙로 125, 로이어즈타워 10층 (법무법인 일신)</p>
+              <p className={styles.address}>서울특별시 서초구 서초중앙로 125, 로이어즈타워 10층 (법무법인 플로우)</p>
             </div>
 
             <div className={styles.transportList}>

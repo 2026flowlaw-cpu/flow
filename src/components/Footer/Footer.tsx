@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container">
         <div className={styles.footerGrid}>
           <div className={styles.footerBrand}>
-            <h3 className={styles.footerLogo}>법무법인 <span className="accent-text">일신</span></h3>
+            <h3 className={styles.footerLogo}>법무법인 <span className="accent-text">플로우</span></h3>
             <p className={styles.footerAddress}>
               서울특별시 서초구 서초대로 314, 12층<br />
               (서초동, 법조타워)<br /><br />
@@ -43,7 +43,7 @@ const Footer = () => {
           </div>
         </div>
         <div className={styles.footerBottom}>
-          <div className={styles.copyright}>© 2026 Law Firm Ilshin. All rights reserved.</div>
+          <div className={styles.copyright}>© 2026 Law Firm Flow. All rights reserved.</div>
           <div className={styles.footerLegal}>이용약관 | 개인정보처리방침</div>
         </div>
       </div>

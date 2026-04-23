@@ -31,7 +31,7 @@ export default function ColumnDetailPage({ params: paramsPromise }: { params: Pr
     fetchData();
   }, [colId]);
 
-  if (isLoading) return <div className={styles.loading}>일신의 전문 칼럼을 불러오는 중입니다...</div>;
+  if (isLoading) return <div className={styles.loading}>플로우의 전문 칼럼을 불러오는 중입니다...</div>;
   if (!column) return <div className={styles.error}>칼럼을 찾을 수 없습니다.</div>;
 
   return (
@@ -70,7 +70,7 @@ export default function ColumnDetailPage({ params: paramsPromise }: { params: Pr
           <footer className={styles.footerArea}>
             <div className={styles.consultBox}>
               <h3 className={styles.consultTitle}>본 칼럼의 내용과 관련하여 궁금한 점이 있으신가요?</h3>
-              <p>일신의 전문 변호사팀이 명쾌한 해답을 드립니다.</p>
+              <p>플로우의 전문 변호사팀이 명쾌한 해답을 드립니다.</p>
             </div>
             
             <div className={styles.actions}>

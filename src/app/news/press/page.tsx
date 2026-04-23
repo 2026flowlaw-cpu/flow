@@ -32,7 +32,7 @@ export default function PublicPressPage() {
           <div className={styles.heroOverlay}></div>
           <div className={styles.heroContent}>
             <h1>언론보도</h1>
-            <p>법무법인 일신의 언론 방송 출연 및 기사 보도 내역을 전해드립니다.</p>
+            <p>법무법인 플로우의 언론 방송 출연 및 기사 보도 내역을 전해드립니다.</p>
           </div>
         </section>
 

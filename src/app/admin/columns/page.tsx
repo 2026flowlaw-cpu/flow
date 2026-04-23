@@ -59,7 +59,7 @@ export default function AdminColumnsListingPage() {
               {isLoading ? (
                 <tr><td colSpan={6} className={styles.center}>로딩 중...</td></tr>
               ) : columns.length > 0 ? (
-                columns.map((col) => (
+                columns.map((col: any) => (
                   <tr key={col.id}>
                     <td>
                       <div className={styles.thumbnail}>

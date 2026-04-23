@@ -58,7 +58,7 @@ export default function AdminYouTubeListingPage() {
               {isLoading ? (
                 <tr><td colSpan={5} className={styles.center}>로딩 중...</td></tr>
               ) : videos.length > 0 ? (
-                videos.map((video) => (
+                videos.map((video: any) => (
                   <tr key={video.id}>
                     <td>
                       <div className={styles.thumbnail}>

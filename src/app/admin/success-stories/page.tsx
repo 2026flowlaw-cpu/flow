@@ -61,7 +61,7 @@ export default function AdminSuccessStoriesListingPage() {
               {isLoading ? (
                 <tr><td colSpan={6} className={styles.center}>로딩 중...</td></tr>
               ) : stories.length > 0 ? (
-                stories.map((story) => (
+                stories.map((story: any) => (
                   <tr key={story.id}>
                     <td>
                       <div className={styles.thumbnail}>

@@ -1,30 +1,18 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './page.module.css';
+import useSWR from 'swr';
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function AdminLawyersListingPage() {
-  const [lawyers, setLawyers] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data: lawyers, error, mutate } = useSWR('/api/lawyers', fetcher);
+  const isLoading = !lawyers && !error;
 
-  const fetchLawyers = async () => {
-    setIsLoading(true);
-    try {
-      const res = await fetch('/api/lawyers');
-      const data = await res.json();
-      setLawyers(data);
-    } catch (error) {
-      console.error('Failed to fetch lawyers:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchLawyers();
-  }, []);
+  const fetchLawyers = () => mutate();
 
   const handleDelete = async (id: number, name: string) => {
     if (confirm(`${name} 변호사 정보를 정말로 삭제하시겠습니까?`)) {
@@ -86,7 +74,7 @@ export default function AdminLawyersListingPage() {
               {isLoading ? (
                 <tr><td colSpan={6}>로딩 중...</td></tr>
               ) : (
-                lawyers.map((lawyer, index) => (
+                (lawyers || []).map((lawyer: any, index: number) => (
                   <tr key={lawyer.id}>
                     <td>
                       <div className={styles.orderControls}>

@@ -73,7 +73,7 @@ export default function AdminConsultationsPage() {
               {isLoading ? (
                 <tr><td colSpan={6} className={styles.center}>불러오는 중...</td></tr>
               ) : consultations.length > 0 ? (
-                consultations.map((item) => (
+                consultations.map((item: any) => (
                   <tr key={item.id} style={{ background: item.status === '대기중' ? '#fdf8f6' : 'transparent' }}>
                     <td>{new Date(item.created_at).toLocaleString('ko-KR')}</td>
                     <td className={styles.storyTitle}>{item.name}</td>

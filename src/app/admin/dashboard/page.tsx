@@ -100,52 +100,65 @@ export default function AdminDashboardMainPage() {
         </div>
       </div>
 
-      {/* 최근 상담 신청 (전체 너비로 확장하여 최우선 노출) */}
-      <div style={{ background: 'white', padding: '35px', borderRadius: '24px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.05)', border: '1px solid #f1f5f9' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-          <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#0A1B39' }}>실시간 상담 접수 현황</h2>
-          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-            <span style={{ fontSize: '13px', color: '#64748b' }}>최근 6건 표시</span>
-            <Link href="/admin/consultations" style={{ color: '#4f46e5', textDecoration: 'none', fontSize: '14px', fontWeight: 700, padding: '8px 16px', background: '#eef2ff', borderRadius: '10px' }}>전체 관리 페이지로 이동 →</Link>
+      {/* 실시간 상담 접수 현황 (전체 데이터 노출) */}
+      <div style={{ background: 'white', padding: '40px', borderRadius: '28px', boxShadow: '0 15px 30px -5px rgba(0,0,0,0.05)', border: '1px solid #f1f5f9' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '35px' }}>
+          <div>
+            <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#0A1B39', marginBottom: '4px' }}>실시간 상담 접수 현황</h2>
+            <p style={{ fontSize: '13px', color: '#94a3b8' }}>전체 접수된 상담 신청 내역을 실시간으로 나열합니다.</p>
           </div>
+          <Link href="/admin/consultations" style={{ 
+            color: 'white', background: '#4f46e5', textDecoration: 'none', 
+            fontSize: '14px', fontWeight: 800, padding: '12px 24px', borderRadius: '14px',
+            boxShadow: '0 4px 12px rgba(79, 70, 229, 0.2)' 
+          }}>상담 마스터 관리 페이지 이동</Link>
         </div>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px' }}>
           {isConsultArray && consultations.length > 0 ? (
-            consultations.slice(0, 6).map((item: any, i: number) => (
+            consultations.map((item: any, i: number) => (
               <div key={i} style={{ 
-                padding: '24px', borderRadius: '18px', background: '#fcfcfc', 
-                border: '1px solid #f1f5f9', display: 'flex', transition: 'all 0.2s'
+                padding: '28px', borderRadius: '20px', background: '#fcfcfc', 
+                border: '1px solid #f1f5f9', display: 'flex', transition: 'all 0.3s'
               }}>
                 <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
-                      <span style={{ fontWeight: 800, fontSize: '17px', color: '#1e293b' }}>{item.name} 님</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '14px' }}>
+                      <span style={{ fontWeight: 900, fontSize: '19px', color: '#1e293b' }}>{item.name} 님</span>
                       <span style={{ 
-                          fontSize: '11px', padding: '3px 10px', borderRadius: '6px', fontWeight: 800,
+                          fontSize: '12px', padding: '4px 12px', borderRadius: '8px', fontWeight: 800,
                           background: item.status === '대기중' ? '#ffebee' : '#e8f5e9',
                           color: item.status === '대기중' ? '#ef4444' : '#22c55e'
                       }}>{item.status}</span>
                   </div>
-                  <div style={{ display: 'flex', gap: '20px', marginBottom: '12px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#64748b' }}>
-                          <Phone size={14} /> {item.phone}
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginBottom: '15px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', color: '#64748b', fontWeight: 600 }}>
+                          <Phone size={16} /> {item.phone}
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#64748b' }}>
-                          <FileText size={14} /> {item.case_type}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', color: '#64748b', fontWeight: 600 }}>
+                          <FileText size={16} /> {item.case_type}
                       </div>
                   </div>
-                  <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: '1.5', display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                  <p style={{ fontSize: '14px', color: '#94a3b8', lineHeight: '1.6', background: '#fff', padding: '12px', borderRadius: '12px', border: '1px dashed #eee' }}>
                       {item.details || '내용이 없습니다.'}
                   </p>
                 </div>
-                <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <p style={{ fontSize: '12px', color: '#94a3b8' }}>{new Date(item.created_at).toLocaleDateString()}</p>
-                    <Link href="/admin/consultations" style={{ color: '#0A1B39', fontSize: '12px', fontWeight: 800, marginTop: '8px', textDecoration: 'none' }}>문의 상세 🔍</Link>
+                <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingLeft: '20px', marginLeft: '20px', borderLeft: '1px solid #f1f5f9' }}>
+                    <div>
+                      <p style={{ fontSize: '13px', color: '#94a3b8', fontWeight: 600 }}>{new Date(item.created_at).toLocaleDateString()}</p>
+                      <p style={{ fontSize: '11px', color: '#cbd5e1' }}>{new Date(item.created_at).toLocaleTimeString().slice(0, 5)}</p>
+                    </div>
+                    <Link href="/admin/consultations" style={{ 
+                        color: '#4f46e5', fontSize: '13px', fontWeight: 800, 
+                        textDecoration: 'none', background: '#f5f7ff', padding: '8px 12px', borderRadius: '8px' 
+                    }}>관리 →</Link>
                 </div>
               </div>
             ))
           ) : (
-            <div style={{ gridColumn: 'span 2', textAlign: 'center', padding: '60px 0', color: '#94a3b8' }}>새로 접수된 상담이 없습니다.</div>
+            <div style={{ gridColumn: 'span 2', textAlign: 'center', padding: '100px 0', border: '2px dashed #f1f5f9', borderRadius: '24px' }}>
+              <MessageSquare size={48} color="#cbd5e1" style={{ marginBottom: '16px' }} />
+              <p style={{ color: '#94a3b8', fontWeight: 600 }}>아직 접수된 상담 신청이 없습니다.</p>
+            </div>
           )}
         </div>
       </div>

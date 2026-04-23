@@ -26,20 +26,20 @@ const visitorData = [
 ];
 
 export default function AdminDashboardMainPage() {
-  const { data: consultations, error } = useSWR('/api/consultations', fetcher);
+  const { data: consultations } = useSWR('/api/consultations', fetcher);
+  const { data: pressReleases } = useSWR('/api/press-releases', fetcher);
 
   // 상담 통계 계산
   const totalCount = consultations?.length || 0;
   const pendingCount = consultations?.filter((c: any) => c.status === '대기중').length || 0;
   const completedCount = consultations?.filter((c: any) => c.status === '상담완료').length || 0;
-  const todayCount = consultations?.filter((c: any) => {
-    const today = new Date().toISOString().split('T')[0];
-    return c.created_at.startsWith(today);
-  }).length || 0;
+  
+  // 언론보도 통계
+  const totalPressCount = pressReleases?.length || 0;
 
   const stats = [
     { label: '전체 상담 신청', value: totalCount, icon: MessageSquare, color: '#4f46e5' },
-    { label: '오늘 신규 문의', value: todayCount, icon: TrendingUp, color: '#bd9d62' },
+    { label: '언론보도 자료', value: totalPressCount, icon: Calendar, color: '#bd9d62' },
     { label: '현재 대기 중', value: pendingCount, icon: AlertCircle, color: '#ef4444' },
     { label: '상담 완료 건수', value: completedCount, icon: CheckCircle2, color: '#22c55e' },
   ];
@@ -135,6 +135,31 @@ export default function AdminDashboardMainPage() {
           }}>
             상담 내역 전체 관리하러 가기 <ArrowRight size={18} />
           </Link>
+        </div>
+
+        {/* 하단 줄: 언론보도 퀵 요약 */}
+        <div style={{ background: 'white', padding: '32px', borderRadius: '20px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.05)', marginTop: '32px', gridColumn: 'span 2' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#0A1B39' }}>언론보도 최근 내역</h2>
+            <Link href="/admin/press-releases/add" style={{ 
+              background: '#bd9d62', color: 'white', padding: '8px 20px', borderRadius: '8px', 
+              textDecoration: 'none', fontSize: '13px', fontWeight: 700 
+            }}>+ 새 기사 등록</Link>
+          </div>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+            {pressReleases?.slice(0, 3).map((item: any) => (
+              <div key={item.id} style={{ display: 'flex', gap: '15px', alignItems: 'center', padding: '15px', background: '#fcfcfc', border: '1px solid #eee', borderRadius: '12px' }}>
+                <div style={{ width: '60px', height: '40px', position: 'relative', borderRadius: '4px', overflow: 'hidden' }}>
+                    <Image src={item.image_url || '/images/hero_bg.png'} alt="news" fill style={{ objectFit: 'cover' }} />
+                </div>
+                <div style={{ flex: 1, overflow: 'hidden' }}>
+                  <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.title}</h4>
+                  <p style={{ fontSize: '12px', color: '#bd9d62' }}>{item.press_name} | {item.publish_date}</p>
+                </div>
+              </div>
+            )) || <p style={{ color: '#999' }}>최근 등록된 기사가 없습니다.</p>}
+          </div>
         </div>
       </div>
     </div>

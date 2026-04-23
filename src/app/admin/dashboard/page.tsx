@@ -3,18 +3,17 @@
 import React from 'react';
 import useSWR from 'swr';
 import { 
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
-  LineChart, Line, AreaChart, Area 
+  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer 
 } from 'recharts';
 import { 
-  Users, MessageSquare, AlertCircle, CheckCircle2, 
+  MessageSquare, AlertCircle, CheckCircle2, 
   TrendingUp, Calendar, ArrowRight 
 } from 'lucide-react';
 import Link from 'next/link';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-// 시뮬레이션용 GA4 방문자 데이터 (실제 연동 시 API 데이터로 대체)
+// 시뮬레이션용 GA4 방문자 데이터
 const visitorData = [
   { name: '04.17', visitors: 120, pageviews: 450 },
   { name: '04.18', visitors: 210, pageviews: 890 },
@@ -72,7 +71,7 @@ export default function AdminDashboardMainPage() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
-        {/* 방문자 통계 그래프 (GA4 대체용) */}
+        {/* 방문자 통계 그래프 */}
         <div style={{ background: 'white', padding: '32px', borderRadius: '20px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.05)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#0A1B39' }}>방문자 추이 (GA4)</h2>
@@ -107,27 +106,31 @@ export default function AdminDashboardMainPage() {
           </div>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {isConsultArray && consultations.length > 0 ? consultations.slice(0, 5).map((item: any, i: number) => (
-              <div key={i} style={{ 
-                padding: '16px', borderRadius: '12px', background: '#f8fafc', 
-                border: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-              }}>
-                <div>
-                  <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#1e293b', marginBottom: '4px' }}>{item.name} 님</h4>
-                  <p style={{ fontSize: '12px', color: '#64748b' }}>{item.case_type}</p>
+            {isConsultArray && consultations.length > 0 ? (
+              consultations.slice(0, 5).map((item: any, i: number) => (
+                <div key={i} style={{ 
+                  padding: '16px', borderRadius: '12px', background: '#f8fafc', 
+                  border: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                }}>
+                  <div>
+                    <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#1e293b', marginBottom: '4px' }}>{item.name} 님</h4>
+                    <p style={{ fontSize: '12px', color: '#64748b' }}>{item.case_type}</p>
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    <span style={{ 
+                      fontSize: '11px', padding: '4px 8px', borderRadius: '4px', fontWeight: 700,
+                      background: item.status === '대기중' ? '#ffebee' : '#e8f5e9',
+                      color: item.status === '대기중' ? '#ef4444' : '#22c55e'
+                    }}>
+                      {item.status}
+                    </span>
+                    <p style={{ fontSize: '10px', color: '#94a3b8', marginTop: '6px' }}>{new Date(item.created_at).toLocaleDateString()}</p>
+                  </div>
                 </div>
-                <div style={{ textAlign: 'right' }}>
-                  <span style={{ 
-                    fontSize: '11px', padding: '4px 8px', borderRadius: '4px', fontWeight: 700,
-                    background: item.status === '대기중' ? '#ffebee' : '#e8f5e9',
-                    color: item.status === '대기중' ? '#ef4444' : '#22c55e'
-                  }}>
-                    {item.status}
-                  </span>
-                  <p style={{ fontSize: '10px', color: '#94a3b8', marginTop: '6px' }}>{new Date(item.created_at).toLocaleDateString()}</p>
-                </div>
-              </div>
-            )) || <p style={{ textAlign: 'center', color: '#94a3b8', padding: '40px 0' }}>데이터가 없습니다.</p>}
+              ))
+            ) : (
+              <p style={{ textAlign: 'center', color: '#94a3b8', padding: '40px 0' }}>상담 신청 내역이 없습니다.</p>
+            )}
           </div>
 
           <Link href="/admin/consultations" style={{ 
@@ -150,17 +153,21 @@ export default function AdminDashboardMainPage() {
           </div>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
-            {isPressArray && pressReleases.length > 0 ? pressReleases.slice(0, 3).map((item: any) => (
-              <div key={item.id} style={{ display: 'flex', gap: '15px', alignItems: 'center', padding: '15px', background: '#fcfcfc', border: '1px solid #eee', borderRadius: '12px' }}>
-                <div style={{ width: '60px', height: '40px', position: 'relative', borderRadius: '4px', overflow: 'hidden' }}>
-                    <Image src={item.image_url || '/images/hero_bg.png'} alt="news" fill style={{ objectFit: 'cover' }} />
+            {isPressArray && pressReleases.length > 0 ? (
+              pressReleases.slice(0, 3).map((item: any) => (
+                <div key={item.id} style={{ display: 'flex', gap: '15px', alignItems: 'center', padding: '15px', background: '#fcfcfc', border: '1px solid #eee', borderRadius: '12px' }}>
+                  <div style={{ width: '60px', height: '40px', position: 'relative', borderRadius: '4px', overflow: 'hidden' }}>
+                      <img src={item.image_url || '/images/hero_bg.png'} alt="news" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                  <div style={{ flex: 1, overflow: 'hidden' }}>
+                    <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.title}</h4>
+                    <p style={{ fontSize: '12px', color: '#bd9d62' }}>{item.press_name} | {item.publish_date}</p>
+                  </div>
                 </div>
-                <div style={{ flex: 1, overflow: 'hidden' }}>
-                  <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.title}</h4>
-                  <p style={{ fontSize: '12px', color: '#bd9d62' }}>{item.press_name} | {item.publish_date}</p>
-                </div>
-              </div>
-            )) || <p style={{ color: '#999' }}>최근 등록된 기사가 없습니다.</p>}
+              ))
+            ) : (
+              <p style={{ color: '#999', padding: '20px 0' }}>최근 등록된 기사가 없습니다.</p>
+            )}
           </div>
         </div>
       </div>

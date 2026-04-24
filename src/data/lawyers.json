@@ -64,42 +64,6 @@
     "blogs": []
   },
   {
-    "name": "조석태",
-    "title": "변호사",
-    "experience": [
-      "ㄷ"
-    ],
-    "history": [
-      "ㄷ"
-    ],
-    "activities": [
-      "ㄷ"
-    ],
-    "image": "/images/lawyer_조석태.png",
-    "id": 9,
-    "order": 3,
-    "slug": "조석태",
-    "blogs": []
-  },
-  {
-    "name": "홍길동",
-    "title": "홍길동",
-    "experience": [
-      "홍길동"
-    ],
-    "history": [
-      "ㄷ"
-    ],
-    "activities": [
-      "ㄷ"
-    ],
-    "image": "/images/lawyer_홍길동.png",
-    "id": 10,
-    "order": 4,
-    "slug": "홍길동",
-    "blogs": []
-  },
-  {
     "id": 4,
     "order": 5,
     "slug": "park-sung-hyun",

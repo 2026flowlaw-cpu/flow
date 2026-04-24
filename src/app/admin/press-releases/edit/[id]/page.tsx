@@ -62,6 +62,9 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
       if (res.ok) {
         alert('수정되었습니다.');
         router.push('/admin/press-releases');
+      } else {
+        const errorData = await res.json();
+        alert(`수정 실패: ${errorData.error || '알 수 없는 서버 오류'}`);
       }
     } catch (error) {
       alert('수정 중 오류 발생');
@@ -134,9 +137,9 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
             />
           </div>
 
-          <div className={styles.formActions}>
+          <div className={styles.actions}>
             <button type="button" onClick={() => router.back()} className={styles.cancelBtn}>취소</button>
-            <button type="submit" disabled={loading} className={styles.submitBtn}>
+            <button type="submit" disabled={loading} className={styles.saveBtn}>
               {loading ? '처리 중...' : '수정 완료하기'}
             </button>
           </div>

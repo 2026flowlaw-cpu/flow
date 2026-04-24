@@ -46,6 +46,9 @@ export default function AdminPressAddPage() {
       if (res.ok) {
         alert('등록되었습니다.');
         router.push('/admin/press-releases');
+      } else {
+        const errorData = await res.json();
+        alert(`등록 실패: ${errorData.error || '알 수 없는 서버 오류'}`);
       }
     } catch (error) {
       alert('등록 중 오류 발생');
@@ -121,9 +124,9 @@ export default function AdminPressAddPage() {
             />
           </div>
 
-          <div className={styles.formActions}>
+          <div className={styles.actions}>
             <button type="button" onClick={() => router.back()} className={styles.cancelBtn}>취소</button>
-            <button type="submit" disabled={loading} className={styles.submitBtn}>
+            <button type="submit" disabled={loading} className={styles.saveBtn}>
               {loading ? '처리 중...' : '기사 등록하기'}
             </button>
           </div>

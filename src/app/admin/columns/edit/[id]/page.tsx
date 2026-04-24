@@ -5,12 +5,14 @@ import { useRouter } from 'next/navigation';
 import styles from '../../../youtube/admin-youtube.module.css';
 import { uploadImage } from '@/lib/upload';
 import Editor from '@/components/Editor/Editor';
+import { supabase } from '@/lib/supabase';
 
 export default function AdminColumnEditPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
   const params = React.use(paramsPromise);
   const colId = params.id;
 
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [formData, setFormData] = useState({
     id: '',
     title: '',
@@ -18,16 +20,27 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
     content: '',
     category: '법률칼럼',
     author_name: '대표변호사',
-    image_url: ''
+    image_url: '',
+    custom_meta: '' // 🚀 슈퍼 어드민 전용 메타 코드
   });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [statusMsg, setStatusMsg] = useState<{ type: 'error' | 'success' | '', text: string }>({ type: '', text: '' });
   const [isSaving, setIsSaving] = useState(false);
 
+  // 🛡️ [권한 및 데이터 확인]
   useEffect(() => {
-    const fetchColumn = async () => {
+    const fetchRoleAndColumn = async () => {
       try {
+        if (!supabase) return;
+        
+        // 권한 확인
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user?.user_metadata?.role === 'super_admin') {
+          setIsSuperAdmin(true);
+        }
+
+        // 데이터 확인
         const res = await fetch('/api/columns');
         const data = await res.json();
         const currentCol = data.find((c: any) => c.id.toString() === colId.toString());
@@ -40,19 +53,20 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
             content: currentCol.content,
             category: currentCol.category,
             author_name: currentCol.author_name,
-            image_url: currentCol.image_url || ''
+            image_url: currentCol.image_url || '',
+            custom_meta: currentCol.custom_meta || '' // 저장되어 있는 레코드에서 메타 코드 로드
           });
         } else {
           alert('칼럼을 찾을 수 없습니다.');
           router.push('/admin/columns');
         }
       } catch (error) {
-        console.error('Failed to fetch column:', error);
+        console.error('Failed to fetch data:', error);
       } finally {
         setIsLoading(false);
       }
     };
-    fetchColumn();
+    fetchRoleAndColumn();
   }, [colId, router]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,7 +98,7 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
         setStatusMsg({ type: 'success', text: '칼럼이 성공적으로 수정되었습니다!' });
         setTimeout(() => router.push('/admin/columns'), 1500);
       } else {
-        setStatusMsg({ type: 'error', text: '수정 실패 (데이터베이스 연결을 확인해주세요.)' });
+        setStatusMsg({ type: 'error', text: '수정 실패 (데이터베이스 필드를 확인해주세요.)' });
       }
     } catch (err: any) {
       setStatusMsg({ type: 'error', text: '오류 발생: ' + err.message });
@@ -130,7 +144,6 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
             {formData.image_url && !selectedFile && (
               <p className={styles.helpText}>현재 설정된 이미지가 있습니다. 파일을 선택하면 교체됩니다.</p>
             )}
-            {selectedFile && <p className={styles.helpText}>선택된 새 파일: {selectedFile.name}</p>}
           </div>
 
           <div className={styles.inputGroup}>
@@ -139,6 +152,7 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
               rows={2}
               value={formData.summary}
               onChange={(e) => setFormData({...formData, summary: e.target.value})}
+              placeholder="SEO 및 목록 미리보기에 활용됩니다."
             ></textarea>
           </div>
 
@@ -171,6 +185,25 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
               />
             </div>
           </div>
+
+          {/* 🤫 [슈퍼 어드민 전용 섹션] 고급 SEO/GEO 설정 */}
+          {isSuperAdmin && (
+            <div className={styles.inputGroup} style={{ marginTop: '40px', padding: '25px', backgroundColor: '#fcfcfd', border: '1px dashed #ced4da', borderRadius: '12px' }}>
+              <label style={{ color: '#0A1B39', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                🔒 고급 SEO / GEO 메타데이터 설정 (Super Admin Only)
+              </label>
+              <textarea 
+                rows={4}
+                placeholder='<meta name="geo.region" content="KR-11" /> 등 커스텀 메타 코드를 입력하세요.'
+                value={formData.custom_meta}
+                onChange={(e) => setFormData({...formData, custom_meta: e.target.value})}
+                style={{ fontFamily: 'monospace', fontSize: '13px', marginTop: '10px' }}
+              ></textarea>
+              <p className={styles.helpText} style={{ color: '#666', marginTop: '8px' }}>
+                * 칼럼 상세 페이지의 헤더 섹션에 커스텀 메타데이터를 삽입합니다. GEO 최적화나 특수 SEO용으로 활용하세요.
+              </p>
+            </div>
+          )}
 
           {statusMsg.text && (
             <div style={{ 

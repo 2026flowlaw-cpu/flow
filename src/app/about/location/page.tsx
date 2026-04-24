@@ -11,14 +11,12 @@ import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 export default function LocationPage() {
   return (
     <main>
-      <Header />
       <LocationHero />
       <LocationMap />
       <LocationVision />
       <LocationGallery />
       <MainCarousel />
       <InquiryForm />
-      <Footer />
     </main>
   );
 }

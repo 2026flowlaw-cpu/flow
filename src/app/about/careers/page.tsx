@@ -23,8 +23,6 @@ export default function CareersPage() {
 
   return (
     <div className={styles.container}>
-      <Header />
-      
       <main className={styles.main}>
         {/* Title Section */}
         <section className={styles.heroSection}>
@@ -118,8 +116,6 @@ export default function CareersPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

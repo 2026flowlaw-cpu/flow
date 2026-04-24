@@ -11,7 +11,6 @@
   display: flex;
   align-items: center;
   color: white;
-  margin-top: 80px; /* Offset for sticky header */
 }
 
 .heroOverlay {

@@ -9,7 +9,6 @@ import styles from './page.module.css';
 export default function GreetingsPage() {
   return (
     <div className={styles.page}>
-      <Header />
       
       <main>
         {/* Banner Section */}
@@ -114,7 +113,7 @@ export default function GreetingsPage() {
         </section>
       </main>
 
-      <Footer />
+      </main>
     </div>
   );
 }

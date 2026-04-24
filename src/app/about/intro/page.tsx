@@ -1,15 +1,12 @@
 import React from 'react';
 import Header from '@/components/Header/Header';
 import PartnerCarousel from '@/components/PartnerCarousel/PartnerCarousel';
-import Footer from '@/components/Footer/Footer';
 import Image from 'next/image';
 import styles from './page.module.css';
 
 export default function AboutIntroPage() {
   return (
     <div className={styles.page}>
-      <Header />
-      
       <main>
         {/* Section 2: Sub-Hero */}
         <section className={styles.subHero}>
@@ -172,8 +169,6 @@ export default function AboutIntroPage() {
         {/* Section 8: Partner Logos */}
         <PartnerCarousel />
       </main>
-
-      <Footer />
     </div>
   );
 }

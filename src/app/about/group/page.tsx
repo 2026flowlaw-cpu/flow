@@ -32,8 +32,6 @@ export default function GroupPage() {
 
   return (
     <div className={styles.container}>
-      <Header />
-      
       <main className={styles.main}>
         {/* Hero Section */}
         <section className={styles.heroSection}>
@@ -110,8 +108,6 @@ export default function GroupPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

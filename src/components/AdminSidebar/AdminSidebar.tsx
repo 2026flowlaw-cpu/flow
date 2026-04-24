@@ -11,7 +11,7 @@ import {
   PhoneCall, 
   Trophy, 
   Users, 
-  Youtube, 
+  Video, 
   PenTool, 
   Newspaper,
   ShieldCheck 
@@ -22,7 +22,7 @@ const menuItems = [
   { name: '상담 내역 확인', href: '/admin/consultations', icon: <PhoneCall size={20} /> },
   { name: '성공사례 관리', href: '/admin/success-stories', icon: <Trophy size={20} /> },
   { name: '변호사 관리', href: '/admin/lawyers', icon: <Users size={20} /> },
-  { name: '유튜브 관리', href: '/admin/youtube', icon: <Youtube size={20} /> },
+  { name: '유튜브 관리', href: '/admin/youtube', icon: <Video size={20} /> },
   { name: '칼럼 관리', href: '/admin/columns', icon: <PenTool size={20} /> },
   { name: '언론보도 관리', href: '/admin/press-releases', icon: <Newspaper size={20} /> },
 ];

@@ -59,8 +59,6 @@ export default function ConsultPage() {
 
   return (
     <div className={styles.container}>
-      <Header />
-      
       <main className={styles.main}>
         {/* Banner Section */}
         <div className={styles.heroOverlay}>
@@ -207,8 +205,6 @@ export default function ConsultPage() {
           </aside>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

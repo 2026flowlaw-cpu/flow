@@ -24,7 +24,9 @@ const menuData: MenuItem[] = [
     subItems: [
       { name: '법무법인 플로우', href: '/about/intro' },
       { name: '대표인사말', href: '/about/greetings' },
-      { name: '오시는길', href: '/about/location' },
+      { name: '그룹구성(중개법인)', href: '/about/group' },
+      { name: '오시는길', href: '/location' },
+      { name: '인재채용', href: '/about/careers' },
     ]
   },
   {

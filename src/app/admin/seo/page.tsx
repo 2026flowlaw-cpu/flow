@@ -51,13 +51,15 @@ export default function AdminSeoPage() {
 
       // 📚 칼럼 목록 로드 (통합 관리를 위해)
       try {
-        const { data, error } = await supabase
-          .from('legal_columns')
-          .select('id, title, custom_meta, category')
-          .order('created_at', { ascending: false });
+        const res = await fetch('/api/columns');
+        const data = await res.json();
         
-        if (data && !error) setColumns(data);
-      } catch (err) { console.error('Columns load failed'); }
+        if (data && !data.error) {
+          // Sort by creation date
+          data.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+          setColumns(data);
+        }
+      } catch (err) { console.error('Columns load failed', err); }
       
       setIsLoading(false);
       setIsColumnLoading(false);

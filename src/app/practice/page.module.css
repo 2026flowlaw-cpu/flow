@@ -1,5 +1,5 @@
 .page {
-  /* 헤더가 배너 위에 올라가야 하므로 상단 여백을 제거합니다. */
+  /* Site branding and global layout container */
 }
 
 .hero {
@@ -68,12 +68,6 @@
 
 .practiceCard:hover::before {
   height: 100%;
-}
-
-.iconWrapper {
-  font-size: 40px;
-  margin-bottom: 25px;
-  display: block;
 }
 
 .cardTitle {

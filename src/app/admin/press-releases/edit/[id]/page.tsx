@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import styles from '../../../youtube/admin-youtube.module.css';
 import { uploadImage } from '@/lib/upload';
 import Editor from '@/components/Editor/Editor';
+import { supabase } from '@/lib/supabase';
 
 export default function AdminPressEditPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
@@ -12,6 +13,7 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
   const articleId = params.id;
 
   const [loading, setLoading] = useState(false);
+  const [isScraping, setIsScraping] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     press_name: '',
@@ -34,6 +36,41 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
     }
     fetchData();
   }, [articleId]);
+
+  // 🌐 [마법의 스크레이핑] 정보 갱신/가져오기
+  const handleScrape = async () => {
+    if (!formData.external_url) {
+      alert('기사 원문 링크를 먼저 입력해주세요.');
+      return;
+    }
+
+    try {
+      setIsScraping(true);
+      const res = await fetch('/api/scrape', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: formData.external_url })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setFormData({
+          ...formData,
+          title: data.title || formData.title,
+          press_name: data.press_name || formData.press_name,
+          content: data.content || formData.content,
+          image_url: data.image_url || formData.image_url
+        });
+        alert('최신 정보를 성공적으로 불러왔습니다!');
+      } else {
+        alert('정보를 가져오는 데 실패했습니다.');
+      }
+    } catch (err) {
+      alert('오류 발생');
+    } finally {
+      setIsScraping(false);
+    }
+  };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -64,7 +101,7 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
         router.push('/admin/press-releases');
       } else {
         const errorData = await res.json();
-        alert(`수정 실패: ${errorData.error || '알 수 없는 서버 오류'}`);
+        alert(`수정 실패: ${errorData.error || '알 수 없는 오류'}`);
       }
     } catch (error) {
       alert('수정 중 오류 발생');
@@ -79,6 +116,36 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
       
       <div className={styles.card} style={{ padding: '40px' }}>
         <form onSubmit={handleSubmit}>
+
+          <div className={styles.inputGroup}>
+            <label>기사 원문 링크 (URL)</label>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <input 
+                type="url" 
+                value={formData.external_url}
+                onChange={(e) => setFormData({...formData, external_url: e.target.value})}
+                style={{ flex: 1 }}
+              />
+              <button 
+                type="button" 
+                onClick={handleScrape}
+                disabled={isScraping}
+                style={{ 
+                  backgroundColor: '#0066cc', 
+                  color: 'white', 
+                  border: 'none', 
+                  padding: '10px 20px', 
+                  borderRadius: '6px', 
+                  fontWeight: '700', 
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                {isScraping ? '불러오는 중...' : '🌐 정보 갱신하기'}
+              </button>
+            </div>
+          </div>
+
           <div className={styles.inputGroup}>
             <label>기사 제목 *</label>
             <input 
@@ -108,15 +175,6 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
                 required 
               />
             </div>
-          </div>
-
-          <div className={styles.inputGroup}>
-            <label>기사 원문 링크 (URL)</label>
-            <input 
-              type="url" 
-              value={formData.external_url}
-              onChange={(e) => setFormData({...formData, external_url: e.target.value})}
-            />
           </div>
 
           <div className={styles.inputGroup}>

@@ -44,9 +44,7 @@ export default function PublicPressPage() {
               {articles.map((item: any) => (
                 <a 
                   key={item.id} 
-                  href={item.external_url || `/news/press/${item.id}`} 
-                  target={item.external_url ? "_blank" : "_self"}
-                  rel="noopener noreferrer"
+                  href={`/news/press/${item.id}`} 
                   className={styles.card}
                 >
                   <div className={styles.imageBox}>

@@ -13,6 +13,17 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
   const articleId = params.id;
 
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isScraping, setIsScraping] = useState(false);
+  const [formData, setFormData] = useState({
+    title: '',
+    press_name: '',
+    publish_date: '',
+    external_url: '',
+    image_url: '',
+    content: '',
+    custom_meta: ''
+  });
   
   useEffect(() => {
     async function checkRole() {

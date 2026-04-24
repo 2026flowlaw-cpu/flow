@@ -10,6 +10,7 @@ import CTA from '@/components/CTA/CTA';
 import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
 import PartnersDetail from '@/components/PartnersDetail/PartnersDetail';
 import PartnerCarousel from '@/components/PartnerCarousel/PartnerCarousel';
+import LocationMap from '@/components/Location/LocationMap/LocationMap';
 import Footer from '@/components/Footer/Footer';
 import styles from './page.module.css';
 
@@ -29,6 +30,21 @@ export default function Home() {
         <PhilosophyMessage />
         <PartnersDetail />
         <PartnerCarousel />
+        
+        {/* Location Section */}
+        <div style={{ background: 'white', padding: '100px 0 0' }}>
+          <div className="container">
+            <h2 style={{ 
+              fontSize: '42px', 
+              fontWeight: 800, 
+              textAlign: 'center', 
+              marginBottom: '60px',
+              color: '#0A1B39',
+              letterSpacing: '-1px'
+            }}>오시는 길</h2>
+          </div>
+          <LocationMap />
+        </div>
       </main>
 
       <Footer />

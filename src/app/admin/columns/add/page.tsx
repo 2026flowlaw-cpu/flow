@@ -28,7 +28,7 @@ export default function AdminColumnAddPage() {
   useEffect(() => {
     if (!supabase) return;
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
       const user = session?.user;
       if (user?.user_metadata?.role === 'super_admin') {
         setIsSuperAdmin(true);

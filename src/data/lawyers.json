@@ -176,45 +176,5 @@
       "이화여자대학교 법학과 졸업"
     ],
     "blogs": []
-  },
-  {
-    "id": 7,
-    "order": 9,
-    "slug": "yoon-do-hyun",
-    "name": "윤도현",
-    "title": "고문 변호사",
-    "experience": [
-      "전 서울고등법원 판사",
-      "건설 소송 분석 및 전략 수립 고문",
-      "중대재해처벌법 및 건설 현장 안전 자문"
-    ],
-    "image": "/images/lawyer1.png",
-    "history": [
-      "전 서울고등법원 판사"
-    ],
-    "activities": [
-      "서울대학교 법법대학 졸업"
-    ],
-    "blogs": []
-  },
-  {
-    "id": 8,
-    "order": 10,
-    "slug": "jung-yu-jin",
-    "name": "정유진",
-    "title": "소속 변호사",
-    "experience": [
-      "계산사 수행팀 법률 검토 전담",
-      "손해배상액 산정 및 감정 대응 전문",
-      "조세 및 건설 금융 분쟁 상담"
-    ],
-    "image": "/images/lawyer2.png",
-    "history": [
-      "계산사 수행팀 법률 검토 전담"
-    ],
-    "activities": [
-      "경희대학교 법학과 졸업"
-    ],
-    "blogs": []
   }
 ]

@@ -33,7 +33,7 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
     if (!supabase) return;
 
     // 1. 실시간 권한 감지
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
       if (session?.user?.user_metadata?.role === 'super_admin') {
         setIsSuperAdmin(true);
       }

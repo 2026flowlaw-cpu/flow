@@ -6,14 +6,25 @@ import { usePathname } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import styles from './AdminSidebar.module.css';
 
+import { 
+  LayoutDashboard, 
+  PhoneCall, 
+  Trophy, 
+  Users, 
+  Youtube, 
+  PenTool, 
+  Newspaper,
+  ShieldCheck 
+} from 'lucide-react';
+
 const menuItems = [
-  { name: '대시보드', href: '/admin/dashboard', icon: '📊' },
-  { name: '상담 내역 확인', href: '/admin/consultations', icon: '📞' },
-  { name: '성공사례 관리', href: '/admin/success-stories', icon: '🏆' },
-  { name: '변호사 관리', href: '/admin/lawyers', icon: '🤵‍♂️' },
-  { name: '유튜브 관리', href: '/admin/youtube', icon: '🎬' },
-  { name: '칼럼 관리', href: '/admin/columns', icon: '✍️' },
-  { name: '언론보도 관리', href: '/admin/press-releases', icon: '📰' },
+  { name: '대시보드', href: '/admin/dashboard', icon: <LayoutDashboard size={20} /> },
+  { name: '상담 내역 확인', href: '/admin/consultations', icon: <PhoneCall size={20} /> },
+  { name: '성공사례 관리', href: '/admin/success-stories', icon: <Trophy size={20} /> },
+  { name: '변호사 관리', href: '/admin/lawyers', icon: <Users size={20} /> },
+  { name: '유튜브 관리', href: '/admin/youtube', icon: <Youtube size={20} /> },
+  { name: '칼럼 관리', href: '/admin/columns', icon: <PenTool size={20} /> },
+  { name: '언론보도 관리', href: '/admin/press-releases', icon: <Newspaper size={20} /> },
 ];
 
 export default function AdminSidebar() {
@@ -98,7 +109,7 @@ export default function AdminSidebar() {
             className={`${styles.navItem} ${styles.superItem} ${pathname === '/admin/super' ? styles.active : ''}`}
             style={{ marginTop: '20px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '20px' }}
           >
-            <span className={styles.icon}>🔐</span>
+            <span className={styles.icon}><ShieldCheck size={20} /></span>
             시스템 권한 설정
           </Link>
         )}

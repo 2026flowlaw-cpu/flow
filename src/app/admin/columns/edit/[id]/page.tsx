@@ -192,6 +192,51 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
             </div>
           </div>
 
+          {/* 🔐 [슈퍼 어드민 전담] 개별 칼럼 특수 코드 주입기 */}
+          {isSuperAdmin && (
+            <div style={{ 
+              marginTop: '40px', 
+              padding: '30px', 
+              backgroundColor: '#f8fafc', 
+              border: '2px dashed #bd9d62', 
+              borderRadius: '20px',
+              position: 'relative'
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: '-15px',
+                left: '20px',
+                background: '#bd9d62',
+                color: 'white',
+                padding: '4px 15px',
+                borderRadius: '20px',
+                fontSize: '12px',
+                fontWeight: '900'
+              }}>SUPER ADMIN ONLY</div>
+              <label style={{ color: '#0A1B39', fontWeight: '800', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                🚀 개별 칼럼 특수 코드 / 메타데이터 주입
+              </label>
+              <textarea 
+                rows={5}
+                placeholder='이 칼럼에만 적용될 <meta>, <script>, 또는 JSON-LD 코드를 입력하세요.'
+                value={formData.custom_meta}
+                onChange={(e) => setFormData({...formData, custom_meta: e.target.value})}
+                style={{ 
+                  fontFamily: 'monospace', 
+                  fontSize: '13px', 
+                  marginTop: '15px', 
+                  width: '100%',
+                  padding: '15px',
+                  borderRadius: '12px',
+                  border: '1px solid #e2e8f0'
+                }}
+              ></textarea>
+              <p style={{ color: '#64748b', fontSize: '13px', marginTop: '10px' }}>
+                * 입력한 코드는 해당 칼럼 상세 페이지의 헤더 섹션에 즉시 삽입됩니다. GEO 태그나 특정 트래킹 픽셀 심기에 활용하세요.
+              </p>
+            </div>
+          )}
+
           {statusMsg.text && (
             <div style={{ 
               marginTop: '20px', 

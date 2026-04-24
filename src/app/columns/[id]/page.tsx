@@ -93,8 +93,6 @@ export default async function ColumnDetailPage({ params: paramsPromise }: { para
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <Header />
-      
       {/* 🚀 [슈퍼 어드민 커스텀 메타] 저장된 SEO/GEO 코드를 헤드에 주입 */}
       {column.custom_meta && (
         <div dangerouslySetInnerHTML={{ __html: column.custom_meta }} style={{ display: 'none' }} />
@@ -146,8 +144,6 @@ export default async function ColumnDetailPage({ params: paramsPromise }: { para
           </footer>
         </article>
       </main>
-
-      <Footer />
     </div>
   );
 }

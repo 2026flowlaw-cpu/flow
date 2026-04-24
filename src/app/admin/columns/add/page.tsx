@@ -24,16 +24,27 @@ export default function AdminColumnAddPage() {
   const [statusMsg, setStatusMsg] = useState<{ type: 'error' | 'success' | '', text: string }>({ type: '', text: '' });
   const [isSaving, setIsSaving] = useState(false);
 
-  // 🛡️ [권한 확인] 슈퍼 어드민 여부 체크
+  // 🛡️ [강력한 권한 확인] 슈퍼 어드민 여부를 실시간으로 감지합니다.
   useEffect(() => {
-    async function checkRole() {
-      if (!supabase) return;
-      const { data: { user } } = await supabase.auth.getUser();
+    if (!supabase) return;
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      const user = session?.user;
       if (user?.user_metadata?.role === 'super_admin') {
         setIsSuperAdmin(true);
       }
-    }
-    checkRole();
+    });
+
+    // 초기 로드 시에도 확인
+    const checkInitialSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user?.user_metadata?.role === 'super_admin') {
+        setIsSuperAdmin(true);
+      }
+    };
+    checkInitialSession();
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

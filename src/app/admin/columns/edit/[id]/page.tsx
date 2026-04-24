@@ -28,19 +28,25 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
   const [statusMsg, setStatusMsg] = useState<{ type: 'error' | 'success' | '', text: string }>({ type: '', text: '' });
   const [isSaving, setIsSaving] = useState(false);
 
-  // 🛡️ [권한 및 데이터 확인]
+  // 🛡️ [강력한 권한 및 데이터 확인] 슈퍼 어드민 여부를 실시간 감지합니다.
   useEffect(() => {
-    const fetchRoleAndColumn = async () => {
+    if (!supabase) return;
+
+    // 1. 실시간 권한 감지
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user?.user_metadata?.role === 'super_admin') {
+        setIsSuperAdmin(true);
+      }
+    });
+
+    // 2. 초기 로드 및 데이터 페칭
+    const fetchData = async () => {
       try {
-        if (!supabase) return;
-        
-        // 권한 확인
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user?.user_metadata?.role === 'super_admin') {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user?.user_metadata?.role === 'super_admin') {
           setIsSuperAdmin(true);
         }
 
-        // 데이터 확인
         const res = await fetch('/api/columns');
         const data = await res.json();
         const currentCol = data.find((c: any) => c.id.toString() === colId.toString());
@@ -54,20 +60,19 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
             category: currentCol.category,
             author_name: currentCol.author_name,
             image_url: currentCol.image_url || '',
-            custom_meta: currentCol.custom_meta || '' // 저장되어 있는 레코드에서 메타 코드 로드
+            custom_meta: currentCol.custom_meta || ''
           });
-        } else {
-          alert('칼럼을 찾을 수 없습니다.');
-          router.push('/admin/columns');
         }
       } catch (error) {
-        console.error('Failed to fetch data:', error);
+        console.error('Data sync failed:', error);
       } finally {
         setIsLoading(false);
       }
     };
-    fetchRoleAndColumn();
-  }, [colId, router]);
+    fetchData();
+
+    return () => subscription.unsubscribe();
+  }, [colId]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {

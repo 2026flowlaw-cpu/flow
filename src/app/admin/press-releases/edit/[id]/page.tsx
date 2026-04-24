@@ -54,13 +54,13 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
 
       const data = await res.json();
       if (res.ok) {
-        setFormData({
-          ...formData,
-          title: data.title || formData.title,
-          press_name: data.press_name || formData.press_name,
-          content: data.content || formData.content,
-          image_url: data.image_url || formData.image_url
-        });
+        setFormData(prev => ({
+          ...prev,
+          title: (data.title && !data.title.includes('못했습니다')) ? data.title : (prev.title || data.title),
+          press_name: (data.press_name && data.press_name !== '언론사 확인 필요') ? data.press_name : (prev.press_name || data.press_name),
+          content: (data.content && !data.content.includes('못했습니다')) ? data.content : (prev.content || data.content),
+          image_url: data.image_url || prev.image_url
+        }));
         alert('최신 정보를 성공적으로 불러왔습니다!');
       } else {
         alert('정보를 가져오는 데 실패했습니다.');

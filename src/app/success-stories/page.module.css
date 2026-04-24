@@ -76,16 +76,18 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
+  overflow: hidden; /* 박스 밖으로 튀어나가지 않게 보호 */
 }
 
 .filterTabs {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   overflow-x: auto;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 4px;
+  padding: 5px 15px 10px 5px; /* 오른쪽 끝 여백 확보 */
   flex-wrap: nowrap;
+  width: 100%;
 }
 
 .filterTabs::-webkit-scrollbar {

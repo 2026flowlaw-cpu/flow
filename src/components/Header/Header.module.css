@@ -244,18 +244,18 @@
 .dropdown {
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
+  left: 0; /* 중앙 정렬 대신 왼쪽 정렬로 안정화 */
   background: white;
-  min-width: 180px;
+  min-width: 200px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  padding: 16px 0;
-  border-radius: 4px;
+  padding: 12px 0;
+  border-radius: 8px;
   z-index: 1100;
   pointer-events: none;
+  border: 1px solid #f1f5f9;
 }
 
 .navItem:hover .dropdown,
@@ -271,17 +271,19 @@
   flex-direction: column;
 }
 
-.subLink {
+.dropdownLink {
   padding: 12px 24px;
   font-size: 14px;
-  color: var(--text-muted);
-  font-weight: 500;
+  color: #334155;
+  font-weight: 600;
   transition: all 0.2s ease;
+  display: block;
+  text-decoration: none;
 }
 
-.subLink:hover {
-  background: var(--bg-soft);
-  color: var(--primary);
+.dropdownLink:hover {
+  background: #f8fafc;
+  color: var(--accent);
   padding-left: 28px;
 }
 

@@ -22,7 +22,10 @@ export default function PressDetailPage({ params: paramsPromise }: { params: Pro
 
   return (
     <div className={styles.page}>
-      <Header />
+      {/* 🚀 [슈퍼 어드민 커스텀 메타] 저장된 SEO/GEO 코드를 헤드에 주입 */}
+      {article.custom_meta && (
+        <div dangerouslySetInnerHTML={{ __html: article.custom_meta }} style={{ display: 'none' }} />
+      )}
       
       <main className={styles.articleContainer}>
         <header className={styles.header}>
@@ -64,8 +67,6 @@ export default function PressDetailPage({ params: paramsPromise }: { params: Pro
           </div>
         )}
       </main>
-
-      <Footer />
     </div>
   );
 }

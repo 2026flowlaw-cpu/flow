@@ -29,7 +29,8 @@ export async function POST(request: Request) {
           publish_date: body.publish_date,
           external_url: body.external_url,
           image_url: body.image_url,
-          content: body.content
+          content: body.content,
+          custom_meta: body.custom_meta
         })
         .eq('id', body.id);
       if (error) throw error;
@@ -43,7 +44,8 @@ export async function POST(request: Request) {
           publish_date: body.publish_date,
           external_url: body.external_url,
           image_url: body.image_url,
-          content: body.content
+          content: body.content,
+          custom_meta: body.custom_meta
         }]);
       if (error) throw error;
     }

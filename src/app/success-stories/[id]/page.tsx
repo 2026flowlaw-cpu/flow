@@ -26,6 +26,7 @@ async function getCaseData(id: string) {
         image: data.image_url || '/images/success_apartment.png',
         category: data.category,
         lawyer_name: data.lawyer_name,
+        custom_meta: data.custom_meta,
         overview: {
           text1: data.description,
           text2: data.content
@@ -97,7 +98,10 @@ export default async function CaseDetailPage({ params: paramsPromise }: { params
 
   return (
     <div className={styles.page}>
-      <Header />
+      {/* 🚀 [슈퍼 어드민 커스텀 메타] 저장된 SEO/GEO 코드를 헤드에 주입 */}
+      {data.custom_meta && (
+        <div dangerouslySetInnerHTML={{ __html: data.custom_meta }} style={{ display: 'none' }} />
+      )}
       
       <main className={styles.container}>
         {/* Breadcrumbs */}
@@ -210,8 +214,6 @@ export default async function CaseDetailPage({ params: paramsPromise }: { params
           </aside>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

@@ -12,16 +12,18 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
   const params = React.use(paramsPromise);
   const articleId = params.id;
 
-  const [loading, setLoading] = useState(false);
-  const [isScraping, setIsScraping] = useState(false);
-  const [formData, setFormData] = useState({
-    title: '',
-    press_name: '',
-    publish_date: '',
-    external_url: '',
-    image_url: '',
-    content: ''
-  });
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+  
+  useEffect(() => {
+    async function checkRole() {
+      if (!supabase) return;
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user?.user_metadata?.role === 'super_admin') {
+        setIsSuperAdmin(true);
+      }
+    }
+    checkRole();
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -29,7 +31,17 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
         const res = await fetch('/api/press-releases');
         const data = await res.json();
         const found = data.find((item: any) => item.id.toString() === articleId);
-        if (found) setFormData(found);
+        if (found) {
+          setFormData({
+            title: found.title || '',
+            press_name: found.press_name || '',
+            publish_date: found.publish_date || '',
+            external_url: found.external_url || '',
+            image_url: found.image_url || '',
+            content: found.content || '',
+            custom_meta: found.custom_meta || ''
+          } as any);
+        }
       } catch (err) {
         console.error('Failed to load article:', err);
       }
@@ -78,7 +90,7 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
     try {
       setLoading(true);
       const url = await uploadImage(file);
-      setFormData({ ...formData, image_url: url });
+      setFormData({ ...formData, image_url: url } as any);
       alert('이미지가 교체되었습니다.');
     } catch (error) {
       alert('업로드 실패');
@@ -194,6 +206,25 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
               onChange={(val) => setFormData({...formData, content: val})}
             />
           </div>
+
+          {/* 🔐 [슈퍼 어드민 전용] 개별 기사 코드 주입기 */}
+          {isSuperAdmin && (
+            <div style={{ marginTop: '30px', padding: '25px', backgroundColor: '#fcfcfd', border: '1px dashed #bd9d62', borderRadius: '15px' }}>
+              <label style={{ color: '#0A1B39', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '15px' }}>
+                🚀 개별 언론보도 특수 코드 / 메타데이터 주입
+              </label>
+              <textarea 
+                rows={4}
+                placeholder='이 기사에만 적용될 SEO, GEO, 트래킹 코드를 입력하세요.'
+                value={(formData as any).custom_meta || ''}
+                onChange={(e) => setFormData({...formData, custom_meta: e.target.value} as any)}
+                style={{ fontFamily: 'monospace', fontSize: '12px', marginTop: '10px', width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid #ddd' }}
+              ></textarea>
+              <p style={{ color: '#666', fontSize: '12px', marginTop: '8px' }}>
+                * 최고 관리자 전용 기능입니다. 주입된 코드는 해당 게시물 헤드 섹션에 반영됩니다.
+              </p>
+            </div>
+          )}
 
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '15px', marginTop: '30px', paddingTop: '20px', borderTop: '1px solid #eee' }}>
             <button 

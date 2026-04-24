@@ -57,7 +57,8 @@ export async function POST(request: Request) {
           content: body.content || body.description,
           badge: body.badge,
           lawyer_name: body.lawyer?.name || body.lawyer_name,
-          image_url: body.image || body.image_url
+          image_url: body.image || body.image_url,
+          custom_meta: body.custom_meta
         })
         .eq('id', Number(body.id));
 
@@ -84,7 +85,8 @@ export async function POST(request: Request) {
         content: body.content || body.description,
         badge: body.badge,
         lawyer_name: body.lawyer?.name || body.lawyerName || body.lawyer_name,
-        image_url: body.image || body.image_url
+        image_url: body.image || body.image_url,
+        custom_meta: body.custom_meta
       }]);
 
     if (insertError) throw insertError;

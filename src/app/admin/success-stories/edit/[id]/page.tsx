@@ -27,6 +27,18 @@ export default function AdminSuccessStoryEditPage({ params: paramsPromise }: { p
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
 
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+  
+  useEffect(() => {
+    async function checkRole() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user?.user_metadata?.role === 'super_admin') {
+        setIsSuperAdmin(true);
+      }
+    }
+    checkRole();
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,6 +62,7 @@ export default function AdminSuccessStoryEditPage({ params: paramsPromise }: { p
             content: currentStory.content || currentStory.description || '',
             badge: currentStory.badge,
             lawyerName: currentStory.lawyer?.name || currentStory.lawyer_name || '',
+            custom_meta: currentStory.custom_meta || ''
           });
           setImagePreview(currentStory.image || currentStory.image_url);
         } else {
@@ -246,6 +259,25 @@ export default function AdminSuccessStoryEditPage({ params: paramsPromise }: { p
                 </select>
               </div>
             </div>
+
+            {/* 🔐 [슈퍼 어드민 전용] 개별 성공사례 코드 주입기 */}
+            {isSuperAdmin && (
+              <div style={{ marginTop: '20px', padding: '25px', backgroundColor: '#fcfcfd', border: '1px dashed #bd9d62', borderRadius: '15px' }}>
+                <label style={{ color: '#0A1B39', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '15px' }}>
+                  🚀 개별 성공사례 특수 코드 / 메타데이터 주입
+                </label>
+                <textarea 
+                  rows={4}
+                  placeholder='이 성공사례에만 적용될 SEO, GEO, 트래킹 코드를 입력하세요.'
+                  value={(formData as any).custom_meta || ''}
+                  onChange={(e) => setFormData({...formData, custom_meta: e.target.value} as any)}
+                  style={{ fontFamily: 'monospace', fontSize: '12px', marginTop: '10px', width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid #ddd' }}
+                ></textarea>
+                <p style={{ color: '#666', fontSize: '12px', marginTop: '8px' }}>
+                  * 최고 관리자 전용 기능입니다. 주입된 코드는 해당 게시물 헤드 섹션에 반영됩니다.
+                </p>
+              </div>
+            )}
 
             <div className={styles.actions}>
               <button 

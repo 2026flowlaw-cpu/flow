@@ -88,48 +88,53 @@ export default function Header() {
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
-      <div className={`${styles.container} container`}>
-        <Link href="/" className={styles.logo}>
-          <span className={styles.logoText}>법무법인 <span className="accent-text">플로우</span></span>
-        </Link>
+      <div className={`${styles.container} container`} style={{ flexDirection: 'column', alignItems: 'stretch' }}>
+        <div className={styles.utilityBar}>
+          <Link href="/admin/login" className={styles.loginBtn}>
+            <span>ADMIN LOGIN</span>
+          </Link>
+        </div>
+        
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Link href="/" className={styles.logo}>
+            <span className={styles.logoText}>법무법인 <span className="accent-text">플로우</span></span>
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className={styles.nav}>
-          {menuData.map((item, index) => (
-            <div key={index} className={styles.navItem}>
-              <Link href={item.href} className={styles.navLink}>
-                {item.title}
-              </Link>
-              <div className={styles.dropdown}>
-                <div className={styles.dropdownContent}>
-                  {item.subItems.map((sub, sIndex) => (
-                    <Link key={sIndex} href={sub.href} className={styles.dropdownLink}>
-                      {sub.name}
-                    </Link>
-                  ))}
+          {/* Desktop Navigation */}
+          <nav className={styles.nav}>
+            {menuData.map((item, index) => (
+              <div key={index} className={styles.navItem}>
+                <Link href={item.href} className={styles.navLink}>
+                  {item.title}
+                </Link>
+                <div className={styles.dropdown}>
+                  <div className={styles.dropdownContent}>
+                    {item.subItems.map((sub, sIndex) => (
+                      <Link key={sIndex} href={sub.href} className={styles.dropdownLink}>
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </nav>
+            ))}
+          </nav>
 
-        <div className={styles.rightActions}>
-          <Link href="/admin/login" className={styles.loginBtn}>
-            로그인
-          </Link>
-          <Link href="/consult" className={styles.consultButton}>
-            간편상담 신청
-          </Link>
-          
-          <button 
-            className={`${styles.mobileToggle} ${isMobileMenuOpen ? styles.active : ''}`}
-            onClick={toggleMobileMenu}
-            aria-label="Toggle Menu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
+          <div className={styles.rightActions}>
+            <Link href="/consult" className={styles.consultButton}>
+              간편상담 신청
+            </Link>
+            
+            <button 
+              className={`${styles.mobileToggle} ${isMobileMenuOpen ? styles.active : ''}`}
+              onClick={toggleMobileMenu}
+              aria-label="Toggle Menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
         </div>
       </div>
 

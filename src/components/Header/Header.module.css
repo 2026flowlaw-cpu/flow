@@ -350,28 +350,41 @@
   gap: 20px;
 }
 
+.utilityBar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 8px;
+}
+
+.solid .utilityBar {
+  border-bottom: 1px solid #EEEEEE;
+}
+
 .loginBtn {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   transition: all 0.3s ease;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .solid .loginBtn {
-  color: var(--text-muted);
+  color: #999999;
 }
 
 .loginBtn:hover {
-  color: white;
-}
-
-.solid .loginBtn:hover {
-  color: var(--primary);
+  color: var(--accent) !important;
 }
 
 @media (max-width: 1024px) {
-  .loginBtn {
+  .utilityBar {
     display: none;
   }
 }

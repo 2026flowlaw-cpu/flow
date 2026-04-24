@@ -92,7 +92,14 @@ export default function CareersPage() {
                   <h3>{pos.title}</h3>
                   <p>{pos.dept}</p>
                 </div>
-                <button className={styles.applyBtn}>지원하기</button>
+                <a 
+                  href="https://www.saramin.co.kr/zf_user/company-info/view?csn=..." 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={styles.applyBtn}
+                >
+                  지원하기
+                </a>
               </div>
             ))}
           </div>
@@ -102,11 +109,11 @@ export default function CareersPage() {
         <section className={styles.ctaSection}>
           <div className={styles.ctaCard}>
             <h2>당신의 경험이 플로우의 가치가 됩니다.</h2>
-            <p>우리는 당신의 새로운 도전을 기다리고 있습니다.</p>
+            <p>사람인 채용 공고를 통해 지금 바로 지원하세요.</p>
             <div className={styles.contactInfo}>
-              <span>문의: hr@lawflow.com</span>
-              <span className={styles.separator}>|</span>
-              <span>02-123-4567 (내선 2번)</span>
+              <a href="https://www.saramin.co.kr/..." target="_blank" rel="noopener noreferrer" className={styles.saraminCta}>
+                사람인 공고 보러가기 ➔
+              </a>
             </div>
           </div>
         </section>

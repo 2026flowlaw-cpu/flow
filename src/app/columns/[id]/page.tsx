@@ -1,41 +1,98 @@
-"use client";
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { supabase } from '@/lib/supabase';
+import { Metadata } from 'next';
 import styles from './page.module.css';
 
-export default function ColumnDetailPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
-  const router = useRouter();
-  const params = React.use(paramsPromise);
+// 🚀 [SEO 최적화] 각 칼럼 페이지마다 고유한 제목과 설명을 생성합니다.
+export async function generateMetadata(
+  { params }: { params: Promise<{ id: string }> }
+): Promise<Metadata> {
+  const { id } = await params;
+  
+  if (!supabase) return { title: '법률칼럼 | 법무법인 플로우' };
+
+  const { data: column } = await supabase
+    .from('legal_columns')
+    .select('title, summary')
+    .eq('id', id)
+    .single();
+
+  if (!column) return { title: '칼럼을 찾을 수 없습니다 | 법무법인 플로우' };
+
+  return {
+    title: `${column.title} | 법무법인 플로우 법률칼럼`,
+    description: column.summary || '법무법인 플로우의 전문적인 법률 지식과 조언을 만나보세요.',
+    openGraph: {
+      title: column.title,
+      description: column.summary,
+      type: 'article',
+      siteName: '법무법인 플로우',
+    }
+  };
+}
+
+export default async function ColumnDetailPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   const colId = params.id;
 
-  const [column, setColumn] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  if (!supabase) {
+    return <div className={styles.error}>데이터베이스 연결 설정이 필요합니다.</div>;
+  }
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch('/api/columns');
-        const data = await res.json();
-        const found = data.find((c: any) => c.id.toString() === colId.toString());
-        setColumn(found);
-      } catch (err) {
-        console.error('Failed to load column:', err);
-      } finally {
-        setIsLoading(false);
+  // 🏛️ [서버 사이드 데이터 페칭] 로봇이 즉시 읽을 수 있도록 서버에서 직접 데이터를 가져옵니다.
+  const { data: column, error } = await supabase
+    .from('legal_columns')
+    .select('*')
+    .eq('id', colId)
+    .single();
+
+  if (error || !column) {
+    return (
+      <div className={styles.page}>
+        <Header />
+        <div className={styles.errorContainer}>
+          <p className={styles.error}>칼럼을 찾을 수 없습니다.</p>
+          <Link href="/columns" className={styles.listBtn}>목록으로 돌아가기</Link>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  // 🧠 [구조화 데이터] 구글 검색 결과에서 리치 스니펫(Rich Snippet)을 노출하기 위한 JSON-LD
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": column.title,
+    "description": column.summary,
+    "image": column.image_url || 'https://ilshin-law.com/images/default_column.png',
+    "author": {
+      "@type": "Person",
+      "name": `${column.author_name} 변호사`
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "법무법인 플로우",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://ilshin-law.com/logo.png"
       }
-    }
-    fetchData();
-  }, [colId]);
-
-  if (isLoading) return <div className={styles.loading}>플로우의 전문 칼럼을 불러오는 중입니다...</div>;
-  if (!column) return <div className={styles.error}>칼럼을 찾을 수 없습니다.</div>;
+    },
+    "datePublished": column.created_at
+  };
 
   return (
     <div className={styles.page}>
+      {/* JSON-LD 삽입 */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      
       <Header />
       
       <main>
@@ -47,12 +104,16 @@ export default function ColumnDetailPage({ params: paramsPromise }: { params: Pr
             <div className={styles.meta}>
               <div className={styles.author}>{column.author_name} 변호사</div>
               <span>|</span>
-              <div className={styles.date}>{new Date(column.created_at).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+              <div className={styles.date}>
+                {new Date(column.created_at).toLocaleDateString('ko-KR', { 
+                  year: 'numeric', month: 'long', day: 'numeric' 
+                })}
+              </div>
             </div>
           </div>
           <Image 
             src={column.image_url || '/images/philosophy_bg.png'} 
-            alt="Hero Background" 
+            alt={column.title} 
             fill 
             className={styles.heroImg}
             priority
@@ -74,8 +135,8 @@ export default function ColumnDetailPage({ params: paramsPromise }: { params: Pr
             </div>
             
             <div className={styles.actions}>
-              <button onClick={() => router.push('/columns')} className={styles.listBtn}>목록으로</button>
-              <button onClick={() => router.push('/consult')} className={styles.consultBtn}>1:1 무료 상담 신청 ✉️</button>
+              <Link href="/columns" className={styles.listBtn}>목록으로</Link>
+              <Link href="/consult" className={styles.consultBtn}>1:1 무료 상담 신청 ✉️</Link>
             </div>
           </footer>
         </article>

@@ -35,7 +35,9 @@ export default function AdminSidebar() {
   }, []);
 
   const handleSecretTrigger = () => {
-    if (!isSuperAdmin) return;
+    // 🧪 [테스트 모드] 권한 체크를 잠시 풀고 클릭만으로 확인 가능하게 합니다.
+    // 실운영 시에는 아래 if (!isSuperAdmin) 주석을 해제하세요.
+    // if (!isSuperAdmin) return;
     
     const newCount = clickCount + 1;
     setClickCount(newCount);

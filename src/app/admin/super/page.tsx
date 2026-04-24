@@ -52,7 +52,7 @@ export default function SuperAdminPage() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>관리자 권한 부여 가이드</h2>
           <div className={styles.guideBox}>
-            <p>새로운 관리자에게 슈퍼 권한을 부여하려면 **Supabase Dashboard**의 **Authentication > Users**에서 아래 메타데이터를 추가하세요:</p>
+            <p>새로운 관리자에게 슈퍼 권한을 부여하려면 **Supabase Dashboard**의 **Authentication &gt; Users**에서 아래 메타데이터를 추가하세요:</p>
             <code>
               {`{ "role": "super_admin" }`}
             </code>

@@ -73,15 +73,13 @@ export default function AdminPressListingPage() {
                     <td>{item.publish_date}</td>
                     <td>
                       <div className={styles.rowActions}>
-                        <a 
-                          href={item.external_url || '#'} 
+                        <Link 
+                          href={`/news/press/${item.id}`} 
                           target="_blank" 
-                          rel="noopener noreferrer" 
                           className={styles.viewBtn}
-                          style={{ pointerEvents: item.external_url ? 'auto' : 'none', opacity: item.external_url ? 1 : 0.5 }}
                         >
                           기사보기
-                        </a>
+                        </Link>
                         <Link href={`/admin/press-releases/edit/${item.id}`} className={styles.editBtn}>
                           수정
                         </Link>

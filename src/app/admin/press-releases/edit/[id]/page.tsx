@@ -137,9 +137,19 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
             />
           </div>
 
-          <div className={styles.actions}>
-            <button type="button" onClick={() => router.back()} className={styles.cancelBtn}>취소</button>
-            <button type="submit" disabled={loading} className={styles.saveBtn}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '15px', marginTop: '30px', paddingTop: '20px', borderTop: '1px solid #eee' }}>
+            <button 
+              type="button" 
+              onClick={() => router.back()} 
+              style={{ backgroundColor: 'white', border: '1px solid #ddd', padding: '12px 30px', borderRadius: '6px', fontWeight: '600', cursor: 'pointer', color: '#666' }}
+            >
+              취소
+            </button>
+            <button 
+              type="submit" 
+              disabled={loading} 
+              style={{ backgroundColor: loading ? '#ccc' : '#0A1B39', color: 'white', border: 'none', padding: '12px 40px', borderRadius: '6px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 12px rgba(10, 27, 57, 0.2)' }}
+            >
               {loading ? '처리 중...' : '수정 완료하기'}
             </button>
           </div>

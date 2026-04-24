@@ -10,8 +10,8 @@ export async function POST(request: Request) {
 
     const response = await fetch(url, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
         'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
       }
     });
@@ -22,42 +22,47 @@ export async function POST(request: Request) {
 
     const html = await response.text();
 
-    // 🕵️ 훨씬 강력해진 메타 태그 추출기 (속성 순서 무관)
-    const getMeta = (property: string) => {
-      // 패턴 1: <meta property="og:title" content="제목">
-      const pattern1 = new RegExp(`<meta[^>]*property=["']og:${property}["'][^>]*content=["']([^"']+)["']`, 'i');
-      // 패턴 2: <meta content="제목" property="og:title">
-      const pattern2 = new RegExp(`<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:${property}["']`, 'i');
-      // 패턴 3: (일반 네임태그) <meta name="title" content="제목">
-      const pattern3 = new RegExp(`<meta[^>]*name=["'](?:twitter:)?${property}["'][^>]*content=["']([^"']+)["']`, 'i');
-
-      const match = html.match(pattern1) || html.match(pattern2) || html.match(pattern3);
-      return match ? match[1] : '';
+    // 🕵️ 양방향 속성 탐지 (Attribute-Agnostic Scraper)
+    // content가 앞에 있든 property가 앞에 있든 모두 찾아냅니다.
+    const extractMeta = (target: string) => {
+      // 패턴: 어떤 속성이든 target(title, site_name 등)을 포함하고 그 옆에 content가 있는 경우
+      const regex = new RegExp(`<(?:meta|link)[^>]*(?:property|name|itemprop)=["'][^"']*(?:og:|twitter:)?${target}["'][^>]*content=["']([^"']+)["']|<(?:meta|link)[^>]*content=["']([^"']+)["'][^>]*(?:property|name|itemprop)=["'][^"']*(?:og:|twitter:)?${target}["']`, 'i');
+      const match = html.match(regex);
+      return match ? (match[1] || match[2] || '').trim() : '';
     };
 
-    // 📰 정보 긁어오기 (우선순위 부여)
-    let title = getMeta('title') || 
-                (html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1] || '');
+    // 📰 1. 제목 추출 (우선순서: og:title -> twitter:title -> <title> 태그)
+    let title = extractMeta('title');
+    if (!title) {
+      const titleMatch = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+      title = titleMatch ? titleMatch[1].trim() : '';
+    }
+    // 인코딩 및 불필요한 장식 제거
+    title = title.replace(/&quot;/g, '"').replace(/&amp;/g, '&').split(' : ')[0].split(' - ')[0].trim();
+
+    // 📡 2. 언론사명 추출 (우선순서: site_name -> author -> URL 호스트명 유추)
+    let pressName = extractMeta('site_name') || extractMeta('author');
     
-    // 제목에서 언론사명이 붙어있는 경우 정리 (예: "기사제목 : 네이버 뉴스")
-    title = title.split(' : ')[0].split(' - ')[0].trim();
-
-    let pressName = getMeta('site_name') || 
-                    getMeta('author') || 
-                    "언론사 확인 필요";
-
-    // 언론사명이 너무 길거나 URL인 경우 예외처리
-    if (pressName.includes('http') || pressName.length > 20) {
-      pressName = "언론사 확인 필요";
+    if (!pressName) {
+      // URL에서 도메인만 추출해서 보여주기 (최후의 수단)
+      try {
+        const domain = new URL(url).hostname.replace('www.', '');
+        pressName = domain.split('.')[0].toUpperCase();
+      } catch {
+        pressName = "언론사 직접 입력";
+      }
     }
 
-    const description = getMeta('description');
-    const imageUrl = getMeta('image');
+    // 📝 3. 본문/상세내용
+    const description = extractMeta('description') || extractMeta('text');
+    
+    // 🖼️ 4. 이미지
+    const imageUrl = extractMeta('image');
 
     return NextResponse.json({
       title: title || '제목을 불러오지 못했습니다. 직접 입력해주세요.',
       press_name: pressName,
-      content: description || '본문 내용을 불러오지 못했습니다. 직접 입력해주세요.',
+      content: description || '내용을 불러오지 못했습니다. 직접 입력해주세요.',
       image_url: imageUrl
     });
 

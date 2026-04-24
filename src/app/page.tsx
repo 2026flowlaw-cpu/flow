@@ -1,4 +1,3 @@
-import Header from '@/components/Header/Header';
 import Hero from '@/components/Hero/Hero';
 import Stats from '@/components/Stats/Stats';
 import PracticeAreas from '@/components/PracticeAreas/PracticeAreas';
@@ -11,13 +10,11 @@ import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage'
 import PartnersDetail from '@/components/PartnersDetail/PartnersDetail';
 import PartnerCarousel from '@/components/PartnerCarousel/PartnerCarousel';
 import LocationMap from '@/components/Location/LocationMap/LocationMap';
-import Footer from '@/components/Footer/Footer';
 import styles from './page.module.css';
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <Header />
       <main>
         <Hero />
         <Stats />
@@ -46,8 +43,6 @@ export default function Home() {
           <LocationMap />
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

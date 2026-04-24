@@ -62,6 +62,9 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const pathname = usePathname();
+  
+  // 관리자 페이지에서는 헤더를 렌더링하지 않습니다.
+  if (pathname.startsWith('/admin')) return null;
 
   useEffect(() => {
     const handleScroll = () => {

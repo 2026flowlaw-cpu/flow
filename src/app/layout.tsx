@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: "건설 소송 분석 및 전략 수립에 특화된 법무법인 플로우입니다.",
 };
 
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
 import FloatingConsult from "@/components/FloatingConsult/FloatingConsult";
 
 export default function RootLayout({
@@ -32,7 +34,9 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <Header />
         {children}
+        <Footer />
         <FloatingConsult />
       </body>
     </html>

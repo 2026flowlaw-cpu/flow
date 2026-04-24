@@ -28,12 +28,14 @@ const menuData = [
     title: '업무분야',
     href: '/practice/construction-dispute',
     subItems: [
-      { name: '아파트 하자소송', href: '/practice/construction-dispute' },
-      { name: '분양계약 해제', href: '/practice/resale-cancellation' },
-      { name: '전세사기 전담대응', href: '/practice/jeonse-fraud' },
-      { name: '집단소송 센터', href: '/practice/class-action' },
-      { name: '부동산 일반', href: '/practice/real-estate-dispute' },
-      { name: '형사/민사/교육', href: '/practice/general-civil' },
+      { name: '분양계약해제센터', href: '/practice/resale-cancellation' },
+      { name: '전세사기센터', href: '/practice/jeonse-fraud' },
+      { name: '부동산분쟁센터', href: '/practice/real-estate-dispute' },
+      { name: '건설분쟁센터', href: '/practice/construction-dispute' },
+      { name: '집단소송센터', href: '/practice/class-action' },
+      { name: '민사일반센터', href: '/practice/general-civil' },
+      { name: '에듀법률센터', href: '/practice/edu-law' },
+      { name: '형사소송센터', href: '/practice/criminal-law' },
     ]
   },
   {

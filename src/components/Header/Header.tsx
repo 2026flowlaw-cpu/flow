@@ -7,14 +7,21 @@ import styles from './Header.module.css';
 
 const menuData = [
   {
-    title: '회사소개',
+    title: '회사 소개',
     href: '/about/intro',
     subItems: [
       { name: '법무법인 플로우', href: '/about/intro' },
-      { name: '대표인사말', href: '/about/greetings' },
+      { name: '대표이사 인사말', href: '/about/greetings' },
       { name: '그룹구성(중개법인)', href: '/about/group' },
       { name: '오시는길', href: '/about/location' },
       { name: '인재채용', href: '/about/careers' },
+    ]
+  },
+  {
+    title: '구성원소개',
+    href: '/lawyers/profiles',
+    subItems: [
+      { name: '변호사 소개', href: '/lawyers/profiles' },
     ]
   },
   {
@@ -26,22 +33,24 @@ const menuData = [
       { name: '전세사기 전담대응', href: '/practice/jeonse-fraud' },
       { name: '집단소송 센터', href: '/practice/class-action' },
       { name: '부동산 일반', href: '/practice/real-estate-dispute' },
+      { name: '형사/민사/교육', href: '/practice/general-civil' },
     ]
   },
   {
-    title: '성공사례',
-    href: '/success-stories',
-    subItems: [
-      { name: '하자소송 성공사례', href: '/success-stories?category=하자소송' },
-      { name: '계약해제 성공사례', href: '/success-stories?category=계약해제' },
-    ]
-  },
-  {
-    title: '뉴스/칼럼',
+    title: '플로우 소식',
     href: '/news/press',
     subItems: [
       { name: '언론보도', href: '/news/press' },
-      { name: '전문칼럼', href: '/columns' },
+      { name: '전문 칼럼', href: '/columns' },
+      { name: '성공사례', href: '/success-stories' },
+      { name: '유튜브', href: '/news/youtube' },
+    ]
+  },
+  {
+    title: '상담게시판',
+    href: '/consult',
+    subItems: [
+      { name: '간편상담 신청', href: '/consult' },
     ]
   }
 ];
@@ -60,7 +69,6 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 페이지 이동 시 메뉴 닫기
   useEffect(() => {
     setIsMobileMenuOpen(false);
     document.body.style.overflow = 'unset';
@@ -108,7 +116,6 @@ export default function Header() {
             간편상담 신청
           </Link>
           
-          {/* Mobile Hamburger Toggle */}
           <button 
             className={`${styles.mobileToggle} ${isMobileMenuOpen ? styles.active : ''}`}
             onClick={toggleMobileMenu}

@@ -32,15 +32,15 @@ export default function Home() {
         <PartnerCarousel />
         
         {/* Location Section */}
-        <div style={{ background: 'white', padding: '100px 0 0' }}>
+        <div style={{ background: '#f9fafb', padding: '120px 0 0' }}>
           <div className="container">
             <h2 style={{ 
-              fontSize: '42px', 
+              fontSize: '48px', 
               fontWeight: 800, 
               textAlign: 'center', 
-              marginBottom: '60px',
+              marginBottom: '80px',
               color: '#0A1B39',
-              letterSpacing: '-1px'
+              letterSpacing: '-1.5px'
             }}>오시는 길</h2>
           </div>
           <LocationMap />

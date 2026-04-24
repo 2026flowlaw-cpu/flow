@@ -1,116 +1,153 @@
 .mapSection {
-  padding: 100px 0;
-  background-color: #ffffff;
+  padding: 120px 0;
+  background-color: #f9fafb; /* Premium soft background */
+  background-image: radial-gradient(var(--primary) 0.5px, transparent 0.5px);
+  background-size: 40px 40px;
+  position: relative;
+  overflow: hidden;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 50px;
-  align-items: flex-start;
+  align-items: stretch;
+  position: relative;
+  z-index: 1;
 }
 
 .mapWrapper {
-  height: 500px;
-  border-radius: 20px;
+  height: 600px;
+  border-radius: 30px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-  border: 1px solid #eee;
+  box-shadow: 0 30px 60px rgba(10, 27, 57, 0.15);
+  border: 1px solid rgba(10, 27, 57, 0.05);
+  background: white;
 }
 
 .info {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 24px;
 }
 
 .addressBox {
-  padding-bottom: 30px;
-  border-bottom: 1px solid #efefef;
+  background: white;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border-left: 8px solid var(--accent);
+  transition: transform 0.3s ease;
+}
+
+.addressBox:hover {
+  transform: translateX(10px);
 }
 
 .label {
-  display: block;
+  display: inline-block;
   font-size: 13px;
-  font-weight: 700;
-  color: #C5A059;
-  letter-spacing: 2px;
+  font-weight: 800;
+  color: var(--accent);
   text-transform: uppercase;
-  margin-bottom: 12px;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
 }
 
 .address {
-  font-size: 20px;
-  font-weight: 700;
-  color: #0A1B39;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
   line-height: 1.5;
+  word-break: keep-all;
 }
 
 .transportList {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 15px;
+  flex-grow: 1;
 }
 
 .transportItem {
+  background: #0A1B39; /* Deep Navy Card */
+  padding: 30px;
+  border-radius: 24px;
   display: flex;
   gap: 20px;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(10, 27, 57, 0.1);
+}
+
+.transportItem:hover {
+  transform: translateY(-5px);
+  background: #12284d;
 }
 
 .iconBox {
-  width: 48px;
-  height: 48px;
-  background-color: #f8faff;
-  border-radius: 12px;
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 26px;
   flex-shrink: 0;
 }
 
 .details {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .trLabel {
-  font-size: 16px;
-  font-weight: 700;
-  color: #0A1B39;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--accent);
 }
 
 .details p {
   font-size: 15px;
-  color: #666;
-  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
 }
 
 .line2 {
-  color: #3cb44b;
-  font-weight: 700;
+  color: #60a5fa;
+  font-weight: 800;
   margin-right: 8px;
 }
 
 .line3 {
-  color: #ff8c00;
-  font-weight: 700;
+  color: #fbbf24;
+  font-weight: 800;
   margin-right: 8px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
   .mapWrapper {
-    height: 400px;
+    height: 450px;
   }
 }
 
 @media (max-width: 768px) {
+  .mapSection {
+    padding: 80px 20px;
+  }
+  .addressBox {
+    padding: 30px;
+  }
   .address {
     font-size: 18px;
+  }
+  .transportItem {
+    padding: 24px;
   }
 }

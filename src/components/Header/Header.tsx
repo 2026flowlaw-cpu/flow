@@ -104,7 +104,7 @@ export default function Header() {
         </nav>
 
         <div className={styles.rightActions}>
-          <Link href="/consult" className={styles.consultBtn}>
+          <Link href="/consult" className={styles.consultButton}>
             간편상담 신청
           </Link>
           

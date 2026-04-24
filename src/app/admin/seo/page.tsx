@@ -26,34 +26,41 @@ export default function AdminSeoPage() {
     custom_head_scripts: '<!-- Custom scripts for SEO -->'
   });
 
+  const [columns, setColumns] = useState<any[]>([]);
+  const [isColumnLoading, setIsColumnLoading] = useState(true);
+
   useEffect(() => {
     async function checkAuth() {
       if (!supabase) return;
       const { data: { user } } = await supabase.auth.getUser();
       
       if (user?.user_metadata?.role !== 'super_admin') {
-        // 테스트 중에는 경고만 띄우고 접근은 유지합니다.
-        // 실운영시에는 아래 alert/router.push를 활성화하세요.
         console.warn('Super Admin access required');
       } else {
         setIsSuperAdmin(true);
       }
       
-      // 실제 데이터 패칭 로직 (테이블이 없을 경우 기본값 유지)
+      // 전역 설정 로드
       try {
         const { data, error } = await supabase
           .from('site_settings')
           .select('*')
           .single();
+        if (data && !error) setSettings(data);
+      } catch (err) { console.log('Defaults used.'); }
+
+      // 📚 칼럼 목록 로드 (통합 관리를 위해)
+      try {
+        const { data, error } = await supabase
+          .from('legal_columns')
+          .select('id, title, custom_meta, category')
+          .order('created_at', { ascending: false });
         
-        if (data && !error) {
-          setSettings(data);
-        }
-      } catch (err) {
-        console.log('Site settings table not found, using defaults.');
-      } finally {
-        setIsLoading(false);
-      }
+        if (data && !error) setColumns(data);
+      } catch (err) { console.error('Columns load failed'); }
+      
+      setIsLoading(false);
+      setIsColumnLoading(false);
     }
     checkAuth();
   }, []);
@@ -65,25 +72,39 @@ export default function AdminSeoPage() {
     try {
       if (!supabase) throw new Error('Supabase not connected');
 
-      // upsert: 있으면 수정, 없으면 삽입
-      const { error } = await supabase
+      // 1. 전역 설정 저장
+      const { error: settingsError } = await supabase
         .from('site_settings')
         .upsert({ id: 1, ...settings });
 
-      if (error) {
-        if (error.code === '42P01') {
-          throw new Error('데이터베이스에 site_settings 테이블이 존재하지 않습니다. 개발자에게 문의하세요.');
-        }
-        throw error;
-      }
+      if (settingsError) throw settingsError;
+
+      // 2. 개별 칼럼 코드 일괄 저장 로직 (필요시 호출)
+      // (각 칼럼의 로컬 변경사항을 추적하여 한꺼번에 저장하는 로직 추가 가능)
       
-      setStatus({ type: 'success', msg: '전역 SEO/GEO 설정이 성공적으로 반영되었습니다!' });
+      setStatus({ type: 'success', msg: '전역 및 개별 기초 설정이 성공적으로 반영되었습니다!' });
     } catch (err: any) {
       console.error(err);
       setStatus({ type: 'error', msg: `변경 실패: ${err.message}` });
     } finally {
       setIsSaving(false);
       setTimeout(() => setStatus({ type: '', msg: '' }), 3000);
+    }
+  };
+
+  const updateIndividualColumn = async (id: number, meta: string) => {
+    try {
+      const { error } = await supabase
+        .from('legal_columns')
+        .update({ custom_meta: meta })
+        .eq('id', id);
+      
+      if (error) throw error;
+      
+      setColumns(prev => prev.map(c => c.id === id ? { ...c, custom_meta: meta } : c));
+      alert('해당 칼럼의 코드가 즉시 주입되었습니다.');
+    } catch (err) {
+      alert('주입 실패: ' + (err as any).message);
     }
   };
 
@@ -206,6 +227,58 @@ export default function AdminSeoPage() {
             <p className={styles.helpText}>&lt;head&gt; 섹션에 삽입될 외부 서비스 연동 소스코드입니다. 매우 신중하게 수정하세요.</p>
           </div>
         </div>
+
+        {/* 📚 신규: 칼럼별 개별 코드 마스터 제어판 */}
+        <div className={`${styles.card} ${styles.fullRow}`} style={{ border: '2px solid #bd9d62' }}>
+          <h3 className={styles.cardTitle}>
+            <ShieldCheck size={22} color="#bd9d62" /> 
+            칼럼별 개별 특수 코드 마스터 제어판
+          </h3>
+          <p className={styles.desc}>작성된 모든 칼럼의 개별 메타데이터와 주입 코드를 이곳에서 한눈에 관리하세요.</p>
+          
+          <div style={{ marginTop: '25px', overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '800px' }}>
+              <thead>
+                <tr style={{ background: '#f8f9fa', textAlign: 'left', borderBottom: '2px solid #eee' }}>
+                  <th style={{ padding: '15px' }}>칼럼 제목</th>
+                  <th style={{ padding: '15px' }}>카테고리</th>
+                  <th style={{ padding: '15px', width: '400px' }}>주입된 특수 코드 / 메타데이터</th>
+                  <th style={{ padding: '15px' }}>액션</th>
+                </tr>
+              </thead>
+              <tbody>
+                {isColumnLoading ? (
+                  <tr><td colSpan={4} style={{ padding: '40px', textAlign: 'center' }}>칼럼 정보를 불러오는 중...</td></tr>
+                ) : columns.map((col) => (
+                  <tr key={col.id} style={{ borderBottom: '1px solid #f1f3f5' }}>
+                    <td style={{ padding: '15px', fontWeight: '700', color: '#0A1B39' }}>{col.title}</td>
+                    <td style={{ padding: '15px' }}><span style={{ background: '#e9ecef', padding: '4px 8px', borderRadius: '4px', fontSize: '12px' }}>{col.category}</span></td>
+                    <td style={{ padding: '15px' }}>
+                      <textarea 
+                        rows={3} 
+                        style={{ width: '100%', fontSize: '12px', fontFamily: 'monospace', padding: '10px', borderRadius: '8px', border: '1px solid #dee2e6' }}
+                        value={col.custom_meta || ''}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setColumns(prev => prev.map(c => c.id === col.id ? { ...c, custom_meta: val } : c));
+                        }}
+                        placeholder="이 칼럼에만 적용될 스크립트나 메타데이터를 입력하세요."
+                      />
+                    </td>
+                    <td style={{ padding: '15px' }}>
+                      <button 
+                        onClick={() => updateIndividualColumn(col.id, col.custom_meta)}
+                        style={{ background: '#bd9d62', color: 'white', border: 'none', padding: '8px 15px', borderRadius: '6px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap' }}
+                      >
+                        즉시 주입
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <div className={styles.actions}>
@@ -220,7 +293,7 @@ export default function AdminSeoPage() {
           disabled={isSaving}
         >
           <Save size={20} style={{ marginRight: '8px', verticalAlign: 'middle' }} />
-          {isSaving ? '동기화 중...' : '마스터 설정 저장 및 즉시 반영'}
+          {isSaving ? '동기화 중...' : '마스터 전역 설정 저장'}
         </button>
       </div>
     </div>

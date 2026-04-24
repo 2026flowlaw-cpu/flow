@@ -1,0 +1,94 @@
+.container {
+  padding: 40px;
+  max-width: 1000px;
+}
+
+.header {
+  margin-bottom: 50px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0A1B39;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 16px;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0A1B39;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.infoCard {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.badge {
+  background: #0A1B39;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.guideBox {
+  background: #f1f5f9;
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px dashed #cbd5e1;
+}
+
+.guideBox code {
+  display: block;
+  background: #1e293b;
+  color: #f8fafc;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  font-family: monospace;
+}
+
+.warning {
+  color: #e11d48;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.placeholder {
+  background: white;
+  padding: 50px;
+  text-align: center;
+  color: #94a3b8;
+  border-radius: 16px;
+  border: 2px dashed #e2e8f0;
+}
+
+.loading {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #0A1B39;
+}

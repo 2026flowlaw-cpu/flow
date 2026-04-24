@@ -5,19 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
 
-interface SubItem {
-  name: string;
-  href: string;
-  isExternal?: boolean;
-}
-
-interface MenuItem {
-  title: string;
-  href: string;
-  subItems: SubItem[];
-}
-
-const menuData: MenuItem[] = [
+const menuData = [
   {
     title: '회사소개',
     href: '/about/intro',
@@ -30,54 +18,39 @@ const menuData: MenuItem[] = [
     ]
   },
   {
-    title: '구성원소개',
-    href: '/lawyers/profiles',
-    subItems: [
-      { name: '변호사 소개', href: '/lawyers/profiles' },
-    ]
-  },
-  {
     title: '업무분야',
-    href: '#practice',
+    href: '/practice/construction-dispute',
     subItems: [
-      { name: '분양계약해제센터', href: '/practice/resale-cancellation' },
-      { name: '전세사기센터', href: '/practice/jeonse-fraud' },
-      { name: '부동산분쟁센터', href: '/practice/real-estate-dispute' },
       { name: '아파트 하자소송', href: '/practice/construction-dispute' },
       { name: '분양계약 해제', href: '/practice/resale-cancellation' },
       { name: '전세사기 전담대응', href: '/practice/jeonse-fraud' },
       { name: '집단소송 센터', href: '/practice/class-action' },
-      { name: '건설분쟁센터', href: '/practice/construction-dispute' },
-      { name: '민사일반센터', href: '/practice/general-civil' },
-      { name: '에듀법률센터', href: '/practice/edu-law' },
-      { name: '형사소송센터', href: '/practice/criminal-law' },
+      { name: '부동산 일반', href: '/practice/real-estate-dispute' },
     ]
   },
   {
-    title: '플로우 소식',
+    title: '성공사례',
     href: '/success-stories',
     subItems: [
-      { name: '성공사례', href: '/success-stories' },
-      { name: '언론보도', href: '/news/press' },
-      { name: '유튜브', href: '/news/youtube' },
-      { name: '법률칼럼', href: '/columns' },
-      { name: '네이버 블로그', href: 'https://blog.naver.com', isExternal: true },
+      { name: '하자소송 성공사례', href: '/success-stories?category=하자소송' },
+      { name: '계약해제 성공사례', href: '/success-stories?category=계약해제' },
     ]
   },
   {
-    title: '상담게시판',
-    href: '/consult',
+    title: '뉴스/칼럼',
+    href: '/news/press',
     subItems: [
-      { name: '상담신청', href: '/consult' },
+      { name: '언론보도', href: '/news/press' },
+      { name: '전문칼럼', href: '/columns' },
     ]
   }
 ];
 
-const Header = () => {
+export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const pathname = usePathname();
-  const isHomePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,27 +60,21 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menu when a link is clicked
-  const handleLinkClick = () => {
-    setHoveredIndex(null);
-  };
+  // 페이지 이동 시 메뉴 닫기
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    document.body.style.overflow = 'unset';
+  }, [pathname]);
+
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    if (!isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    const newState = !isMobileMenuOpen;
+    setIsMobileMenuOpen(newState);
+    document.body.style.overflow = newState ? 'hidden' : 'unset';
   };
 
   const handleMobileSubmenu = (title: string) => {
     setActiveSubmenu(activeSubmenu === title ? null : title);
   };
-
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-    document.body.style.overflow = 'unset';
-  }, [pathname]);
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
@@ -116,6 +83,7 @@ const Header = () => {
           <span className={styles.logoText}>법무법인 <span className="accent-text">플로우</span></span>
         </Link>
 
+        {/* Desktop Navigation */}
         <nav className={styles.nav}>
           {menuData.map((item, index) => (
             <div key={index} className={styles.navItem}>
@@ -125,13 +93,7 @@ const Header = () => {
               <div className={styles.dropdown}>
                 <div className={styles.dropdownContent}>
                   {item.subItems.map((sub, sIndex) => (
-                    <Link 
-                      key={sIndex} 
-                      href={sub.href} 
-                      className={styles.subLink}
-                      target={sub.isExternal ? "_blank" : undefined}
-                      onClick={handleLinkClick}
-                    >
+                    <Link key={sIndex} href={sub.href} className={styles.dropdownLink}>
                       {sub.name}
                     </Link>
                   ))}
@@ -140,23 +102,76 @@ const Header = () => {
             </div>
           ))}
         </nav>
-        <div className={styles.actions}>
-          <Link href="/admin/login" className={styles.loginBtn} onClick={handleLinkClick}>
-            로그인
+
+        <div className={styles.rightActions}>
+          <Link href="/consult" className={styles.consultBtn}>
+            간편상담 신청
           </Link>
-          <Link href="/consult" className={styles.consultButton} onClick={handleLinkClick}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            <span>상담예약</span>
-          </Link>
+          
+          {/* Mobile Hamburger Toggle */}
+          <button 
+            className={`${styles.mobileToggle} ${isMobileMenuOpen ? styles.active : ''}`}
+            onClick={toggleMobileMenu}
+            aria-label="Toggle Menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`${styles.mobileOverlay} ${isMobileMenuOpen ? styles.open : ''}`}>
+        <div className={styles.mobileMenuContent}>
+          <div className={styles.mobileNav}>
+            {menuData.map((item, index) => (
+              <div key={index} className={styles.mobileNavItem}>
+                <div 
+                  className={styles.mobileNavHeader}
+                  onClick={() => item.subItems ? handleMobileSubmenu(item.title) : null}
+                >
+                  <Link 
+                    href={item.href} 
+                    className={styles.mobileNavLink}
+                    onClick={(e) => {
+                      if (item.subItems) {
+                        e.preventDefault();
+                      }
+                    }}
+                  >
+                    {item.title}
+                  </Link>
+                  {item.subItems && (
+                    <span className={`${styles.arrow} ${activeSubmenu === item.title ? styles.arrowUp : ''}`}>
+                      ▼
+                    </span>
+                  )}
+                </div>
+                
+                {item.subItems && (
+                  <div className={`${styles.mobileSubmenu} ${activeSubmenu === item.title ? styles.submenuOpen : ''}`}>
+                    {item.subItems.map((sub, sIndex) => (
+                      <Link 
+                        key={sIndex} 
+                        href={sub.href} 
+                        className={styles.mobileSubLink}
+                      >
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className={styles.mobileFooter}>
+            <Link href="/consult" className={styles.mobileConsultBtn}>
+              지금 바로 상담하기
+            </Link>
+          </div>
         </div>
       </div>
     </header>
   );
-};
-
-export default Header;
+}

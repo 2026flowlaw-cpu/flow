@@ -24,10 +24,10 @@
 /* Desktop Nav Hide on Mobile */
 @media (max-width: 1024px) {
   .nav {
-    display: none;
+    display: none !important;
   }
   .consultButton {
-    display: none;
+    display: none !important;
   }
 }
 

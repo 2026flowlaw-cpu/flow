@@ -86,8 +86,11 @@ export default function Header() {
     setActiveSubmenu(activeSubmenu === title ? null : title);
   };
 
+  // 메인 페이지가 아니면 항상 배경이 있는 헤더 스타일을 유지합니다.
+  const isSubPage = pathname !== '/';
+  
   return (
-    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
+    <header className={`${styles.header} ${(isScrolled || isSubPage) ? styles.scrolled : ''}`}>
       <div className={`${styles.container} container`}>
         <Link href="/" className={styles.logo}>
           <span className={styles.logoText}>법무법인 <span className="accent-text">플로우</span></span>

@@ -341,9 +341,22 @@
   .filterContainer {
     flex-direction: column;
     align-items: stretch;
+    padding: 20px 15px; /* 모바일 여백 최적화 */
+    margin-top: -20px;
+  }
+  .filterTabs {
+    flex-wrap: wrap; /* 가로 스크롤 대신 줄바꿈 적용 */
+    justify-content: center;
+    overflow-x: visible;
+  }
+  .filterTab {
+    padding: 8px 15px;
+    font-size: 13px;
+    flex: 0 1 auto; /* 버튼이 너무 커지지 않게 조정 */
   }
   .searchBox {
     max-width: none;
+    margin-top: 10px;
   }
   .grid {
     grid-template-columns: 1fr;

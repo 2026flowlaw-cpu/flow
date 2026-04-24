@@ -112,8 +112,6 @@ export default function GreetingsPage() {
           </div>
         </section>
       </main>
-
-      </main>
     </div>
   );
 }

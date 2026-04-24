@@ -14,7 +14,9 @@ import {
   Video, 
   PenTool, 
   Newspaper,
-  ShieldCheck 
+  ShieldCheck,
+  Globe,
+  Search
 } from 'lucide-react';
 
 const menuItems = [
@@ -104,7 +106,8 @@ export default function AdminSidebar() {
 
         {/* 🤫 수퍼 어드민 전용 숨겨진 메뉴 */}
         {showHiddenMenu && (
-          <Link 
+          <>
+            <Link 
             href="/admin/super" 
             className={`${styles.navItem} ${styles.superItem} ${pathname === '/admin/super' ? styles.active : ''}`}
             style={{ marginTop: '20px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '20px' }}
@@ -112,6 +115,14 @@ export default function AdminSidebar() {
             <span className={styles.icon}><ShieldCheck size={20} /></span>
             시스템 권한 설정
           </Link>
+          <Link 
+            href="/admin/seo" 
+            className={`${styles.navItem} ${styles.superItem} ${pathname === '/admin/seo' ? styles.active : ''}`}
+          >
+            <span className={styles.icon}><Globe size={20} /></span>
+            SEO/GEO 통합 관리
+          </Link>
+        </>
         )}
       </nav>
 

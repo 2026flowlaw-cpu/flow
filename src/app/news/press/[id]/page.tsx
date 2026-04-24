@@ -1,29 +1,55 @@
-"use client";
-
 import React from 'react';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
-import useSWR from 'swr';
+import { supabase } from '@/lib/supabase';
+import { Metadata } from 'next';
 import styles from './page.module.css';
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+export const dynamic = 'force-dynamic';
 
-export default function PressDetailPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
-  const params = React.use(paramsPromise);
+// 🚀 [SEO 최적화] 메타데이터 생성
+export async function generateMetadata(
+  { params }: { params: Promise<{ id: string }> }
+): Promise<Metadata> {
+  const { id } = await params;
+  
+  if (!supabase) return { title: '언론보도 | 법무법인 플로우' };
+
+  const { data: article } = await supabase
+    .from('press_releases')
+    .select('title, press_name, content, custom_meta')
+    .eq('id', id)
+    .single();
+
+  if (!article) return { title: '기사를 찾을 수 없습니다 | 법무법인 플로우' };
+
+  const isPlainTextKeywords = article.custom_meta && !article.custom_meta.includes('<');
+
+  return {
+    title: `${article.title} | ${article.press_name} - 법무법인 플로우`,
+    description: article.content ? article.content.replace(/<[^>]*>?/gm, '').slice(0, 160) : '법무법인 플로우 언론보도입니다.',
+    keywords: isPlainTextKeywords ? article.custom_meta : undefined,
+  };
+}
+
+export default async function PressDetailPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = await paramsPromise;
   const articleId = params.id;
   
-  const { data: articles, error } = useSWR('/api/press-releases', fetcher);
-  
-  const article = articles?.find((item: any) => item.id.toString() === articleId);
-  const isLoading = !articles && !error;
+  if (!supabase) return <div className={styles.loading}>DB Connection Required.</div>;
 
-  if (isLoading) return <div className={styles.loading}>기사를 불러오는 중입니다...</div>;
-  if (!article) return <div className={styles.loading}>기사를 찾을 수 없습니다.</div>;
+  const { data: article, error } = await supabase
+    .from('press_releases')
+    .select('*')
+    .eq('id', articleId)
+    .single();
+
+  if (error || !article) return <div className={styles.loading}>기사를 찾을 수 없습니다.</div>;
 
   return (
     <div className={styles.page}>
-      {/* 🚀 [슈퍼 어드민 커스텀 메타] 저장된 SEO/GEO 코드를 헤드에 주입 */}
-      {article.custom_meta && (
+      {/* 🚀 [슈퍼 어드민 커스텀 메타] HTML/스크립트 코드가 있을 때만 바디에 렌더링 */}
+      {article.custom_meta && article.custom_meta.includes('<') && (
         <div dangerouslySetInnerHTML={{ __html: article.custom_meta }} style={{ display: 'none' }} />
       )}
       

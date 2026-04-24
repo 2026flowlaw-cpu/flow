@@ -17,15 +17,18 @@ export async function generateMetadata(
 
   const { data: column } = await supabase
     .from('legal_columns')
-    .select('title, summary')
+    .select('title, summary, custom_meta')
     .eq('id', id)
     .single();
 
   if (!column) return { title: '칼럼을 찾을 수 없습니다 | 법무법인 플로우' };
 
+  const isPlainTextKeywords = column.custom_meta && !column.custom_meta.includes('<');
+
   return {
     title: `${column.title} | 법무법인 플로우 법률칼럼`,
     description: column.summary || '법무법인 플로우의 전문적인 법률 지식과 조언을 만나보세요.',
+    keywords: isPlainTextKeywords ? column.custom_meta : undefined,
     openGraph: {
       title: column.title,
       description: column.summary,
@@ -93,8 +96,8 @@ export default async function ColumnDetailPage({ params: paramsPromise }: { para
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      {/* 🚀 [슈퍼 어드민 커스텀 메타] 저장된 SEO/GEO 코드를 헤드에 주입 */}
-      {column.custom_meta && (
+      {/* 🚀 [슈퍼 어드민 커스텀 메타] HTML/스크립트 코드가 있을 때만 렌더링 */}
+      {column.custom_meta && column.custom_meta.includes('<') && (
         <div dangerouslySetInnerHTML={{ __html: column.custom_meta }} style={{ display: 'none' }} />
       )}
       

@@ -5,9 +5,27 @@ import { notFound } from 'next/navigation';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import { supabase } from '@/lib/supabase';
+import { Metadata } from 'next';
 import styles from './page.module.css';
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ id: string }> }
+): Promise<Metadata> {
+  const { id } = await params;
+  const data = await getCaseData(id);
+
+  if (!data) return { title: '성공사례 | 법무법인 플로우' };
+
+  const isPlainTextKeywords = data.custom_meta && !data.custom_meta.includes('<');
+
+  return {
+    title: `${data.title} | 법무법인 플로우 성공사례`,
+    description: data.overview?.text1?.slice(0, 160) || '법무법인 플로우의 전문적인 성공사례를 확인하세요.',
+    keywords: isPlainTextKeywords ? data.custom_meta : undefined,
+  };
+}
 
 async function getCaseData(id: string) {
   // 1. Try to fetch from Supabase (if it's a numeric ID)
@@ -98,8 +116,8 @@ export default async function CaseDetailPage({ params: paramsPromise }: { params
 
   return (
     <div className={styles.page}>
-      {/* 🚀 [슈퍼 어드민 커스텀 메타] 저장된 SEO/GEO 코드를 헤드에 주입 */}
-      {data.custom_meta && (
+      {/* 🚀 [슈퍼 어드민 커스텀 메타] HTML/스크립트 코드가 있을 때만 렌더링 */}
+      {data.custom_meta && data.custom_meta.includes('<') && (
         <div dangerouslySetInnerHTML={{ __html: data.custom_meta }} style={{ display: 'none' }} />
       )}
       

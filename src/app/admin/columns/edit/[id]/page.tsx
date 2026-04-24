@@ -103,10 +103,11 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
         setStatusMsg({ type: 'success', text: '칼럼이 성공적으로 수정되었습니다!' });
         setTimeout(() => router.push('/admin/columns'), 1500);
       } else {
-        setStatusMsg({ type: 'error', text: '수정 실패 (데이터베이스 필드를 확인해주세요.)' });
+        const errorData = await res.json();
+        setStatusMsg({ type: 'error', text: `수정 실패: ${errorData.error || '데이터베이스 필드를 확인해주세요.'}` });
       }
     } catch (err: any) {
-      setStatusMsg({ type: 'error', text: '오류 발생: ' + err.message });
+      setStatusMsg({ type: 'error', text: '네트워크 오류 발생: ' + err.message });
     } finally {
       setIsSaving(false);
     }
@@ -191,24 +192,7 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
             </div>
           </div>
 
-          {/* 🤫 [슈퍼 어드민 전용 섹션] 고급 SEO/GEO 설정 */}
-          {isSuperAdmin && (
-            <div className={styles.inputGroup} style={{ marginTop: '40px', padding: '25px', backgroundColor: '#fcfcfd', border: '1px dashed #ced4da', borderRadius: '12px' }}>
-              <label style={{ color: '#0A1B39', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                🔒 고급 SEO / GEO 메타데이터 설정 (Super Admin Only)
-              </label>
-              <textarea 
-                rows={4}
-                placeholder='<meta name="geo.region" content="KR-11" /> 등 커스텀 메타 코드를 입력하세요.'
-                value={formData.custom_meta}
-                onChange={(e) => setFormData({...formData, custom_meta: e.target.value})}
-                style={{ fontFamily: 'monospace', fontSize: '13px', marginTop: '10px' }}
-              ></textarea>
-              <p className={styles.helpText} style={{ color: '#666', marginTop: '8px' }}>
-                * 칼럼 상세 페이지의 헤더 섹션에 커스텀 메타데이터를 삽입합니다. GEO 최적화나 특수 SEO용으로 활용하세요.
-              </p>
-            </div>
-          )}
+          </div>
 
           {statusMsg.text && (
             <div style={{ 

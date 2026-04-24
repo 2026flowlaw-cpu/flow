@@ -1,0 +1,287 @@
+.container {
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.main {
+  width: 100%;
+}
+
+/* Hero Section */
+.heroSection {
+  background: linear-gradient(rgba(10, 27, 57, 0.9), rgba(10, 27, 57, 0.95)), url('/images/hero_bg.png');
+  background-size: cover;
+  background-position: center;
+  padding: 180px 20px 120px;
+  text-align: center;
+  color: white;
+}
+
+.heroContent {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #bd9d62;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 30px;
+}
+
+.title span {
+  color: #bd9d62;
+}
+
+.desc {
+  font-size: 20px;
+  color: #94a3b8;
+  line-height: 1.7;
+}
+
+/* Common Header */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.sectionHeader h2 {
+  font-size: 40px;
+  font-weight: 800;
+  color: #0A1B39;
+  margin-bottom: 12px;
+}
+
+.sectionHeader h2.light {
+  color: white;
+}
+
+.sectionHeader p {
+  font-size: 18px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* Culture Section */
+.cultureSection {
+  max-width: 1200px;
+  margin: 120px auto;
+  padding: 0 20px;
+}
+
+.cultureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.cultureCard {
+  background: #f8fafc;
+  padding: 50px 35px;
+  border-radius: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.cultureCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  background: white;
+  border: 1px solid #f1f5f9;
+}
+
+.cardIcon {
+  font-size: 44px;
+  margin-bottom: 24px;
+}
+
+.cultureCard h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0A1B39;
+  margin-bottom: 16px;
+}
+
+.cultureCard p {
+  font-size: 16px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Process Section */
+.processSection {
+  background: #0A1B39;
+  padding: 120px 20px;
+}
+
+.processList {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.processItem {
+  flex: 1;
+  text-align: center;
+  color: white;
+  padding: 0 20px;
+  position: relative;
+}
+
+.stepNum {
+  width: 60px;
+  height: 60px;
+  background: #bd9d62;
+  color: #0A1B39;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 900;
+  margin: 0 auto 24px;
+}
+
+.processItem h4 {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.processItem p {
+  font-size: 14px;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* Position Section */
+.positionSection {
+  max-width: 1200px;
+  margin: 120px auto;
+  padding: 0 20px;
+}
+
+.positionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.positionCard {
+  background: white;
+  padding: 35px;
+  border-radius: 24px;
+  border: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.positionCard:hover {
+  border-color: #bd9d62;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.posType {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.positionCard h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0A1B39;
+  margin-bottom: 8px;
+}
+
+.positionCard p {
+  font-size: 15px;
+  color: #64748b;
+}
+
+.applyBtn {
+  background: #0A1B39;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.applyBtn:hover {
+  background: #bd9d62;
+}
+
+/* CTA Section */
+.ctaSection {
+  max-width: 1200px;
+  margin: 0 auto 150px;
+  padding: 0 20px;
+}
+
+.ctaCard {
+  background: #f8fafc;
+  padding: 100px 40px;
+  border-radius: 40px;
+  text-align: center;
+  border: 1px solid #f1f5f9;
+}
+
+.ctaCard h2 {
+  font-size: 36px;
+  font-weight: 800;
+  color: #0A1B39;
+  margin-bottom: 20px;
+}
+
+.ctaCard p {
+  font-size: 18px;
+  color: #64748b;
+  margin-bottom: 40px;
+}
+
+.contactInfo {
+  font-weight: 700;
+  color: #0A1B39;
+}
+
+.separator {
+  margin: 0 20px;
+  color: #e2e8f0;
+}
+
+@media (max-width: 1024px) {
+  .processList {
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  .processItem {
+    min-width: 45%;
+  }
+}
+
+@media (max-width: 800px) {
+  .title { font-size: 36px; }
+  .cultureGrid, .positionGrid { grid-template-columns: 1fr; }
+  .processItem { min-width: 100%; }
+}

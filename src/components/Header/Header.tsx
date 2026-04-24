@@ -26,7 +26,7 @@ const menuData = [
   },
   {
     title: '업무분야',
-    href: '/practice/construction-dispute',
+    href: '/practice',
     subItems: [
       { name: '분양계약해제센터', href: '/practice/resale-cancellation' },
       { name: '전세사기센터', href: '/practice/jeonse-fraud' },

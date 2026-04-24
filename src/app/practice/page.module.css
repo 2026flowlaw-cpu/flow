@@ -1,0 +1,128 @@
+.page {
+  padding-top: 80px;
+}
+
+.hero {
+  background: linear-gradient(rgba(10, 27, 57, 0.85), rgba(10, 27, 57, 0.85)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80') center/cover no-repeat;
+  padding: 120px 20px;
+  text-align: center;
+  color: white;
+}
+
+.heroTitle {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.heroText {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 800px;
+  margin: 0 auto;
+  word-break: keep-all;
+}
+
+.content {
+  padding: 100px 0;
+  background: var(--bg-soft);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.practiceCard {
+  background: white;
+  border-radius: 16px;
+  padding: 45px 35px;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.practiceCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 0;
+  background: var(--accent);
+  transition: height 0.4s ease;
+}
+
+.practiceCard:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+
+.practiceCard:hover::before {
+  height: 100%;
+}
+
+.iconWrapper {
+  font-size: 40px;
+  margin-bottom: 25px;
+  display: block;
+}
+
+.cardTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.cardDesc {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 25px;
+  word-break: keep-all;
+}
+
+.linkText {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.linkText span {
+  transition: transform 0.3s ease;
+}
+
+.practiceCard:hover .linkText span {
+  transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 80px 20px;
+  }
+  .heroTitle {
+    font-size: 32px;
+  }
+  .heroText {
+    font-size: 15px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+  }
+  .content {
+    padding: 60px 0;
+  }
+}

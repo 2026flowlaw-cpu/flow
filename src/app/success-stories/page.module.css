@@ -335,30 +335,43 @@
 }
 
 @media (max-width: 768px) {
+  .hero {
+    height: auto;
+    padding: 100px 0 60px;
+  }
   .heroTitle {
-    font-size: 36px;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  .heroText {
+    font-size: 15px;
+    padding: 0 20px;
   }
   .filterContainer {
     flex-direction: column;
     align-items: stretch;
-    padding: 20px 15px; /* 모바일 여백 최적화 */
-    margin-top: -20px;
+    padding: 20px 15px;
+    margin: -20px 0 0 0; /* 좌우 마진 제거하여 풀화면 느낌 유지 */
+    border-radius: 0; /* 모바일에서 박스형태보다 풀화면 선호 시 */
   }
   .filterTabs {
-    flex-wrap: wrap; /* 가로 스크롤 대신 줄바꿈 적용 */
+    flex-wrap: wrap;
     justify-content: center;
     overflow-x: visible;
   }
   .filterTab {
     padding: 8px 15px;
     font-size: 13px;
-    flex: 0 1 auto; /* 버튼이 너무 커지지 않게 조정 */
+    flex: 0 1 auto;
   }
   .searchBox {
     max-width: none;
-    margin-top: 10px;
+    margin-top: 15px;
+    padding: 0 15px;
   }
   .grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 30px 0;
   }
 }

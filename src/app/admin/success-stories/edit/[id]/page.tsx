@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { supabase } from '@/lib/supabase';
 import styles from '../../add/page.module.css'; // Reusing add page styles
 
 export default function AdminSuccessStoryEditPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
@@ -20,6 +21,7 @@ export default function AdminSuccessStoryEditPage({ params: paramsPromise }: { p
     content: '',
     badge: '승소 (FULL WIN)',
     lawyerName: '',
+    custom_meta: '',
   });
   
   const [lawyers, setLawyers] = useState<any[]>([]);

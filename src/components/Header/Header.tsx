@@ -91,40 +91,38 @@ const Header = () => {
   const handleLinkClick = () => {
     setHoveredIndex(null);
   };
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    if (!isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  };
 
-  // Close menu on navigation
+  const handleMobileSubmenu = (title: string) => {
+    setActiveSubmenu(activeSubmenu === title ? null : title);
+  };
+
   useEffect(() => {
-    setHoveredIndex(null);
+    setIsMobileMenuOpen(false);
+    document.body.style.overflow = 'unset';
   }, [pathname]);
 
-  const shouldBeSolid = isScrolled || hoveredIndex !== null || !isHomePage;
-
   return (
-    <header 
-      className={`${styles.header} ${shouldBeSolid ? styles.solid : styles.transparent}`}
-      onMouseLeave={() => setHoveredIndex(null)}
-    >
+    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={`${styles.container} container`}>
-        <Link href="/" className={styles.logo} onClick={handleLinkClick}>
+        <Link href="/" className={styles.logo}>
           <span className={styles.logoText}>법무법인 <span className="accent-text">플로우</span></span>
         </Link>
+
         <nav className={styles.nav}>
           {menuData.map((item, index) => (
-            <div 
-              key={index} 
-              className={`${styles.navItem} ${hoveredIndex === index ? styles.hovered : ''}`}
-              onMouseEnter={() => setHoveredIndex(index)}
-            >
-              <Link 
-                href={item.href} 
-                className={styles.navLink}
-                onClick={handleLinkClick}
-              >
+            <div key={index} className={styles.navItem}>
+              <Link href={item.href} className={styles.navLink}>
                 {item.title}
               </Link>
-              <div 
-                className={`${styles.dropdown} ${hoveredIndex === index ? styles.showDropdown : ''}`}
-              >
+              <div className={styles.dropdown}>
                 <div className={styles.dropdownContent}>
                   {item.subItems.map((sub, sIndex) => (
                     <Link 

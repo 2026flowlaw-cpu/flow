@@ -192,8 +192,6 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
             </div>
           </div>
 
-          </div>
-
           {statusMsg.text && (
             <div style={{ 
               marginTop: '20px', 

@@ -82,7 +82,14 @@
   display: flex;
   gap: 8px;
   overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
   padding-bottom: 4px;
+  flex-wrap: nowrap;
+}
+
+.filterTabs::-webkit-scrollbar {
+  display: none;
 }
 
 .filterTab {

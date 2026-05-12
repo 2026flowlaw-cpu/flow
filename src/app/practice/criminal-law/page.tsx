@@ -94,6 +94,22 @@ export default function CriminalLawPage() {
                 </div>
               </Link>
             ))}
+
+            {/* 민사 소송센터 전용 버튼 */}
+            <Link href="/practice/general-civil" className={`${styles.card} ${styles.cardFull}`}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
+                <span style={{ fontFamily: 'serif', fontSize: '24px', fontWeight: 700, color: '#C5A059', fontStyle: 'italic' }}>
+                  07
+                </span>
+                <h3 className={styles.cardTitle} style={{ margin: 0 }}>민사 소송센터</h3>
+              </div>
+              <p className={styles.cardDesc}>
+                부동산, 손해배상, 대여금 등 일상에서 발생하는 민사적 고충. 복잡한 소송 절차를 전문 변호사가 직접 해결해 드립니다.
+              </p>
+              <div>
+                <span className={styles.cardLink}>자세히 보기 →</span>
+              </div>
+            </Link>
           </div>
         </div>
       </section>

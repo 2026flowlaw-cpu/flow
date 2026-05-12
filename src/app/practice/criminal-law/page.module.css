@@ -108,6 +108,39 @@
   font-size: 14px;
 }
 
+.cardFull {
+  grid-column: 1 / -1;
+  background-color: #0A1B39;
+  border-color: #0A1B39;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 60px;
+}
+
+.cardFull:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(10, 27, 57, 0.2);
+  border-color: #C5A059;
+  background-color: #0d2249;
+}
+
+.cardFull .cardTitle {
+  color: #ffffff;
+  font-size: 28px;
+  margin-bottom: 0;
+}
+
+.cardFull .cardDesc {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0;
+  max-width: 600px;
+}
+
+.cardFull .cardLink {
+  color: #C5A059;
+}
+
 /* Two Columns Layout for News and Youtube */
 .twoCol {
   display: grid;
@@ -179,5 +212,18 @@
   }
   .twoCol {
     grid-template-columns: 1fr;
+  }
+  .cardFull {
+    flex-direction: column;
+    padding: 30px 20px;
+    text-align: center;
+  }
+  .cardFull > div:first-child {
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  .cardFull .cardDesc {
+    margin-bottom: 20px;
   }
 }

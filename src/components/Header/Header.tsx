@@ -100,6 +100,7 @@ export default function Header() {
     if (item.title === '업무분야' && isCriminalPage) {
       return {
         ...item,
+        href: '/practice/criminal-law/overview', // 제목 클릭 시 개요 페이지로 이동
         subItems: [
           { name: '성범죄센터', href: '/practice/criminal-law/sex-offense' },
           { name: '음주·교통센터', href: '/practice/criminal-law/dui-traffic' },

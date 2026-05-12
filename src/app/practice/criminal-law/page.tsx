@@ -96,7 +96,7 @@ export default function CriminalLawPage() {
             ))}
 
             {/* 민사 소송센터 전용 버튼 */}
-            <Link href="/practice/general-civil" className={`${styles.card} ${styles.cardFull}`}>
+            <Link href="/" className={`${styles.card} ${styles.cardFull}`}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
                 <span style={{ fontFamily: 'serif', fontSize: '24px', fontWeight: 700, color: '#C5A059', fontStyle: 'italic' }}>
                   07

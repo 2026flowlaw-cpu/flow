@@ -93,6 +93,28 @@ export default function Header() {
   const hasDarkHero = pathname === '/' || pathname.startsWith('/practice') || pathname.startsWith('/about');
   const isTransparentMode = hasDarkHero && !isScrolled;
   
+  // 동적으로 메뉴 데이터 변경 (형사 전담 페이지인 경우)
+  const isCriminalPage = pathname.startsWith('/practice/criminal-law');
+  
+  const currentMenuData = menuData.map(item => {
+    if (item.title === '업무분야' && isCriminalPage) {
+      return {
+        ...item,
+        subItems: [
+          { name: '성범죄센터', href: '/consult' },
+          { name: '음주·교통센터', href: '/consult' },
+          { name: '마약센터', href: '/consult' },
+          { name: '보이스피싱센터', href: '/consult' },
+          { name: '건설형사센터', href: '/consult' },
+          { name: '경제범죄센터', href: '/consult' },
+          { name: '소년학폭센터', href: '/consult' },
+          { name: '일반형사센터', href: '/consult' },
+        ]
+      };
+    }
+    return item;
+  });
+
   return (
     <header className={`${styles.header} ${!isTransparentMode ? styles.scrolled : ''}`}>
       <div className={`${styles.container} container`}>
@@ -102,7 +124,7 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className={styles.nav}>
-          {menuData.map((item, index) => (
+          {currentMenuData.map((item, index) => (
             <div key={index} className={styles.navItem}>
               <Link href={item.href} className={styles.navLink}>
                 {item.title}
@@ -145,7 +167,7 @@ export default function Header() {
       <div className={`${styles.mobileOverlay} ${isMobileMenuOpen ? styles.open : ''}`}>
         <div className={styles.mobileMenuContent}>
           <div className={styles.mobileNav}>
-            {menuData.map((item, index) => (
+            {currentMenuData.map((item, index) => (
               <div key={index} className={styles.mobileNavItem}>
                 <div 
                   className={styles.mobileNavHeader}

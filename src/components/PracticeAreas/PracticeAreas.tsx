@@ -60,14 +60,15 @@ const PracticeAreas = () => {
         </div>
         <div className={styles.grid}>
           {practiceAreas.map((area, index) => {
-            // 4열 그리드에서 완벽한 체커보드 패턴(엇갈림)을 만들기 위한 로직
-            const isAccent = (Math.floor(index / 4) + index) % 2 === 0; 
+            const isCriminal = area.title === '형사';
+            // 4열 그리드에서 완벽한 체커보드 패턴 (형사 제외)
+            const isAccent = !isCriminal && (Math.floor(index / 4) + index) % 2 === 0; 
             
             return (
               <Link 
                 key={index} 
                 href={area.href}
-                className={`${styles.card} ${isAccent ? styles.cardAccent : ''}`}
+                className={`${styles.card} ${isAccent ? styles.cardAccent : ''} ${isCriminal ? styles.cardFull : ''}`}
               >
                 <div className={styles.top}>
                   <span className={styles.number}>{(index + 1).toString().padStart(2, '0')}</span>

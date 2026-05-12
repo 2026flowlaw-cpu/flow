@@ -168,9 +168,53 @@
   border-color: #C5A059;
 }
 
+.cardFull {
+  grid-column: span 4;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 60px !important;
+  background-color: #0A1B39;
+  border-color: #C5A059;
+}
+
+.cardFull .top {
+  margin-bottom: 0 !important;
+  gap: 30px;
+}
+
+.cardFull .cardTitle {
+  color: #ffffff;
+  font-size: 28px;
+}
+
+.cardFull .cardDescription {
+  margin-bottom: 0 !important;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 500px;
+}
+
+.cardFull .more {
+  color: #C5A059;
+  opacity: 1;
+}
+
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .cardFull {
+    grid-column: span 2;
+    flex-direction: column !important;
+    padding: 40px !important;
+    text-align: center;
+  }
+  .cardFull .top {
+    justify-content: center;
+    margin-bottom: 20px !important;
+  }
+  .cardFull .cardDescription {
+    margin-bottom: 20px !important;
   }
 }
 

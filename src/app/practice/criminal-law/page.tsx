@@ -19,32 +19,32 @@ const criminalPracticeAreas = [
   {
     title: '성범죄 전담',
     desc: '강제추행, 디지털 성범죄 등 민감한 사건에 대한 철저한 비밀 유지 및 초기 대응을 제공합니다.',
-    href: '/consult'
+    href: '/practice/criminal-law/sex-offense'
   },
   {
     title: '경제범죄',
     desc: '사기, 횡령, 배임 등 복잡한 자금 흐름과 법리를 요구하는 경제범죄에 대한 체계적인 방어 전략을 구축합니다.',
-    href: '/consult'
+    href: '/practice/criminal-law/economic'
   },
   {
     title: '교통사고/음주운전',
     desc: '음주운전, 뺑소니, 12대 중과실 교통사고 등 면허 취소 구제부터 합의, 형사 재판까지 원스톱으로 지원합니다.',
-    href: '/consult'
+    href: '/practice/criminal-law/dui-traffic'
   },
   {
     title: '폭행/상해',
     desc: '쌍방폭행, 특수상해 등 일상에서 발생하는 폭력 사건에 대해 정당방위 입증 및 원만한 합의를 이끌어냅니다.',
-    href: '/consult'
+    href: '/practice/criminal-law/general'
   },
   {
     title: '기업 형사',
     desc: '산업안전보건법 위반, 중대재해처벌법 등 비즈니스 과정의 형사 리스크를 방어합니다.',
-    href: '/consult'
+    href: '/practice/criminal-law/construction'
   },
   {
     title: '수사 초기 대응 / 영장',
     desc: '경찰 조사 전 시뮬레이션 및 동행, 구속 위기 상황에서 영장실질심사를 통한 불구속 상태를 확보합니다.',
-    href: '/consult'
+    href: '/practice/criminal-law/general'
   }
 ];
 

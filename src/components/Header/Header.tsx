@@ -101,14 +101,14 @@ export default function Header() {
       return {
         ...item,
         subItems: [
-          { name: '성범죄센터', href: '/consult' },
-          { name: '음주·교통센터', href: '/consult' },
-          { name: '마약센터', href: '/consult' },
-          { name: '보이스피싱센터', href: '/consult' },
-          { name: '건설형사센터', href: '/consult' },
-          { name: '경제범죄센터', href: '/consult' },
-          { name: '소년학폭센터', href: '/consult' },
-          { name: '일반형사센터', href: '/consult' },
+          { name: '성범죄센터', href: '/practice/criminal-law/sex-offense' },
+          { name: '음주·교통센터', href: '/practice/criminal-law/dui-traffic' },
+          { name: '마약센터', href: '/practice/criminal-law/drugs' },
+          { name: '보이스피싱센터', href: '/practice/criminal-law/voice-phishing' },
+          { name: '건설형사센터', href: '/practice/criminal-law/construction' },
+          { name: '경제범죄센터', href: '/practice/criminal-law/economic' },
+          { name: '소년학폭센터', href: '/practice/criminal-law/juvenile' },
+          { name: '일반형사센터', href: '/practice/criminal-law/general' },
         ]
       };
     }

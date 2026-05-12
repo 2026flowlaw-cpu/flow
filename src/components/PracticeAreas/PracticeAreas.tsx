@@ -59,22 +59,27 @@ const PracticeAreas = () => {
           <p className={styles.subtitle}>Our Professional Practice Areas</p>
         </div>
         <div className={styles.grid}>
-          {practiceAreas.map((area, index) => (
-            <Link 
-              key={index} 
-              href={area.href}
-              className={styles.card}
-            >
-              <div className={styles.top}>
-                <span className={styles.number}>{(index + 1).toString().padStart(2, '0')}</span>
-                <h3 className={styles.cardTitle}>{area.title}</h3>
-              </div>
-              <p className={styles.cardDescription}>{area.description}</p>
-              <div className={styles.footer}>
-                <span className={styles.more}>자세히 보기 →</span>
-              </div>
-            </Link>
-          ))}
+          {practiceAreas.map((area, index) => {
+            // 엇갈린 패턴을 만들기 위한 로직 (1, 5, 9번째 카드 등에 포인트 색상)
+            const isAccent = (index % 4 === 0) || (index === 5); 
+            
+            return (
+              <Link 
+                key={index} 
+                href={area.href}
+                className={`${styles.card} ${isAccent ? styles.cardAccent : ''}`}
+              >
+                <div className={styles.top}>
+                  <span className={styles.number}>{(index + 1).toString().padStart(2, '0')}</span>
+                  <h3 className={styles.cardTitle}>{area.title}</h3>
+                </div>
+                <p className={styles.cardDescription}>{area.description}</p>
+                <div className={styles.footer}>
+                  <span className={styles.more}>자세히 보기 →</span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

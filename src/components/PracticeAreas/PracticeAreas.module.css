@@ -137,6 +137,37 @@
   width: 100%;
 }
 
+.cardAccent {
+  background-color: #0A1B39;
+  border-color: #0A1B39;
+}
+
+.cardAccent .cardTitle {
+  color: #ffffff;
+}
+
+.cardAccent .cardDescription {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cardAccent .number {
+  color: #C5A059;
+}
+
+.cardAccent .more {
+  color: #C5A059;
+  opacity: 0.6;
+}
+
+.cardAccent::after {
+  background-color: #ffffff;
+}
+
+.cardAccent:hover {
+  background-color: #0d2249;
+  border-color: #C5A059;
+}
+
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);

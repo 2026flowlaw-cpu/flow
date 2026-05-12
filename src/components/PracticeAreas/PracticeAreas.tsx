@@ -60,8 +60,8 @@ const PracticeAreas = () => {
         </div>
         <div className={styles.grid}>
           {practiceAreas.map((area, index) => {
-            // 1, 3, 5, 7, 9번째 카드 (인덱스 0, 2, 4, 6, 8)에 색상 적용
-            const isAccent = index % 2 === 0; 
+            // 4열 그리드에서 완벽한 체커보드 패턴(엇갈림)을 만들기 위한 로직
+            const isAccent = (Math.floor(index / 4) + index) % 2 === 0; 
             
             return (
               <Link 

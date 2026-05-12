@@ -60,8 +60,8 @@ const PracticeAreas = () => {
         </div>
         <div className={styles.grid}>
           {practiceAreas.map((area, index) => {
-            // 엇갈린 패턴을 만들기 위한 로직 (1, 5, 9번째 카드 등에 포인트 색상)
-            const isAccent = (index % 4 === 0) || (index === 5); 
+            // 1, 3, 5, 7, 9번째 카드 (인덱스 0, 2, 4, 6, 8)에 색상 적용
+            const isAccent = index % 2 === 0; 
             
             return (
               <Link 

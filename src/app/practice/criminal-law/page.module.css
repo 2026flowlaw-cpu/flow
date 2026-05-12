@@ -1,0 +1,183 @@
+.page {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.hero {
+  position: relative;
+  height: 60vh;
+  min-height: 500px;
+  background-image: url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2000&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, rgba(10, 27, 57, 0.9), rgba(10, 27, 57, 0.5));
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+  padding: 0 20px;
+}
+
+.heroContent h1 {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.heroContent p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.section {
+  padding: 100px 0;
+  background-color: #fafbfc;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.sectionTitle {
+  font-size: 36px;
+  font-weight: 800;
+  color: #0A1B39;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+/* Practice Areas Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.card {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  border: 1px solid #edf2f7;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(10, 27, 57, 0.08);
+  border-color: #C5A059;
+}
+
+.cardTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0A1B39;
+  margin-bottom: 15px;
+}
+
+.cardDesc {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.cardLink {
+  color: #C5A059;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* Two Columns Layout for News and Youtube */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.contentBox {
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.boxTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0A1B39;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #0A1B39;
+  padding-bottom: 15px;
+  display: inline-block;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid #edf2f7;
+  text-decoration: none;
+  color: #1e293b;
+  transition: all 0.2s;
+}
+
+.listItem:hover {
+  color: #C5A059;
+}
+
+.itemTitle {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.itemDate {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.youtubeWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.youtubeWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+}

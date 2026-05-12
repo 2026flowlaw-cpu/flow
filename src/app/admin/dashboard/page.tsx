@@ -7,20 +7,20 @@ import {
 } from 'recharts';
 import { 
   MessageSquare, AlertCircle, CheckCircle2, 
-  TrendingUp, Calendar, ArrowRight, Phone, FileText, User 
+  TrendingUp, Calendar, ArrowRight, Phone, FileText, User, ChevronRight
 } from 'lucide-react';
 import Link from 'next/link';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const visitorData = [
-  { name: '04.17', visitors: 120 },
-  { name: '04.18', visitors: 210 },
-  { name: '04.19', visitors: 180 },
-  { name: '04.20', visitors: 340 },
-  { name: '04.21', visitors: 290 },
-  { name: '04.22', visitors: 420 },
-  { name: '04.23', visitors: 380 },
+  { name: '05.06', visitors: 150 },
+  { name: '05.07', visitors: 230 },
+  { name: '05.08', visitors: 210 },
+  { name: '05.09', visitors: 380 },
+  { name: '05.10', visitors: 320 },
+  { name: '05.11', visitors: 450 },
+  { name: '05.12', visitors: 410 },
 ];
 
 export default function AdminDashboardMainPage() {
@@ -43,124 +43,132 @@ export default function AdminDashboardMainPage() {
   ];
 
   return (
-    <div style={{ padding: '40px', background: '#f8fafc', minHeight: '100vh', fontFamily: 'Pretendard, sans-serif' }}>
-      <div style={{ marginBottom: '40px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+    <div style={{ padding: '40px 60px', background: '#f8fafc', minHeight: '100vh', fontFamily: 'Pretendard, sans-serif' }}>
+      {/* 상단 헤더 섹션 */}
+      <div style={{ marginBottom: '50px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h1 style={{ fontSize: '32px', fontWeight: 800, color: '#0A1B39', marginBottom: '8px' }}>관리자 대시보드</h1>
-          <p style={{ color: '#64748b' }}>법무법인 플로우 웹사이트의 실시간 현황을 보고합니다.</p>
+          <h1 style={{ fontSize: '36px', fontWeight: 900, color: '#0A1B39', marginBottom: '10px', letterSpacing: '-0.02em' }}>
+            실시간 운영 현황 <span style={{ color: '#bd9d62', fontSize: '24px', fontWeight: 400, marginLeft: '10px' }}>Dashboard</span>
+          </h1>
+          <p style={{ color: '#64748b', fontSize: '16px', fontWeight: 500 }}>법무법인 플로우의 유입 통계 및 상담 현황을 한눈에 관리합니다.</p>
         </div>
-        <div style={{ background: 'white', padding: '10px 20px', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', fontSize: '14px', color: '#64748b', fontWeight: 600 }}>
-          <TrendingUp size={16} style={{ marginRight: '8px', color: '#22c55e' }} /> 실시간 데이터 동기화 중
+        <div style={{ display: 'flex', gap: '15px' }}>
+          <div style={{ background: 'white', padding: '12px 24px', borderRadius: '16px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 8px #22c55e' }}></div>
+            <span style={{ fontSize: '14px', color: '#1e293b', fontWeight: 700 }}>시스템 정상 작동 중</span>
+          </div>
         </div>
       </div>
 
-      {/* 통계 카드 */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', marginBottom: '32px' }}>
+      {/* 4분할 통계 카드 */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '30px', marginBottom: '50px' }}>
         {stats.map((stat, i) => (
           <div key={i} style={{ 
-            background: 'white', padding: '28px', borderRadius: '20px', 
-            boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', border: '1px solid #f1f5f9'
+            background: 'white', padding: '32px', borderRadius: '24px', 
+            boxShadow: '0 10px 15px -3px rgba(0,0,0,0.02)', border: '1px solid #edf2f7',
+            transition: 'transform 0.3s ease'
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-                <div style={{ background: `${stat.color}15`, padding: '12px', borderRadius: '12px' }}>
-                    <stat.icon size={24} color={stat.color} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '24px' }}>
+                <div style={{ background: `${stat.color}10`, padding: '14px', borderRadius: '16px' }}>
+                    <stat.icon size={26} color={stat.color} />
                 </div>
-                <span style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 700 }}>+8.2%</span>
+                <div style={{ textAlign: 'right' }}>
+                    <span style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 800 }}>전일 대비</span>
+                    <p style={{ fontSize: '13px', color: '#22c55e', fontWeight: 700 }}>+12.4% ↑</p>
+                </div>
             </div>
-            <p style={{ fontSize: '14px', color: '#64748b', fontWeight: 600, marginBottom: '4px' }}>{stat.label}</p>
-            <h3 style={{ fontSize: '28px', fontWeight: 900, color: '#1e293b' }}>{stat.value}</h3>
+            <p style={{ fontSize: '15px', color: '#64748b', fontWeight: 600, marginBottom: '6px' }}>{stat.label}</p>
+            <h3 style={{ fontSize: '34px', fontWeight: 900, color: '#0A1B39', letterSpacing: '-0.03em' }}>{stat.value}</h3>
           </div>
         ))}
       </div>
 
-      {/* 메인 그래프 (전체 너비로 확장) */}
-      <div style={{ background: 'white', padding: '40px', borderRadius: '24px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.05)', marginBottom: '32px', border: '1px solid #f1f5f9' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
-          <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#0A1B39' }}>방문자 유입 트래픽 (GA4)</h2>
-          <div style={{ display: 'flex', gap: '10px' }}>
-              <span style={{ fontSize: '13px', padding: '6px 14px', background: '#f1f5f9', borderRadius: '20px', color: '#64748b', fontWeight: 700 }}>최근 7일</span>
-          </div>
-        </div>
-        <div style={{ width: '100%', height: '300px' }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={visitorData}>
-              <defs>
-                <linearGradient id="colorVis" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.2}/>
-                  <stop offset="95%" stopColor="#4f46e5" stopOpacity={0}/>
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-              <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} dy={15} />
-              <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} />
-              <Tooltip contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)' }} />
-              <Area type="monotone" dataKey="visitors" stroke="#4f46e5" strokeWidth={4} fillOpacity={1} fill="url(#colorVis)" />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-
-      {/* 실시간 상담 접수 현황 (전체 데이터 노출) */}
-      <div style={{ background: 'white', padding: '40px', borderRadius: '28px', boxShadow: '0 15px 30px -5px rgba(0,0,0,0.05)', border: '1px solid #f1f5f9' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '35px' }}>
-          <div>
-            <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#0A1B39', marginBottom: '4px' }}>실시간 상담 접수 현황</h2>
-            <p style={{ fontSize: '13px', color: '#94a3b8' }}>전체 접수된 상담 신청 내역을 실시간으로 나열합니다.</p>
-          </div>
-          <Link href="/admin/consultations" style={{ 
-            color: 'white', background: '#4f46e5', textDecoration: 'none', 
-            fontSize: '14px', fontWeight: 800, padding: '12px 24px', borderRadius: '14px',
-            boxShadow: '0 4px 12px rgba(79, 70, 229, 0.2)' 
-          }}>상담 마스터 관리 페이지 이동</Link>
-        </div>
+      {/* 메인 섹션: 그래프 & 최근 내역 */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '40px' }}>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px' }}>
-          {isConsultArray && consultations.length > 0 ? (
-            consultations.map((item: any, i: number) => (
-              <div key={i} style={{ 
-                padding: '28px', borderRadius: '20px', background: '#fcfcfc', 
-                border: '1px solid #f1f5f9', display: 'flex', transition: 'all 0.3s'
-              }}>
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '14px' }}>
-                      <span style={{ fontWeight: 900, fontSize: '19px', color: '#1e293b' }}>{item.name} 님</span>
+        {/* 방문자 통계 그래프 */}
+        <div style={{ background: 'white', padding: '45px', borderRadius: '32px', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.03)', border: '1px solid #edf2f7' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '45px' }}>
+            <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#0A1B39', display: 'flex', alignItems: 'center', gap: '10px' }}>
+               방문자 유입 분석 <span style={{ fontSize: '12px', color: '#bd9d62', fontWeight: 800, background: '#bd9d6215', padding: '4px 10px', borderRadius: '8px' }}>GA4 LIVE</span>
+            </h2>
+          </div>
+          <div style={{ width: '100%', height: '350px' }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={visitorData}>
+                <defs>
+                  <linearGradient id="colorVis" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.2}/>
+                    <stop offset="95%" stopColor="#4f46e5" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 13, fontWeight: 600}} dy={20} />
+                <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 13, fontWeight: 600}} />
+                <Tooltip 
+                    contentStyle={{ borderRadius: '20px', border: 'none', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.15)', padding: '15px' }} 
+                    itemStyle={{ fontWeight: 800, color: '#4f46e5' }}
+                />
+                <Area type="monotone" dataKey="visitors" stroke="#4f46e5" strokeWidth={5} fillOpacity={1} fill="url(#colorVis)" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* 엇갈린 배경색의 실시간 상담 리스트 */}
+        <div style={{ background: 'white', padding: '45px', borderRadius: '32px', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.03)', border: '1px solid #edf2f7' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '35px' }}>
+            <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#0A1B39' }}>최근 상담 접수</h2>
+            <Link href="/admin/consultations" style={{ 
+                fontSize: '14px', color: '#4f46e5', fontWeight: 800, textDecoration: 'none',
+                display: 'flex', alignItems: 'center', gap: '4px'
+            }}>전체보기 <ChevronRight size={16} /></Link>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: '#f1f5f9', borderRadius: '24px', overflow: 'hidden', border: '1px solid #f1f5f9' }}>
+            {isConsultArray && consultations.length > 0 ? (
+              consultations.slice(0, 5).map((item: any, i: number) => (
+                <div key={i} style={{ 
+                  padding: '25px 30px', 
+                  background: i % 2 === 0 ? '#ffffff' : '#f8fafc', // 엇갈린 배경색 적용
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                }}>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                      <span style={{ fontWeight: 800, fontSize: '17px', color: '#1e293b' }}>{item.name}</span>
                       <span style={{ 
-                          fontSize: '12px', padding: '4px 12px', borderRadius: '8px', fontWeight: 800,
-                          background: item.status === '대기중' ? '#ffebee' : '#e8f5e9',
+                          fontSize: '11px', padding: '3px 10px', borderRadius: '6px', fontWeight: 900,
+                          background: item.status === '대기중' ? '#ef444415' : '#22c55e15',
                           color: item.status === '대기중' ? '#ef4444' : '#22c55e'
                       }}>{item.status}</span>
-                  </div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginBottom: '15px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', color: '#64748b', fontWeight: 600 }}>
-                          <Phone size={16} /> {item.phone}
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', color: '#64748b', fontWeight: 600 }}>
-                          <FileText size={16} /> {item.case_type}
-                      </div>
-                  </div>
-                  <p style={{ fontSize: '14px', color: '#94a3b8', lineHeight: '1.6', background: '#fff', padding: '12px', borderRadius: '12px', border: '1px dashed #eee' }}>
-                      {item.details || '내용이 없습니다.'}
-                  </p>
-                </div>
-                <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingLeft: '20px', marginLeft: '20px', borderLeft: '1px solid #f1f5f9' }}>
-                    <div>
-                      <p style={{ fontSize: '13px', color: '#94a3b8', fontWeight: 600 }}>{new Date(item.created_at).toLocaleDateString()}</p>
-                      <p style={{ fontSize: '11px', color: '#cbd5e1' }}>{new Date(item.created_at).toLocaleTimeString().slice(0, 5)}</p>
                     </div>
-                    <Link href="/admin/consultations" style={{ 
-                        color: '#4f46e5', fontSize: '13px', fontWeight: 800, 
-                        textDecoration: 'none', background: '#f5f7ff', padding: '8px 12px', borderRadius: '8px' 
-                    }}>관리 →</Link>
+                    <div style={{ display: 'flex', gap: '15px', fontSize: '13px', color: '#64748b', fontWeight: 600 }}>
+                      <span>{item.case_type}</span>
+                      <span style={{ color: '#cbd5e1' }}>|</span>
+                      <span>{item.phone}</span>
+                    </div>
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    <p style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 700 }}>{new Date(item.created_at).toLocaleDateString().slice(5)}</p>
+                    <p style={{ fontSize: '11px', color: '#cbd5e1', fontWeight: 500 }}>{new Date(item.created_at).toLocaleTimeString().slice(0, 5)}</p>
+                  </div>
                 </div>
+              ))
+            ) : (
+              <div style={{ padding: '60px', textAlign: 'center', background: 'white' }}>
+                <p style={{ color: '#94a3b8', fontWeight: 600 }}>접수된 내역이 없습니다.</p>
               </div>
-            ))
-          ) : (
-            <div style={{ gridColumn: 'span 2', textAlign: 'center', padding: '100px 0', border: '2px dashed #f1f5f9', borderRadius: '24px' }}>
-              <MessageSquare size={48} color="#cbd5e1" style={{ marginBottom: '16px' }} />
-              <p style={{ color: '#94a3b8', fontWeight: 600 }}>아직 접수된 상담 신청이 없습니다.</p>
-            </div>
-          )}
+            )}
+          </div>
+
+          <Link href="/admin/consultations" style={{ 
+            display: 'block', width: '100%', padding: '18px', marginTop: '30px',
+            borderRadius: '16px', background: '#0A1B39', color: 'white',
+            textAlign: 'center', textDecoration: 'none', fontWeight: 800, fontSize: '15px',
+            boxShadow: '0 10px 15px -3px rgba(10, 27, 57, 0.2)'
+          }}>상담 마스터 관리하기</Link>
         </div>
+
       </div>
     </div>
   );

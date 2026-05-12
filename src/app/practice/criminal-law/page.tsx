@@ -80,20 +80,25 @@ export default function CriminalLawPage() {
             <p style={{ fontSize: '18px', color: '#64748b', fontWeight: 500, letterSpacing: '2px' }}>CRIMINAL PRACTICE AREAS</p>
           </div>
           <div className={styles.grid}>
-            {criminalPracticeAreas.map((area, idx) => (
-              <Link href={area.href} key={idx} className={styles.card}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-                    <span style={{ fontFamily: 'serif', fontSize: '24px', fontWeight: 700, color: '#C5A059', fontStyle: 'italic' }}>
-                        {(idx + 1).toString().padStart(2, '0')}
-                    </span>
-                    <h3 className={styles.cardTitle} style={{ margin: 0 }}>{area.title}</h3>
-                </div>
-                <p className={styles.cardDesc}>{area.desc}</p>
-                <div style={{ marginTop: 'auto' }}>
-                    <span className={styles.cardLink}>상담 신청하기 →</span>
-                </div>
-              </Link>
-            ))}
+            {criminalPracticeAreas.map((area, idx) => {
+              // 1, 3, 5번 카드 (인덱스 0, 2, 4)에 색상 적용
+              const isAccent = idx % 2 === 0;
+
+              return (
+                <Link href={area.href} key={idx} className={`${styles.card} ${isAccent ? styles.cardAccent : ''}`}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+                      <span style={{ fontFamily: 'serif', fontSize: '24px', fontWeight: 700, color: '#C5A059', fontStyle: 'italic' }}>
+                          {(idx + 1).toString().padStart(2, '0')}
+                      </span>
+                      <h3 className={styles.cardTitle} style={{ margin: 0 }}>{area.title}</h3>
+                  </div>
+                  <p className={styles.cardDesc}>{area.desc}</p>
+                  <div style={{ marginTop: 'auto' }}>
+                      <span className={styles.cardLink}>상담 신청하기 →</span>
+                  </div>
+                </Link>
+              );
+            })}
 
             {/* 민사 소송센터 전용 버튼 */}
             <Link href="/" className={`${styles.card} ${styles.cardFull}`}>

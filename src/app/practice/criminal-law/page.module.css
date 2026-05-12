@@ -108,6 +108,28 @@
   font-size: 14px;
 }
 
+.cardAccent {
+  background-color: #0A1B39;
+  border-color: #0A1B39;
+}
+
+.cardAccent .cardTitle {
+  color: #ffffff;
+}
+
+.cardAccent .cardDesc {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cardAccent span {
+  color: #C5A059 !important;
+}
+
+.cardAccent:hover {
+  background-color: #0d2249;
+  border-color: #C5A059;
+}
+
 .cardFull {
   grid-column: 1 / -1;
   background-color: #0A1B39;

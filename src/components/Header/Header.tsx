@@ -42,10 +42,11 @@ const menuData = [
     title: '플로우 소식',
     href: '/news/press',
     subItems: [
-      { name: '언론보도', href: '/news/press' },
-      { name: '전문 칼럼', href: '/columns' },
       { name: '성공사례', href: '/success-stories' },
+      { name: '언론보도', href: '/news/press' },
       { name: '유튜브', href: '/news/youtube' },
+      { name: '법률칼럼', href: '/columns' },
+      { name: '네이버 블로그', href: 'https://blog.naver.com/flowlaw' },
     ]
   },
   {

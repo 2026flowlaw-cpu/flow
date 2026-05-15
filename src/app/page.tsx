@@ -21,8 +21,8 @@ export default function Home() {
         <PracticeAreas />
         <OrganicConnectivity />
         <CustomerReviews />
-        <SuccessStories />
-        <LawyerProfiles />
+        {/* <SuccessStories /> */}
+        {/* <LawyerProfiles /> */}
         <CTA />
         {/* <PhilosophyMessage /> */}
         {/* <PartnersDetail /> */}

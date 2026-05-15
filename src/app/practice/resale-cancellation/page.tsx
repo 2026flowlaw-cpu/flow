@@ -6,6 +6,14 @@ import Footer from '@/components/Footer/Footer';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import styles from './ResaleCancellation.module.css';
 
+import Stats from '@/components/Stats/Stats';
+import SuccessStories from '@/components/SuccessStories/SuccessStories';
+import FAQ from '@/components/FAQ/FAQ';
+import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
+import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
+import CTA from '@/components/CTA/CTA';
+
+
 const ResaleCancellationPage = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -57,6 +65,10 @@ const ResaleCancellationPage = () => {
           </p>
         </div>
       </section>
+
+        {/* 1. 실적 카드 */}
+        <Stats />
+
 
       {/* Pain Points Section */}
       <section className={styles.painSection}>
@@ -118,8 +130,8 @@ const ResaleCancellationPage = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className={styles.faqSection}>
+      
+      {/* <section className={styles.faqSection}>
         <div className="container">
           <div className={styles.sectionHeader}>
             <span className={styles.goldLabel}>FAQ</span>
@@ -146,7 +158,7 @@ const ResaleCancellationPage = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Experience Section */}
       <section className={styles.experienceSection}>
@@ -205,8 +217,8 @@ const ResaleCancellationPage = () => {
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section className={styles.philSection}>
+      
+      {/* <section className={styles.philSection}>
         <div className="container">
            <div className={styles.philBox}>
               <span className={styles.philLabel}>수임을 위한 장밋빛 전망을 경계합니다</span>
@@ -225,9 +237,30 @@ const ResaleCancellationPage = () => {
               </div>
            </div>
         </div>
-      </section>
+      </section> */}
 
-      <InquiryForm />
+      
+      
+        {/* 3. 성공사례(판결문) */}
+        <SuccessStories />
+
+        {/* 4. FAQ */}
+        <FAQ />
+
+        {/* 5. 회사 강점소개 */}
+        <PhilosophyMessage />
+
+        {/* 6. 의뢰인후기 */}
+        <CustomerReviews />
+
+        {/* 7. 상담 */}
+        <div style={{ backgroundColor: '#f8fafc', padding: '80px 0' }}>
+          <div className="container">
+            <InquiryForm />
+          </div>
+        </div>
+        <CTA />
+  
       <Footer />
     </div>
   );

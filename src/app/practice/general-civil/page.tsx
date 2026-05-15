@@ -4,6 +4,14 @@ import Footer from '@/components/Footer/Footer';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import styles from '../resale-cancellation/ResaleCancellation.module.css';
 
+import Stats from '@/components/Stats/Stats';
+import SuccessStories from '@/components/SuccessStories/SuccessStories';
+import FAQ from '@/components/FAQ/FAQ';
+import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
+import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
+import CTA from '@/components/CTA/CTA';
+
+
 const GeneralCivilPage = () => {
   const categories = [
     { title: '손해배상 청구', desc: '불법 행위나 계약 위반으로 발생한 경제적, 정신적 피해에 대한 정당한 보상' },
@@ -33,6 +41,10 @@ const GeneralCivilPage = () => {
         </div>
       </section>
 
+        {/* 1. 실적 카드 */}
+        <Stats />
+
+
       <section className={styles.serviceSection}>
         <div className="container">
           <div className={styles.sectionHeader}>
@@ -50,7 +62,28 @@ const GeneralCivilPage = () => {
         </div>
       </section>
 
-      <InquiryForm />
+      
+      
+        {/* 3. 성공사례(판결문) */}
+        <SuccessStories />
+
+        {/* 4. FAQ */}
+        <FAQ />
+
+        {/* 5. 회사 강점소개 */}
+        <PhilosophyMessage />
+
+        {/* 6. 의뢰인후기 */}
+        <CustomerReviews />
+
+        {/* 7. 상담 */}
+        <div style={{ backgroundColor: '#f8fafc', padding: '80px 0' }}>
+          <div className="container">
+            <InquiryForm />
+          </div>
+        </div>
+        <CTA />
+  
       <Footer />
     </div>
   );

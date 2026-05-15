@@ -3,6 +3,13 @@
 import React from 'react';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import Stats from '@/components/Stats/Stats';
+import SuccessStories from '@/components/SuccessStories/SuccessStories';
+import FAQ from '@/components/FAQ/FAQ';
+import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
+import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
+import CTA from '@/components/CTA/CTA';
+import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import styles from './page.module.css';
 
 export default function ClassActionPage() {
@@ -30,7 +37,10 @@ export default function ClassActionPage() {
           </div>
         </section>
 
-        {/* Feature Grid */}
+        {/* 1. 실적 카드 */}
+        <Stats />
+
+        {/* 2. 케이스 */}
         <section className={styles.featureSection}>
           <div className={styles.featureGrid}>
             {features.map((f, i) => (
@@ -43,7 +53,6 @@ export default function ClassActionPage() {
           </div>
         </section>
 
-        {/* System Section */}
         <section className={styles.systemSection}>
           <div className={styles.systemCard}>
             <div className={styles.systemInfo}>
@@ -59,7 +68,6 @@ export default function ClassActionPage() {
           </div>
         </section>
 
-        {/* Case Section */}
         <section className={styles.caseSection}>
           <div className={styles.sectionHeader}>
             <h2>Practice Areas</h2>
@@ -80,6 +88,26 @@ export default function ClassActionPage() {
             </div>
           </div>
         </section>
+
+        {/* 3. 성공사례(판결문) */}
+        <SuccessStories />
+
+        {/* 4. FAQ */}
+        <FAQ />
+
+        {/* 5. 회사 강점소개 */}
+        <PhilosophyMessage />
+
+        {/* 6. 의뢰인후기 */}
+        <CustomerReviews />
+
+        {/* 7. 상담 */}
+        <div style={{ backgroundColor: '#f8fafc', padding: '80px 0' }}>
+          <div className="container">
+            <InquiryForm />
+          </div>
+        </div>
+        <CTA />
       </main>
 
       <Footer />

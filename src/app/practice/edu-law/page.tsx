@@ -4,6 +4,14 @@ import Footer from '@/components/Footer/Footer';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import styles from '../resale-cancellation/ResaleCancellation.module.css';
 
+import Stats from '@/components/Stats/Stats';
+import SuccessStories from '@/components/SuccessStories/SuccessStories';
+import FAQ from '@/components/FAQ/FAQ';
+import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
+import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
+import CTA from '@/components/CTA/CTA';
+
+
 const EduLawPage = () => {
   const categories = [
     { title: '학원 경영 컨설팅', desc: '설립, 인가, 노무 등 학원 운영 전반에 걸친 법률 리스크 선제적 관리' },
@@ -33,6 +41,10 @@ const EduLawPage = () => {
         </div>
       </section>
 
+        {/* 1. 실적 카드 */}
+        <Stats />
+
+
       <section className={styles.serviceSection}>
         <div className="container">
           <div className={styles.sectionHeader}>
@@ -50,7 +62,28 @@ const EduLawPage = () => {
         </div>
       </section>
 
-      <InquiryForm />
+      
+      
+        {/* 3. 성공사례(판결문) */}
+        <SuccessStories />
+
+        {/* 4. FAQ */}
+        <FAQ />
+
+        {/* 5. 회사 강점소개 */}
+        <PhilosophyMessage />
+
+        {/* 6. 의뢰인후기 */}
+        <CustomerReviews />
+
+        {/* 7. 상담 */}
+        <div style={{ backgroundColor: '#f8fafc', padding: '80px 0' }}>
+          <div className="container">
+            <InquiryForm />
+          </div>
+        </div>
+        <CTA />
+  
       <Footer />
     </div>
   );

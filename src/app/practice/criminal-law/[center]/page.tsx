@@ -4,9 +4,12 @@ import { notFound } from 'next/navigation';
 import CTA from '@/components/CTA/CTA';
 import LawyerProfiles from '@/components/LawyerProfiles/LawyerProfiles';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
+import Stats from '@/components/Stats/Stats';
+import SuccessStories from '@/components/SuccessStories/SuccessStories';
+import FAQ from '@/components/FAQ/FAQ';
+import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
+import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
 import styles from '../page.module.css';
-
-// 각 센터별 콘텐츠 데이터 매핑
 const centerData: Record<string, { title: string; subtitle: string; desc: string }> = {
   'sex-offense': {
     title: '성범죄센터',
@@ -73,7 +76,10 @@ export default function CriminalCenterPage({ params }: { params: { center: strin
         </div>
       </section>
 
-      {/* Content Section */}
+      {/* 1. 실적 카드 */}
+      <Stats />
+
+      {/* 2. 케이스 (Content Section) */}
       <section className={styles.section}>
         <div className={styles.container}>
           <div style={{ textAlign: 'center', marginBottom: '60px' }}>
@@ -89,15 +95,24 @@ export default function CriminalCenterPage({ params }: { params: { center: strin
         </div>
       </section>
 
-      {/* Inquiry Form */}
+      {/* 3. 성공사례(판결문) */}
+      <SuccessStories />
+
+      {/* 4. FAQ */}
+      <FAQ />
+
+      {/* 5. 회사 강점소개 */}
+      <PhilosophyMessage />
+
+      {/* 6. 의뢰인후기 */}
+      <CustomerReviews />
+
+      {/* 7. 상담 */}
       <div style={{ backgroundColor: '#f8fafc', padding: '80px 0' }}>
         <div className={styles.container}>
           <InquiryForm />
         </div>
       </div>
-
-      {/* Reused Components */}
-      <LawyerProfiles />
       <CTA />
     </div>
   );

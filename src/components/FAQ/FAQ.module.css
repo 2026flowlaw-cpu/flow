@@ -1,0 +1,139 @@
+.section {
+  padding: 100px 0;
+  background-color: #ffffff;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.kicker {
+  font-size: 14px;
+  font-weight: 700;
+  color: #C5A059;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #0A1B39;
+  margin: 0;
+}
+
+.faqList {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.faqItem {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faqItem.open {
+  border-color: #0A1B39;
+  box-shadow: 0 10px 25px rgba(10, 27, 57, 0.05);
+}
+
+.question {
+  width: 100%;
+  text-align: left;
+  background: white;
+  border: none;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0A1B39;
+  transition: background-color 0.3s ease;
+}
+
+.question:hover {
+  background-color: #f8fafc;
+}
+
+.open .question {
+  background-color: #f8fafc;
+}
+
+.qMark {
+  color: #C5A059;
+  font-size: 20px;
+  font-weight: 900;
+  margin-right: 15px;
+}
+
+.qText {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.icon {
+  font-size: 24px;
+  color: #94a3b8;
+  font-weight: 400;
+  transition: transform 0.3s ease;
+}
+
+.open .icon {
+  color: #0A1B39;
+}
+
+.answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  background-color: white;
+}
+
+.open .answer {
+  max-height: 300px; /* Adjust as needed */
+}
+
+.answerContent {
+  padding: 0 24px 24px 60px; /* aligns with question text */
+  display: flex;
+  gap: 15px;
+}
+
+.aMark {
+  color: #0A1B39;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.answerContent p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #475569;
+  padding-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 28px;
+  }
+  .question {
+    font-size: 16px;
+    padding: 20px;
+  }
+  .answerContent {
+    padding: 0 20px 20px 50px;
+  }
+  .answerContent p {
+    font-size: 15px;
+  }
+}

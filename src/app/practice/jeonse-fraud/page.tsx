@@ -4,6 +4,14 @@ import Footer from '@/components/Footer/Footer';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import styles from '../resale-cancellation/ResaleCancellation.module.css';
 
+import Stats from '@/components/Stats/Stats';
+import SuccessStories from '@/components/SuccessStories/SuccessStories';
+import FAQ from '@/components/FAQ/FAQ';
+import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
+import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
+import CTA from '@/components/CTA/CTA';
+
+
 const JeonseFraudPage = () => {
   const categories = [
     { title: '집주인 무단 변경', desc: '수분양자 동의 없는 임대인 명의 변경 및 바지사장 대응' },
@@ -32,6 +40,10 @@ const JeonseFraudPage = () => {
           </p>
         </div>
       </section>
+
+        {/* 1. 실적 카드 */}
+        <Stats />
+
 
       <section className={styles.painSection}>
         <div className="container">
@@ -101,7 +113,28 @@ const JeonseFraudPage = () => {
         </div>
       </section>
 
-      <InquiryForm />
+      
+      
+        {/* 3. 성공사례(판결문) */}
+        <SuccessStories />
+
+        {/* 4. FAQ */}
+        <FAQ />
+
+        {/* 5. 회사 강점소개 */}
+        <PhilosophyMessage />
+
+        {/* 6. 의뢰인후기 */}
+        <CustomerReviews />
+
+        {/* 7. 상담 */}
+        <div style={{ backgroundColor: '#f8fafc', padding: '80px 0' }}>
+          <div className="container">
+            <InquiryForm />
+          </div>
+        </div>
+        <CTA />
+  
       <Footer />
     </div>
   );

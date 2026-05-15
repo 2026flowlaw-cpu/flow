@@ -46,6 +46,7 @@ const menuData = [
       { name: '언론보도', href: '/news/press' },
       { name: '유튜브', href: '/news/youtube' },
       { name: '법률칼럼', href: '/columns' },
+      { name: '법률 정보', href: '/news/legal-info' },
       { name: '네이버 블로그', href: 'https://blog.naver.com/flowlaw' },
     ]
   },

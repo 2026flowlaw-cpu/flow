@@ -24,9 +24,9 @@ export default function Home() {
         <SuccessStories />
         <LawyerProfiles />
         <CTA />
-        <PhilosophyMessage />
-        <PartnersDetail />
-        <PartnerCarousel />
+        {/* <PhilosophyMessage /> */}
+        {/* <PartnersDetail /> */}
+        {/* <PartnerCarousel /> */}
         
         {/* Location Section */}
         <div style={{ background: '#f9fafb', padding: '120px 0 0' }}>

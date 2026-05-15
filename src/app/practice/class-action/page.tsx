@@ -11,6 +11,7 @@ import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
 import CTA from '@/components/CTA/CTA';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import styles from './page.module.css';
+import PracticeCases from '@/components/PracticeCases/PracticeCases';
 
 export default function ClassActionPage() {
   const features = [
@@ -41,53 +42,7 @@ export default function ClassActionPage() {
         <Stats />
 
         {/* 2. 케이스 */}
-        <section className={styles.featureSection}>
-          <div className={styles.featureGrid}>
-            {features.map((f, i) => (
-              <div key={i} className={styles.featureCard}>
-                <div className={styles.cardNum}>{i + 1}</div>
-                <h3>{f.title}</h3>
-                <p>{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className={styles.systemSection}>
-          <div className={styles.systemCard}>
-            <div className={styles.systemInfo}>
-              <h2>Flow Group Action Platform</h2>
-              <p>법무법인 플로우는 대규모 소송 인원을 효율적으로 관리하고 투명하게 진행 과정을 공유하는 자체 전산 시스템을 운영합니다.</p>
-            </div>
-            <ul className={styles.systemList}>
-              <li>개별 의뢰인 맞춤형 진행 알림 서비스</li>
-              <li>온라인 증거 자료 통합 업로드 시스템</li>
-              <li>소송 단계별 리포트 자동 생성</li>
-              <li>전용 메신저를 통한 실시간 Q&A 운영</li>
-            </ul>
-          </div>
-        </section>
-
-        <section className={styles.caseSection}>
-          <div className={styles.sectionHeader}>
-            <h2>Practice Areas</h2>
-            <p>플로우가 강점을 가진 집단소송 분야</p>
-          </div>
-          <div className={styles.caseGrid}>
-            <div className={styles.caseCard}>
-              <h4>아파트 하자 소송</h4>
-              <p>대규모 단지의 공용부 및 전용부 하자 판정 및 손해배상 청구</p>
-            </div>
-            <div className={styles.caseCard}>
-              <h4>분양계약 해제/취소</h4>
-              <p>허위·과장 광고 및 입주 지연에 따른 집단 계약 해제 대응</p>
-            </div>
-            <div className={styles.caseCard}>
-              <h4>부동산 금전 소비대차</h4>
-              <p>건설사/시행사 부당 이득 반환 및 다수 피해자 구제</p>
-            </div>
-          </div>
-        </section>
+        <PracticeCases />
 
         {/* 3. 성공사례(판결문) */}
         <SuccessStories />

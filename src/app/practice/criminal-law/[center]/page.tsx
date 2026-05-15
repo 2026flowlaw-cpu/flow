@@ -10,6 +10,7 @@ import FAQ from '@/components/FAQ/FAQ';
 import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
 import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
 import styles from '../page.module.css';
+import PracticeCases from '@/components/PracticeCases/PracticeCases';
 const centerData: Record<string, { title: string; subtitle: string; desc: string }> = {
   'sex-offense': {
     title: '성범죄센터',
@@ -79,23 +80,10 @@ export default function CriminalCenterPage({ params }: { params: { center: strin
       {/* 1. 실적 카드 */}
       <Stats />
 
-      {/* 2. 케이스 (Content Section) */}
-      <section className={styles.section}>
-        <div className={styles.container}>
-          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <h2 style={{ fontSize: '36px', fontWeight: 800, color: '#0A1B39', marginBottom: '20px' }}>
-              수사 초기부터 재판까지,<br />
-              <span style={{ color: '#C5A059' }}>{data.title}</span> 전담 변호사가 함께합니다.
-            </h2>
-            <p style={{ fontSize: '18px', color: '#64748b', lineHeight: 1.6 }}>
-              형사 사건은 '골든타임'이 존재합니다. 경찰 조사 첫 진술이 재판의 결과를 좌우합니다.<br />
-              지체하지 말고 지금 바로 플로우 형사 전담팀과 상의하세요.
-            </p>
-          </div>
-        </div>
-      </section>
+        {/* 2. 케이스 */}
+        <PracticeCases />
 
-      {/* 3. 성공사례(판결문) */}
+        {/* 3. 성공사례(판결문) */}
       <SuccessStories />
 
       {/* 4. FAQ */}

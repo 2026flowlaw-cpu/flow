@@ -10,6 +10,7 @@ import FAQ from '@/components/FAQ/FAQ';
 import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
 import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
 import CTA from '@/components/CTA/CTA';
+import PracticeCases from '@/components/PracticeCases/PracticeCases';
 
 
 const RealEstateDisputePage = () => {
@@ -44,26 +45,9 @@ const RealEstateDisputePage = () => {
         {/* 1. 실적 카드 */}
         <Stats />
 
+        {/* 2. 케이스 */}
+        <PracticeCases />
 
-      <section className={styles.serviceSection}>
-        <div className="container">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>부동산분쟁센터 핵심 조력 분야</h2>
-          </div>
-          <div className={styles.serviceGrid}>
-            {categories.map((cat, idx) => (
-              <div key={idx} className={styles.serviceCard}>
-                <div className={styles.cardIndex}>0{idx + 1}</div>
-                <h3 className={styles.cardTitle}>{cat.title}</h3>
-                <p className={styles.cardDesc}>{cat.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      
-      
         {/* 3. 성공사례(판결문) */}
         <SuccessStories />
 

@@ -10,6 +10,7 @@ import FAQ from '@/components/FAQ/FAQ';
 import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
 import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
 import CTA from '@/components/CTA/CTA';
+import PracticeCases from '@/components/PracticeCases/PracticeCases';
 
 
 const JeonseFraudPage = () => {
@@ -44,77 +45,9 @@ const JeonseFraudPage = () => {
         {/* 1. 실적 카드 */}
         <Stats />
 
+        {/* 2. 케이스 */}
+        <PracticeCases />
 
-      <section className={styles.painSection}>
-        <div className="container">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>보증금을 지키기 위한 긴급 점검</h2>
-          </div>
-          <div className={styles.painGrid}>
-            <div className={styles.painCard}>
-              <p>"집주인이 연락이 안 되고 등기부에 경매 통지가 떴어요.."</p>
-            </div>
-            <div className={styles.painCard}>
-              <p>"입주할 땐 몰랐는데, 건물 전체에 선순위 채권이 가득해요.."</p>
-            </div>
-            <div className={styles.painCard}>
-              <p>"계약한 집주인이 아닌 낯선 사람으로 명의가 바뀌어 있어요.."</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.serviceSection}>
-        <div className="container">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>전세사기 전담팀의 핵심 대응 분야</h2>
-          </div>
-          <div className={styles.serviceGrid}>
-            {categories.map((cat, idx) => (
-              <div key={idx} className={styles.serviceCard}>
-                <div className={styles.cardIndex}>0{idx + 1}</div>
-                <h3 className={styles.cardTitle}>{cat.title}</h3>
-                <p className={styles.cardDesc}>{cat.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.strengthSection}>
-        <div className="container">
-          <div className={styles.strengthGrid}>
-            <div className={styles.strengthContent}>
-              <h2 className={styles.strengthTitle}>
-                보증금 회수의 <br />
-                <span>압도적 데이터</span>
-              </h2>
-              <div className={styles.strengthList}>
-                <div className={styles.strengthItem}>
-                  <h4>가장 빠른 가압류/가처분</h4>
-                  <p>상담 당일 증거 수집부터 보전 처분 신청까지 신속하게 진행합니다.</p>
-                </div>
-                <div className={styles.strengthItem}>
-                  <h4>임대차 승계 거부 전략</h4>
-                  <p>바지사장으로의 명의 변경을 원천 무효화하거나 책임을 묻는 법리를 구사합니다.</p>
-                </div>
-                <div className={styles.strengthItem}>
-                  <h4>형사 고소 병행</h4>
-                  <p>단순 민사를 넘어 형사적 압박을 통해 합의 및 자산 회수율을 높입니다.</p>
-                </div>
-              </div>
-            </div>
-            <div className={styles.strengthImage}>
-              <div className={styles.imagePlaceholder}>
-                <span>SAFE<br />HOME</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
-      
         {/* 3. 성공사례(판결문) */}
         <SuccessStories />
 

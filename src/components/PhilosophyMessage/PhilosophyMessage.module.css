@@ -1,116 +1,142 @@
 .section {
+  padding: 140px 0;
   position: relative;
-  padding: 100px 0;
-  background-image: url('/images/philosophy_bg.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-color: #0A1B39; /* Deep navy background */
   color: white;
   overflow: hidden;
 }
 
-.background {
+.overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.85);
-  z-index: 1;
+  background: radial-gradient(circle at center, rgba(197, 160, 89, 0.1) 0%, transparent 60%);
+  pointer-events: none;
 }
 
-.container {
+.contentBox {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 60px 40px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.quoteIcon {
+  font-size: 120px;
+  font-family: serif;
+  color: rgba(197, 160, 89, 0.2);
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.kicker {
+  font-size: 18px;
+  font-weight: 700;
+  color: #C5A059;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 15px;
   position: relative;
   z-index: 2;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--primary);
-}
-
-.content {
-  max-width: 600px;
 }
 
 .title {
-  font-size: 36px;
-  font-weight: 800;
-  line-height: 1.4;
-  margin-bottom: 32px;
+  font-size: 48px;
+  font-weight: 900;
+  color: white;
+  margin: 0 0 30px 0;
+  letter-spacing: -1.5px;
+  position: relative;
+  z-index: 2;
 }
 
-.description {
+.divider {
+  width: 60px;
+  height: 3px;
+  background-color: #C5A059;
+  margin: 0 auto 30px auto;
+  border-radius: 2px;
+}
+
+.highlightText {
+  font-size: 24px;
+  font-weight: 800;
+  color: #f8fafc;
+  margin-bottom: 40px;
+  font-style: italic;
+  letter-spacing: -0.5px;
+}
+
+.textWrap {
   font-size: 16px;
   line-height: 1.8;
-  opacity: 0.9;
-  margin-bottom: 40px;
+  color: #cbd5e1;
+  margin-bottom: 50px;
 }
 
-.button {
-  background: var(--primary);
+.textWrap p {
+  margin-bottom: 24px;
+}
+
+.textWrap p:last-child {
+  margin-bottom: 0;
+}
+
+.textWrap strong {
   color: white;
-  padding: 16px 32px;
-  border-radius: 4px;
   font-weight: 700;
-  transition: all 0.3s ease;
+  background: linear-gradient(120deg, rgba(197, 160, 89, 0.3) 0%, rgba(197, 160, 89, 0) 100%);
+  padding: 0 4px;
 }
 
-.button:hover {
-  background: var(--accent);
-  transform: translateX(5px);
-}
-
-.statsBox {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 60px;
-  border-radius: 1000px;
-  text-align: center;
-  width: 320px;
-  height: 320px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border);
-}
-
-.statsLabel {
-  font-size: 12px;
+.footerText {
+  font-size: 22px;
   font-weight: 700;
-  color: #3B82F6;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
+  color: #94a3b8;
+  line-height: 1.6;
 }
 
-.number {
-  font-size: 84px;
-  font-weight: 800;
-  color: var(--primary);
-  line-height: 1;
+.footerText span {
+  display: block;
+  font-size: 28px;
+  font-weight: 900;
+  color: #C5A059;
+  margin-top: 10px;
 }
 
-.numberSuffix {
-  font-size: 20px;
-  color: var(--primary);
-  font-weight: 600;
-}
-
-.statsText {
-  font-size: 16px;
-  color: var(--text-muted);
-  font-weight: 500;
-  margin-top: 8px;
-}
-
-@media (max-width: 1024px) {
-  .container {
-    flex-direction: column;
-    gap: 60px;
-    text-align: center;
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 0;
   }
-  .statsBox {
-    width: 280px;
-    height: 280px;
-    padding: 40px;
+  .contentBox {
+    padding: 40px 20px;
+  }
+  .title {
+    font-size: 32px;
+  }
+  .highlightText {
+    font-size: 18px;
+  }
+  .footerText {
+    font-size: 18px;
+  }
+  .footerText span {
+    font-size: 22px;
+  }
+  .quoteIcon {
+    font-size: 80px;
+    top: -25px;
   }
 }

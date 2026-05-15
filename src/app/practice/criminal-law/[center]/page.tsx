@@ -54,8 +54,9 @@ const centerData: Record<string, { title: string; subtitle: string; desc: string
   }
 };
 
-export default function CriminalCenterPage({ params }: { params: { center: string } }) {
-  const data = centerData[params.center];
+export default async function CriminalCenterPage({ params }: { params: Promise<{ center: string }> }) {
+  const resolvedParams = await params;
+  const data = centerData[resolvedParams.center];
 
   if (!data) {
     notFound();

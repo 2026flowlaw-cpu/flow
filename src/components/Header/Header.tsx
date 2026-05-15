@@ -53,7 +53,8 @@ const menuData = [
     title: '상담게시판',
     href: '/consult',
     subItems: [
-      { name: '간편상담 신청', href: '/consult' },
+      { name: '상담신청', href: '/consult' },
+      { name: '고객 후기', href: '/#reviews' },
     ]
   }
 ];

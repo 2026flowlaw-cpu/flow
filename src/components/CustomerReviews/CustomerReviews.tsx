@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './CustomerReviews.module.css';
 
 interface Review {
@@ -78,7 +79,7 @@ const CustomerReviews = () => {
 
         <div className={styles.grid}>
           {reviews.map((review) => (
-            <div key={review.id} className={styles.card}>
+            <Link href={`/success-stories/${review.id}`} key={review.id} className={styles.card}>
               <div className={styles.imageBox}>
                 {/* Fallback pattern for missing images to mimic handwriting paper */}
                 <div className={styles.imagePlaceholder}>
@@ -101,7 +102,7 @@ const CustomerReviews = () => {
                   <span className={styles.date}>{review.date}</span>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

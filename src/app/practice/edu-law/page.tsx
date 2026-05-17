@@ -210,7 +210,76 @@ export default function EduLawPage() {
 
 
         {/* 4.5. Specialized Win Strategy Grid (Image 1 layout) */}
-        <DefectStrategyGrid />
+        <DefectStrategyGrid 
+          kicker="[법무법인 플로우만의 '학원 분쟁' 필승 전략]"
+          mainTitle={
+            <>
+              "경험의 차이가 결과의 차이를 만듭니다"<br />
+              학생들 교육에만 전념하실 수 있도록! 복잡한 법률 문제는 플로우에 맡기세요
+            </>
+          }
+          descBlock={
+            <>
+              학원 설립 및 운영, 강사 고용 갈등부터 영업비밀 보호까지 교육업계 맞춤형 토탈 솔루션으로<br />
+              원장님의 소중한 학원 사업을 법률적 리스크로부터 안전하게 철통 보호합니다.
+            </>
+          }
+          strategies={[
+            {
+              id: 1,
+              title: '학원전문변호사 1:1 상담',
+              desc: '강남구 학원연합회 자문변호사로 활약하고 있는 학원전문변호사가 직접 디테일한 상담을 진행합니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              )
+            },
+            {
+              id: 2,
+              title: '로펌 최초 학원분쟁 특화',
+              desc: '국내 로펌 최초로 학원분쟁에 고도의 역량을 특화한 에듀법률센터를 별도 창설하여 밀도 높게 운영 중입니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              )
+            },
+            {
+              id: 3,
+              title: '법률 대리인 그 이상의 가치',
+              desc: '단순한 소송 대리를 넘어 학원 사업 전 분야의 법률 리스크를 진단하고 비즈니스 파트너로서의 역할을 다합니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              )
+            },
+            {
+              id: 4,
+              title: '철저한 사후 관리',
+              desc: '당면한 분쟁 해결에 그치지 않고 학원 운영 과정에서 파생될 수 있는 노무·세무·지재권 이슈에 대해 종합 솔루션을 제공합니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="16" x2="12" y2="12"/>
+                  <line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+              )
+            }
+          ]}
+          bottomText={
+            <>
+              법무법인 플로우는 강남구 학원연합회 공식 자문 및 수백 건에 달하는 학원 권리금, 강사 근로자성 퇴직금 분쟁에서 독보적인 방어 및 승소 기록을 보유하고 있습니다. 교육의 가치와 학원의 운영 자산을 법적으로 가장 두텁고 확실하게 수호할 것을 약속드립니다.
+            </>
+          }
+        />
 
         {/* 4.6. Real Client Testimonial Reviews (Interactive filter grid) */}
         <DefectReviews />

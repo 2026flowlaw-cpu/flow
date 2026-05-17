@@ -21,45 +21,45 @@ interface DefectCaseItem {
 const defectCases: DefectCaseItem[] = [
   {
     id: 1,
-    title: '김포 XXX 아파트 외벽 균열 및 결로 부실시공 손해배상청구',
-    countText: '1,240세대 공동소송',
-    statusText: '모집중',
-    description: '외벽 균열 누수 및 세대 내 결로 곰팡이 피해에 따른 시공사 대상 하자보수 손해배상청구'
+    title: '차용증 없는 투자 사기 및 미반환 대여금 2억 원 반환 청구 소송',
+    countText: '개인 의뢰인 대리',
+    statusText: '진행중',
+    description: '차용금 약정을 입증할 직접적 계약서 부재 상태에서 이체 내역 및 문자 메시지 교차 분석을 통해 적법한 대여 의무 확정'
   },
   {
     id: 2,
-    title: '용인 XXX 아파트 지하주차장 철근 누락 및 보수보증금 청구',
-    countText: '980세대 전체 참여',
-    statusText: '모집완료',
-    description: '구조안전 진단 결과 기둥 무단 철근 탈락 입증 및 25억 보증금 증액 판결 성공'
+    title: 'IT 벤처 창업 동업 해지에 따른 미정산 수익배분금 3억 5천만 원 청구',
+    countText: '주주간 공동 소송',
+    statusText: '인용완료',
+    description: '동업자의 고의 매출 축소 정황을 회계 장부 열람 가처분으로 확보하여 미정산 수익금 3억 5천만 원 전액 배상 인용'
   },
   {
     id: 3,
-    title: '인천 XXX 아파트 외벽 마감 대리석 탈락 및 구조안전 진단 청구',
-    countText: '850세대 공동소송',
-    statusText: '모집중',
-    description: '외장재 탈락으로 인한 안전사고 위험 해결 및 전면 재시공 공사 청구'
+    title: '상가 임대인의 무단 신규 임차인 거절로 인한 권리금 회수 방해 손해배상',
+    countText: '상가 임차인 대리',
+    statusText: '진행중',
+    description: '상가임대차법상 주선 의무 해태 정황 및 신규 임차인의 계약 불성립 귀책사유가 임대인에게 있음을 법원에 입증'
   },
   {
     id: 4,
-    title: '수원 XXX 아파트 조경 식재 고사 및 지반 균열 손해배상청구',
-    countText: '680세대 판결금 확보',
-    statusText: '모집완료',
-    description: '조경 수목 무단 미식재 및 고사, 단지 지반 침하 균열 입증 손해배상금 승소'
+    title: '부동산 매매계약 해제에 따른 계약금 반환 및 위약금 1억 원 청구 소송',
+    countText: '매수인 단독 대리',
+    statusText: '인용완료',
+    description: '시행사의 무단 설계 변경 및 기망 약정에 따른 원인 무효 입증으로 납부된 계약금 전액 반환 및 위약금 판결 승소'
   },
   {
     id: 5,
-    title: '양주 XXX 신축빌라 단지 결로 및 부실 마감 하자 기망 손해배상',
-    countText: '120세대 소제기 완료',
-    statusText: '모집중',
-    description: '설계도면과 상이한 저가 마감재 무단 변경 사용 입증 및 계약 위반 손해배상'
+    title: '채무자의 친인척 명의 부동산 허위 증여 사해행위 취소 및 원상회복 소송',
+    countText: '채권자 대리 수행',
+    statusText: '진행중',
+    description: '강제집행을 해할 목적으로 고의 매매 계약을 가장한 사해행위를 입증하여 은닉 재산의 채무자 명의 복구 선제 조치'
   },
   {
     id: 6,
-    title: '천안 XXX 상가 동별 오배수관 역류 및 배관 부실 하자보수청구',
-    countText: '320개 점포 연합소송',
-    statusText: '모집완료',
-    description: '상가 지하공간 오수관 구배 위반 부실 시공 및 상습 역류 하자 보수 비용 청구'
+    title: '법률상 원인 없는 오송금 및 명의 도용 자금 1억 2천만 원 부당이득 반환',
+    countText: '송금인 단독 소송',
+    statusText: '인용완료',
+    description: '상대방의 부당한 자금 보관 사실 및 금융 법률상 실익 없음을 증명하여 신속하게 예금 압류 및 반환 판결 조치'
   }
 ];
 
@@ -204,7 +204,45 @@ export default function GeneralCivilPage() {
         />
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
-        <VerdictSection />
+        <VerdictSection 
+          kicker="승소, 결코 우연이 아닙니다"
+          mainTitle="모두가 불가능하다고 했던 사건, 법무법인 플로우는 결과로 증명했습니다!"
+          descText="데이터가 증명하는 압도적 실력"
+          verdicts={[
+            {
+              id: 1,
+              court: '서울중앙지방법원',
+              caseNo: '2023가단51082',
+              plaintiff: '원고 이XX (의뢰인)',
+              orderText: '피고는 원고에게 차용 원금 1억 8천만 원 및 이에 대한 지연손해금을 즉각 지급하라.',
+              stampText: '대여금 원금 전액 인용'
+            },
+            {
+              id: 2,
+              court: '서울동부지방법원',
+              caseNo: '2023가합80491',
+              plaintiff: '원고 정XX (동업자)',
+              orderText: '피고는 동업 계약 해지에 따른 정산금으로 원고에게 3억 2천만 원을 지급하라.',
+              stampText: '정산금 청구 완승'
+            },
+            {
+              id: 3,
+              court: '수원지방법원',
+              caseNo: '2024가합10283',
+              plaintiff: '원고 주식회사 XX (상인)',
+              orderText: '피고의 불법행위 책임을 인정하며, 영업 손실액 2억 1천만 원을 원고에게 즉각 배상하라.',
+              stampText: '불법행위 손배 인용'
+            },
+            {
+              id: 4,
+              court: '인천지방법원',
+              caseNo: '2022가합30894',
+              plaintiff: '원고 최XX (매수인)',
+              orderText: '계약 해제에 따른 위약금이 부당하게 과다하므로 피고는 원고에게 계약금 8천만 원을 반환하라.',
+              stampText: '계약 위약금 반환 성공'
+            }
+          ]}
+        />
 
 
 
@@ -215,7 +253,7 @@ export default function GeneralCivilPage() {
             <div className={styles.sectionHeader}>
               <h2 className={styles.panelTitle}>일반 민사 실시간 진행 현황</h2>
               <p className={styles.panelSubtitle}>
-                전국 대규모 단지 및 상가 입주민들이 플로우 하자 전담 TF와 함께 정당한 가치를 찾고 있습니다.
+                전국 각지의 의뢰인들이 법무법인 플로우 민사 분쟁 전담 TF와 함께 소중한 재산과 권리를 완벽하게 되찾고 있습니다.
               </p>
             </div>
 

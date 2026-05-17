@@ -16,14 +16,16 @@ interface VerdictSectionProps {
   kicker?: string;
   mainTitle?: string;
   descText?: React.ReactNode;
+  verdicts?: VerdictItem[];
 }
 
 export default function VerdictSection({
   kicker = '',
   mainTitle = '모두가 불가능하다고 했던 사건, 법무법인 플로우는 결과로 증명했습니다!',
-  descText
+  descText,
+  verdicts: customVerdicts
 }: VerdictSectionProps) {
-  const verdicts: VerdictItem[] = [
+  const defaultVerdicts: VerdictItem[] = [
     {
       id: 1,
       court: '서울중앙지방법원',
@@ -57,6 +59,8 @@ export default function VerdictSection({
       stampText: '외벽 균열 감정가 증액'
     }
   ];
+
+  const verdicts = customVerdicts || defaultVerdicts;
 
   return (
     <section className={styles.sectionWrapper}>

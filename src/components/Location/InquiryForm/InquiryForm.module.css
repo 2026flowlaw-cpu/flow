@@ -42,7 +42,7 @@
 }
 
 .sloganRed {
-  color: #ef4444; /* Striking warning red */
+  color: #dc2626; /* Premium Deep Crimson / Burgundy Red (Refined & Luxury contrast) */
 }
 
 .sloganDesc {
@@ -55,19 +55,19 @@
 }
 
 .topInfoBadge {
-  background-color: #f8fafc;
-  border: 1px dashed #cbd5e1;
-  border-radius: 16px;
-  padding: 20px 35px;
+  background-color: #faf9f6; /* Soft cream/gold-tinted white for luxurious paper look */
+  border: 1px solid rgba(197, 160, 89, 0.25); /* Subtle brand gold border */
+  border-radius: 18px;
+  padding: 22px 35px;
   font-size: 15.5px;
-  color: #475569;
+  color: #334155;
   font-weight: 600;
   line-height: 1.6;
   display: inline-flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
-  box-shadow: 0 4px 15px rgba(10, 27, 57, 0.02);
+  box-shadow: 0 10px 30px rgba(197, 160, 89, 0.03); /* Extremely soft gold glow */
 }
 
 .sloganPhone {
@@ -216,7 +216,8 @@
 }
 
 .input:focus, .select:focus {
-  border-color: #2563eb;
+  border-color: #C5A059; /* Brand Gold focus border for premium consistency */
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
 }
 
 .textarea {
@@ -229,11 +230,12 @@
   background-color: #ffffff;
   min-height: 120px;
   resize: vertical;
-  transition: border-color 0.2s;
+  transition: all 0.2s;
 }
 
 .textarea:focus {
-  border-color: #2563eb;
+  border-color: #C5A059; /* Brand Gold focus border */
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
 }
 
 /* File attachments styling */
@@ -298,7 +300,7 @@
 .viewDetailsBtn {
   background: none;
   border: none;
-  color: #2563eb;
+  color: #C5A059; /* Elegant Brand Gold */
   font-weight: 800;
   font-size: 13.5px;
   cursor: pointer;
@@ -308,7 +310,7 @@
 }
 
 .viewDetailsBtn:hover {
-  color: #1d4ed8;
+  color: #0A1B39; /* Deep Navy hover */
 }
 
 .privacyDetailsBox {

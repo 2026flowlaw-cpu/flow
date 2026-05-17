@@ -146,6 +146,22 @@
   font-weight: 800;
 }
 
+.completedCard {
+  background-color: #fafbfc;
+  border-color: #e2e8f0;
+  opacity: 0.95;
+}
+
+.statusClosed {
+  color: #64748b;
+  font-weight: 800;
+  background-color: #f1f5f9;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-size: 11px;
+  display: inline-block;
+}
+
 .cardDesc {
   font-size: 13.5px;
   color: #64748b;

@@ -12,45 +12,45 @@ interface CaseItem {
 const scrollingCases: CaseItem[] = [
   {
     id: 1,
-    title: '인천 ㅇㅇㅇ 지역주택조합 부당이득금반환청구',
-    countText: '412명 소제기',
-    statusText: '추가 모집중',
-    description: '지역주택조합 가입계약 취소 및 분양 납입금 부당이득 반환 청구 소송단 모집'
+    title: '평택 XXX 지식산업센터 분양계약취소 집단소송',
+    countText: '1,240명 참여',
+    statusText: '모집완료',
+    description: '지식산업센터 분양 기망행위 규명 및 분양대금 전액 반환 청구 소송단'
   },
   {
     id: 2,
-    title: '천안 ㅇㅇㅇ 아파트 입주지연 분양계약해제',
-    countText: '285명 소제기',
-    statusText: '1차 마감임박',
-    description: '시공사 사정으로 인한 대규모 입주 지연 사태에 따른 분양 계약 취소 및 지연 위약금 청구'
+    title: '용인 XXX 아파트 할인분양 손해배상청구',
+    countText: '980명 참여',
+    statusText: '모집완료',
+    description: '미분양 세대 무단 소급 할인 분양에 따른 수분양자 자산가치 하락 보상'
   },
   {
     id: 3,
-    title: '광주 ㅇㅇㅇ 상가 설계변경에 따른 손해배상',
-    countText: '154명 소제기',
-    statusText: '실시간 접수중',
-    description: '무단 설계 변경 및 분양 면적 감소에 따른 차액 정산 및 계약 취소 손해배상'
+    title: '수원 XXX 재개발 아파트 등기지연 손해배상청구',
+    countText: '850명 참여',
+    statusText: '모집완료',
+    description: '조합 및 시공사 분쟁으로 인한 소유권 보존등기 지연 피해 배상 청구'
   },
   {
     id: 4,
-    title: '평택 ㅇㅇㅇ 지식산업센터 분양계약취소 집단소송',
-    countText: '1,240명 소제기',
-    statusText: '추가 모집중',
-    description: '지식산업센터 용도 기망 및 분양 계약 위반으로 인한 계약 해제 및 대금 전액 반환 청구'
+    title: '인천 XXX 지역주택조합 부당이득금반환청구',
+    countText: '412명 소제기',
+    statusText: '모집중',
+    description: '지역주택조합 허위 광고 및 조합원 가입 대금 전액 부당이득금 반환 소송'
   },
   {
     id: 5,
-    title: '용인 ㅇㅇㅇ 아파트 할인분양 손해배상청구',
-    countText: '980명 소제기',
-    statusText: '실시간 접수중',
-    description: '미분양 세대 무단 소급 할인 분양으로 인한 기존 수분양자 자산가치 하락 배상 청구'
+    title: '천안 XXX 입주지연 분양계약해제 집단소송',
+    countText: '285명 소제기',
+    statusText: '모집중',
+    description: '입주 지정일 지연에 따른 정당한 분양 계약 취소 및 지연 위약금 청구'
   },
   {
     id: 6,
-    title: '수원 ㅇㅇㅇ 재개발 아파트 등기지연 손해배상청구',
-    countText: '850명 소제기',
-    statusText: '1차 마감임박',
-    description: '재개발 조합 및 시공사 간의 공사비 갈등으로 인한 보존등기 지연 피해 손해배상 청구'
+    title: '광주 XXX 상가 설계변경에 따른 손해배상',
+    countText: '154명 소제기',
+    statusText: '모집중',
+    description: '상가 동의 없는 무단 설계 변경 및 분양 면적 임의 감소 손해배상 청구'
   }
 ];
 
@@ -80,16 +80,17 @@ const ClassActionCases = () => {
                 {/* 1st copy of cases */}
                 {scrollingCases.map((item) => {
                   const key = `${item.id}-orig`;
+                  const isCompleted = item.statusText === '모집완료';
                   return (
                     <div 
                       key={key} 
-                      className={styles.caseCard}
+                      className={`${styles.caseCard} ${isCompleted ? styles.completedCard : ''}`}
                     >
                       <div className={styles.cardContent}>
                         <div className={styles.cardTitleRow}>
                           <h3 className={styles.cardTitle}>{item.title}</h3>
                           <span className={styles.countBadge}>
-                            {item.countText}, <span className={styles.statusHighlight}>{item.statusText}</span>
+                            {item.countText}, <span className={isCompleted ? styles.statusClosed : styles.statusHighlight}>{item.statusText}</span>
                           </span>
                         </div>
                         <p className={styles.cardDesc}>{item.description}</p>
@@ -101,16 +102,17 @@ const ClassActionCases = () => {
                 {/* 2nd copy of cases for seamless vertical loop */}
                 {scrollingCases.map((item) => {
                   const key = `${item.id}-dup`;
+                  const isCompleted = item.statusText === '모집완료';
                   return (
                     <div 
                       key={key} 
-                      className={styles.caseCard}
+                      className={`${styles.caseCard} ${isCompleted ? styles.completedCard : ''}`}
                     >
                       <div className={styles.cardContent}>
                         <div className={styles.cardTitleRow}>
                           <h3 className={styles.cardTitle}>{item.title}</h3>
                           <span className={styles.countBadge}>
-                            {item.countText}, <span className={styles.statusHighlight}>{item.statusText}</span>
+                            {item.countText}, <span className={isCompleted ? styles.statusClosed : styles.statusHighlight}>{item.statusText}</span>
                           </span>
                         </div>
                         <p className={styles.cardDesc}>{item.description}</p>
@@ -149,7 +151,7 @@ const ClassActionCases = () => {
                 <div className={styles.closedCaseRow}>
                   <div className={styles.closedDot}></div>
                   <div className={styles.closedCaseInfo}>
-                    <strong className={styles.closedTitle}>평택 ㅇㅇㅇ 지식산업센터 분양계약취소 집단소송</strong>
+                    <strong className={styles.closedTitle}>평택 XXX 지식산업센터 분양계약취소 집단소송</strong>
                     <span className={styles.closedMeta}>모집 완료 (1,240명 소제기 완료)</span>
                   </div>
                 </div>
@@ -158,7 +160,7 @@ const ClassActionCases = () => {
                 <div className={styles.closedCaseRow}>
                   <div className={styles.closedDot}></div>
                   <div className={styles.closedCaseInfo}>
-                    <strong className={styles.closedTitle}>용인 ㅇㅇㅇ 아파트 할인분양 손해배상청구</strong>
+                    <strong className={styles.closedTitle}>용인 XXX 아파트 할인분양 손해배상청구</strong>
                     <span className={styles.closedMeta}>모집 완료 (980명 소제기 완료)</span>
                   </div>
                 </div>
@@ -167,7 +169,7 @@ const ClassActionCases = () => {
                 <div className={styles.closedCaseRow}>
                   <div className={styles.closedDot}></div>
                   <div className={styles.closedCaseInfo}>
-                    <strong className={styles.closedTitle}>수원 ㅇㅇㅇ 재개발 아파트 등기지연 손해배상청구</strong>
+                    <strong className={styles.closedTitle}>수원 XXX 재개발 아파트 등기지연 손해배상청구</strong>
                     <span className={styles.closedMeta}>모집 완료 (850명 소제기 완료)</span>
                   </div>
                 </div>

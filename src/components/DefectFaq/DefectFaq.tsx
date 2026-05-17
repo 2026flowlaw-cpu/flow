@@ -9,10 +9,20 @@ interface FaqItem {
   answer: string;
 }
 
-export default function DefectFaq() {
+interface DefectFaqProps {
+  title?: string;
+  subtitle?: string;
+  items?: FaqItem[];
+}
+
+export default function DefectFaq({
+  title = "하자소송 자주 묻는 질문",
+  subtitle = "* 여러분의 고민을 속 시원하게 해결해 드립니다.",
+  items
+}: DefectFaqProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(0); // Default open the first one
 
-  const faqs: FaqItem[] = [
+  const defaultFaqs: FaqItem[] = [
     {
       id: 1,
       question: '보수해주겠다고 하는데.. 굳이 하자소송을 진행해야 할까요?',
@@ -45,6 +55,8 @@ export default function DefectFaq() {
     }
   ];
 
+  const faqs = items || defaultFaqs;
+
   const handleToggle = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
@@ -56,8 +68,8 @@ export default function DefectFaq() {
         {/* Section Header (Image 1 replica) */}
         <div className={styles.headerArea}>
           <span className={styles.kicker}>FAQ</span>
-          <h2 className={styles.mainTitle}>하자소송 자주 묻는 질문</h2>
-          <p className={styles.subTitle}>* 여러분의 고민을 속 시원하게 해결해 드립니다.</p>
+          <h2 className={styles.mainTitle}>{title}</h2>
+          <p className={styles.subTitle}>{subtitle}</p>
         </div>
 
         {/* Accordion List (Image 1 replica styled with custom active indicator) */}

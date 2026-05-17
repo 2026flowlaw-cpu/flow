@@ -12,7 +12,17 @@ interface VerdictItem {
   stampText: string;
 }
 
-export default function VerdictSection() {
+interface VerdictSectionProps {
+  kicker?: string;
+  mainTitle?: string;
+  descText?: React.ReactNode;
+}
+
+export default function VerdictSection({
+  kicker = '데이터가 증명하는 압도적 실력',
+  mainTitle = '"승소, 결코 우연이 아닙니다"',
+  descText
+}: VerdictSectionProps) {
   const verdicts: VerdictItem[] = [
     {
       id: 1,
@@ -54,12 +64,16 @@ export default function VerdictSection() {
         
         {/* Header Block (Image 1 replica) */}
         <div className={styles.headerArea}>
-          <span className={styles.kicker}>데이터가 증명하는 압도적 실력</span>
-          <h2 className={styles.mainTitle}>"승소, 결코 우연이 아닙니다"</h2>
-          <p className={styles.descText}>
-            법무법인 플로우는 자체 기술인력의 정밀 진단 데이터와 수백 건의 승소 사례를 바탕으로, <br />
-            복잡하게 얽힌 하자 분쟁의 실타래를 명쾌하게 풀어드립니다.
-          </p>
+          <span className={styles.kicker}>{kicker}</span>
+          <h2 className={styles.mainTitle}>{mainTitle}</h2>
+          <div className={styles.descText}>
+            {descText || (
+              <>
+                법무법인 플로우는 자체 기술인력의 정밀 진단 데이터와 수백 건의 승소 사례를 바탕으로, <br />
+                복잡하게 얽힌 하자 분쟁의 실타래를 명쾌하게 풀어드립니다.
+              </>
+            )}
+          </div>
         </div>
 
         {/* Verdict Cards Infinite Marquee */}

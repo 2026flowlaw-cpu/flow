@@ -10,7 +10,19 @@ interface StrategyItem {
   icon: React.ReactNode;
 }
 
-export default function DefectStrategyGrid() {
+interface DefectStrategyGridProps {
+  kicker?: string;
+  mainTitle?: React.ReactNode;
+  descBlock?: React.ReactNode;
+  bottomText?: React.ReactNode;
+}
+
+export default function DefectStrategyGrid({
+  kicker = "[법무법인 플로우만의 '하자소송' 필승 전략]",
+  mainTitle,
+  descBlock,
+  bottomText
+}: DefectStrategyGridProps) {
   const strategies: StrategyItem[] = [
     {
       id: 1,
@@ -81,21 +93,41 @@ export default function DefectStrategyGrid() {
     }
   ];
 
+  const defaultMainTitle = (
+    <>
+      경험의 차이가 결과의 차이를 만듭니다.<br />
+      포기하지 마세요. 플로우가 돕겠습니다.
+    </>
+  );
+
+  const defaultDescBlock = (
+    <>
+      <span className={styles.descLine}>최고의 전문가들로 구성된 전문 파트너십을 기반으로, 하자진단부터 합의,</span>
+      <span className={styles.descLine}>소송 및 완벽한 사후정산에 이르기까지 국내 유일 올인원 통합하자관리 서비스를 가동합니다.</span>
+    </>
+  );
+
+  const defaultBottomText = (
+    <>
+      법무법인 플로우는 다수의 아파트, 빌라, 상가건물 하자소송에서 독보적인 실적과 실무 노하우를 보유하고 있으며, 
+      수천 건에 이르는 건설·부동산 분쟁 케이스를 분석하여 의뢰인의 소중한 주거 가치를 보호하는데 앞장서고 있습니다. 
+      여러분의 사례가 승소 사례가 될 수 있도록 조력하겠습니다.
+    </>
+  );
+
   return (
     <section className={styles.sectionWrapper}>
       <div className={styles.container}>
         
         {/* Header Block (Image 1 replica with Image 2 Text) */}
         <div className={styles.headerArea}>
-          <span className={styles.kicker}>[법무법인 플로우만의 '하자소송' 필승 전략]</span>
+          <span className={styles.kicker}>{kicker}</span>
           <h2 className={styles.mainTitle}>
-            경험의 차이가 결과의 차이를 만듭니다.<br />
-            포기하지 마세요. 플로우가 돕겠습니다.
+            {mainTitle || defaultMainTitle}
           </h2>
-          <p className={styles.descBlock}>
-            <span className={styles.descLine}>최고의 전문가들로 구성된 전문 파트너십을 기반으로, 하자진단부터 합의,</span>
-            <span className={styles.descLine}>소송 및 완벽한 사후정산에 이르기까지 국내 유일 올인원 통합하자관리 서비스를 가동합니다.</span>
-          </p>
+          <div className={styles.descBlock}>
+            {descBlock || defaultDescBlock}
+          </div>
         </div>
 
         {/* 6-Card Deep Navy Grid (Image 1 layout) */}
@@ -113,11 +145,9 @@ export default function DefectStrategyGrid() {
 
         {/* Bottom Caption Summary Block (Image 2 text footer) */}
         <div className={styles.bottomSummary}>
-          <p className={styles.summaryText}>
-            법무법인 플로우는 다수의 아파트, 빌라, 상가건물 하자소송에서 독보적인 실적과 실무 노하우를 보유하고 있으며, 
-            수천 건에 이르는 건설·부동산 분쟁 케이스를 분석하여 의뢰인의 소중한 주거 가치를 보호하는데 앞장서고 있습니다. 
-            여러분의 사례가 승소 사례가 될 수 있도록 조력하겠습니다.
-          </p>
+          <div className={styles.summaryText}>
+            {bottomText || defaultBottomText}
+          </div>
         </div>
 
       </div>

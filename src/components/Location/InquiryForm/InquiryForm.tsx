@@ -126,7 +126,7 @@ const InquiryForm = () => {
                 </span>
                 <span className={styles.headerContactDivider}>|</span>
                 <span className={styles.headerContactItem}>
-                  <span className={styles.headerContactLabel}>실시간회신</span> 24시간 상담 가능 (영업일 기준 1시간 내 회신)
+                  <span className={styles.headerContactLabel}>실시간회신</span> 24시간 상담 가능 (영업일 기준 1시간 내 회신 / 주말 방문상담 가능)
                 </span>
               </div>
             </div>

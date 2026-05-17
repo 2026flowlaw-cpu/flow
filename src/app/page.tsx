@@ -20,7 +20,7 @@ export default function Home() {
         <Stats />
         <PracticeAreas />
         <OrganicConnectivity />
-        <CustomerReviews />
+        <CustomerReviews isMain={true} />
         {/* <SuccessStories /> */}
         {/* <LawyerProfiles /> */}
         <CTA />

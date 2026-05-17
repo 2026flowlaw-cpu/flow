@@ -69,6 +69,10 @@ export default function DefectPromise({
   ];
 
   const actualCounters = counters || defaultCounters;
+  
+  const countersRef = useRef(actualCounters);
+  countersRef.current = actualCounters;
+  const countersKey = actualCounters.map(c => `${c.id}-${c.target}-${c.suffix}`).join(',');
 
   const defaultPromises: PromiseCardItem[] = [
     {
@@ -100,7 +104,7 @@ export default function DefectPromise({
   const actualPromises = promises || defaultPromises;
 
   useEffect(() => {
-    setCounts(actualCounters.map(() => 0));
+    setCounts(countersRef.current.map(() => 0));
     animatedRef.current = false;
 
     const startAnimation = () => {
@@ -119,12 +123,12 @@ export default function DefectPromise({
         const easeProgress = progress * (2 - progress);
 
         setCounts(
-          actualCounters.map(c => Math.floor(easeProgress * c.target))
+          countersRef.current.map(c => Math.floor(easeProgress * c.target))
         );
 
         if (frame >= totalFrames) {
           clearInterval(timer);
-          setCounts(actualCounters.map(c => c.target));
+          setCounts(countersRef.current.map(c => c.target));
         }
       }, frameRate);
     };
@@ -145,7 +149,7 @@ export default function DefectPromise({
     return () => {
       observer.disconnect();
     };
-  }, [actualCounters]);
+  }, [countersKey]);
 
   const getIcon = (type?: string) => {
     switch (type) {

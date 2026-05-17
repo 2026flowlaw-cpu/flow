@@ -333,7 +333,7 @@ const centerData: Record<string, {
         desc: '합의 전문 인력과 형사전문변호사가 직접 피해자 측과 조율하여, 과도한 합의금 요구를 방지하고 처벌불원서 확보 및 형사 공탁 절차를 완벽히 대리합니다.'
       }
     ],
-    casesKicker: '현재 어떤상황에 처해 계신가요?',
+    casesKicker: '현재 어떤 상황에 처해 계신가요?',
     casesTitle: '음주·교통 사건, 상황마다 전략이 다릅니다.',
     casesDescLines: [],
     difficultyTitle: '',
@@ -404,8 +404,8 @@ const centerData: Record<string, {
       }
     ],
     reviewsKicker: '실제 해결 사례',
-    reviewsTitle: '유사 사건 대응 사례를 직접 확인해보세요',
-    reviewsDesc: '음주운전 초범부터 음주측정 거부·뺑소니까지,\n다양한 음주·교통 사건에서 의뢰인의 편에 섰습니다.'
+    reviewsTitle: '다양한 음주·교통 사건 해결 경험을 보유하고 있습니다',
+    reviewsDesc: '음주운전 3진 아웃부터 뺑소니, 인명 사고까지, 위기에 처한 의뢰인의 일상을 지키기 위해 노력해왔습니다.'
   },
   'drugs': {
     title: '마약',

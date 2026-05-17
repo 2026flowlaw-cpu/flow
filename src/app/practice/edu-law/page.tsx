@@ -282,7 +282,53 @@ export default function EduLawPage() {
         />
 
         {/* 4.6. Real Client Testimonial Reviews (Interactive filter grid) */}
-        <DefectReviews />
+        <DefectReviews 
+          kicker="REAL CLIENT REVIEWS"
+          mainTitle='"의뢰인이 직접 작성한 법무법인 플로우 생생한 후기"'
+          descText={
+            <>
+              학원 노무 분쟁부터 지식재산권 보호, 행정처분 대응까지 변호사단이 <br />
+              원장님과 강사님의 곁에서 권익을 철저히 지켜낸 생생한 목소리입니다.
+            </>
+          }
+          items={[
+            {
+              id: 1,
+              content: '개원은 이번이 처음이라 위반사항 있을까봐 걱정했는데 학원전문변호사님 컨설팅으로 걱정 덜었습니다. 계약서 자문건도 조만간 받아보려고요!',
+              clientType: '학원 신규 개원 원장',
+              location: '서울 강남구 수학전문학원',
+              initial: '최'
+            },
+            {
+              id: 2,
+              content: '부당해고 주장하는 강사 진정때문에 정말 힘들고 막막했는데 변호사님이 소명 자료를 꼼꼼히 준비해 주신 덕분에 무사히 넘겼습니다. 전문가가 괜히 있는게 아니더라고요.',
+              clientType: '학원 운영 대표 원장',
+              location: '서울 서초구 영어어학원',
+              initial: '김'
+            },
+            {
+              id: 3,
+              content: '주말도 일했고, 원장님이 시키는 건 다했는데 퇴직금 못받았어요. 항의도 해보고 읍소해도 안됐는데 변호사님 선임해 내용증명 발송하자마자 퇴직금 입금했네요. 변호사님 만난게 행운이에요.',
+              clientType: '비율제 전임 강사',
+              location: '경기 분당구 국어단과학원',
+              initial: '이'
+            },
+            {
+              id: 4,
+              content: '강사 이직 문제로 감정이 격해져서 무조건 소송하겠다고 고집 피웠는데, 변호사님이 냉정하게 실익을 따져주셨어요. 소송 기간이랑 비용 생각해서 가장 유리한 조건으로 합의를 이끌어내 주셨고, 덕분에 학원 운영에 지장 없이 깔끔하게 마무리했습니다.',
+              clientType: '학원 경영 대표이사',
+              location: '대구 수성구 대형 종합학원',
+              initial: '박'
+            },
+            {
+              id: 5,
+              content: '저희 학원 교재를 그대로 베껴 쓰고 허위 사실을 퍼뜨려 운영을 방해하던 경쟁 학원 때문에 잠도 못 잤어요. 그런데 변호사님이 저작권법 위반이랑 업무방해로 형사 고소 강력하게 진행해 주신 덕분에 사과도 받고 손해배상금도 받았습니다.',
+              clientType: '학원 콘텐츠 개발 원장',
+              location: '부산 해운대구 입시전문학원',
+              initial: '정'
+            }
+          ]}
+        />
 
         {/* 4.8. Frequently Asked Questions (Image 1 Accordion FAQ) */}
         <DefectFaq 

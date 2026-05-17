@@ -204,7 +204,9 @@ export default function JeonseFraudPage() {
         />
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
-        <VerdictSection />
+        <VerdictSection 
+          descText="포기하려 했던 보증금, 법무법인 플로우 함께라면 가능합니다."
+        />
 
 
 

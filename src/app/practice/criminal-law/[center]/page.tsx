@@ -1108,7 +1108,7 @@ export default function CriminalCenterPage() {
                 </div>
                 <h1 className={styles.heroMainTitle} style={{ fontSize: '42px', lineHeight: '1.4', marginBottom: '24px' }}>
                   {data.heroTitleLine1}<br />
-                  <span style={{ color: centerKey === 'dui-traffic' ? '#ef4444' : undefined }}>{data.heroTitleLine2}</span>
+                  <span style={{ color: centerKey === 'dui-traffic' ? '#c5a059' : undefined }}>{data.heroTitleLine2}</span>
                 </h1>
                 <div className={styles.heroDescription} style={{ fontSize: '18px', lineHeight: '1.8', color: '#cbd5e1' }}>
                   {data.heroDescLines.map((line, idx) => (

@@ -37,10 +37,10 @@
 }
 
 .descText {
-  font-size: 15.5px;
+  font-size: 18.5px; /* Scaled up from 15.5px */
   color: #475569;
   line-height: 1.8;
-  font-weight: 400500;
+  font-weight: 500; /* Fixed typo from 400500 */
   margin: 0;
   word-break: keep-all;
 }
@@ -65,7 +65,7 @@
 
 .carouselTrack {
   display: flex;
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
 }
 
@@ -74,7 +74,7 @@
   width: 33.333%;
   box-sizing: border-box;
   padding: 0 18px; /* Elegant spacing between cards */
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.45s cubic-bezier(0.25, 1, 0.5, 1);
   opacity: 0.45; /* Lowered opacity for flanking side cards */
   transform: scale(0.9); /* Shrunk scale for 3D focus effect */
   will-change: transform, opacity;

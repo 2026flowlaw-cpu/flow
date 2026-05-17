@@ -39,10 +39,10 @@
 }
 
 .descText {
-  font-size: 15.5px;
+  font-size: 18.5px; /* Scaled up from 15.5px */
   color: #475569;
   line-height: 1.8;
-  font-weight: 400500;
+  font-weight: 500; /* Fixed typo from 400500 */
   margin: 0;
   word-break: keep-all;
 }

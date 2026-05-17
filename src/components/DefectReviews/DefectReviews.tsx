@@ -14,9 +14,8 @@ interface ReviewItem {
 export default function DefectReviews() {
   const [trackIndex, setTrackIndex] = useState(2);
   const [isTransitioning, setIsTransitioning] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isSliding, setIsSliding] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const autoPlayTimer = useRef<NodeJS.Timeout | null>(null);
 
   const reviews: ReviewItem[] = [
     {
@@ -66,11 +65,19 @@ export default function DefectReviews() {
   ];
 
   const handlePrev = () => {
-    setTrackIndex((prev) => prev - 1);
+    setIsSliding((sliding) => {
+      if (sliding) return sliding;
+      setTrackIndex((prev) => prev - 1);
+      return true;
+    });
   };
 
   const handleNext = () => {
-    setTrackIndex((prev) => prev + 1);
+    setIsSliding((sliding) => {
+      if (sliding) return sliding;
+      setTrackIndex((prev) => prev + 1);
+      return true;
+    });
   };
 
   const handleTransitionEnd = () => {
@@ -81,6 +88,7 @@ export default function DefectReviews() {
       setIsTransitioning(false);
       setTrackIndex(6);
     }
+    setIsSliding(false);
   };
 
   // Re-enable transitioning class smoothly on next frame
@@ -105,20 +113,17 @@ export default function DefectReviews() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Auto-play effect
+  // Safe and clean Autoplay interval (runs once, never pauses on hover)
   useEffect(() => {
-    if (!isPaused) {
-      autoPlayTimer.current = setInterval(() => {
-        handleNext();
-      }, 5000); // Auto slide every 5 seconds
-    }
-
-    return () => {
-      if (autoPlayTimer.current) {
-        clearInterval(autoPlayTimer.current);
-      }
-    };
-  }, [isPaused]);
+    const timer = setInterval(() => {
+      setIsSliding((sliding) => {
+        if (sliding) return sliding;
+        setTrackIndex((prev) => prev + 1);
+        return true;
+      });
+    }, 5000); // Autoplay slide every 5 seconds
+    return () => clearInterval(timer);
+  }, []);
 
   // Dynamic calculation of horizontal translate offset
   const translation = isMobile
@@ -143,11 +148,7 @@ export default function DefectReviews() {
         </div>
 
         {/* Carousel Slider Outer Wrapper */}
-        <div 
-          className={styles.carouselContainer}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
+        <div className={styles.carouselContainer}>
           {/* Navigation Prev Button */}
           <button className={`${styles.navBtn} ${styles.prevBtn}`} onClick={handlePrev} aria-label="Previous review">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -161,7 +162,7 @@ export default function DefectReviews() {
               className={styles.carouselTrack}
               style={{ 
                 transform: `translateX(${translation})`,
-                transition: isTransitioning ? 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)' : 'none'
+                transition: isTransitioning ? 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)' : 'none'
               }}
               onTransitionEnd={handleTransitionEnd}
             >
@@ -215,7 +216,23 @@ export default function DefectReviews() {
           </button>
         </div>
 
-
+        {/* Premium Navigation Dots */}
+        <div className={styles.paginationDots}>
+          {reviews.map((_, i) => (
+            <button
+              key={i}
+              className={`${styles.dot} ${activeDotIndex === i ? styles.activeDot : ''}`}
+              onClick={() => {
+                setIsSliding((sliding) => {
+                  if (sliding) return sliding;
+                  setTrackIndex(i + 2);
+                  return true;
+                });
+              }}
+              aria-label={`Go to review slide ${i + 1}`}
+            />
+          ))}
+        </div>
 
       </div>
     </section>

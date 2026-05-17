@@ -35,13 +35,13 @@
 .suffix {
   font-size: 24px;
   margin-left: 4px;
-  font-weight: 400500;
+  font-weight: 500; /* Fixed typo */
 }
 
 .label {
-  font-size: 16px;
-  font-weight: 400500;
-  opacity: 0.7;
+  font-size: 18px; /* Scaled up from 16px */
+  font-weight: 500; /* Fixed typo */
+  opacity: 0.85; /* Increased contrast slightly */
   letter-spacing: 1px;
   margin: 0;
 }

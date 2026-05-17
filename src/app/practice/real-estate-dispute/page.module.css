@@ -19,11 +19,10 @@
     HERO SECTION
    ==================================================== */
 .heroSection {
-  background: linear-gradient(135deg, #FFFDF5 0%, #FEF9E7 100%);
-  padding: 180px 0 140px 0;
+  background: linear-gradient(135deg, #0A1B39 0%, #162a52 100%);
+  padding: 200px 0 160px 0;
   position: relative;
   overflow: hidden;
-  border-bottom: 1px solid #EAE0C5;
 }
 
 /* Decorative backdrop lights */
@@ -34,7 +33,7 @@
   left: -10%;
   width: 50%;
   height: 50%;
-  background: radial-gradient(circle, rgba(197, 160, 89, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -64,12 +63,12 @@
 }
 
 .heroMainTitle {
-  font-size: 54px;
-  font-weight: 700;
-  color: #0A1B39;
+  font-size: 58px;
+  font-weight: 600;
+  color: #ffffff;
   margin: 0 0 28px 0;
   line-height: 1.35;
-  letter-spacing: -2.5px;
+  letter-spacing: -2px;
   word-break: keep-all;
 }
 
@@ -80,27 +79,27 @@
 .heroSubtitles {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 0px;
+  gap: 12px;
+  margin-bottom: 35px;
   align-items: center;
 }
 
 .titleSub1 {
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 600;
-  color: #1e293b;
+  color: #C5A059;
   display: block;
-  line-height: 1.5;
+  line-height: 1.45;
   letter-spacing: -0.5px;
   word-break: keep-all;
 }
 
 .titleSub2 {
-  font-size: 18px;
-  font-weight: 500;
-  color: #475569;
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
   display: block;
-  line-height: 1.5;
+  line-height: 1.45;
   letter-spacing: -0.3px;
   word-break: keep-all;
 }

@@ -75,7 +75,8 @@ export default function RealEstateDisputePage() {
               
               <div className={styles.heroLeft}>
                 <h1 className={styles.heroMainTitle}>
-                  부동산 분쟁, 법리만으로는 부족합니다
+                  부동산 분쟁,<br />
+                  <span className={styles.goldHighlight}>법리만으로는</span> 부족합니다
                 </h1>
                 <div className={styles.heroSubtitles}>
                   <span className={styles.titleSub1}>수많은 이해관계와 복잡한 권리관계... 부동산소송은 단순하지 않습니다.</span>
@@ -88,7 +89,39 @@ export default function RealEstateDisputePage() {
         </section>
 
         {/* 2. Strengths & Promises (Hexagon & Count-up Section) */}
-        <DefectPromise />
+        <DefectPromise 
+          sectionSubtitle="부동산 분쟁 해결의 핵심은 정밀한 분석과 압도적인 맨파워입니다. 플로우 부동산 TF팀은 갈등의 본질과 권리관계의 실체를 정확히 파악하여 의뢰인의 소중한 재산을 견고하게 지킵니다."
+          counters={[
+            {
+              id: 0,
+              target: 3000,
+              suffix: '건+',
+              title: '부동산 분쟁 수행 및 자문 건수',
+              desc: '소송, 조정, 합의를 아우르는 풍부한 자문 및 소송 수행 실적'
+            },
+            {
+              id: 1,
+              target: 25,
+              suffix: '년+',
+              title: '부동산 전문 TF팀',
+              desc: '변호사, 세무사, 공인중개사가 유기적으로 결합된 완벽한 솔루션'
+            },
+            {
+              id: 2,
+              target: 100,
+              suffix: '%',
+              title: '현장 중심의 정밀 분석',
+              desc: '실제 현장을 직접 확인하고 입체적 분석을 기반으로 실질적인 해결책을 제시합니다.'
+            },
+            {
+              id: 3,
+              target: 3,
+              suffix: '대 핵심 전략',
+              title: '입체적 분쟁 솔루션',
+              desc: '말이 통하는 전문가단이 예기치 못한 모든 변수까지 완벽하게 대비합니다.'
+            }
+          ]}
+        />
 
         {/* 2.5. Specialized Defect Cases Pill Grid (Image 1 layout) */}
         <DefectCasesGrid />

@@ -5,6 +5,7 @@ import ClassActionSuccess from '@/components/ClassActionSuccess/ClassActionSucce
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import DefectPromise from '@/components/DefectPromise/DefectPromise';
 import DefectCasesGrid from '@/components/DefectCasesGrid/DefectCasesGrid';
+import VerdictSection from '@/components/VerdictSection/VerdictSection';
 import styles from './page.module.css';
 
 interface DefectCaseItem {
@@ -96,6 +97,9 @@ export default function DefectLitigationPage() {
 
         {/* 2.5. Specialized Defect Cases Pill Grid (Image 1 layout) */}
         <DefectCasesGrid />
+
+        {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
+        <VerdictSection />
 
         {/* 3. Success Stories Carousel */}
         <ClassActionSuccess />

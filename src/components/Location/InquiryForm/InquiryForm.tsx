@@ -7,6 +7,7 @@ import styles from './InquiryForm.module.css';
 const InquiryForm = () => {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [showDetails, setShowDetails] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -41,7 +42,7 @@ const InquiryForm = () => {
       const fullDetails = [
         `[이메일 주소] ${formData.email || '미기재'}`,
         `[부동산 명칭/위치] ${formData.location || '미기재'}`,
-        `[희망 상담 시간] ${formData.availableTime || '미기재'}`,
+        `[연락 가능 시간] ${formData.availableTime || '미기재'}`,
         formData.details ? `\n[상세 내용]\n${formData.details}` : ''
       ].filter(Boolean).join('\n');
 
@@ -55,7 +56,7 @@ const InquiryForm = () => {
         }]);
 
       if (error) throw error;
-      alert('상담 신청이 완료되었습니다. 플로우 집단소송 TF팀에서 신속하게 검토 후 회신해 드리겠습니다.');
+      alert('상담 신청이 완료되었습니다. 플로우 전담 TF팀에서 신속하게 검토 후 회신해 드리겠습니다.');
       setFormData({
         name: '',
         phone: '',
@@ -91,14 +92,14 @@ const InquiryForm = () => {
   };
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id="inquiry">
       <div className={styles.container}>
         
-        {/* Top Kicker Label Info */}
+        {/* Top Header Text (Left side of the user's screenshot) */}
         <div className={styles.topBannerText}>
-          <div className={styles.topInfoTag}>집단소송, 24시간 비대면 간편 상담 접수!</div>
-          <h3 className={styles.topInfoTitle}>결과가 증명하는 연대의 힘! 지금 바로 문의하세요</h3>
-          <p className={styles.topInfoDesc}>집단소송 전담 TF팀이 검토하여 신속하게 회신하여 드립니다.</p>
+          <div className={styles.topInfoTag}>법무법인 플로우 상담신청</div>
+          <h3 className={styles.topInfoTitle}>문의내용 남겨주시면 검토 후 02-517-8300으로 회신드립니다.</h3>
+          <p className={styles.topInfoDesc}>(※ 24시간 상담 가능 / 영업일 기준 1시간 내 회신 / 주말 방문상담 가능)</p>
         </div>
 
         {/* Brand Background Heading Board */}
@@ -183,10 +184,10 @@ const InquiryForm = () => {
                 />
               </div>
 
-              {/* Row 3: 사건 유형 & 부동산 명칭/위치 */}
+              {/* Row 3: 건 유형 & 부동산 명칭/위치 */}
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
-                  <label className={styles.formLabel}>사건 유형</label>
+                  <label className={styles.formLabel}>건 유형</label>
                   <select 
                     name="caseType" 
                     value={formData.caseType} 
@@ -194,12 +195,15 @@ const InquiryForm = () => {
                     className={styles.select}
                   >
                     <option value="">사건 유형을 선택하세요</option>
-                    <option value="아파트 하자소송">아파트 하자소송</option>
-                    <option value="건설 분쟁/자문">건설 분쟁/자문</option>
-                    <option value="민사/상사 전담">민사/상사 전담</option>
-                    <option value="재개발/재건축">재개발/재건축</option>
+                    <option value="하자소송">하자소송</option>
+                    <option value="건설분쟁">건설분쟁</option>
                     <option value="부동산 분쟁">부동산 분쟁</option>
-                    <option value="분양계약 해제">분양계약 해제</option>
+                    <option value="재분양/계약해제">재분양/계약해제</option>
+                    <option value="집단소송">집단소송</option>
+                    <option value="전세사기">전세사기</option>
+                    <option value="교육법률">교육법률</option>
+                    <option value="형사전문">형사전문</option>
+                    <option value="일반민사">일반민사</option>
                     <option value="기타">기타</option>
                   </select>
                 </div>
@@ -234,7 +238,7 @@ const InquiryForm = () => {
               {/* Row 5: 희망 상담 시간 & 파일첨부 */}
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
-                  <label className={styles.formLabel}>희망 상담 시간 (연락 가능 시간)</label>
+                  <label className={styles.formLabel}>연락 가능 시간</label>
                   <input 
                     type="text" 
                     name="availableTime" 
@@ -263,19 +267,46 @@ const InquiryForm = () => {
                 </div>
               </div>
 
-              {/* Row 6: 개인정보 동의 체크박스 */}
-              <div className={styles.consentRow}>
-                <input 
-                  type="checkbox" 
-                  id="agree" 
-                  checked={formData.agree} 
-                  onChange={handleCheckboxChange} 
-                  className={styles.checkbox} 
-                />
-                <label htmlFor="agree" className={styles.checkboxLabel}>
-                  개인정보 수집 및 이용동의 <span className={styles.req}>*</span> 
-                  <span className={styles.viewDetailsBtn}> [자세히 보기]</span>
-                </label>
+              {/* Row 6: 개인정보 동의 체크박스 & 자세히 보기 */}
+              <div className={styles.consentContainer}>
+                <div className={styles.consentRow}>
+                  <input 
+                    type="checkbox" 
+                    id="agree" 
+                    checked={formData.agree} 
+                    onChange={handleCheckboxChange} 
+                    className={styles.checkbox} 
+                  />
+                  <label htmlFor="agree" className={styles.checkboxLabel}>
+                    개인정보 수집 및 이용동의 <span className={styles.req}>*</span> 
+                  </label>
+                  <button 
+                    type="button" 
+                    className={styles.viewDetailsBtn}
+                    onClick={() => setShowDetails(!showDetails)}
+                  >
+                    [자세히 보기]
+                  </button>
+                </div>
+                
+                {/* Dynamically Toggled Inline Privacy Details Box */}
+                {showDetails && (
+                  <div className={styles.privacyDetailsBox}>
+                    <h5>개인정보 수집 및 이용동의서</h5>
+                    <p>
+                      <strong>1. 개인정보 수집 목적:</strong> 법률 상담 신청 건에 대한 검토, 고객 응대, 사실관계 파악 및 법적 해법 제안 관련 안내 연락.<br />
+                      <strong>2. 수집하는 개인정보 항목:</strong> 성함, 연락처, 이메일 주소, 사건 유형, 부동산 정보, 문의 상세 내용 및 첨부파일.<br />
+                      <strong>3. 개인정보의 보유 및 이용기간:</strong> 원칙적으로 개인정보 수집 및 이용목적이 달성된 후(상담 종결 시) 즉시 파기합니다. 단, 관계법령의 규정에 의하여 보존할 필요가 있는 경우 관련 법령에 따라 보관합니다.
+                    </p>
+                    <button 
+                      type="button" 
+                      onClick={() => setShowDetails(false)}
+                      className={styles.closeDetailsBtn}
+                    >
+                      닫기
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Submit button inside form card */}
@@ -317,7 +348,7 @@ const InquiryForm = () => {
                 <div className={styles.infoText}>
                   <span className={styles.infoLabel}>OFFICE ADDRESS</span>
                   <strong className={styles.infoVal}>
-                    서울특별시 강남구 영동대로 617, 6~8층 (삼성동, 찬이빌딩)
+                    서울특별시 서초구 서초대로 314 법조타워 12층
                   </strong>
                 </div>
               </div>

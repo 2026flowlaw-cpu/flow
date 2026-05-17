@@ -5,7 +5,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import Stats from '@/components/Stats/Stats';
 import PainPoints from '@/components/PainPoints/PainPoints';
-import SuccessStories from '@/components/SuccessStories/SuccessStories';
+import ClassActionSuccess from '@/components/ClassActionSuccess/ClassActionSuccess';
 import FAQ from '@/components/FAQ/FAQ';
 import ClassActionStrength from '@/components/ClassActionStrength/ClassActionStrength';
 import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
@@ -73,8 +73,8 @@ export default function ClassActionPage() {
         {/* 2. 케이스 */}
         <PracticeCases />
 
-        {/* 3. 성공사례(판결문) */}
-        <SuccessStories />
+        {/* 3. 성공사례(판결문 롤링 카루셀) */}
+        <ClassActionSuccess />
 
         {/* 4. FAQ */}
         <FAQ />

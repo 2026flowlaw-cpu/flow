@@ -1,0 +1,294 @@
+.section {
+  padding: 120px 0;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* ====================================================
+    LEFT COLUMN - 집단소송 주요 수행사례 리스트
+   ==================================================== */
+.leftCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  margin-bottom: 35px;
+}
+
+.kicker, .carouselKicker {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  color: #C5A059; /* Brand warm gold */
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.title, .carouselTitle {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0A1B39; /* Deep Navy */
+  margin: 0 0 15px 0;
+  letter-spacing: -0.8px;
+}
+
+.subtitle, .carouselSubtitle {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+  word-break: keep-all;
+}
+
+.caseListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.caseRow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 20px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.caseRow:hover {
+  transform: translateX(6px);
+  border-color: #C5A059;
+  background: linear-gradient(135deg, #ffffff 0%, #fdfbf7 100%);
+  box-shadow: 0 8px 25px rgba(197, 160, 89, 0.05);
+}
+
+.caseTag {
+  font-size: 11px;
+  font-weight: 800;
+  color: #C5A059;
+  background: rgba(197, 160, 89, 0.08);
+  border: 1px solid rgba(197, 160, 89, 0.15);
+  padding: 4px 8px;
+  border-radius: 6px;
+  min-width: 85px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.caseInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.caseTitle {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #0A1B39;
+  letter-spacing: -0.3px;
+}
+
+.caseCourt {
+  font-size: 12.5px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* ====================================================
+    RIGHT COLUMN - 성공사례 판결문 롤링 카루셀
+   ==================================================== */
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.carouselHeader {
+  margin-bottom: 35px;
+}
+
+.marqueeWrapper {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, white 8%, white 92%, transparent);
+  padding: 15px 0 25px 0;
+  position: relative;
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: scroll 30s linear infinite;
+}
+
+/* Pause scroll animation on Hover */
+.marqueeWrapper:hover .marqueeTrack {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Moves exactly half the track for perfect seamless scrolling */
+  }
+}
+
+.documentCard {
+  width: 320px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 15px 35px rgba(10, 27, 57, 0.03);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.documentCard:hover {
+  transform: translateY(-5px);
+  border-color: #C5A059;
+  box-shadow: 0 20px 40px rgba(197, 160, 89, 0.08);
+}
+
+.docHeader {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 12px;
+  margin-bottom: 15px;
+}
+
+.docCourt {
+  font-size: 13px;
+  font-weight: 800;
+  color: #0A1B39;
+}
+
+.docSub {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.docBody {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.docLine {
+  font-size: 12px;
+  color: #475569;
+  font-weight: 500;
+}
+
+.docLabel {
+  color: #94a3b8;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.docDivider {
+  height: 1px;
+  background-color: #f1f5f9;
+  margin: 10px 0;
+}
+
+.docLineBold {
+  font-size: 13px;
+  font-weight: 800;
+  color: #0A1B39;
+  margin-bottom: 4px;
+}
+
+.docOrderText {
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0;
+  white-space: pre-line;
+}
+
+/* Premium Red Stamp Overlay */
+.stamp {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  border: 3.5px solid #dc2626; /* Deep stamp red */
+  padding: 8px 12px;
+  border-radius: 8px;
+  transform: rotate(-12deg);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.1);
+  pointer-events: none;
+}
+
+.stampInner {
+  font-size: 13px;
+  font-weight: 800;
+  color: #dc2626;
+  text-align: center;
+  line-height: 1.3;
+  white-space: pre-line;
+  letter-spacing: -0.2px;
+}
+
+.rollingNotice {
+  text-align: center;
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+/* ====================================================
+    RESPONSIVE MEDIA QUERIES
+   ==================================================== */
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 20px;
+  }
+  
+  .title, .carouselTitle {
+    font-size: 26px;
+  }
+  
+  .documentCard {
+    width: 290px;
+    padding: 20px;
+  }
+  
+  .caseRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .caseTag {
+    min-width: 70px;
+  }
+}

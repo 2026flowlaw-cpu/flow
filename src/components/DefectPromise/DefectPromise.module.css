@@ -120,14 +120,18 @@
 }
 
 .promiseGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
   position: relative;
   z-index: 3;
 }
 
 .promiseCard {
+  flex: 1;
+  min-width: 260px;
+  max-width: 340px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -202,22 +206,12 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-  
-  .promiseGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-  }
 }
 
 @media (max-width: 640px) {
   .metricsGrid {
     grid-template-columns: 1fr;
     gap: 20px;
-  }
-  
-  .promiseGrid {
-    grid-template-columns: 1fr;
-    gap: 45px;
   }
   
   .sectionTitle {

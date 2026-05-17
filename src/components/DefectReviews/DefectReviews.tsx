@@ -151,11 +151,20 @@ export default function DefectReviews({
           <span className={styles.kicker}>{kicker}</span>
           <h2 className={styles.mainTitle}>{mainTitle}</h2>
           <div className={styles.descText}>
-            {descText || (
-              <>
-                어려운 하자 분쟁의 고비마다 변호사와 기술진이 한 몸으로 뛰며 <br />
-                의뢰인의 소중한 권리와 안전한 보수 결과를 지켜낸 진짜 이야기입니다.
-              </>
+            {typeof descText === 'string' ? (
+              descText.split('\n').map((line, i) => (
+                <React.Fragment key={i}>
+                  {line}
+                  {i < descText.split('\n').length - 1 && <br />}
+                </React.Fragment>
+              ))
+            ) : (
+              descText || (
+                <>
+                  어려운 하자 분쟁의 고비마다 변호사와 기술진이 한 몸으로 뛰며 <br />
+                  의뢰인의 소중한 권리와 안전한 보수 결과를 지켜낸 진짜 이야기입니다.
+                </>
+              )
             )}
           </div>
         </div>

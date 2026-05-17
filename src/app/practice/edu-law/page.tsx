@@ -52,17 +52,17 @@ export default function EduLawPage() {
             },
             {
               id: 1,
-              target: 1,
-              suffix: '개 전문센터',
-              title: '에듀법률센터 별도 운영',
-              desc: '학원 행정 및 분쟁 해결만을 위해 조직된 전문 브랜드'
+              target: 100,
+              suffix: '% 에듀 특화',
+              title: '플로우 에듀법률센터',
+              desc: '학원 행정 및 분쟁 해결만을 위해 조직된 로펌 최초 전문 브랜드'
             },
             {
               id: 2,
-              target: 1,
-              suffix: '팀 전담 가동',
-              title: '학원분쟁 전담 TF팀 조직',
-              desc: '법률 분석팀과 노무 연계 시스템이 상시 연대하여 신속 방어'
+              target: 24,
+              suffix: '시간 긴급 대응',
+              title: '학원분쟁 전담 TF팀',
+              desc: '강사 무단퇴사, 경업위반, 교육청 점검 등 긴급 상황 즉각 대응'
             },
             {
               id: 3,

@@ -185,7 +185,53 @@ export default function ConstructionDisputePage() {
         />
 
         {/* 4.6. Real Client Testimonial Reviews (Interactive filter grid) */}
-        <DefectReviews />
+        <DefectReviews 
+          kicker="CONSTRUCTION CLIENT REVIEWS"
+          mainTitle='"의뢰인이 직접 작성한 법무법인 플로우 생생한 후기"'
+          descText={(
+            <>
+              어려운 건설 분쟁의 고비마다 변호사와 기술진이 한 몸으로 뛰며 <br />
+              의뢰인의 소중한 권리와 공사대금을 지켜낸 진짜 이야기입니다.
+            </>
+          )}
+          items={[
+            {
+              id: 1,
+              content: '공사 중간에 설계 계속 바꿔놓고 나중엔 계약서 타령하며 추가공사비 못 준다던 건축주 때문에 정말 피눈물 났거든요. 그런데 변호사님이 작업 일지랑 공정 같은거 다 분석해서 조목조목 반박해주셔서 밀린 공사비 전부 받았어요. 변호사님 짱입니다!!! ㅎㅎㅎ',
+              clientType: '종합건설사 대표',
+              location: '서울 강남구 신축현장',
+              initial: '박'
+            },
+            {
+              id: 2,
+              content: '근거 없는 민원을 넣으며 방해하는 사람들 때문에 공사가 계속 지연됐었거든요.... 변호사님이 즉각적으로 \'공사방해금지 가처분\' 신청을 진행해 주셨고, 법원 결정이 빠르게 나온 덕분에 공사를 다시 안전하게 진행할 수 있게 되었습니다. 현장의 고단함을 아는 변호사님이라 그런가 역시 다르네요.',
+              clientType: '시행사 대표',
+              location: '인천 서구 개발지구',
+              initial: '최'
+            },
+            {
+              id: 3,
+              content: '건축주 사정으로 공사가 지연된 건데, 나중에 저한테 지체상금을 물리겠다고 협박하더라고요. 억울해서 잠도 못 잤는데, 변호사님이 공정표랑 회의록 다 분석해서 지체상금 면책 사유를 완벽하게 입증해 주셨습니다. 엄지척드립니다!!!',
+              clientType: '골조공사 전문업체 대표',
+              location: '경기 화성 공용부지',
+              initial: '정'
+            },
+            {
+              id: 4,
+              content: '카페 오픈 일정 맞춰서 계약했는데, 인테리어 업체가 철거만 해놓고 추가공사비 요구하며 버티더라구요... 진짜 눈앞이 캄캄했는데 변호사님 나서자마자 계약해지에 계약금 반환까지 일사천리였습니다. 한번도 말씀 못드렸는데 정말 감사합니다... ㅠㅠ',
+              clientType: '상가 수분양자 (인테리어 분쟁)',
+              location: '부산 수영구 카페거리',
+              initial: '이'
+            },
+            {
+              id: 5,
+              content: '부실시공 하자 때문에 업체랑 6개월째 실랑이 했는데 하자 증명해서 공사계약 해지하고 선급 공사비 일부도 돌려받았습니다. 변호사님 덕분에 더 큰 피해를 막았습니다.',
+              clientType: '단독주택 건축주',
+              location: '경기 용인 타운하우스',
+              initial: '김'
+            }
+          ]}
+        />
 
         {/* 4.8. Frequently Asked Questions (Image 1 Accordion FAQ) */}
         <DefectFaq />

@@ -111,9 +111,6 @@ const InquiryForm = () => {
             <div className={styles.headerTextColFull}>
               <span className={styles.kicker}>PROFESSIONAL LEGAL SHIELD</span>
               <h2 className={styles.title}>신속한 법률 지원, 변호사와 바로 연결됩니다.</h2>
-              <p className={styles.subtitle}>
-                하자소송의 정밀한 분석부터 전략적 대응까지, 법무법인 플로우가 귀하의 권리를 단단하게 보호합니다.
-              </p>
               
               {/* Clean, premium horizontal contact links inside the blue board */}
               <div className={styles.headerContactRow}>

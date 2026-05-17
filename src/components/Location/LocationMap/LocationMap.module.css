@@ -127,6 +127,65 @@
   margin-right: 8px;
 }
 
+.phone {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-top: 10px;
+}
+
+.transportHeader {
+  margin-top: 10px;
+}
+
+/* Seoul Subway Signature Colors */
+.subwayLine9 {
+  color: #c9a92e; /* Line 9 Gold */
+  font-weight: 800;
+  margin-right: 8px;
+}
+
+.subwayLine7 {
+  color: #8da427; /* Line 7 Olive Green */
+  font-weight: 800;
+  margin-right: 8px;
+}
+
+.subwayLine2 {
+  color: #2fb827; /* Line 2 Green */
+  font-weight: 800;
+  margin-right: 8px;
+}
+
+/* Seoul Bus Type Colors */
+.busBlue {
+  color: #3b82f6; /* Blue bus */
+  font-weight: 800;
+  margin-right: 6px;
+  background: rgba(59, 130, 246, 0.15);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.busGreen {
+  color: #10b981; /* Green bus */
+  font-weight: 800;
+  margin-right: 6px;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.busRed {
+  color: #ef4444; /* Red bus */
+  font-weight: 800;
+  margin-right: 6px;
+  background: rgba(239, 68, 68, 0.15);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
 @media (max-width: 1200px) {
   .grid {
     grid-template-columns: 1fr;
@@ -151,3 +210,4 @@
     padding: 24px;
   }
 }
+

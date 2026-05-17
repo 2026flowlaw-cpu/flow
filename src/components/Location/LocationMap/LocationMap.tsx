@@ -9,7 +9,7 @@ const LocationMap = () => {
           {/* Left: Interactive Map */}
           <div className={styles.mapWrapper}>
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.7891461937965!2d127.01188377757917!3d37.49520847201884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca13e73549221%3A0x7d6f5f308ce0f62d!2z7ISc7LSI7JetIDfcontentID!5e0!3m2!1sko!2skr!4v1712999999999!5m2!1sko!2skr" 
+              src="https://maps.google.com/maps?q=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EC%98%81%EB%8F%99%EB%8C%80%EB%A1%9C%20617&t=&z=16&ie=UTF8&iwloc=&output=embed" 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
@@ -21,20 +21,30 @@ const LocationMap = () => {
 
           {/* Right: Transportation Info */}
           <div className={styles.info}>
+            {/* By Car */}
             <div className={styles.addressBox}>
-              <span className={styles.label}>주소</span>
-              <p className={styles.address}>서울특별시 서초구 서초중앙로 125, 로이어즈타워 10층 (법무법인 플로우)</p>
+              <span className={styles.label}>🚗 차량 이용 시</span>
+              <p className={styles.address}>
+                서울특별시 강남구 영동대로 617(삼성동, 찬이빌딩) 6~8층<br />
+                <span className={styles.phone}>T. 02-517-8300</span>
+              </p>
+            </div>
+
+            {/* By Public Transport */}
+            <div className={styles.transportHeader}>
+              <span className={styles.label}>🏓 대중교통 이용 시</span>
             </div>
 
             <div className={styles.transportList}>
               {/* Subway */}
               <div className={styles.transportItem}>
-                <div className={styles.iconBox}>🚉</div>
+                <div className={styles.iconBox}>🚇</div>
                 <div className={styles.details}>
-                  <strong className={styles.trLabel}>지하철 이용 시</strong>
+                  <strong className={styles.trLabel}>지하철</strong>
                   <p>
-                    <span className={styles.line2}>2호선 서초역</span> 7번 출구 (도보 3분)<br />
-                    <span className={styles.line3}>3호선 교대역</span> 14번 출구 (도보 5분)
+                    <span className={styles.subwayLine9}>9호선 봉은사역</span> 2번출구 직진 약 1분<br />
+                    <span className={styles.subwayLine7}>7호선 청담역</span> 2번출구 직진 약 10분<br />
+                    <span className={styles.subwayLine2}>2호선 삼성역</span> 6번출구 직진 약 15분
                   </p>
                 </div>
               </div>
@@ -43,22 +53,12 @@ const LocationMap = () => {
               <div className={styles.transportItem}>
                 <div className={styles.iconBox}>🚌</div>
                 <div className={styles.details}>
-                  <strong className={styles.trLabel}>버스 이용 시</strong>
+                  <strong className={styles.trLabel}>버스 (봉은사. 삼성1파출소 앞 하차)</strong>
                   <p>
-                    <strong>서초역/교대역 정류장</strong> 하차<br />
-                    - 간선: 405, 740, N37<br />
-                    - 지선: 3012, 5413<br />
-                    - 마을: 서초03, 서초10, 서초11
+                    <span className={styles.busBlue}>간선</span> 145, 146, 301, 362, 401<br />
+                    <span className={styles.busGreen}>지선</span> 2413, 2415, 3217, 3414, 4318<br />
+                    <span className={styles.busRed}>직행</span> 9407, 9507, 9607
                   </p>
-                </div>
-              </div>
-
-              {/* Parking */}
-              <div className={styles.transportItem}>
-                <div className={styles.iconBox}>🅿️</div>
-                <div className={styles.details}>
-                  <strong className={styles.trLabel}>주차 안내</strong>
-                  <p>건물 내 기계식 주차 가능 (SUV/대형차는 인근 서초동 공영주차장 이용 권장)</p>
                 </div>
               </div>
             </div>

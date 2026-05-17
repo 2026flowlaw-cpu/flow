@@ -17,11 +17,11 @@ const Footer = () => {
           <div className={styles.footerBrand}>
             <h3 className={styles.footerLogo}>법무법인 <span className="accent-text">플로우</span></h3>
             <p className={styles.footerAddress}>
-              서울특별시 서초구 서초대로 314, 12층<br />
-              (서초동, 법조타워)<br /><br />
-              대표전화: 02-123-4567<br />
-              팩스: 02-123-4568<br />
-              이메일: contact@lawfirmilshin.com
+              서울특별시 강남구 영동대로 617, 6~8층<br />
+              (삼성동, 찬이빌딩)<br /><br />
+              대표전화: 02-517-8300<br />
+              팩스: 02-517-8301<br />
+              이메일: contact@flowlaw.co.kr
             </p>
           </div>
           <div>

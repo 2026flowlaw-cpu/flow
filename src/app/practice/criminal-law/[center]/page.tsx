@@ -46,6 +46,12 @@ const centerData: Record<string, {
   reviewsKicker: string;
   reviewsTitle: string;
   reviewsDesc: string;
+  strategies?: Array<{
+    id: number;
+    title: string;
+    desc: string;
+    iconType: 'user' | 'shield' | 'screen' | 'info';
+  }>;
 }> = {
   'sex-offense': {
     title: '성범죄',
@@ -156,7 +162,33 @@ const centerData: Record<string, {
     ],
     reviewsKicker: '실제 해결 사례',
     reviewsTitle: '다양한 성범죄 사건 해결 경험을 보유하고 있습니다',
-    reviewsDesc: '무고부터 디지털 성범죄까지, 다양한 성범죄 피의자 사건에서 의뢰인의 편에 섰습니다.'
+    reviewsDesc: '무고부터 디지털 성범죄까지, 다양한 성범죄 피의자 사건에서 의뢰인의 편에 섰습니다.',
+    strategies: [
+      {
+        id: 1,
+        title: '무고·허위 고소 반박',
+        desc: 'CCTV·통화내역·목격자 확보, 피해자 진술의 불일치 분석, 피의자 알리바이 입증을 통해 허위 고소를 체계적으로 반박합니다. 무고죄 맞고소도 병행 검토합니다.',
+        iconType: 'shield'
+      },
+      {
+        id: 2,
+        title: '수사 초기 진술 설계 시스템',
+        desc: '성범죄 사건은 첫 조사 이후 진술을 번복하기 어렵습니다. 조사 전 예상 질문, 진술 충돌 가능성, 증거 흐름까지 사전에 검토하여 대응 방향을 설계합니다.',
+        iconType: 'user'
+      },
+      {
+        id: 3,
+        title: '디지털 포렌식·증거 분석 중심 대응',
+        desc: '성범죄 사건은 진술만으로 결정되지 않습니다. CCTV, 통화내역, 위치기록, 디지털 포렌식 결과 등 객관적 자료 분석이 핵심입니다. 법무법인 플로우는 사건 초기부터 증거 확보와 진술 구조 분석을 병행합니다.',
+        iconType: 'screen'
+      },
+      {
+        id: 4,
+        title: '부수처분 최소화',
+        desc: '신상정보 등록(최대 20년), 취업제한, 위치추적 전자장치(전자발찌), 성충동 약물치료 명령 등 성범죄 특유의 부수처분을 수사·재판 단계에서 최소화합니다.',
+        iconType: 'info'
+      }
+    ]
   },
   'dui-traffic': {
     title: '음주·교통',
@@ -937,6 +969,42 @@ const centerData: Record<string, {
   }
 };
 
+function getStrategyIcon(iconType?: 'user' | 'shield' | 'screen' | 'info') {
+  switch (iconType) {
+    case 'shield':
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+      );
+    case 'screen':
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+      );
+    case 'info':
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="16" x2="12" y2="12"/>
+          <line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+      );
+    case 'user':
+    default:
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      );
+  }
+}
 
 export default function CriminalCenterPage() {
   const params = useParams();
@@ -1074,55 +1142,41 @@ export default function CriminalCenterPage() {
               의뢰인의 억울함을 풀고 일상을 되찾아 드립니다.
             </>
           }
-          strategies={[
-            {
-              id: 1,
-              title: '수사기관 출신 자문 연계',
-              desc: '경찰, 검찰 등 수사기관의 생리를 가장 잘 아는 실무진과 협력하여 수사의 방향을 예측하고 선제적으로 방어합니다.',
-              icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-              )
-            },
-            {
-              id: 2,
-              title: '형사전문변호사 1:1 전담',
-              desc: '사건 수임부터 종결까지 대한변협 등록 형사전문변호사가 직접 의뢰인과 밀착 소통하며 변론을 책임집니다.',
-              icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-              )
-            },
-            {
-              id: 3,
-              title: '디지털 증거 포렌식 대응',
-              desc: '휴대폰, PC 압수수색 시 불리한 증거가 유출되지 않도록 전문가가 동참하여 포렌식 절차의 적법성을 감시합니다.',
-              icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                  <line x1="8" y1="21" x2="16" y2="21"></line>
-                  <line x1="12" y1="17" x2="12" y2="21"></line>
-                </svg>
-              )
-            },
-            {
-              id: 4,
-              title: '안전한 합의 대행 시스템',
-              desc: '피해자와의 직접 접촉으로 인한 2차 가해 논란을 차단하고, 변호사가 전문적으로 개입하여 유리한 조건의 합의를 도출합니다.',
-              icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <line x1="12" y1="16" x2="12" y2="12"/>
-                  <line x1="12" y1="8" x2="12.01" y2="8"/>
-                </svg>
-              )
-            }
-          ]}
+          strategies={
+            data.strategies
+              ? data.strategies.map((s) => ({
+                  id: s.id,
+                  title: s.title,
+                  desc: s.desc,
+                  icon: getStrategyIcon(s.iconType)
+                }))
+              : [
+                  {
+                    id: 1,
+                    title: '수사기관 출신 자문 연계',
+                    desc: '경찰, 검찰 등 수사기관의 생리를 가장 잘 아는 실무진과 협력하여 수사의 방향을 예측하고 선제적으로 방어합니다.',
+                    icon: getStrategyIcon('user')
+                  },
+                  {
+                    id: 2,
+                    title: '형사전문변호사 1:1 전담',
+                    desc: '사건 수임부터 종결까지 대한변협 등록 형사전문변호사가 직접 의뢰인과 밀착 소통하며 변론을 책임집니다.',
+                    icon: getStrategyIcon('shield')
+                  },
+                  {
+                    id: 3,
+                    title: '디지털 증거 포렌식 대응',
+                    desc: '휴대폰, PC 압수수색 시 불리한 증거가 유출되지 않도록 전문가가 동참하여 포렌식 절차의 적법성을 감시합니다.',
+                    icon: getStrategyIcon('screen')
+                  },
+                  {
+                    id: 4,
+                    title: '안전한 합의 대행 시스템',
+                    desc: '피해자와의 직접 접촉으로 인한 2차 가해 논란을 차단하고, 변호사가 전문적으로 개입하여 유리한 조건의 합의를 도출합니다.',
+                    icon: getStrategyIcon('info')
+                  }
+                ]
+          }
           bottomText={
             <>
               법무법인 플로우 형사 전담 센터는 수많은 구속영장 기각, 무혐의, 무죄 판결을 이끌어낸 검증된 노하우를 바탕으로, 의뢰인의 인생이 걸린 절체절명의 위기에서 가장 든든한 방패가 되어드립니다.

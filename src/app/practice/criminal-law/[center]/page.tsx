@@ -89,6 +89,14 @@ const centerData: Record<string, {
   singleCardTitle?: string | null;
   singleCardEnglishTitle?: string | null;
   singleCardBadge?: string | null;
+  verdicts?: Array<{
+    id: number;
+    court: string;
+    caseNo: string;
+    plaintiff: string;
+    orderText: string;
+    stampText: string;
+  }>;
 }> = {
   'sex-offense': {
     title: '성범죄',
@@ -634,7 +642,78 @@ const centerData: Record<string, {
     reviewsDesc: '초범 투약부터 밀수까지,\n다양한 마약 사건에서 의뢰인의 편에 섰습니다.',
     verdictKicker: 'PROVEN RESULTS',
     verdictTitle: '무죄와 선처, 결코 우연이 아닙니다\n판결문이 증명하는 압도적 승소 실력',
-    verdictDesc: '수사기관의 압박과 불리한 증거 속에서도 빈틈없는 법리 구성으로 이뤄낸 쾌거.\n법무법인 플로우는 오직 결과로 말합니다.'
+    verdictDesc: '수사기관의 압박과 불리한 증거 속에서도 빈틈없는 법리 구성으로 이뤄낸 쾌거.\n법무법인 플로우는 오직 결과로 말합니다.',
+    reviews: [
+      {
+        id: 1,
+        content: '호기심에 마약을 한 번 투약했다가 적발되어 인생이 송두리째 무너지는 줄 알았습니다. 변호사님께서 치료 의지와 양형 자료를 철저히 준비해주시고 동행해주신 덕분에 기적적으로 치료조건부 기소유예를 받았습니다. 정말 감사합니다.',
+        clientType: '마약 투약·소지 기소유예 선처',
+        location: '서울',
+        initial: '김'
+      },
+      {
+        id: 2,
+        content: '모발 검사에서 양성이 나와 무척 억울하고 막막했습니다. 법무법인 플로우 변호사님들이 검체 채취 절차의 기술적인 문제점과 제가 평소 복용하던 약물과의 교차 반응 가능성을 과학적으로 명쾌하게 입증해주신 덕분에 혐의를 벗을 수 있었습니다.',
+        clientType: '모발 양성 반응 무혐의 처분',
+        location: '경기',
+        initial: '이'
+      },
+      {
+        id: 3,
+        content: '고수익 알바라는 말에 속아 단순 마약 배달을 하다 체포되어 구속될 위기였습니다. 변호사님이 압수수색 당시 영장 범위를 정확히 짚어내시고, 제가 실질적 유통 조직원이 아닌 단순 도구였음을 입증해주셔서 구속영장이 기각되고 불구속으로 선처를 받았습니다.',
+        clientType: '단순 운반책 구속영장 기각',
+        location: '인천',
+        initial: '최'
+      },
+      {
+        id: 4,
+        content: '동종 전과가 있는 상태에서 또다시 적발되어 무조건 실형을 살 것이라 확신하고 포기하고 있었습니다. 변호사님께서 끝까지 저를 믿어주시고 치료 및 재활 프로그램 참여를 밀착 코칭해주신 덕분에 기적적으로 집행유예 처분을 받아내고 새 삶을 살게 되었습니다.',
+        clientType: '마약류 관리법 위반(재범) 집행유예',
+        location: '부산',
+        initial: '박'
+      },
+      {
+        id: 5,
+        content: '해외 직구 과정에서 금지 약물이 포함되어 밀수 혐의를 받게 되었습니다. 수사기관의 강도 높은 추궁에 눈앞이 캄캄했으나, 변호사님이 고의성이 전혀 없었음을 법리적으로 명백하게 소명해주신 덕분에 벌금형 이하의 선처로 원만히 해결되었습니다.',
+        clientType: '마약 밀수 혐의 감경 선처',
+        location: '서울',
+        initial: '정'
+      }
+    ],
+    verdicts: [
+      {
+        id: 1,
+        court: '서울중앙지방법원',
+        caseNo: '2023고단4928',
+        plaintiff: '피고인 A (단순 투약 및 소지)',
+        orderText: '피고인에 대한 형의 집행을 2년간 유예한다. 보호관찰 및 약물치료 강의 수강을 명한다.',
+        stampText: '단순 투약 집행유예 선처'
+      },
+      {
+        id: 2,
+        court: '수원지방법원',
+        caseNo: '2024고합109',
+        plaintiff: '피고인 B (밀수 및 유통)',
+        orderText: '피고인을 징역 1년에 처한다. 다만 이 판결 확정일로부터 2년간 위 형의 집행을 유예한다.',
+        stampText: '대마 밀수 영장 기각 및 집유'
+      },
+      {
+        id: 3,
+        court: '인천지방검찰청',
+        caseNo: '2023형제89241',
+        plaintiff: '피의자 C (초범 투약)',
+        orderText: '피의자는 기소유예(치료조건부 및 교육이수) 처분한다.',
+        stampText: '치료조건부 기소유예'
+      },
+      {
+        id: 4,
+        court: '서울동부지방법원',
+        caseNo: '2023고단3091',
+        plaintiff: '피고인 D (재범 투약)',
+        orderText: '피고인은 무죄. 모발 검사의 오염 가능성과 절차상 하자를 인정한다.',
+        stampText: '모발 양성 모순 무죄 판결'
+      }
+    ]
   },
   'voice-phishing': {
     title: '보이스피싱',
@@ -1352,7 +1431,7 @@ export default function CriminalCenterPage() {
               </>
             )
           }
-          verdicts={[
+          verdicts={data.verdicts || [
             {
               id: 1,
               court: '서울중앙지방법원',

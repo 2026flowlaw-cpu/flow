@@ -150,28 +150,103 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  border-bottom: 1.5px solid #e2e8f0;
+  padding-bottom: 18px;
+  margin-bottom: 6px;
 }
 
 .detailBadge {
   background-color: #0A1B39;
   color: #ffffff;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 6px;
+  letter-spacing: 0.5px;
 }
 
 .detailTitle {
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 600;
   color: #0A1B39;
   margin: 0;
+  letter-spacing: -0.5px;
 }
 
-.detailContent {
+.detailGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.3fr;
+  gap: 24px;
+  margin-top: 15px;
+}
+
+.detailColCore {
+  background-color: #fffdf5; /* Sleek extremely warm premium tint */
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 4px 15px rgba(197, 160, 89, 0.02);
+}
+
+.detailColAction {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.actionBlock {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(10, 27, 57, 0.01);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.actionBlock:hover {
+  border-color: rgba(10, 27, 57, 0.15);
+  box-shadow: 0 6px 18px rgba(10, 27, 57, 0.03);
+}
+
+.detailSubHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 14.5px;
+  font-weight: 700;
+  color: #C5A059; /* Gold accent by default */
+}
+
+.detailIcon {
+  flex-shrink: 0;
+}
+
+.engHeader {
+  color: #1a56db !important; /* Corporate trust sapphire blue */
+}
+
+.lawHeader {
+  color: #C5A059 !important; /* Accent gold */
+}
+
+.detailTextCore {
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.8;
+  margin: 0;
+  word-break: keep-all;
+}
+
+.detailTextAction {
+  font-size: 13.5px;
   color: #475569;
-  line-height: 1.7;
+  line-height: 1.75;
   margin: 0;
   word-break: keep-all;
 }
@@ -199,7 +274,12 @@
   }
   
   .detailBox {
-    padding: 20px;
+    padding: 24px 20px;
+  }
+
+  .detailGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 

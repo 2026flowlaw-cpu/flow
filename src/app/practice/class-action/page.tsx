@@ -63,6 +63,9 @@ export default function ClassActionPage() {
           </div>
         </section>
 
+        {/* 강점/철학 소개 세션 (히어로 직후 배치) */}
+        <ClassActionStrength />
+
         {/* 1. 실적 카드 */}
         <Stats />
       <PainPoints />
@@ -76,8 +79,7 @@ export default function ClassActionPage() {
         {/* 4. FAQ */}
         <FAQ />
 
-        {/* 5. 회사 강점소개 */}
-        <ClassActionStrength />
+        {/* 5. 회사 강점소개 (히어로 뒤로 이동됨) */}
 
         {/* 6. 의뢰인후기 */}
         <CustomerReviews />

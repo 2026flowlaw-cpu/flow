@@ -1,119 +1,77 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './ClassActionCases.module.css';
 
 interface CaseItem {
   id: number;
   title: string;
+  countText: string;
   statusText: string;
   description: string;
 }
 
+const scrollingCases: CaseItem[] = [
+  {
+    id: 1,
+    title: '인천 ㅇㅇㅇ 지역주택조합 부당이득금반환청구',
+    countText: '412명 소제기',
+    statusText: '추가 모집중',
+    description: '지역주택조합 가입계약 취소 및 분양 납입금 부당이득 반환 청구 소송단 모집'
+  },
+  {
+    id: 2,
+    title: '천안 ㅇㅇㅇ 아파트 입주지연 분양계약해제',
+    countText: '285명 소제기',
+    statusText: '1차 마감임박',
+    description: '시공사 사정으로 인한 대규모 입주 지연 사태에 따른 분양 계약 취소 및 지연 위약금 청구'
+  },
+  {
+    id: 3,
+    title: '광주 ㅇㅇㅇ 상가 설계변경에 따른 손해배상',
+    countText: '154명 소제기',
+    statusText: '실시간 접수중',
+    description: '무단 설계 변경 및 분양 면적 감소에 따른 차액 정산 및 계약 취소 손해배상'
+  },
+  {
+    id: 4,
+    title: '평택 ㅇㅇㅇ 지식산업센터 분양계약취소 집단소송',
+    countText: '1,240명 소제기',
+    statusText: '추가 모집중',
+    description: '지식산업센터 용도 기망 및 분양 계약 위반으로 인한 계약 해제 및 대금 전액 반환 청구'
+  },
+  {
+    id: 5,
+    title: '용인 ㅇㅇㅇ 아파트 할인분양 손해배상청구',
+    countText: '980명 소제기',
+    statusText: '실시간 접수중',
+    description: '미분양 세대 무단 소급 할인 분양으로 인한 기존 수분양자 자산가치 하락 배상 청구'
+  },
+  {
+    id: 6,
+    title: '수원 ㅇㅇㅇ 재개발 아파트 등기지연 손해배상청구',
+    countText: '850명 소제기',
+    statusText: '1차 마감임박',
+    description: '재개발 조합 및 시공사 간의 공사비 갈등으로 인한 보존등기 지연 피해 손해배상 청구'
+  }
+];
+
 const ClassActionCases = () => {
-  // Live state for counts
-  const [counts, setCounts] = useState<{ [key: number]: number }>({
-    1: 412,
-    2: 285,
-    3: 154
+  // Live toggle states inside marquee cards
+  const [toggleStates, setToggleStates] = useState<{ [key: string]: boolean }>({
+    '1-orig': true, '1-dup': true,
+    '2-orig': true, '2-dup': true,
+    '3-orig': true, '3-dup': true,
+    '4-orig': true, '4-dup': true,
+    '5-orig': true, '5-dup': true,
+    '6-orig': true, '6-dup': true
   });
 
-  // State to trigger numeric glow pop animation when a number ticks up
-  const [incrementActive, setIncrementActive] = useState<{ [key: number]: boolean }>({
-    1: false,
-    2: false,
-    3: false
-  });
-
-  // Live toggle state for high-fidelity interactive feel
-  const [toggleStates, setToggleStates] = useState<{ [key: number]: boolean }>({
-    1: true,
-    2: true,
-    3: true
-  });
-
-  const handleToggle = (id: number) => {
+  const handleToggle = (key: string, e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card bubbling
     setToggleStates((prev) => ({
       ...prev,
-      [id]: !prev[id]
+      [key]: !prev[key]
     }));
   };
-
-  // 1. Mount animation count-up
-  useEffect(() => {
-    // Start count slightly lower and count up instantly on load
-    setCounts({
-      1: 395,
-      2: 270,
-      3: 142
-    });
-
-    const timers = [
-      setTimeout(() => animateInitial(1, 395, 412), 100),
-      setTimeout(() => animateInitial(2, 270, 285), 200),
-      setTimeout(() => animateInitial(3, 142, 154), 300)
-    ];
-
-    function animateInitial(id: number, start: number, end: number) {
-      let current = start;
-      const step = () => {
-        if (current < end) {
-          current += 1;
-          setCounts((prev) => ({ ...prev, [id]: current }));
-          setTimeout(step, 40);
-        }
-      };
-      step();
-    }
-
-    return () => timers.forEach(clearTimeout);
-  }, []);
-
-  // 2. Real-time incremental ticking (simulating live signups every 4-8 seconds)
-  useEffect(() => {
-    const tick = () => {
-      // Pick a random case (1, 2, or 3)
-      const randomId = Math.floor(Math.random() * 3) + 1;
-      
-      // Increment count
-      setCounts((prev) => ({
-        ...prev,
-        [randomId]: prev[randomId] + 1
-      }));
-
-      // Trigger pop animation glow
-      setIncrementActive((prev) => ({ ...prev, [randomId]: true }));
-      setTimeout(() => {
-        setIncrementActive((prev) => ({ ...prev, [randomId]: false }));
-      }, 800);
-
-      // Schedule next tick at a random interval between 4s and 8s
-      const nextDelay = Math.random() * 4000 + 4000;
-      timeoutId = setTimeout(tick, nextDelay);
-    };
-
-    let timeoutId = setTimeout(tick, 5000);
-    return () => clearTimeout(timeoutId);
-  }, []);
-
-  const activeCases: CaseItem[] = [
-    {
-      id: 1,
-      title: '인천 ㅇㅇㅇ 지역주택조합 부당이득금반환청구',
-      statusText: '추가 모집중',
-      description: '인천 ㅇㅇㅇ 지역주택조합 허위·과장 광고 및 사업 지연에 따른 분양 납입금 반환 소송단 모집'
-    },
-    {
-      id: 2,
-      title: '천안 ㅇㅇㅇ 아파트 입주지연 분양계약해제',
-      statusText: '1차 마감임박',
-      description: '시공사 사정으로 인한 대규모 입주 지연 사태에 따른 계약 취소 및 지연 위약금 청구 집단 소송'
-    },
-    {
-      id: 3,
-      title: '광주 ㅇㅇㅇ 상가 설계변경에 따른 손해배상',
-      statusText: '실시간 접수중',
-      description: '가맹본사 및 분양 대행사의 무단 설계 변경 및 상가 면적 축소에 따른 차액 손해배상 청구'
-    }
-  ];
 
   return (
     <section className={styles.section}>
@@ -132,44 +90,73 @@ const ClassActionCases = () => {
         {/* 2-Column Grid Layout */}
         <div className={styles.grid}>
           
-          {/* Left Column: 3 active cases with interactive toggles */}
+          {/* Left Column: ENDLESS VERTICAL ROLLING CASES (사건이 위로 올라가는 느낌) */}
           <div className={styles.leftCol}>
-            {activeCases.map((item) => (
-              <div 
-                key={item.id} 
-                className={`${styles.caseCard} ${toggleStates[item.id] ? styles.activeCard : ''}`}
-                onClick={() => handleToggle(item.id)}
-              >
-                <div className={styles.cardContent}>
-                  
-                  {/* Neon Green LIVE Pulse Badge */}
-                  <div className={styles.liveIndicator}>
-                    <span className={styles.liveDot}></span>
-                    <span>LIVE STATUS</span>
-                  </div>
+            <div className={styles.verticalMarqueeWrapper}>
+              <div className={styles.verticalMarqueeTrack}>
+                
+                {/* 1st copy of cases */}
+                {scrollingCases.map((item) => {
+                  const key = `${item.id}-orig`;
+                  return (
+                    <div 
+                      key={key} 
+                      className={`${styles.caseCard} ${toggleStates[key] ? styles.activeCard : ''}`}
+                    >
+                      <div className={styles.cardContent}>
+                        <div className={styles.cardTitleRow}>
+                          <h3 className={styles.cardTitle}>{item.title}</h3>
+                          <span className={styles.countBadge}>
+                            {item.countText}, <span className={styles.statusHighlight}>{item.statusText}</span>
+                          </span>
+                        </div>
+                        <p className={styles.cardDesc}>{item.description}</p>
+                      </div>
 
-                  <div className={styles.cardTitleRow}>
-                    <h3 className={styles.cardTitle}>{item.title}</h3>
-                    
-                    {/* Count text with live numeric increment pops */}
-                    <span className={styles.countBadge}>
-                      <span className={`${styles.countNumber} ${incrementActive[item.id] ? styles.countIncremented : ''}`}>
-                        {counts[item.id]}명
-                      </span>{' '}
-                      소제기, <span className={styles.statusHighlight}>{item.statusText}</span>
-                    </span>
-                  </div>
-                  <p className={styles.cardDesc}>{item.description}</p>
-                </div>
+                      {/* IOS-style toggle switch */}
+                      <div className={styles.toggleWrapper} onClick={(e) => handleToggle(key, e)}>
+                        <div className={`${styles.switch} ${toggleStates[key] ? styles.switchOn : ''}`}>
+                          <div className={styles.switchHandle}></div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
 
-                {/* IOS-style toggle switch */}
-                <div className={styles.toggleWrapper}>
-                  <div className={`${styles.switch} ${toggleStates[item.id] ? styles.switchOn : ''}`}>
-                    <div className={styles.switchHandle}></div>
-                  </div>
-                </div>
+                {/* 2nd copy of cases for seamless vertical loop */}
+                {scrollingCases.map((item) => {
+                  const key = `${item.id}-dup`;
+                  return (
+                    <div 
+                      key={key} 
+                      className={`${styles.caseCard} ${toggleStates[key] ? styles.activeCard : ''}`}
+                    >
+                      <div className={styles.cardContent}>
+                        <div className={styles.cardTitleRow}>
+                          <h3 className={styles.cardTitle}>{item.title}</h3>
+                          <span className={styles.countBadge}>
+                            {item.countText}, <span className={styles.statusHighlight}>{item.statusText}</span>
+                          </span>
+                        </div>
+                        <p className={styles.cardDesc}>{item.description}</p>
+                      </div>
+
+                      {/* IOS-style toggle switch */}
+                      <div className={styles.toggleWrapper} onClick={(e) => handleToggle(key, e)}>
+                        <div className={`${styles.switch} ${toggleStates[key] ? styles.switchOn : ''}`}>
+                          <div className={styles.switchHandle}></div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+
               </div>
-            ))}
+            </div>
+            
+            <div className={styles.marqueeNotice}>
+              * 사건 카드에 마우스를 올리시면(Hover) 위로 올라가는 롤링이 일시정지되며, 토글 조작이 가능합니다.
+            </div>
           </div>
 
           {/* Right Column: Dark navy status overview banner */}

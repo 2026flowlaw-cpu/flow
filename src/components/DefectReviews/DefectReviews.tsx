@@ -215,21 +215,7 @@ export default function DefectReviews() {
           </button>
         </div>
 
-        {/* Bottom Pagination Dots */}
-        <div className={styles.paginationDots}>
-          {reviews.map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.dot} ${activeDotIndex === index ? styles.activeDot : ''}`}
-              onClick={() => {
-                if (isTransitioning) {
-                  setTrackIndex(index + 2);
-                }
-              }}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
+
 
       </div>
     </section>

@@ -161,45 +161,65 @@ export default function DefectCasesGrid() {
               </button>
 
               <div className={styles.detailHeader}>
-                <span className={styles.detailBadge}>CASE {currentCase.id.toString().padStart(2, '0')}</span>
-                <h4 className={styles.detailTitle}>{currentCase.label}</h4>
+                <div className={styles.headerLeftInfo}>
+                  <span className={styles.detailBadge}>CASE {currentCase.id.toString().padStart(2, '0')}</span>
+                  <h4 className={styles.detailTitle}>{currentCase.label}</h4>
+                </div>
+                <div className={styles.headerSubtitle}>법무법인 플로우(FLOW) 기술·법률 통합 진단 보고서</div>
               </div>
               
-              <div className={styles.detailGrid}>
-                <div className={styles.detailColCore}>
-                  <div className={styles.detailSubHeader}>
-                    <svg className={styles.detailIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                      <line x1="12" y1="9" x2="12" y2="13"/>
-                      <line x1="12" y1="17" x2="12.01" y2="17"/>
-                    </svg>
-                    <span>핵심 진단 (Diagnosis)</span>
-                  </div>
-                  <p className={styles.detailTextCore}>{currentCase.coreDiagnosis}</p>
-                </div>
-                
-                <div className={styles.detailColAction}>
-                  <div className={styles.actionBlock}>
-                    <div className={`${styles.detailSubHeader} ${styles.engHeader}`}>
-                      <svg className={styles.detailIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="12" y1="16" x2="12" y2="12"/>
-                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+              <div className={styles.modalContent}>
+                {/* 1. 핵심 진단 (Full Width at Top) */}
+                <div className={styles.diagnosisCard}>
+                  <div className={styles.diagnosisHeader}>
+                    <div className={styles.diagnosisTitleArea}>
+                      <svg className={styles.warningIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
                       </svg>
-                      <span>엔지니어링 솔루션 (Engineering)</span>
+                      <span className={styles.diagnosisTitle}>핵심 진단 (Diagnosis)</span>
                     </div>
-                    <p className={styles.detailTextAction}>{currentCase.engineeringSolution}</p>
+                    <span className={styles.diagnosisBadge}>DIAGNOSIS</span>
+                  </div>
+                  <p className={styles.diagnosisText}>{currentCase.coreDiagnosis}</p>
+                </div>
+
+                {/* 2. Solutions Grid (Two Equal Columns below) */}
+                <div className={styles.solutionsGrid}>
+                  
+                  {/* Engineering Card */}
+                  <div className={`${styles.solutionCard} ${styles.engCard}`}>
+                    <div className={styles.solutionHeader}>
+                      <div className={styles.solutionIconBox}>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <circle cx="12" cy="12" r="10"/>
+                          <line x1="12" y1="16" x2="12" y2="12"/>
+                          <line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                      </div>
+                      <span className={styles.solutionTitle}>
+                        엔지니어링 솔루션 <span className={styles.englishSub}>(Engineering)</span>
+                      </span>
+                    </div>
+                    <p className={styles.solutionText}>{currentCase.engineeringSolution}</p>
                   </div>
 
-                  <div className={styles.actionBlock}>
-                    <div className={`${styles.detailSubHeader} ${styles.lawHeader}`}>
-                      <svg className={styles.detailIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                      </svg>
-                      <span>법적 대응 전략 (Legal Strategy)</span>
+                  {/* Legal Card */}
+                  <div className={`${styles.solutionCard} ${styles.lawCard}`}>
+                    <div className={styles.solutionHeader}>
+                      <div className={styles.solutionIconBox}>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                      </div>
+                      <span className={styles.solutionTitle}>
+                        법적 대응 전략 <span className={styles.englishSub}>(Legal Strategy)</span>
+                      </span>
                     </div>
-                    <p className={styles.detailTextAction}>{currentCase.legalStrategy}</p>
+                    <p className={styles.solutionText}>{currentCase.legalStrategy}</p>
                   </div>
+
                 </div>
               </div>
             </div>

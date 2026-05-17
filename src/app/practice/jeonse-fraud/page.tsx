@@ -149,7 +149,15 @@ export default function JeonseFraudPage() {
         />
 
         {/* 2.5. Specialized Defect Cases Pill Grid (Image 1 layout) */}
-        <DefectCasesGrid />
+        <DefectCasesGrid 
+          hideKicker={true}
+          mainTitle="보증금반환 판결부터 경매까지, 전세사기 토탈 솔루션"
+          descLines={[
+            '보증금반환소송에서 승소해 판결문을 받아도 이는 종이 한장에 불과합니다.',
+            '법무법인 플로우는 승소를 넘어 보증금 회수를 목표로 합니다.',
+            '소송부터 집행까지 논스톱 & 원스톱 조력이 가능한 전세사기 전문가를 찾고 계시다면 플로우가 정답입니다.'
+          ]}
+        />
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
         <VerdictSection />

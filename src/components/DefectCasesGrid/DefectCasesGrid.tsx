@@ -30,7 +30,7 @@ export default function DefectCasesGrid({
     '800여 단지에서 축적한 실무 데이터를 기반으로 거대 건설사의 주장을 완벽 방어합니다.'
   ],
   difficultyTitle = '* 현재 어떤 어려움을 겪고 계신가요?',
-  difficultySubtitle = '아래 하자 분류를 클릭하시면 법률 및 엔지니어링 실무 해법을 조회하실 수 있습니다.',
+  difficultySubtitle = '법무법인 플로우는 모든 케이스를 축적하고 있습니다.',
   hideKicker = false,
   customCases
 }: DefectCasesGridProps) {

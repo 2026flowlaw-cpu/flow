@@ -126,7 +126,8 @@ export default function ConstructionDisputePage() {
 
         {/* 2.5. Specialized Defect Cases Pill Grid (Image 1 layout) */}
         <DefectCasesGrid 
-          kicker="건설전문변호사 건설소송 토탈 솔루션"
+          hideKicker={true}
+          mainTitle="건설전문변호사 건설소송 토탈 솔루션"
           descLines={[
             "천문학적 금액이 오가는 건설 분쟁, 현장을 모르면 결코 이길 수 없습니다.",
             "건설소송은 법무법인 플로우가 정답입니다."

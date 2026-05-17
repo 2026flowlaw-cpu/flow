@@ -75,16 +75,18 @@ export default function ResaleCancellationPage() {
               
               <div className={styles.heroLeft}>
                 <h1 className={styles.heroMainTitle}>
-                  분양계약해제 특화,<br />
-                  <span className={styles.goldHighlight}>ONE-STOP</span> 종합 법률서비스
+                  분양권해제 특화,<br />
+                  <span className={styles.goldHighlight}>ONE STOP</span> 종합 법률서비스
                 </h1>
                 <div className={styles.heroSubtitles}>
-                  <span className={styles.titleSub1}>하자조사 · 진단 · 보수까지 올인원(All-in-One) 토털케어</span>
-                  <span className={styles.titleSub2}>분양계약해제의 처음과 끝, 법무법인 플로우가 함께합니다.</span>
+                  <span className={styles.titleSub1}>분양계약해제 케이스를 분석한 빅데이터와 독보적인 승소 노하우를 보유하고 있습니다.</span>
+                  <span className={styles.titleSub2}>불가능해 보이는 그 사건도 법무법인 플로우와 함께라면 가능합니다.</span>
                 </div>
+                <div className={styles.slashDivider}>\</div>
                 <p className={styles.heroDescription}>
-                  아파트 단지와 상가의 부실시공 및 하자는 입주민의 안전과 재산을 위협합니다. <br />
-                  법무법인 플로우는 상주 건축 엔지니어링 TF와 법률 계산팀이 긴밀히 연대하여, 하자를 과학적으로 입증하고 판결 보상액을 최대로 끌어올립니다.
+                  분양계약해제 전담 TF · 현장 밀착 법률 서비스<br />
+                  상가 · 오피스텔 · 지산 · 생숙 · 라이브오피스 등 분양계약해제 사례 다수<br />
+                  부동산 · 건설 기술인력 자체 보유
                 </p>
               </div>
 

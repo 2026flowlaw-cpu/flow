@@ -104,6 +104,14 @@
   word-break: keep-all;
 }
 
+.slashDivider {
+  font-size: 26px;
+  color: #C5A059; /* Gold */
+  margin: 10px 0 25px 0;
+  font-weight: 300;
+  opacity: 0.85;
+}
+
 .heroDescription {
   font-size: 18.5px;
   color: #cbd5e1;

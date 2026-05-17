@@ -43,7 +43,7 @@
 
 .kicker {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   color: #C5A059;
   letter-spacing: 2px;
   display: block;
@@ -54,7 +54,7 @@
 
 .title {
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 600;
   color: white;
   margin: 0 0 30px 0;
   letter-spacing: -1.5px;
@@ -72,7 +72,7 @@
 
 .highlightText {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 600;
   color: #f8fafc;
   margin-bottom: 40px;
   font-style: italic;
@@ -96,14 +96,14 @@
 
 .textWrap strong {
   color: white;
-  font-weight: 700;
+  font-weight: 600;
   background: linear-gradient(120deg, rgba(197, 160, 89, 0.3) 0%, rgba(197, 160, 89, 0) 100%);
   padding: 0 4px;
 }
 
 .footerText {
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 600;
   color: #94a3b8;
   line-height: 1.6;
 }
@@ -111,7 +111,7 @@
 .footerText span {
   display: block;
   font-size: 28px;
-  font-weight: 900;
+  font-weight: 600;
   color: #C5A059;
   margin-top: 10px;
 }

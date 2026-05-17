@@ -15,7 +15,7 @@
   color: white;
   border-radius: 8px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: none;
   transition: all 0.2s ease;
 }
@@ -27,7 +27,7 @@
 
 .title {
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   margin-bottom: 8px;
 }
@@ -59,7 +59,7 @@
   background: #f8fafc;
   padding: 16px 24px;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -82,7 +82,7 @@
 }
 
 .lawyerName {
-  font-weight: 700;
+  font-weight: 600;
   color: #0A1B39;
   font-size: 15px;
 }
@@ -99,7 +99,7 @@
   padding: 4px 10px;
   border-radius: 6px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400500;
 }
 
 .rowActions {

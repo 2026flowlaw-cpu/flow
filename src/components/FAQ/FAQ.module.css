@@ -10,7 +10,7 @@
 
 .kicker {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: #C5A059;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -20,7 +20,7 @@
 
 .title {
   font-size: 36px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   margin: 0;
 }
@@ -55,7 +55,7 @@
   align-items: center;
   cursor: pointer;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   color: #0A1B39;
   transition: background-color 0.3s ease;
 }
@@ -71,7 +71,7 @@
 .qMark {
   color: #C5A059;
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 600;
   margin-right: 15px;
 }
 
@@ -111,7 +111,7 @@
 .aMark {
   color: #0A1B39;
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .answerContent p {

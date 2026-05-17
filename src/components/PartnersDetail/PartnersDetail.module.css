@@ -13,7 +13,7 @@
 
 .title {
   font-size: 36px;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--primary);
   margin-bottom: 32px;
   line-height: 1.2;
@@ -56,7 +56,7 @@
   align-items: center;
   justify-content: center;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--primary);
   flex-shrink: 0;
   text-align: center;
@@ -69,7 +69,7 @@
 
 .partnerName {
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--primary);
   margin-bottom: 4px;
 }

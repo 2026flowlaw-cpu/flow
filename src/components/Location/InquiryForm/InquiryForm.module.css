@@ -26,14 +26,14 @@
 .topInfoTag {
   font-size: 14.5px;
   color: #B89B63; /* Official Muted Gold Kicker */
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 18px;
   letter-spacing: 1.5px;
 }
 
 .sloganTitle {
   font-size: 40px; /* Massive hero scale slogan! */
-  font-weight: 900;
+  font-weight: 600;
   color: #162233; /* Deep Flow Navy */
   letter-spacing: -2px;
   line-height: 1.45;
@@ -49,7 +49,7 @@
   font-size: 19px; /* Expanded sub-slogan */
   color: #334155;
   line-height: 1.7;
-  font-weight: 700;
+  font-weight: 600;
   margin: 40px 0 0 0; /* Clear 40px gap above sloganDesc, below topInfoBadge */
   word-break: keep-all;
 }
@@ -72,14 +72,14 @@
 .topInfoBadgeLabel {
   font-size: 16px;
   color: #334155;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.5px;
 }
 
 .sloganPhone {
   font-size: 28px; /* High impact prominent phone number! */
   color: #162233; /* Deep Flow Navy color */
-  font-weight: 800;
+  font-weight: 600;
   text-decoration: underline;
   text-decoration-thickness: 2.5px;
   text-underline-offset: 6px;
@@ -134,7 +134,7 @@
 
 .headerContactLabel {
   font-size: 12.5px; /* Larger tag text */
-  font-weight: 800;
+  font-weight: 600;
   color: #B89B63; /* Brand Muted Gold label text */
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -145,21 +145,21 @@
 
 .headerContactDivider {
   color: rgba(255, 255, 255, 0.3);
-  font-weight: 300;
+  font-weight: 400300;
 }
 
 .kicker {
   font-size: 13px; /* Slightly larger professional tracker */
   letter-spacing: 2.5px;
   color: #B89B63; /* Brand Muted Gold */
-  font-weight: 800;
+  font-weight: 600;
   display: block;
   margin-bottom: 12px;
 }
 
 .title {
   font-size: 30px; /* Magnificent expanded title */
-  font-weight: 800;
+  font-weight: 600;
   color: #ffffff;
   margin: 0 0 12px 0;
   letter-spacing: -0.8px;
@@ -210,7 +210,7 @@
 
 .formCardTitle {
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   margin: 0;
 }
@@ -236,7 +236,7 @@
 
 .formLabel {
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: #475569;
 }
 
@@ -337,7 +337,7 @@
 .checkboxLabel {
   font-size: 13.5px;
   color: #475569;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -345,7 +345,7 @@
   background: none;
   border: none;
   color: #C5A059; /* Elegant Brand Gold */
-  font-weight: 800;
+  font-weight: 600;
   font-size: 13.5px;
   cursor: pointer;
   padding: 0;
@@ -370,7 +370,7 @@
 
 .privacyDetailsBox h5 {
   font-size: 13.5px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   margin: 0 0 10px 0;
 }
@@ -386,7 +386,7 @@
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -403,7 +403,7 @@
   border: none;
   border-radius: 10px;
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s;
   text-align: center;
@@ -440,7 +440,7 @@
 .orText {
   font-size: 13.5px;
   color: #94a3b8;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -449,7 +449,7 @@
   background-color: #FFE600; /* Bright KakaoTalk yellow */
   color: #3A1D1D;
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;

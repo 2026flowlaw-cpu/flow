@@ -26,7 +26,7 @@
 
 .kicker {
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: #94a3b8; /* Grey category tag */
   letter-spacing: 2px;
   display: block;
@@ -36,7 +36,7 @@
 
 .title {
   font-size: 42px;
-  font-weight: 800;
+  font-weight: 600;
   color: #111827; /* Near black */
   line-height: 1.25;
   margin: 0 0 20px 0;
@@ -93,7 +93,7 @@
   border-radius: 30px;
   color: #6b7280;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: none;
   background-color: #ffffff;
   transition: all 0.25s ease;
@@ -150,7 +150,7 @@
 
 .cardCategory {
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 600;
   color: #2563eb; /* Royal Blue */
   margin-bottom: 8px;
   display: block;
@@ -158,7 +158,7 @@
 
 .cardTitle {
   font-size: 17px;
-  font-weight: 800;
+  font-weight: 600;
   color: #111827;
   margin: 0 0 20px 0;
   letter-spacing: -0.5px;
@@ -204,7 +204,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 80px;
-  font-weight: 800;
+  font-weight: 600;
   color: rgba(227, 225, 217, 0.4);
   font-family: 'Georgia', serif;
   pointer-events: none;
@@ -223,14 +223,14 @@
 
 .docCourtName {
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 600;
   color: #4b5563;
   letter-spacing: 0.5px;
 }
 
 .docSubject {
   font-size: 15px;
-  font-weight: 900;
+  font-weight: 600;
   color: #1f2937;
   letter-spacing: 5px;
   font-family: 'Georgia', serif;
@@ -268,7 +268,7 @@
 
 .docOrderLabel {
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
   color: #111827;
   margin-bottom: 2px;
 }
@@ -298,7 +298,7 @@
 
 .stampInner {
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 600;
   color: #dc2626;
   text-align: center;
   line-height: 1.35;
@@ -311,7 +311,7 @@
   font-size: 12.5px;
   color: #9ca3af;
   margin-top: 15px;
-  font-weight: 500;
+  font-weight: 400500;
 }
 
 /* ====================================================

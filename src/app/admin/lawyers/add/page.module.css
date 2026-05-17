@@ -27,7 +27,7 @@
 
 .title {
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
 }
 
@@ -48,7 +48,7 @@
 
 .cardTitle {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   color: #0A1B39;
   margin-bottom: 24px;
   padding-bottom: 12px;
@@ -180,7 +180,7 @@
   color: white;
   border-radius: 8px;
   border: none;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }

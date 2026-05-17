@@ -28,7 +28,7 @@
   background: #f8fafc;
   padding: 0 24px;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 600;
   color: #C5A059; /* Brand warm gold */
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -96,7 +96,7 @@
 
 .label {
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39; /* Deep Navy */
   letter-spacing: -0.5px;
 }
@@ -109,7 +109,7 @@
 
 .address {
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   line-height: 1.5;
   margin: 0;
@@ -118,7 +118,7 @@
 .buildingName {
   display: block;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400500;
   color: #64748b;
   margin-top: 4px;
 }
@@ -135,13 +135,13 @@
 
 .phoneLabel {
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: #64748b;
 }
 
 .phoneLink {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
   color: #C5A059;
   text-decoration: none;
   transition: opacity 0.2s;
@@ -163,7 +163,7 @@
   padding: 14px;
   border-radius: 12px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: none;
   transition: background-color 0.2s, transform 0.2s;
 }
@@ -209,7 +209,7 @@
 
 .trLabel {
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   letter-spacing: -0.5px;
 }
@@ -264,26 +264,26 @@
 
 .subwayBadgeLine9 {
   color: #c59e31;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 14px;
 }
 
 .subwayBadgeLine7 {
   color: #788a1e;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 14px;
 }
 
 .subwayBadgeLine2 {
   color: #30a728;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 14px;
 }
 
 .timelineDesc {
   font-size: 14px;
   color: #64748b;
-  font-weight: 500;
+  font-weight: 400500;
 }
 
 /* 3. Bus Card (버스) - Grid pills card */
@@ -322,7 +322,7 @@
 
 .busStation {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: #475569;
   margin: 15px 0 20px 0;
   padding-bottom: 12px;
@@ -345,7 +345,7 @@
 /* Bus type badges */
 .busBlue {
   color: #3a69a7;
-  font-weight: 800;
+  font-weight: 600;
   background: rgba(58, 105, 167, 0.08);
   border: 1px solid rgba(58, 105, 167, 0.15);
   padding: 4px 8px;
@@ -358,7 +358,7 @@
 
 .busGreen {
   color: #40916c;
-  font-weight: 800;
+  font-weight: 600;
   background: rgba(64, 145, 108, 0.08);
   border: 1px solid rgba(64, 145, 108, 0.15);
   padding: 4px 8px;
@@ -371,7 +371,7 @@
 
 .busRed {
   color: #b34747;
-  font-weight: 800;
+  font-weight: 600;
   background: rgba(179, 71, 71, 0.08);
   border: 1px solid rgba(179, 71, 71, 0.15);
   padding: 4px 8px;

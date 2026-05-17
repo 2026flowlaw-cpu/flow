@@ -47,15 +47,15 @@ export default function AdminDashboardMainPage() {
       {/* 상단 헤더 섹션 */}
       <div style={{ marginBottom: '50px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h1 style={{ fontSize: '36px', fontWeight: 900, color: '#0A1B39', marginBottom: '10px', letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: '36px', fontWeight: 600, color: '#0A1B39', marginBottom: '10px', letterSpacing: '-0.02em' }}>
             실시간 운영 현황 <span style={{ color: '#bd9d62', fontSize: '24px', fontWeight: 400, marginLeft: '10px' }}>Dashboard</span>
           </h1>
-          <p style={{ color: '#64748b', fontSize: '16px', fontWeight: 500 }}>법무법인 플로우의 유입 통계 및 상담 현황을 한눈에 관리합니다.</p>
+          <p style={{ color: '#64748b', fontSize: '16px', fontWeight: 400 }}>법무법인 플로우의 유입 통계 및 상담 현황을 한눈에 관리합니다.</p>
         </div>
         <div style={{ display: 'flex', gap: '15px' }}>
           <div style={{ background: 'white', padding: '12px 24px', borderRadius: '16px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 8px #22c55e' }}></div>
-            <span style={{ fontSize: '14px', color: '#1e293b', fontWeight: 700 }}>시스템 정상 작동 중</span>
+            <span style={{ fontSize: '14px', color: '#1e293b', fontWeight: 600 }}>시스템 정상 작동 중</span>
           </div>
         </div>
       </div>
@@ -73,12 +73,12 @@ export default function AdminDashboardMainPage() {
                     <stat.icon size={26} color={stat.color} />
                 </div>
                 <div style={{ textAlign: 'right' }}>
-                    <span style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 800 }}>전일 대비</span>
-                    <p style={{ fontSize: '13px', color: '#22c55e', fontWeight: 700 }}>+12.4% ↑</p>
+                    <span style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 600 }}>전일 대비</span>
+                    <p style={{ fontSize: '13px', color: '#22c55e', fontWeight: 600 }}>+12.4% ↑</p>
                 </div>
             </div>
             <p style={{ fontSize: '15px', color: '#64748b', fontWeight: 600, marginBottom: '6px' }}>{stat.label}</p>
-            <h3 style={{ fontSize: '34px', fontWeight: 900, color: '#0A1B39', letterSpacing: '-0.03em' }}>{stat.value}</h3>
+            <h3 style={{ fontSize: '34px', fontWeight: 600, color: '#0A1B39', letterSpacing: '-0.03em' }}>{stat.value}</h3>
           </div>
         ))}
       </div>
@@ -89,8 +89,8 @@ export default function AdminDashboardMainPage() {
         {/* 방문자 통계 그래프 */}
         <div style={{ background: 'white', padding: '45px', borderRadius: '32px', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.03)', border: '1px solid #edf2f7' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '45px' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#0A1B39', display: 'flex', alignItems: 'center', gap: '10px' }}>
-               방문자 유입 분석 <span style={{ fontSize: '12px', color: '#bd9d62', fontWeight: 800, background: '#bd9d6215', padding: '4px 10px', borderRadius: '8px' }}>GA4 LIVE</span>
+            <h2 style={{ fontSize: '24px', fontWeight: 600, color: '#0A1B39', display: 'flex', alignItems: 'center', gap: '10px' }}>
+               방문자 유입 분석 <span style={{ fontSize: '12px', color: '#bd9d62', fontWeight: 600, background: '#bd9d6215', padding: '4px 10px', borderRadius: '8px' }}>GA4 LIVE</span>
             </h2>
           </div>
           <div style={{ width: '100%', height: '350px' }}>
@@ -107,7 +107,7 @@ export default function AdminDashboardMainPage() {
                 <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 13, fontWeight: 600}} />
                 <Tooltip 
                     contentStyle={{ borderRadius: '20px', border: 'none', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.15)', padding: '15px' }} 
-                    itemStyle={{ fontWeight: 800, color: '#4f46e5' }}
+                    itemStyle={{ fontWeight: 600, color: '#4f46e5' }}
                 />
                 <Area type="monotone" dataKey="visitors" stroke="#4f46e5" strokeWidth={5} fillOpacity={1} fill="url(#colorVis)" />
               </AreaChart>
@@ -118,9 +118,9 @@ export default function AdminDashboardMainPage() {
         {/* 엇갈린 배경색의 실시간 상담 리스트 */}
         <div style={{ background: 'white', padding: '45px', borderRadius: '32px', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.03)', border: '1px solid #edf2f7' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '35px' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#0A1B39' }}>최근 상담 접수</h2>
+            <h2 style={{ fontSize: '24px', fontWeight: 600, color: '#0A1B39' }}>최근 상담 접수</h2>
             <Link href="/admin/consultations" style={{ 
-                fontSize: '14px', color: '#4f46e5', fontWeight: 800, textDecoration: 'none',
+                fontSize: '14px', color: '#4f46e5', fontWeight: 600, textDecoration: 'none',
                 display: 'flex', alignItems: 'center', gap: '4px'
             }}>전체보기 <ChevronRight size={16} /></Link>
           </div>
@@ -135,9 +135,9 @@ export default function AdminDashboardMainPage() {
                 }}>
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-                      <span style={{ fontWeight: 800, fontSize: '17px', color: '#1e293b' }}>{item.name}</span>
+                      <span style={{ fontWeight: 600, fontSize: '17px', color: '#1e293b' }}>{item.name}</span>
                       <span style={{ 
-                          fontSize: '11px', padding: '3px 10px', borderRadius: '6px', fontWeight: 900,
+                          fontSize: '11px', padding: '3px 10px', borderRadius: '6px', fontWeight: 600,
                           background: item.status === '대기중' ? '#ef444415' : '#22c55e15',
                           color: item.status === '대기중' ? '#ef4444' : '#22c55e'
                       }}>{item.status}</span>
@@ -149,8 +149,8 @@ export default function AdminDashboardMainPage() {
                     </div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 700 }}>{new Date(item.created_at).toLocaleDateString().slice(5)}</p>
-                    <p style={{ fontSize: '11px', color: '#cbd5e1', fontWeight: 500 }}>{new Date(item.created_at).toLocaleTimeString().slice(0, 5)}</p>
+                    <p style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 600 }}>{new Date(item.created_at).toLocaleDateString().slice(5)}</p>
+                    <p style={{ fontSize: '11px', color: '#cbd5e1', fontWeight: 400 }}>{new Date(item.created_at).toLocaleTimeString().slice(0, 5)}</p>
                   </div>
                 </div>
               ))
@@ -164,7 +164,7 @@ export default function AdminDashboardMainPage() {
           <Link href="/admin/consultations" style={{ 
             display: 'block', width: '100%', padding: '18px', marginTop: '30px',
             borderRadius: '16px', background: '#0A1B39', color: 'white',
-            textAlign: 'center', textDecoration: 'none', fontWeight: 800, fontSize: '15px',
+            textAlign: 'center', textDecoration: 'none', fontWeight: 600, fontSize: '15px',
             boxShadow: '0 10px 15px -3px rgba(10, 27, 57, 0.2)'
           }}>상담 마스터 관리하기</Link>
         </div>

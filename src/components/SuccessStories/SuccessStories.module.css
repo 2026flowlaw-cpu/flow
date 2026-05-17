@@ -11,7 +11,7 @@
 
 .kicker {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   color: #0A1B39;
   display: block;
   margin-bottom: 10px;
@@ -19,7 +19,7 @@
 
 .title {
   font-size: 42px;
-  font-weight: 900;
+  font-weight: 600;
   color: #0A1B39;
   margin: 0 0 20px 0;
   letter-spacing: -1px;
@@ -28,7 +28,7 @@
 .subtitle {
   font-size: 20px;
   font-style: italic;
-  font-weight: 700;
+  font-weight: 600;
   color: #475569;
   margin-bottom: 40px;
 }
@@ -47,7 +47,7 @@
 
 .description p:last-child {
   margin-bottom: 0;
-  font-weight: 700;
+  font-weight: 600;
   color: #0A1B39;
 }
 
@@ -121,7 +121,7 @@
 .docTitle {
   display: block;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 600;
   color: #1e293b;
   letter-spacing: 4px;
 }
@@ -146,7 +146,7 @@
 
 .docLineBold {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
   color: #1e293b;
   margin-bottom: 10px;
   text-align: center;
@@ -176,7 +176,7 @@
   border: 2px solid #dc2626;
   padding: 10px 15px;
   font-size: 24px;
-  font-weight: 900;
+  font-weight: 600;
   color: #dc2626;
   text-align: center;
   white-space: pre-line;

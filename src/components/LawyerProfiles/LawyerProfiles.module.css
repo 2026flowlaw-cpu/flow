@@ -5,7 +5,7 @@
 
 .sectionTitle {
   font-size: 36px;
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 16px;
   color: var(--primary);
 }
@@ -68,7 +68,7 @@
 
 .name {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--primary);
   margin-bottom: 12px;
 }

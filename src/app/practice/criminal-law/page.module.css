@@ -33,7 +33,7 @@
 
 .heroContent h1 {
   font-size: 48px;
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 20px;
   letter-spacing: -1px;
 }
@@ -57,7 +57,7 @@
 
 .sectionTitle {
   font-size: 36px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   text-align: center;
   margin-bottom: 60px;
@@ -89,7 +89,7 @@
 
 .cardTitle {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   margin-bottom: 15px;
 }
@@ -104,7 +104,7 @@
 
 .cardLink {
   color: #C5A059;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 14px;
 }
 
@@ -179,7 +179,7 @@
 
 .boxTitle {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   margin-bottom: 30px;
   border-bottom: 2px solid #0A1B39;

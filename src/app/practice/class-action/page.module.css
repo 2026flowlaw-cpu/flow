@@ -41,7 +41,7 @@
 
 .heroMainTitle {
   font-size: 48px;
-  font-weight: 800;
+  font-weight: 600;
   color: white;
   margin: 0 0 24px 0;
   letter-spacing: -1.5px;
@@ -67,7 +67,7 @@
 .heroUrl {
   font-size: 15px;
   color: #3b82f6;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.5px;
 }
 
@@ -95,7 +95,7 @@
 
 .glassCardTitle {
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 600;
   color: #3b82f6; /* Electric blue title highlight */
   margin: 0 0 10px 0;
   letter-spacing: -0.3px;
@@ -133,7 +133,7 @@
 
 .cardNum {
   font-size: 32px;
-  font-weight: 900;
+  font-weight: 600;
   color: #bd9d62;
   margin-bottom: 25px;
   opacity: 0.3;
@@ -141,7 +141,7 @@
 
 .featureCard h3 {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   margin-bottom: 20px;
 }
@@ -175,7 +175,7 @@
 
 .systemInfo h2 {
   font-size: 36px;
-  font-weight: 800;
+  font-weight: 600;
   color: #bd9d62;
   margin-bottom: 24px;
 }
@@ -194,7 +194,7 @@
 
 .systemList li {
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 600;
   padding: 18px 0;
   border-bottom: 1px solid rgba(255,255,255,0.1);
   display: flex;
@@ -221,7 +221,7 @@
 
 .sectionHeader h2 {
   font-size: 40px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
 }
 
@@ -245,7 +245,7 @@
 
 .caseCard h4 {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   margin-bottom: 15px;
 }

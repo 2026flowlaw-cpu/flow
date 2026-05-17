@@ -32,7 +32,7 @@
 .label {
   display: inline-block;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -41,7 +41,7 @@
 
 .mainTitle {
   font-size: clamp(2.2rem, 6vw, 4rem);
-  font-weight: 900;
+  font-weight: 600;
   line-height: 1.2;
   margin-bottom: 30px;
 }
@@ -55,7 +55,7 @@
 
 .heroCatch {
   font-size: 1.3rem;
-  font-weight: 500;
+  font-weight: 400500;
   color: #fff;
   opacity: 0.9;
   letter-spacing: -0.5px;
@@ -116,7 +116,7 @@
 
 .subText {
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.1rem;
   display: block;
   margin-bottom: 15px;
@@ -124,7 +124,7 @@
 
 .specTitle {
   font-size: 3rem;
-  font-weight: 900;
+  font-weight: 600;
   color: var(--primary);
   margin-bottom: 20px;
 }
@@ -171,7 +171,7 @@
   padding: 18px;
   background: #f1f3f6;
   border-radius: 12px;
-  font-weight: 700;
+  font-weight: 600;
   color: #555;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -198,13 +198,13 @@
 
 .tagLine {
   color: var(--accent);
-  font-weight: 800;
+  font-weight: 600;
   font-size: 1.2rem;
 }
 
 .mainHeading {
   font-size: 2.8rem;
-  font-weight: 900;
+  font-weight: 600;
   color: var(--primary);
   margin: 20px 0 40px;
 }
@@ -220,7 +220,7 @@
   padding: 30px;
   background-color: #f9f4e8;
   border-radius: 15px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--primary);
 }
 
@@ -232,7 +232,7 @@
 
 .goldLabel {
   color: var(--accent);
-  font-weight: 900;
+  font-weight: 600;
   font-size: 1.5rem;
   display: block;
   margin-bottom: 10px;
@@ -254,7 +254,7 @@
   align-items: center;
   justify-content: space-between;
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #222;
   padding: 10px 0;
 }
@@ -303,12 +303,12 @@
 .whiteTag {
   color: var(--accent);
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .hugeTitle {
   font-size: 3.5rem;
-  font-weight: 900;
+  font-weight: 600;
   margin: 20px 0;
 }
 
@@ -321,7 +321,7 @@
 
 .quote {
   font-size: 1.8rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--accent);
   margin-bottom: 50px;
 }
@@ -335,7 +335,7 @@
 
 .finalCall {
   font-size: 1.4rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #fff;
   margin-top: 50px;
 }
@@ -354,20 +354,20 @@
 
 .techLabel {
   color: var(--accent);
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 10px;
   display: block;
 }
 
 .techTitle {
   font-size: 3rem;
-  font-weight: 900;
+  font-weight: 600;
   color: var(--primary);
 }
 
 .techQuote {
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #333;
   margin: 30px 0;
 }
@@ -381,7 +381,7 @@
 
 .techHighlight {
   font-size: 1.2rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--primary);
 }
 
@@ -405,7 +405,7 @@
 }
 
 .techCard li {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.1rem;
   color: #444;
   display: flex;
@@ -416,7 +416,7 @@
   content: '✓';
   color: var(--accent);
   margin-right: 15px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 /* Philosophy Section */
@@ -443,13 +443,13 @@
 
 .philTitle {
   font-size: 2.8rem;
-  font-weight: 900;
+  font-weight: 600;
   color: var(--primary);
 }
 
 .philQuote {
   font-size: 1.6rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #333;
   margin: 40px 0;
 }

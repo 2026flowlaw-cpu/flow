@@ -10,7 +10,7 @@
 
 .label {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   color: #64748b;
   display: block;
   margin-bottom: 10px;
@@ -18,7 +18,7 @@
 
 .title {
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   margin: 0 0 20px 0;
 }
@@ -115,7 +115,7 @@
 .text {
   font-size: 16px;
   color: #334155;
-  font-weight: 500;
+  font-weight: 400500;
   line-height: 1.5;
 }
 

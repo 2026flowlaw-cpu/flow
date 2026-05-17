@@ -31,7 +31,7 @@
 
 .heroTitle {
   font-size: 48px;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.2;
   margin-bottom: 20px;
 }
@@ -82,7 +82,7 @@
 
 .mainQuote {
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.4;
   margin-bottom: 40px;
   color: var(--primary);
@@ -124,7 +124,7 @@
 
 .signatureName {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--primary);
   display: flex;
   align-items: center;
@@ -170,7 +170,7 @@
 
 .valueTitle {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 16px;
   color: var(--primary);
 }

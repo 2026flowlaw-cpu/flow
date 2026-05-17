@@ -21,7 +21,7 @@
 
 .heroTitle {
   font-size: 64px;
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 40px;
   letter-spacing: -1px;
 }
@@ -72,7 +72,7 @@
 
 .sectionHeading {
   font-size: 48px;
-  font-weight: 800;
+  font-weight: 600;
   color: #111;
   margin-bottom: 60px;
 }
@@ -141,7 +141,7 @@
 
 .videoTitle {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 12px;
   color: #111;
 }
@@ -149,7 +149,7 @@
 .videoDesc {
   font-size: 16px;
   color: #666;
-  font-weight: 500;
+  font-weight: 400500;
 }
 
 /* Partner Logos */

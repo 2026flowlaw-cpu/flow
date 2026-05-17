@@ -11,7 +11,7 @@
 
 .heroTitle {
   font-size: 48px;
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 20px;
   letter-spacing: -1px;
 }
@@ -72,7 +72,7 @@
 
 .cardTitle {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--primary);
   margin-bottom: 15px;
 }
@@ -87,7 +87,7 @@
 
 .linkText {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--accent);
   display: flex;
   align-items: center;

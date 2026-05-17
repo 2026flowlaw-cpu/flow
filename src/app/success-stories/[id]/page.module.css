@@ -37,7 +37,7 @@
   padding: 4px 10px;
   border-radius: 4px;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 600;
   margin-right: 12px;
   vertical-align: middle;
 }
@@ -45,7 +45,7 @@
 .caseId {
   font-size: 14px;
   color: #999;
-  font-weight: 500;
+  font-weight: 400500;
 }
 
 .title {
@@ -99,14 +99,14 @@
 
 .sectionNumber {
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 600;
   color: #E0E0E0;
   font-family: serif;
 }
 
 .sectionTitle {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 600;
   color: #111;
 }
 
@@ -154,7 +154,7 @@
 
 .strategyTitle {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 12px;
   color: #111;
 }
@@ -193,7 +193,7 @@
 
 .resultLabel {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: rgba(255,255,255,0.6);
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -203,7 +203,7 @@
 
 .resultTitle {
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 48px;
   line-height: 1.3;
 }
@@ -226,7 +226,7 @@
 
 .statValue {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 /* Sidebar */
@@ -241,7 +241,7 @@
 
 .sidebarTitle {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 24px;
   color: #111;
 }
@@ -259,7 +259,7 @@
 
 .relatedCategory {
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 600;
   color: #999;
   text-transform: uppercase;
   margin-bottom: 8px;
@@ -268,7 +268,7 @@
 
 .relatedTitle {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.4;
   color: #333;
 }
@@ -282,7 +282,7 @@
 
 .ctaTitle {
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 12px;
   line-height: 1.4;
 }
@@ -299,7 +299,7 @@
   color: white;
   width: 100%;
   padding: 14px;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 14px;
   border-radius: 4px;
 }

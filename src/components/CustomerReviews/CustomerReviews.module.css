@@ -15,7 +15,7 @@
 
 .title {
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39; /* Use the brand navy or dark grey, sketch shows red or dark depending on context, I'll use navy as base and red accent for numbers maybe. Image shows "6. 의뢰인 후기" in red. Wait, image shows the whole title in red. I'll make it red to match sketch exactly or use the theme color. Let's stick to theme for consistency or exact sketch? Sketch shows red text. I'll use a deep red or the primary brand color to keep it elegant. */
   margin: 0;
 }
@@ -81,7 +81,7 @@
   padding: 10px 24px;
   border-radius: 30px;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400500;
   color: #64748b;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -96,7 +96,7 @@
   background-color: #e53e3e; /* Red color from sketch */
   border-color: #e53e3e;
   color: white;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .grid {
@@ -150,7 +150,7 @@
   bottom: 40px;
   transform: rotate(-90deg);
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 600;
   color: #e53e3e; /* Red watermark text */
   letter-spacing: 12px;
   opacity: 0.8;
@@ -174,7 +174,7 @@
 
 .category {
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 600;
   color: #1e293b;
   margin: 0;
 }
@@ -240,7 +240,7 @@
 
 .mainSubtitle {
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 400500;
   color: #e2e8f0;
   margin: 0 0 10px 0;
   letter-spacing: -0.5px;
@@ -248,7 +248,7 @@
 
 .mainTitle {
   font-size: 38px;
-  font-weight: 800;
+  font-weight: 600;
   color: #ffffff;
   margin: 0;
   letter-spacing: -1.5px;
@@ -325,7 +325,7 @@
 
 .mainName {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   color: #ffffff;
   margin: 0 0 4px 0;
 }

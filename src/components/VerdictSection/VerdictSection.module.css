@@ -22,7 +22,7 @@
 
 .kicker {
   font-size: 14.5px;
-  font-weight: 700;
+  font-weight: 600;
   color: #C5A059; /* Gold */
   letter-spacing: 1px;
   margin-bottom: 12px;
@@ -31,7 +31,7 @@
 
 .mainTitle {
   font-size: 38px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   letter-spacing: -1.5px;
   line-height: 1.4;
@@ -42,7 +42,7 @@
   font-size: 15.5px;
   color: #475569;
   line-height: 1.8;
-  font-weight: 500;
+  font-weight: 400500;
   margin: 0;
   word-break: keep-all;
 }
@@ -86,7 +86,7 @@
   left: 50%;
   transform: translate(-50%, -50%) rotate(-15deg);
   font-size: 70px;
-  font-weight: 900;
+  font-weight: 600;
   color: rgba(226, 232, 240, 0.35);
   pointer-events: none;
   font-family: serif;
@@ -104,7 +104,7 @@
 
 .courtBadge {
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   color: #64748b;
   background-color: #f1f5f9;
   padding: 3px 8px;
@@ -114,7 +114,7 @@
 
 .documentTitle {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
   color: #1e293b;
   font-family: serif;
   letter-spacing: 2px;
@@ -136,7 +136,7 @@
 }
 
 .infoLabel {
-  font-weight: 700;
+  font-weight: 600;
   color: #475569;
   width: 50px;
   flex-shrink: 0;
@@ -145,7 +145,7 @@
 
 .infoValue {
   color: #334155;
-  font-weight: 500;
+  font-weight: 400500;
 }
 
 .dummyTextLines {
@@ -186,7 +186,7 @@
   border: 3px double #ef4444; /* Realistic stamp double border */
   color: #ef4444;
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 600;
   padding: 8px 14px;
   background-color: rgba(255, 255, 255, 0.95);
   border-radius: 6px;

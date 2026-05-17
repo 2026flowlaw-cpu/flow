@@ -18,7 +18,7 @@
 .header h1 {
   font-size: 1.8rem;
   color: var(--primary);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .backBtn {
@@ -43,7 +43,7 @@
 }
 
 .section label {
-  font-weight: 700;
+  font-weight: 600;
   color: #333;
   font-size: 0.95rem;
 }
@@ -99,7 +99,7 @@
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
-  font-weight: 800;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -118,7 +118,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--primary);
 }
 

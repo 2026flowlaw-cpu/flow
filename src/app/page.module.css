@@ -24,7 +24,7 @@
 
 .footerLogo {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--primary);
   margin-bottom: 24px;
 }
@@ -36,7 +36,7 @@
 
 .footerTitle {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--primary);
   margin-bottom: 24px;
   letter-spacing: 1px;

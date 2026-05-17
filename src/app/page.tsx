@@ -33,7 +33,7 @@ export default function Home() {
           <div className="container">
             <h2 style={{ 
               fontSize: '48px', 
-              fontWeight: 800, 
+              fontWeight: 600, 
               textAlign: 'center', 
               marginBottom: '80px',
               color: '#0A1B39',

@@ -31,7 +31,7 @@
 
 .heroTitle {
   font-size: 48px;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.2;
   margin-bottom: 24px;
 }
@@ -175,7 +175,7 @@
   padding: 6px 12px;
   border-radius: 4px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.5px;
 }
 
@@ -195,7 +195,7 @@
 
 .categoryTag {
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--accent);
 }
 
@@ -206,7 +206,7 @@
 
 .cardTitle {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.4;
   margin-bottom: 16px;
   color: var(--primary);
@@ -246,7 +246,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 12px;
   color: var(--primary);
 }
@@ -301,7 +301,7 @@
 
 .ctaTitle {
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 16px;
 }
 
@@ -322,7 +322,7 @@
   color: white;
   padding: 16px 32px;
   border-radius: 4px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .secondaryBtn {
@@ -331,7 +331,7 @@
   padding: 16px 32px;
   border-radius: 4px;
   border: 1px solid var(--border);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {

@@ -12,7 +12,7 @@
 
 .title {
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@
 
 .cardTitle {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: #0A1B39;
   margin-bottom: 25px;
   display: flex;
@@ -65,7 +65,7 @@
 .inputGroup label {
   display: block;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: #495057;
   margin-bottom: 8px;
 }
@@ -117,7 +117,7 @@
   border: none;
   padding: 15px 40px;
   border-radius: 10px;
-  font-weight: 800;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
 }

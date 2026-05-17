@@ -78,8 +78,8 @@ export default function CriminalLawPage() {
       <section className={styles.section}>
         <div className={styles.container}>
           <div style={{ textAlign: 'left', marginBottom: '60px', borderLeft: '5px solid #C5A059', paddingLeft: '30px' }}>
-            <h2 style={{ fontSize: '42px', fontWeight: 800, color: '#0A1B39', marginBottom: '12px', letterSpacing: '-0.5px' }}>형사 전문 분야</h2>
-            <p style={{ fontSize: '18px', color: '#64748b', fontWeight: 500, letterSpacing: '2px' }}>CRIMINAL PRACTICE AREAS</p>
+            <h2 style={{ fontSize: '42px', fontWeight: 600, color: '#0A1B39', marginBottom: '12px', letterSpacing: '-0.5px' }}>형사 전문 분야</h2>
+            <p style={{ fontSize: '18px', color: '#64748b', fontWeight: 400, letterSpacing: '2px' }}>CRIMINAL PRACTICE AREAS</p>
           </div>
           <div className={styles.grid}>
             {criminalPracticeAreas.map((area, idx) => {
@@ -89,7 +89,7 @@ export default function CriminalLawPage() {
               return (
                 <Link href={area.href} key={idx} className={`${styles.card} ${isAccent ? styles.cardAccent : ''}`}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-                      <span style={{ fontFamily: 'serif', fontSize: '24px', fontWeight: 700, color: '#C5A059', fontStyle: 'italic' }}>
+                      <span style={{ fontFamily: 'serif', fontSize: '24px', fontWeight: 600, color: '#C5A059', fontStyle: 'italic' }}>
                           {(idx + 1).toString().padStart(2, '0')}
                       </span>
                       <h3 className={styles.cardTitle} style={{ margin: 0 }}>{area.title}</h3>
@@ -105,7 +105,7 @@ export default function CriminalLawPage() {
             {/* 민사 소송센터 전용 버튼 */}
             <Link href="/" className={`${styles.card} ${styles.cardFull}`}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
-                <span style={{ fontFamily: 'serif', fontSize: '24px', fontWeight: 700, color: '#C5A059', fontStyle: 'italic' }}>
+                <span style={{ fontFamily: 'serif', fontSize: '24px', fontWeight: 600, color: '#C5A059', fontStyle: 'italic' }}>
                   07
                 </span>
                 <h3 className={styles.cardTitle} style={{ margin: 0 }}>민사 소송센터</h3>
@@ -125,8 +125,8 @@ export default function CriminalLawPage() {
       <section className={styles.section} style={{ backgroundColor: '#f8fafc' }}>
         <div className={styles.container}>
           <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <h2 style={{ fontSize: '42px', fontWeight: 800, color: '#0A1B39', marginBottom: '12px', letterSpacing: '-0.5px' }}>플로우 형사 전문 소식</h2>
-            <p style={{ fontSize: '18px', color: '#64748b', fontWeight: 500, letterSpacing: '2px' }}>COLUMNS & MEDIA</p>
+            <h2 style={{ fontSize: '42px', fontWeight: 600, color: '#0A1B39', marginBottom: '12px', letterSpacing: '-0.5px' }}>플로우 형사 전문 소식</h2>
+            <p style={{ fontSize: '18px', color: '#64748b', fontWeight: 400, letterSpacing: '2px' }}>COLUMNS & MEDIA</p>
           </div>
           
           <div className={styles.twoCol}>
@@ -176,7 +176,7 @@ export default function CriminalLawPage() {
         <div className="container">
           <h2 style={{ 
             fontSize: '48px', 
-            fontWeight: 800, 
+            fontWeight: 600, 
             textAlign: 'center', 
             marginBottom: '80px',
             color: '#0A1B39',

@@ -21,7 +21,7 @@
 
 .kicker {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: #C5A059; /* Gold */
   letter-spacing: 1.5px;
   margin-bottom: 12px;
@@ -30,7 +30,7 @@
 
 .mainTitle {
   font-size: 38px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39; /* Deep Navy */
   letter-spacing: -1.5px;
   margin: 0 0 20px 0;
@@ -40,7 +40,7 @@
   font-size: 15.5px;
   color: #475569;
   line-height: 1.8;
-  font-weight: 500;
+  font-weight: 400500;
   margin: 0;
   word-break: keep-all;
 }
@@ -153,7 +153,7 @@
   justify-content: center;
   color: #C5A059;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 600;
   flex-shrink: 0;
 }
 
@@ -165,7 +165,7 @@
 
 .clientName {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
   color: #0A1B39;
 }
 

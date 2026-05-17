@@ -89,7 +89,7 @@ export default function AdminConsultationsPage() {
                           border: `1px solid ${item.status === '대기중' ? '#ffcdd2' : '#c8e6c9'}`,
                           background: item.status === '대기중' ? '#ffebee' : '#e8f5e9',
                           color: item.status === '대기중' ? '#c62828' : '#2e7d32',
-                          fontWeight: 'bold',
+                          fontWeight: 600,
                           cursor: 'pointer'
                         }}
                       >
@@ -130,7 +130,7 @@ export default function AdminConsultationsPage() {
             borderRadius: '12px', padding: '30px', boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
             maxHeight: '90vh', overflowY: 'auto'
           }}>
-            <h2 style={{ fontSize: '24px', fontWeight: 800, marginBottom: '20px', color: '#0A1B39', borderBottom: '2px solid #eee', paddingBottom: '15px' }}>
+            <h2 style={{ fontSize: '24px', fontWeight: 600, marginBottom: '20px', color: '#0A1B39', borderBottom: '2px solid #eee', paddingBottom: '15px' }}>
               상담 신청 상세 내역
             </h2>
             
@@ -140,7 +140,7 @@ export default function AdminConsultationsPage() {
             </div>
             <div style={{ marginBottom: '15px', display: 'flex', borderBottom: '1px solid #f5f5f5', paddingBottom: '10px' }}>
               <strong style={{ width: '120px', color: '#666' }}>연락처:</strong>
-              <span style={{ fontWeight: 'bold' }}>{selectedItem.phone}</span>
+              <span style={{ fontWeight: 600 }}>{selectedItem.phone}</span>
             </div>
             <div style={{ marginBottom: '15px', display: 'flex', borderBottom: '1px solid #f5f5f5', paddingBottom: '10px' }}>
               <strong style={{ width: '120px', color: '#666' }}>이메일:</strong>
@@ -169,7 +169,7 @@ export default function AdminConsultationsPage() {
             <div style={{ marginTop: '30px', textAlign: 'right' }}>
               <button 
                 onClick={() => setSelectedItem(null)}
-                style={{ padding: '12px 30px', background: '#0A1B39', color: 'white', borderRadius: '6px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}
+                style={{ padding: '12px 30px', background: '#0A1B39', color: 'white', borderRadius: '6px', border: 'none', fontWeight: 600, cursor: 'pointer' }}
               >
                 닫기
               </button>

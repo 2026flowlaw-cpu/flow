@@ -1,8 +1,6 @@
 .mapSection {
   padding: 120px 0;
-  background-color: #f9fafb; /* Premium soft background */
-  background-image: radial-gradient(var(--primary) 0.5px, transparent 0.5px);
-  background-size: 40px 40px;
+  background-color: #f8fafc; /* Luxury soft background */
   position: relative;
   overflow: hidden;
 }
@@ -20,7 +18,7 @@
   height: 600px;
   border-radius: 30px;
   overflow: hidden;
-  box-shadow: 0 30px 60px rgba(10, 27, 57, 0.15);
+  box-shadow: 0 30px 60px rgba(10, 27, 57, 0.08);
   border: 1px solid rgba(10, 27, 57, 0.05);
   background: white;
 }
@@ -33,157 +31,170 @@
 
 .addressBox {
   background: white;
-  padding: 40px;
+  padding: 35px;
   border-radius: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border-left: 8px solid var(--accent);
-  transition: transform 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .addressBox:hover {
-  transform: translateX(10px);
+  transform: translateY(-3px);
+  border-color: #C5A059;
+  box-shadow: 0 15px 35px rgba(197, 160, 89, 0.08);
+}
+
+.titleWithIcon {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.iconBox {
+  width: 48px;
+  height: 48px;
+  background: rgba(197, 160, 89, 0.08); /* Sophisticated light gold tint */
+  color: #C5A059; /* Brand warm gold */
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .label {
-  display: inline-block;
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 800;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin-bottom: 15px;
+  color: #0A1B39; /* Deep Navy */
+  letter-spacing: -0.5px;
 }
 
 .address {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--primary);
-  line-height: 1.5;
+  font-size: 16px;
+  font-weight: 500;
+  color: #475569; /* Warm slate gray */
+  line-height: 1.6;
   word-break: keep-all;
+  margin: 0;
+}
+
+.phone {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: #C5A059; /* Elegant gold highlight */
+  margin-top: 10px;
 }
 
 .transportList {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  flex-grow: 1;
+  gap: 20px;
 }
 
 .transportItem {
-  background: #0A1B39; /* Deep Navy Card */
+  background: white;
   padding: 30px;
   border-radius: 24px;
   display: flex;
   gap: 20px;
-  color: white;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 25px rgba(10, 27, 57, 0.1);
+  border: 1px solid #e2e8f0;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
 }
 
 .transportItem:hover {
-  transform: translateY(-5px);
-  background: #12284d;
+  transform: translateY(-3px);
+  border-color: #C5A059;
+  box-shadow: 0 15px 35px rgba(197, 160, 89, 0.08);
 }
 
-.iconBox {
-  width: 56px;
-  height: 56px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  flex-shrink: 0;
+/* Adjust gold icon inside transport items as well */
+.transportItem .iconBox {
+  background: rgba(10, 27, 57, 0.04);
+  color: #0A1B39;
+}
+
+.transportItem:hover .iconBox {
+  background: rgba(197, 160, 89, 0.08);
+  color: #C5A059;
 }
 
 .details {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex-grow: 1;
 }
 
 .trLabel {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 800;
-  color: var(--accent);
+  color: #0A1B39;
 }
 
 .details p {
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.7;
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.8;
+  margin: 0;
 }
 
-.line2 {
-  color: #60a5fa;
-  font-weight: 800;
-  margin-right: 8px;
-}
-
-.line3 {
-  color: #fbbf24;
-  font-weight: 800;
-  margin-right: 8px;
-}
-
-.phone {
-  display: block;
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--accent);
-  margin-top: 10px;
-}
-
-.transportHeader {
-  margin-top: 10px;
-}
-
-/* Seoul Subway Signature Colors */
+/* Seoul Subway Signature Colors - Elegant Luxury Tones */
 .subwayLine9 {
-  color: #c9a92e; /* Line 9 Gold */
-  font-weight: 800;
+  color: #c59e31; /* Soft Line 9 Gold */
+  font-weight: 700;
   margin-right: 8px;
 }
 
 .subwayLine7 {
-  color: #8da427; /* Line 7 Olive Green */
-  font-weight: 800;
+  color: #788a1e; /* Soft Line 7 Olive Green */
+  font-weight: 700;
   margin-right: 8px;
 }
 
 .subwayLine2 {
-  color: #2fb827; /* Line 2 Green */
-  font-weight: 800;
+  color: #30a728; /* Soft Line 2 Muted Green */
+  font-weight: 700;
   margin-right: 8px;
 }
 
-/* Seoul Bus Type Colors */
+/* Seoul Bus Type Colors - Soft Muted tone-on-tone Badges */
 .busBlue {
-  color: #3b82f6; /* Blue bus */
-  font-weight: 800;
+  color: #3a69a7;
+  font-weight: 700;
   margin-right: 6px;
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(58, 105, 167, 0.08);
+  border: 1px solid rgba(58, 105, 167, 0.15);
   padding: 2px 6px;
   border-radius: 4px;
+  font-size: 12px;
+  display: inline-block;
 }
 
 .busGreen {
-  color: #10b981; /* Green bus */
-  font-weight: 800;
+  color: #40916c;
+  font-weight: 700;
   margin-right: 6px;
-  background: rgba(16, 185, 129, 0.15);
+  background: rgba(64, 145, 108, 0.08);
+  border: 1px solid rgba(64, 145, 108, 0.15);
   padding: 2px 6px;
   border-radius: 4px;
+  font-size: 12px;
+  display: inline-block;
 }
 
 .busRed {
-  color: #ef4444; /* Red bus */
-  font-weight: 800;
+  color: #b34747;
+  font-weight: 700;
   margin-right: 6px;
-  background: rgba(239, 68, 68, 0.15);
+  background: rgba(179, 71, 71, 0.08);
+  border: 1px solid rgba(179, 71, 71, 0.15);
   padding: 2px 6px;
   border-radius: 4px;
+  font-size: 12px;
+  display: inline-block;
 }
 
 @media (max-width: 1200px) {
@@ -204,10 +215,15 @@
     padding: 30px;
   }
   .address {
-    font-size: 18px;
+    font-size: 15px;
   }
   .transportItem {
     padding: 24px;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .iconBox {
+    width: 42px;
+    height: 42px;
   }
 }
-

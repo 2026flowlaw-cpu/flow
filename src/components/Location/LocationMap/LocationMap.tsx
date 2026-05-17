@@ -23,7 +23,17 @@ const LocationMap = () => {
           <div className={styles.info}>
             {/* By Car */}
             <div className={styles.addressBox}>
-              <span className={styles.label}>🚗 차량 이용 시</span>
+              <div className={styles.titleWithIcon}>
+                <div className={styles.iconBox}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+                    <circle cx="7" cy="17" r="2" />
+                    <circle cx="17" cy="17" r="2" />
+                    <path d="M5 12h14" />
+                  </svg>
+                </div>
+                <span className={styles.label}>차량 이용 시</span>
+              </div>
               <p className={styles.address}>
                 서울특별시 강남구 영동대로 617(삼성동, 찬이빌딩) 6~8층<br />
                 <span className={styles.phone}>T. 02-517-8300</span>
@@ -31,14 +41,20 @@ const LocationMap = () => {
             </div>
 
             {/* By Public Transport */}
-            <div className={styles.transportHeader}>
-              <span className={styles.label}>🏓 대중교통 이용 시</span>
-            </div>
-
             <div className={styles.transportList}>
               {/* Subway */}
               <div className={styles.transportItem}>
-                <div className={styles.iconBox}>🚇</div>
+                <div className={styles.iconBox}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="4" y="3" width="16" height="16" rx="2" />
+                    <path d="M4 11h16" />
+                    <path d="M12 3v8" />
+                    <path d="m8 19-2 3" />
+                    <path d="m16 19 2 3" />
+                    <circle cx="8" cy="15" r="1" />
+                    <circle cx="16" cy="15" r="1" />
+                  </svg>
+                </div>
                 <div className={styles.details}>
                   <strong className={styles.trLabel}>지하철</strong>
                   <p>
@@ -51,7 +67,18 @@ const LocationMap = () => {
 
               {/* Bus */}
               <div className={styles.transportItem}>
-                <div className={styles.iconBox}>🚌</div>
+                <div className={styles.iconBox}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="4" y="3" width="16" height="16" rx="2" />
+                    <path d="M4 11h16" />
+                    <path d="M8 3v8" />
+                    <path d="M16 3v8" />
+                    <path d="m6 19-1 2" />
+                    <path d="m18 19 1 2" />
+                    <circle cx="7" cy="15" r="1" />
+                    <circle cx="17" cy="15" r="1" />
+                  </svg>
+                </div>
                 <div className={styles.details}>
                   <strong className={styles.trLabel}>버스 (봉은사. 삼성1파출소 앞 하차)</strong>
                   <p>

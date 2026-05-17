@@ -80,25 +80,36 @@ export default function DefectReviews() {
     });
   };
 
-  const handleTransitionEnd = () => {
+  // Listen to trackIndex changes to unlock sliding and perform seamless clone jumps
+  useEffect(() => {
     if (trackIndex === 7) {
-      setIsTransitioning(false);
-      setTrackIndex(2);
-      setTimeout(() => {
-        setIsTransitioning(true);
-        setIsSliding(false);
-      }, 50);
+      const timer = setTimeout(() => {
+        setIsTransitioning(false);
+        setTrackIndex(2);
+        setTimeout(() => {
+          setIsTransitioning(true);
+          setIsSliding(false);
+        }, 50);
+      }, 450); // Match CSS transition duration perfectly
+      return () => clearTimeout(timer);
     } else if (trackIndex === 1) {
-      setIsTransitioning(false);
-      setTrackIndex(6);
-      setTimeout(() => {
-        setIsTransitioning(true);
-        setIsSliding(false);
-      }, 50);
+      const timer = setTimeout(() => {
+        setIsTransitioning(false);
+        setTrackIndex(6);
+        setTimeout(() => {
+          setIsTransitioning(true);
+          setIsSliding(false);
+        }, 50);
+      }, 450);
+      return () => clearTimeout(timer);
     } else {
-      setIsSliding(false);
+      // Normal slide lock
+      const timer = setTimeout(() => {
+        setIsSliding(false);
+      }, 450);
+      return () => clearTimeout(timer);
     }
-  };
+  }, [trackIndex]);
 
   // Detect screen size for mobile responsiveness
   useEffect(() => {
@@ -161,7 +172,6 @@ export default function DefectReviews() {
                 transform: `translateX(${translation})`,
                 transition: isTransitioning ? 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)' : 'none'
               }}
-              onTransitionEnd={handleTransitionEnd}
             >
               {extendedReviews.map((item, i) => {
                 const isCenter = i === trackIndex;

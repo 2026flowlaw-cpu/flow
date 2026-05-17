@@ -159,7 +159,54 @@ export default function EduLawPage() {
         />
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
-        <VerdictSection />
+        <VerdictSection 
+          mainTitle={
+            <>
+              승소, 결코 우연이 아닙니다<br />
+              데이터가 증명하는 압도적 실력
+            </>
+          }
+          descText={
+            <>
+              학원업종 특유의 고용 형태와 운영 방식에 대한 이해가 없으면 탁상공론식 법리에만 매몰되기 쉽습니다.<br />
+              법무법인 플로우는 압도적 실전 노하우로 학원분쟁에 마침표를 찍습니다.
+            </>
+          }
+          verdicts={[
+            {
+              id: 1,
+              court: '서울중앙지방법원',
+              caseNo: '2023나48590',
+              plaintiff: '강사 A씨 (피고: B 어학원)',
+              orderText: '원고의 퇴직금 및 주휴수당 청구를 모두 기각한다. 소송비용은 원고가 부담한다.',
+              stampText: '강사 퇴직금 청구 기각 방어'
+            },
+            {
+              id: 2,
+              court: '서울동부지방법원',
+              caseNo: '2024카합10283',
+              plaintiff: 'C 수학학원 (피고: 강사 D씨)',
+              orderText: '피고는 본안 판결 선고 시까지 인근 3km 이내에서 동종 학원을 설립하거나 근무하여서는 아니 된다.',
+              stampText: '경업금지 가처분 인용 승소'
+            },
+            {
+              id: 3,
+              court: '수원지방법원',
+              caseNo: '2023가합70291',
+              plaintiff: '원장 E씨 (피고: 양도인 F씨)',
+              orderText: '피고는 원고에게 학원 매출 기망에 따른 권리금 반환 및 손해배상금 1억 2천만 원을 지급하라.',
+              stampText: '학원 권리금 반환 승소'
+            },
+            {
+              id: 4,
+              court: '서울서부지방법원',
+              caseNo: '2024가합40582',
+              plaintiff: '원장 G씨 (피고: 동업 탈퇴자 H씨)',
+              orderText: '피고는 학원 자산 정산 약정에 따라 원고에게 지분 환수금 8천만 원을 지급하고 명예훼손 행위를 중단하라.',
+              stampText: '동업 정산 및 비방 금지'
+            }
+          ]}
+        />
 
 
         {/* 4.5. Specialized Win Strategy Grid (Image 1 layout) */}

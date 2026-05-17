@@ -12,7 +12,8 @@ interface ReviewItem {
 }
 
 export default function DefectReviews() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [trackIndex, setTrackIndex] = useState(2);
+  const [isTransitioning, setIsTransitioning] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const autoPlayTimer = useRef<NodeJS.Timeout | null>(null);
@@ -57,20 +58,42 @@ export default function DefectReviews() {
 
   // Extended list at both ends for infinite loop with 3 visible cards
   const extendedReviews = [
-    reviews[reviews.length - 2],
-    reviews[reviews.length - 1],
-    ...reviews,
-    reviews[0],
-    reviews[1],
+    reviews[reviews.length - 2], // index 0 (card 3)
+    reviews[reviews.length - 1], // index 1 (card 4)
+    ...reviews,                  // indices 2, 3, 4, 5, 6 (cards 0, 1, 2, 3, 4)
+    reviews[0],                  // index 7 (card 0)
+    reviews[1],                  // index 8 (card 1)
   ];
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? reviews.length - 1 : prev - 1));
+    setTrackIndex((prev) => prev - 1);
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev === reviews.length - 1 ? 0 : prev + 1));
+    setTrackIndex((prev) => prev + 1);
   };
+
+  const handleTransitionEnd = () => {
+    if (trackIndex === 7) {
+      setIsTransitioning(false);
+      setTrackIndex(2);
+    } else if (trackIndex === 1) {
+      setIsTransitioning(false);
+      setTrackIndex(6);
+    }
+  };
+
+  // Re-enable transitioning class smoothly on next frame
+  useEffect(() => {
+    if (!isTransitioning) {
+      const raf = requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsTransitioning(true);
+        });
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+  }, [isTransitioning]);
 
   // Detect screen size for mobile responsiveness
   useEffect(() => {
@@ -99,8 +122,11 @@ export default function DefectReviews() {
 
   // Dynamic calculation of horizontal translate offset
   const translation = isMobile
-    ? `-${(currentIndex + 2) * 100}%`
-    : `calc(-${(currentIndex + 2) * 33.333}% + 33.333%)`;
+    ? `-${trackIndex * 100}%`
+    : `calc(-${trackIndex * 33.333}% + 33.333%)`;
+
+  // Map current active index back to dots (0 to 4)
+  const activeDotIndex = (trackIndex - 2 + reviews.length) % reviews.length;
 
   return (
     <section className={styles.sectionWrapper}>
@@ -133,10 +159,14 @@ export default function DefectReviews() {
           <div className={styles.carouselViewport}>
             <div 
               className={styles.carouselTrack}
-              style={{ transform: `translateX(${translation})` }}
+              style={{ 
+                transform: `translateX(${translation})`,
+                transition: isTransitioning ? 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)' : 'none'
+              }}
+              onTransitionEnd={handleTransitionEnd}
             >
               {extendedReviews.map((item, i) => {
-                const isCenter = i === currentIndex + 2;
+                const isCenter = i === trackIndex;
                 const slideClassName = `${styles.carouselSlide} ${isCenter ? styles.activeSlide : ''}`;
                 return (
                   <div className={slideClassName} key={`${item.id}-${i}`}>
@@ -190,8 +220,12 @@ export default function DefectReviews() {
           {reviews.map((_, index) => (
             <button
               key={index}
-              className={`${styles.dot} ${currentIndex === index ? styles.activeDot : ''}`}
-              onClick={() => setCurrentIndex(index)}
+              className={`${styles.dot} ${activeDotIndex === index ? styles.activeDot : ''}`}
+              onClick={() => {
+                if (isTransitioning) {
+                  setTrackIndex(index + 2);
+                }
+              }}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}

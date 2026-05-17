@@ -9,18 +9,18 @@
 
 /* Hero Section */
 .heroSection {
-  background: linear-gradient(rgba(10, 17, 30, 0.88), rgba(10, 17, 30, 0.94)), url('/images/hero_bg.png');
+  background: linear-gradient(rgba(10, 27, 57, 0.9), rgba(10, 27, 57, 0.95)), url('/images/hero_bg.png');
   background-size: cover;
   background-position: center;
-  padding: 220px 20px 160px;
+  padding: 220px 20px 140px;
   color: white;
 }
 
 .heroContentGrid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 80px;
-  align-items: stretch;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
   max-width: 1200px;
   margin: 0 auto;
   text-align: left;
@@ -30,92 +30,80 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 420px;
 }
 
 .blueSquare {
-  width: 14px;
-  height: 14px;
-  background-color: #0066fe; /* Vibrant blue square accent */
-  margin-bottom: 24px;
-  box-shadow: 0 0 10px rgba(0, 102, 254, 0.4);
+  width: 12px;
+  height: 12px;
+  background-color: #3b82f6; /* Accent electric blue */
+  margin-bottom: 20px;
 }
 
 .heroMainTitle {
-  font-size: 52px;
+  font-size: 48px;
   font-weight: 800;
   color: white;
   margin: 0 0 24px 0;
   letter-spacing: -1.5px;
-  line-height: 1.25;
+  line-height: 1.2;
+}
+
+.titleSub {
+  font-size: 32px;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-left: 10px;
+  letter-spacing: -0.5px;
 }
 
 .heroDescription {
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.8;
-  margin: 0;
+  font-size: 18px;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin: 0 0 45px 0;
   word-break: keep-all;
-  letter-spacing: -0.2px;
 }
 
 .heroUrl {
   font-size: 15px;
-  color: #0066fe;
+  color: #3b82f6;
   font-weight: 700;
   letter-spacing: 0.5px;
-  margin-top: auto;
-  opacity: 0.95;
 }
 
 .heroRight {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  align-self: flex-start;
-  padding-bottom: 40px;
+  gap: 20px;
 }
 
 .glassCard {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 32px 28px;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  padding: 24px;
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Staggered Vertical Card Layout matching the Reference Image */
-.glassCard:nth-child(odd) {
-  transform: translateY(35px);
-}
-
-.glassCard:nth-child(odd):hover {
-  transform: translateY(28px);
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(0, 102, 254, 0.3);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.glassCard:nth-child(even):hover {
+.glassCard:hover {
   transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(0, 102, 254, 0.3);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
 .glassCardTitle {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 800;
-  color: #0066fe; /* Electric blue title highlight */
-  margin: 0 0 12px 0;
+  color: #3b82f6; /* Electric blue title highlight */
+  margin: 0 0 10px 0;
   letter-spacing: -0.3px;
 }
 
 .glassCardDesc {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  color: #94a3b8;
   line-height: 1.5;
   margin: 0;
 }

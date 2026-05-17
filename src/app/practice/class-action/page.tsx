@@ -7,7 +7,7 @@ import Stats from '@/components/Stats/Stats';
 import PainPoints from '@/components/PainPoints/PainPoints';
 import SuccessStories from '@/components/SuccessStories/SuccessStories';
 import FAQ from '@/components/FAQ/FAQ';
-import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
+import ClassActionStrength from '@/components/ClassActionStrength/ClassActionStrength';
 import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
 import CTA from '@/components/CTA/CTA';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
@@ -33,10 +33,9 @@ export default function ClassActionPage() {
             {/* Left side: Definition & Description */}
             <div className={styles.heroLeft}>
               <div className={styles.blueSquare}></div>
-              <h1 className={styles.heroMainTitle}>집단소송(단체소송) 이란?</h1>
+              <h1 className={styles.heroMainTitle}>집단소송<span className={styles.titleSub}>(단체소송)</span> 이란?</h1>
               <p className={styles.heroDescription}>
-                다수의 피해자가 함께 모여 동일하거나 유사한 위법행위로 인한 손해를 구제받기 위해<br />
-                공동으로 하나의 소송을 통해 권리를 행사하는 것
+                다수의 피해자가 함께 모여 동일하거나 유사한 위법행위로 인한 손해를 구제받기 위해 공동으로 하나의 소송을 통해 권리를 행사하는 것
               </p>
               <div className={styles.heroUrl}>www.flowlaw-classaction.com</div>
             </div>
@@ -78,7 +77,7 @@ export default function ClassActionPage() {
         <FAQ />
 
         {/* 5. 회사 강점소개 */}
-        <PhilosophyMessage />
+        <ClassActionStrength />
 
         {/* 6. 의뢰인후기 */}
         <CustomerReviews />

@@ -69,6 +69,32 @@ export default function ConstructionDisputePage() {
               desc: '대한변협등록 건설전문변호사가 모든 초기 상담부터 책임지고 직접 조력'
             }
           ]}
+          promises={[
+            {
+              id: 0,
+              title: '건설전문변호사 1:1 책임제',
+              desc: '건축공학과 법학을 복수 전공하고 오랜 건설 소송 경력을 갖춘 건설전문변호사가 초기 분석부터 최후 변론까지 밀착하여 조력합니다.',
+              iconType: 'lawyer'
+            },
+            {
+              id: 1,
+              title: '기술진 TF 협업 감정망',
+              desc: '건축기사, 시공기술사 등 로펌 내 자체 기술인력과 법률진이 한 몸이 되어, 감정 결과를 완벽하게 대비하고 입증합니다.',
+              iconType: 'tech'
+            },
+            {
+              id: 2,
+              title: '선제적 분쟁 예방 솔루션',
+              desc: '무조건적인 본안 소송 외에도 기성고 정산, 유치권 행사, 공사중지가처분 등 현장 상황에 가장 최적화된 맞춤 경로를 제공합니다.',
+              iconType: 'consult'
+            },
+            {
+              id: 3,
+              title: '압도적인 대금 회수 레코드',
+              desc: '추가공사대금, 지체상금 면책, 공사대금 청구 등 고난도 건설 분쟁에서 풍부한 승소 사례를 기반으로 확실한 이익을 보호합니다.',
+              iconType: 'twotrack'
+            }
+          ]}
         />
 
         {/* 2.5. Specialized Defect Cases Pill Grid (Image 1 layout) */}

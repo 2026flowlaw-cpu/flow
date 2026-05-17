@@ -19,7 +19,7 @@ interface VerdictSectionProps {
 }
 
 export default function VerdictSection({
-  kicker = '데이터가 증명하는 압도적 실력',
+  kicker = '',
   mainTitle = '모두가 불가능하다고 했던 사건, 법무법인 플로우는 결과로 증명했습니다!',
   descText
 }: VerdictSectionProps) {
@@ -64,7 +64,7 @@ export default function VerdictSection({
         
         {/* Header Block (Image 1 replica) */}
         <div className={styles.headerArea}>
-          <span className={styles.kicker}>{kicker}</span>
+          {kicker && <span className={styles.kicker}>{kicker}</span>}
           <h2 className={styles.mainTitle}>{mainTitle}</h2>
           <div className={styles.descText}>
             {descText || (

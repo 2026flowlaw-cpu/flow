@@ -41,22 +41,22 @@ const centerData: Record<string, {
       {
         id: 0,
         target: 800,
-        suffix: '+',
+        suffix: '건+',
         title: '성범죄 수행 건수',
         desc: '강간, 강제추행, 디지털 성범죄 등 축적된 성범죄 성공 데이터'
       },
       {
         id: 1,
         target: 0,
-        suffix: '당일 긴급 상담 및 초기 대응 가능',
-        title: '24시간 즉시 출동',
+        suffix: '당일 긴급',
+        title: '상담 및 초기 대응 가능',
         desc: '체포, 압수수색, 구속영장 등 긴급 상황 즉시 출동 및 밀착 조력'
       },
       {
         id: 2,
         target: 100,
-        suffix: '% 비밀보장',
-        title: '철저한 보안 유지',
+        suffix: '%',
+        title: '철저한 비밀 보장',
         desc: '의뢰인의 신원 노출 방지 및 철저한 보안 하에 1:1 전담 변론'
       }
     ]
@@ -83,14 +83,14 @@ const centerData: Record<string, {
       {
         id: 1,
         target: 0,
-        suffix: '당일 행정처분 구제 조치 착수',
-        title: '원스톱 면허 구제',
+        suffix: '당일 착수',
+        title: '행정처분 구제 조치',
         desc: '생계형 운전자를 위한 즉각적인 행정심판 및 임시운전면허 신청'
       },
       {
         id: 2,
         target: 100,
-        suffix: '% 합의 전문 조율',
+        suffix: '%',
         title: '피해자 신속 합의',
         desc: '형사전문변호사가 직접 원만한 합의와 처벌불원서 즉각 확보'
       }
@@ -118,15 +118,15 @@ const centerData: Record<string, {
       {
         id: 1,
         target: 0,
-        suffix: '당일 소변·모발 정밀 대응',
-        title: '과학적 정밀 진단',
+        suffix: '과학 진단',
+        title: '소변·모발 정밀 대응',
         desc: '국과수 정밀 감정 결과 사전 시뮬레이션 및 소명자료 즉각 구성'
       },
       {
         id: 2,
         target: 100,
-        suffix: '% 치료·재활 솔루션 연계',
-        title: '체계적 재활 솔루션',
+        suffix: '%',
+        title: '치료·재활 솔루션 연계',
         desc: '전문 재활 병원 연계 및 단약 프로그램 이수 양형 조건 극대화'
       }
     ]
@@ -153,14 +153,14 @@ const centerData: Record<string, {
       {
         id: 1,
         target: 0,
-        suffix: '당일 미필적 고의 조각 입증',
-        title: '신속한 고의성 조각',
+        suffix: '고의 조각',
+        title: '미필적 고의 조각 입증',
         desc: '취업 사기, 고수익 알바 등 기망당한 사실을 객관적으로 입증'
       },
       {
         id: 2,
         target: 100,
-        suffix: '% 구속영장 기각 전략 가동',
+        suffix: '%',
         title: '불구속 상태 방어',
         desc: '도주 및 증거 인멸 우려가 없음을 밝혀 불구속 상태 방어 확보'
       }
@@ -188,14 +188,14 @@ const centerData: Record<string, {
       {
         id: 1,
         target: 0,
-        suffix: '당일 안전의무 이행 진단',
+        suffix: '안전 진단',
         title: '안전체계 구축 입증',
         desc: '현장 안전 관리 체계 구축 및 실제 이행 여부를 과학적으로 소명'
       },
       {
         id: 2,
         target: 100,
-        suffix: '% 경영 책임자 밀착 방어',
+        suffix: '%',
         title: '대표이사 구속 방어',
         desc: '대표이사의 과실 책임을 정밀 분리하여 형사 책임 최소화'
       }
@@ -223,14 +223,14 @@ const centerData: Record<string, {
       {
         id: 1,
         target: 0,
-        suffix: '당일 회계 증적 분석 착수',
+        suffix: '증적 분석',
         title: '회계 증적 분석',
         desc: '자금의 실질적 흐름과 용처를 정밀 추적하여 부당이득 없음 입증'
       },
       {
         id: 2,
         target: 100,
-        suffix: '% 경영 판단 원칙 소명',
+        suffix: '%',
         title: '기망 행위 부존재 입증',
         desc: '정당한 비즈니스 결정이었음을 논리적으로 소명하여 혐의 탈피'
       }
@@ -258,14 +258,14 @@ const centerData: Record<string, {
       {
         id: 1,
         target: 0,
-        suffix: '당일 심의위원 맞춤 대응 분석',
+        suffix: '성향 분석',
         title: '학폭 조치 수위 방어',
         desc: '심의위원들의 성향과 쟁점을 분석하여 처분 수위 최소화 전략'
       },
       {
         id: 2,
         target: 100,
-        suffix: '% 아이 시각 맞춤 동행',
+        suffix: '%',
         title: '정서적 동행 조력',
         desc: '경찰 조사 시 상처받지 않도록 따뜻하고 정서적인 동행 조력'
       }
@@ -293,14 +293,14 @@ const centerData: Record<string, {
       {
         id: 1,
         target: 0,
-        suffix: '당일 전담 합의 대행 가동',
+        suffix: '합의 중재',
         title: '신속 합의 중재',
         desc: '감정이 격해진 당사자들을 대신해 원만한 합의와 처벌불원 도출'
       },
       {
         id: 2,
         target: 100,
-        suffix: '% 조기 무혐의 종결 조력',
+        suffix: '%',
         title: '기소 전 빠른 종결',
         desc: '경찰 단계에서 혐의 없음을 입증하여 기소 전 빠른 종결 도모'
       }

@@ -114,6 +114,13 @@ export default function DefectReviews() {
                 <div className={styles.carouselSlide} key={item.id}>
                   <div className={styles.reviewCard}>
                     
+                    {/* Floating Quote Icon */}
+                    <div className={styles.quoteIcon}>
+                      <svg width="48" height="36" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 18C0 8.05888 8.05888 0 18 0V7.2C12.0355 7.2 7.2 12.0355 7.2 18H18V32H0V18ZM22 18C22 8.05888 30.0589 0 40 0V7.2C34.0355 7.2 29.2 12.0355 29.2 18H40V32H22V18Z" fill="#C5A059" fillOpacity="0.18"/>
+                      </svg>
+                    </div>
+
                     {/* Star Rating & Card Body */}
                     <div className={styles.cardTop}>
                       <div className={styles.starRating}>

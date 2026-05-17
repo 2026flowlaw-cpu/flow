@@ -46,11 +46,11 @@
 }
 
 /* ====================================================
-    CAROUSEL LAYOUT
+    CAROUSEL LAYOUT (NARROWED TO BE TALLER / MORE PORTRAIT)
    ==================================================== */
 .carouselContainer {
   position: relative;
-  max-width: 880px; /* Centered, premium card proportion */
+  max-width: 660px; /* Narrowed to create a gorgeous, tall, majestic letterhead ratio! */
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -63,7 +63,7 @@
 
 .carouselTrack {
   display: flex;
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Custom smooth ease-out */
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
 }
 
@@ -71,21 +71,21 @@
   flex: 0 0 100%;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 50px; /* Generous breathing room for navigation buttons */
+  padding: 0 40px; /* Generous breathing room for navigation buttons */
 }
 
 /* ====================================================
-    PREMIUM TESTIMONIAL CARD
+    PREMIUM TALL PORTRAIT TESTIMONIAL CARD
    ==================================================== */
 .reviewCard {
   background-color: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 24px;
-  padding: 50px 45px;
+  border-radius: 28px;
+  padding: 60px 45px 50px 45px; /* Extremely generous padding for luxury feel */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 300px;
+  min-height: 480px; /* Force cards to be tall and prominent vertically! */
   box-shadow: 0 10px 30px rgba(10, 27, 57, 0.02);
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   position: relative;
@@ -97,11 +97,17 @@
   background-color: #ffffff;
 }
 
+.quoteIcon {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+}
+
 /* Top Meta & Stars */
 .cardTop {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
   margin-bottom: 25px;
 }
 
@@ -116,9 +122,9 @@
 }
 
 .reviewText {
-  font-size: 17px;
+  font-size: 16.5px; /* Slightly adjusted to fit beautifully in the tall box */
   color: #1e293b;
-  line-height: 1.85;
+  line-height: 1.9; /* Spacious line-height */
   font-weight: 600;
   word-break: keep-all;
   margin: 0;
@@ -128,7 +134,7 @@
 
 /* Bottom Client Meta */
 .cardBottom {
-  margin-top: 30px;
+  margin-top: auto; /* Push metadata to the very bottom of the tall card */
   border-top: 1px solid #e2e8f0;
   padding-top: 25px;
   display: flex;
@@ -199,11 +205,11 @@
 }
 
 .prevBtn {
-  left: -20px;
+  left: -25px;
 }
 
 .nextBtn {
-  right: -20px;
+  right: -25px;
 }
 
 /* ====================================================
@@ -232,7 +238,7 @@
 }
 
 .activeDot {
-  width: 24px; /* Pill-shaped active state */
+  width: 24px;
   border-radius: 4px;
   background-color: #C5A059 !important; /* Gold active dot */
 }
@@ -241,18 +247,22 @@
     RESPONSIVE MEDIA QUERIES
    ==================================================== */
 @media (max-width: 768px) {
+  .carouselContainer {
+    max-width: 100%;
+  }
+
   .carouselSlide {
-    padding: 0 20px;
+    padding: 0 15px;
   }
   
   .reviewCard {
-    padding: 35px 25px;
-    min-height: 340px;
+    padding: 40px 25px;
+    min-height: 480px;
   }
   
   .reviewText {
     font-size: 15px;
-    line-height: 1.75;
+    line-height: 1.8;
   }
   
   .mainTitle {

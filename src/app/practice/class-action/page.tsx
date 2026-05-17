@@ -69,12 +69,14 @@ export default function ClassActionPage() {
         {/* 3. 성공사례(판결문 롤링 카루셀 - 강점 세션 아래 배치) */}
         <ClassActionSuccess />
 
+        {/* 2. 주요 진행 사건 현황 (수행사례 아래 배치) */}
+        <ClassActionCases />
+
         {/* 1. 실적 카드 */}
         <Stats />
       <PainPoints />
 
-        {/* 2. 주요 진행 사건 현황 (케이스) */}
-        <ClassActionCases />
+
 
 
 

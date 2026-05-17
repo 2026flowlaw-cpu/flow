@@ -67,8 +67,8 @@ export default function VerdictSection() {
           <div className={styles.marqueeTrack}>
             {/* Set 1 */}
             <div className={styles.marqueeSet}>
-              {verdicts.map((item) => (
-                <div className={styles.paperCard} key={`set1-${item.id}`}>
+              {[...verdicts, ...verdicts].map((item, idx) => (
+                <div className={styles.paperCard} key={`set1-${item.id}-${idx}`}>
                   {/* Paper Document Layout */}
                   <div className={styles.documentHeader}>
                     <span className={styles.courtBadge}>{item.court}</span>
@@ -109,8 +109,8 @@ export default function VerdictSection() {
 
             {/* Set 2 (for infinite loop) */}
             <div className={styles.marqueeSet}>
-              {verdicts.map((item) => (
-                <div className={styles.paperCard} key={`set2-${item.id}`}>
+              {[...verdicts, ...verdicts].map((item, idx) => (
+                <div className={styles.paperCard} key={`set2-${item.id}-${idx}`}>
                   {/* Paper Document Layout */}
                   <div className={styles.documentHeader}>
                     <span className={styles.courtBadge}>{item.court}</span>

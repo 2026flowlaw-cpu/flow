@@ -1,7 +1,6 @@
 "use client";
 
 import React from 'react';
-import ClassActionSuccess from '@/components/ClassActionSuccess/ClassActionSuccess';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import DefectPromise from '@/components/DefectPromise/DefectPromise';
 import DefectCasesGrid from '@/components/DefectCasesGrid/DefectCasesGrid';
@@ -104,8 +103,7 @@ export default function DefectLitigationPage() {
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
         <VerdictSection />
 
-        {/* 3. Success Stories Carousel */}
-        <ClassActionSuccess />
+
 
         {/* 4. Defect Cases Rolling */}
         <section className={styles.sectionCases}>

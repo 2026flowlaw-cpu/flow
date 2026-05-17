@@ -396,6 +396,7 @@
   line-height: 1.8;
   margin: 0;
   word-break: keep-all;
+  white-space: pre-wrap;
 }
 
 .singleCard {

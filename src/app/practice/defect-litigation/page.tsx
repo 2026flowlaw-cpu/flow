@@ -79,7 +79,7 @@ export default function DefectLitigationPage() {
                   <span className={styles.goldHighlight}>ONE-STOP</span> 종합 법률서비스
                 </h1>
                 <div className={styles.heroSubtitles}>
-                  <span className={styles.titleSub1}>하자조사 · 진단 · 보수까지 올인원(All-in-One) 토탈케어</span>
+                  <span className={styles.titleSub1}>하자조사 · 진단 · 보수까지 올인원(All-in-One) 토털케어</span>
                   <span className={styles.titleSub2}>하자소송의 처음과 끝, 법무법인 플로우가 함께합니다.</span>
                 </div>
                 <p className={styles.heroDescription}>

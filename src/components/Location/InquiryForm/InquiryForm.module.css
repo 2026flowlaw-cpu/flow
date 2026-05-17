@@ -25,7 +25,7 @@
 
 .topInfoTag {
   font-size: 14.5px;
-  color: #C5A059; /* Brand Gold Kicker */
+  color: #B89B63; /* Official Muted Gold Kicker */
   font-weight: 800;
   margin-bottom: 18px;
   letter-spacing: 1.5px;
@@ -34,7 +34,7 @@
 .sloganTitle {
   font-size: 40px; /* Massive hero scale slogan! */
   font-weight: 900;
-  color: #0A1B39; /* Deep Navy */
+  color: #162233; /* Deep Flow Navy */
   letter-spacing: -2px;
   line-height: 1.45;
   margin: 0 0 20px 0;
@@ -42,7 +42,7 @@
 }
 
 .sloganRed {
-  color: #0A1B39; /* Changed from red to Deep Navy for clean, high-end tone and manner */
+  color: #162233; /* Changed to Deep Flow Navy for clean, high-end tone and manner */
 }
 
 .sloganDesc {
@@ -64,7 +64,7 @@
   gap: 10px;
   align-items: center;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(10, 27, 57, 0.02);
+  box-shadow: 0 10px 30px rgba(22, 34, 51, 0.02);
   max-width: 580px;
   width: 100%;
 }
@@ -78,7 +78,7 @@
 
 .sloganPhone {
   font-size: 28px; /* High impact prominent phone number! */
-  color: #0A1B39; /* Deep navy color */
+  color: #162233; /* Deep Flow Navy color */
   font-weight: 800;
   text-decoration: underline;
   text-decoration-thickness: 2.5px;
@@ -98,7 +98,7 @@
     HEADER BLUE BOARD PANEL
    ==================================================== */
 .formHeaderBg {
-  background: linear-gradient(135deg, #0A1B39 0%, #162a52 100%);
+  background: linear-gradient(135deg, #162233 0%, #222d3d 100%); /* Deep Flow Navy Gradient */
   border-radius: 24px 24px 0 0;
   padding: 40px 45px;
   color: #ffffff;
@@ -135,10 +135,10 @@
 .headerContactLabel {
   font-size: 12.5px; /* Larger tag text */
   font-weight: 800;
-  color: #C5A059; /* Brand Gold label text */
+  color: #B89B63; /* Brand Muted Gold label text */
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  background-color: rgba(197, 160, 89, 0.18); /* Premium gold container tag */
+  background-color: rgba(184, 155, 99, 0.18); /* Premium muted gold container tag */
   padding: 3px 10px;
   border-radius: 6px;
 }
@@ -151,7 +151,7 @@
 .kicker {
   font-size: 13px; /* Slightly larger professional tracker */
   letter-spacing: 2.5px;
-  color: #C5A059; /* Brand Gold */
+  color: #B89B63; /* Brand Muted Gold */
   font-weight: 800;
   display: block;
   margin-bottom: 12px;

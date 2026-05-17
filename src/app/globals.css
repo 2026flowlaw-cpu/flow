@@ -1,9 +1,9 @@
 :root {
   /* Core Brand Colors - High Fidelity */
-  --primary: #0A1B39;
-  --primary-light: #162C52;
-  --accent: #C5A059;
-  --accent-light: #D4B476;
+  --primary: #162233; /* Deep Flow Navy */
+  --primary-light: #222d3d;
+  --accent: #B89B63; /* Muted Gold */
+  --accent-light: #c9ad79;
   --background: #FFFFFF;
   --foreground: #111111;
   --text-muted: #777777;

@@ -133,7 +133,7 @@ export default function DefectStrategyGrid({
         </div>
 
         {/* 6-Card Deep Navy Grid (Image 1 layout) */}
-        <div className={styles.strategyGrid}>
+        <div className={`${styles.strategyGrid} ${(customStrategies || defaultStrategies).length === 4 ? styles.gridOf4 : ''}`}>
           {(customStrategies || defaultStrategies).map((item) => (
             <div className={styles.strategyCard} key={item.id}>
               <div className={styles.iconBox}>

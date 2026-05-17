@@ -198,7 +198,47 @@ export default function GeneralCivilPage() {
 
 
         {/* 4.5. Specialized Win Strategy Grid (Image 1 layout) */}
-        <DefectStrategyGrid />
+        <DefectStrategyGrid 
+          kicker="[법무법인 플로우만의 '민사 분쟁' 필승 전략]"
+          mainTitle="경험의 차이가 결과의 차이를 만듭니다."
+          descBlock="철저한 법리 검토와 신속한 실천력으로 민사 분쟁의 종지부를 찍습니다."
+          bottomText={null}
+          strategies={[
+            {
+              id: 1,
+              title: '입체적 · 선제적 대응',
+              desc: '획일화된 대응이 아닌, 사건의 이면을 파고드는 정밀한 분석을 통해 상대방의 논리를 무력화합니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                  <path d="M2 12h20"/>
+                </svg>
+              )
+            },
+            {
+              id: 2,
+              title: '분쟁 조기 종결 최우선',
+              desc: '의뢰인의 고단함을 고려, 무리한 소송보다는 실익을 우선합니다. 조정 · 합의 등 분쟁을 조기에 종결시킬 수 있는 솔루션을 최우선합니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+              )
+            },
+            {
+              id: 3,
+              title: '철저한 사후 관리',
+              desc: '승소 판결은 시작에 불과합니다. 강제집행을 통한 실질적 채권 회수는 물론, 향후 발생할 수 있는 추가적인 법률 고충까지 섬세하게 관리합니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="m9 11 2 2 4-4"/>
+                </svg>
+              )
+            }
+          ]}
+        />
 
         {/* 4.6. Real Client Testimonial Reviews (Interactive filter grid) */}
         <DefectReviews />

@@ -630,8 +630,11 @@ const centerData: Record<string, {
       }
     ],
     reviewsKicker: '실제 해결 사례',
-    reviewsTitle: '다양한 마약범죄 사건 해결 경험을 보유하고 있습니다',
-    reviewsDesc: '단순 투약 및 소지 혐의부터 밀수, 유통 조직 가담까지, 조기 과학적 대응을 통해 최선의 선처 결과로 증명했습니다.'
+    reviewsTitle: '유사 사건 대응 경험을 확인해보세요',
+    reviewsDesc: '초범 투약부터 밀수까지,\n다양한 마약 사건에서 의뢰인의 편에 섰습니다.',
+    verdictKicker: 'PROVEN RESULTS',
+    verdictTitle: '무죄와 선처, 결코 우연이 아닙니다\n판결문이 증명하는 압도적 승소 실력',
+    verdictDesc: '수사기관의 압박과 불리한 증거 속에서도 빈틈없는 법리 구성으로 이뤄낸 쾌거.\n법무법인 플로우는 오직 결과로 말합니다.'
   },
   'voice-phishing': {
     title: '보이스피싱',

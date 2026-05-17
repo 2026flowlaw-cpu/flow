@@ -10,58 +10,7 @@ import DefectReviews from '@/components/DefectReviews/DefectReviews';
 import DefectFaq from '@/components/DefectFaq/DefectFaq';
 import styles from './page.module.css';
 
-interface DefectCaseItem {
-  id: number;
-  title: string;
-  countText: string;
-  statusText: string;
-  description: string;
-}
 
-const defectCases: DefectCaseItem[] = [
-  {
-    id: 1,
-    title: '김포 XXX 아파트 외벽 균열 및 결로 부실시공 손해배상청구',
-    countText: '1,240세대 공동소송',
-    statusText: '모집중',
-    description: '외벽 균열 누수 및 세대 내 결로 곰팡이 피해에 따른 시공사 대상 하자보수 손해배상청구'
-  },
-  {
-    id: 2,
-    title: '용인 XXX 아파트 지하주차장 철근 누락 및 보수보증금 청구',
-    countText: '980세대 전체 참여',
-    statusText: '모집완료',
-    description: '구조안전 진단 결과 기둥 무단 철근 탈락 입증 및 25억 보증금 증액 판결 성공'
-  },
-  {
-    id: 3,
-    title: '인천 XXX 아파트 외벽 마감 대리석 탈락 및 구조안전 진단 청구',
-    countText: '850세대 공동소송',
-    statusText: '모집중',
-    description: '외장재 탈락으로 인한 안전사고 위험 해결 및 전면 재시공 공사 청구'
-  },
-  {
-    id: 4,
-    title: '수원 XXX 아파트 조경 식재 고사 및 지반 균열 손해배상청구',
-    countText: '680세대 판결금 확보',
-    statusText: '모집완료',
-    description: '조경 수목 무단 미식재 및 고사, 단지 지반 침하 균열 입증 손해배상금 승소'
-  },
-  {
-    id: 5,
-    title: '양주 XXX 신축빌라 단지 결로 및 부실 마감 하자 기망 손해배상',
-    countText: '120세대 소제기 완료',
-    statusText: '모집중',
-    description: '설계도면과 상이한 저가 마감재 무단 변경 사용 입증 및 계약 위반 손해배상'
-  },
-  {
-    id: 6,
-    title: '천안 XXX 상가 동별 오배수관 역류 및 배관 부실 하자보수청구',
-    countText: '320개 점포 연합소송',
-    statusText: '모집완료',
-    description: '상가 지하공간 오수관 구배 위반 부실 시공 및 상습 역류 하자 보수 비용 청구'
-  }
-];
 
 export default function JeonseFraudPage() {
   return (
@@ -209,143 +158,80 @@ export default function JeonseFraudPage() {
         />
 
 
-
-        {/* 4. Defect Cases Rolling */}
-        <section className={styles.sectionCases}>
-          <div className={styles.container}>
-            
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.panelTitle}>전세사기 실시간 진행 현황</h2>
-              <p className={styles.panelSubtitle}>
-                전국 대규모 단지 및 상가 입주민들이 플로우 하자 전담 TF와 함께 정당한 가치를 찾고 있습니다.
-              </p>
-            </div>
-
-            <div className={styles.casesGrid}>
-              
-              {/* Left Column: Vertical Defect Marquee */}
-              <div>
-                <div className={styles.verticalMarqueeWrapper}>
-                  <div className={styles.verticalMarqueeTrack}>
-                    
-                    {/* 1st copy */}
-                    {defectCases.map((item) => {
-                      const key = `${item.id}-defect-orig`;
-                      const isCompleted = item.statusText === '모집완료';
-                      return (
-                        <div 
-                          key={key} 
-                          className={`${styles.caseCard} ${isCompleted ? styles.completedCard : ''}`}
-                        >
-                          <div className={styles.cardTitleRow}>
-                            <h3 className={styles.cardTitle}>{item.title}</h3>
-                            <span className={styles.countBadge}>
-                              {item.countText}, <span className={isCompleted ? styles.statusClosed : styles.statusHighlight}>{item.statusText}</span>
-                            </span>
-                          </div>
-                          <p className={styles.cardDesc}>{item.description}</p>
-                        </div>
-                      );
-                    })}
-
-                    {/* 2nd copy */}
-                    {defectCases.map((item) => {
-                      const key = `${item.id}-defect-dup`;
-                      const isCompleted = item.statusText === '모집완료';
-                      return (
-                        <div 
-                          key={key} 
-                          className={`${styles.caseCard} ${isCompleted ? styles.completedCard : ''}`}
-                        >
-                          <div className={styles.cardTitleRow}>
-                            <h3 className={styles.cardTitle}>{item.title}</h3>
-                            <span className={styles.countBadge}>
-                              {item.countText}, <span className={isCompleted ? styles.statusClosed : styles.statusHighlight}>{item.statusText}</span>
-                            </span>
-                          </div>
-                          <p className={styles.cardDesc}>{item.description}</p>
-                        </div>
-                      );
-                    })}
-
-                  </div>
-                </div>
-                <div className={styles.marqueeNotice}>
-                  * 사건 카드에 마우스를 올리시면(Hover) 위로 올라가는 롤링이 일시정지됩니다.
-                </div>
-              </div>
-
-              {/* Right Column: Dark Navy Info Card */}
-              <div className={styles.rightCol}>
-                <div className={styles.navyPanel}>
-                  <div className={styles.panelWatermark}>
-                    <svg width="240" height="240" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1">
-                      <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
-                      <path d="M12 6V18" />
-                      <path d="M6 12H18" />
-                    </svg>
-                  </div>
-
-                  <div className={styles.panelWatermarkTitle}>성공적 하자보수 보증금 확보 완료</div>
-                  <p className={styles.panelWatermarkSubtitle}>건축 기술적 입증을 바탕으로 시공사 보상을 확실하게 매듭지었습니다.</p>
-
-                  <div className={styles.closedCaseList}>
-                    <div className={styles.closedCaseRow}>
-                      <div className={styles.closedDot}></div>
-                      <div className={styles.closedCaseInfo}>
-                        <strong className={styles.closedTitle}>용인 XXX 아파트 지하주차장 철근 누락 및 보수보증금 청구</strong>
-                        <span className={styles.closedMeta}>모집 완료 (980세대 전체 완료)</span>
-                      </div>
-                    </div>
-
-                    <div className={styles.closedCaseRow}>
-                      <div className={styles.closedDot}></div>
-                      <div className={styles.closedCaseInfo}>
-                        <strong className={styles.closedTitle}>수원 XXX 아파트 조경 식재 고사 및 지반 균열 손해배상청구</strong>
-                        <span className={styles.closedMeta}>모집 완료 (680세대 전체 완료)</span>
-                      </div>
-                    </div>
-
-                    <div className={styles.closedCaseRow}>
-                      <div className={styles.closedDot}></div>
-                      <div className={styles.closedCaseInfo}>
-                        <strong className={styles.closedTitle}>천안 XXX 상가 동별 오배수관 역류 및 배관 부실 하자보수청구</strong>
-                        <span className={styles.closedMeta}>모집 완료 (320개 점포 전체 완료)</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className={styles.divider}></div>
-
-                  <div className={styles.shinmoongoBox}>
-                    <div className={styles.shinmoongoHeader}>
-                      <div className={styles.shinmoongoIconBox}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
-                          <path d="M12 16v-4"/>
-                          <path d="M12 8h.01"/>
-                        </svg>
-                      </div>
-                      <div className={styles.shinmoongoHeaderText}>
-                        <h5 className={styles.shinmoongoTitle}>하자 피해 자가진단 신고센터</h5>
-                        <span className={styles.shinmoongoSubtitle}>무료 결함 계측 및 변호사 기술 진단</span>
-                      </div>
-                    </div>
-                    <p className={styles.shinmoongoDesc}>
-                      단지 내 지하주차장 천장 누수, 세대 벽면 대량 결로, 타일 파손 등 보수 요청을 거부당하신 경우 플로우 진단 신고 센터로 즉시 신고 접수해 주시면 특화 진단을 제공해 드립니다.
-                    </p>
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-        </section>
-
         {/* 4.5. Specialized Win Strategy Grid (Image 1 layout) */}
-        <DefectStrategyGrid />
+        <DefectStrategyGrid 
+          kicker="[법무법인 플로우만의 '전세사기' 필승 전략]"
+          descBlock={
+            <>
+              <span className={styles.descLine}>대한법률구조공단 전세사기피해자 법률지원 지정 로펌 플로우가</span>
+              <span className={styles.descLine}>전세금 즉시 진단부터 형사·민사 소송 및 임대인 재산 추적까지 올인원 밀착 지원합니다.</span>
+            </>
+          }
+          bottomText={
+            <>
+              법무법인 플로우는 대한법률구조공단 전세사기피해자 법률구조 제휴를 맺은 로펌이며, 
+              전세모(전세세입자모임)카페와 업무제휴를 맺은 로펌으로 수천건에 이르는 전세사기 케이스를 보유하고 있습니다. 
+              아울러 다수의 보증금 반환소송에서 전부승소한 바, 여러분의 사례가 승소 사례가 될 수 있도록 조력하겠습니다.
+            </>
+          }
+          strategies={[
+            {
+              id: 1,
+              title: '전세보증금 회수 가능성 즉시 분석',
+              desc: '상담 당일 대항력·최우선변제권 요건, 선순위 채권 현황, 배당 가능 금액을 즉시 분석합니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              )
+            },
+            {
+              id: 2,
+              title: '형사·민사 투트랙 대응',
+              desc: '사기죄 형사고소와 보증금반환 민사소송을 동시에 진행합니다. 형사고소를 통한 압박이 협상 테이블을 열기도 합니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              )
+            },
+            {
+              id: 3,
+              title: '중개사 과실 진단',
+              desc: '공인중개사의 설명의무 위반이 확인되면 중개사 및 공제보험을 통한 배상청구까지 연계하여 회수 가능성을 높입니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="16" x2="12" y2="12"/>
+                  <line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+              )
+            },
+            {
+              id: 4,
+              title: '확실한 사후케어',
+              desc: '판결문 확보 즉시 전문 신용조사를 통해 임대인의 신용 상태와 체납 내역, 주거래 은행, 은닉 재산을 정밀 추적하여 보증금을 끝까지 회수합니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              )
+            },
+            {
+              id: 5,
+              title: '비용부담 최소화',
+              desc: '전세사기가 민생 사건인 점을 감안, 최초 상담부터 수임에 이르는 전과정에 비용 부담을 최소화하였습니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="12" y1="1" x2="12" y2="23"/>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              )
+            }
+          ]}
+        />
 
         {/* 4.6. Real Client Testimonial Reviews (Interactive filter grid) */}
         <DefectReviews />

@@ -54,8 +54,9 @@
     GRID STRUCTURE (Image 1 replica)
    ==================================================== */
 .strategyGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 24px;
   margin-bottom: 55px;
 }
@@ -72,6 +73,9 @@
   align-items: center;
   justify-content: flex-start;
   box-shadow: 0 10px 30px rgba(10, 27, 57, 0.08);
+  flex: 1 1 calc(33.333% - 24px);
+  min-width: 280px;
+  max-width: 380px;
 }
 
 .strategyCard:hover {

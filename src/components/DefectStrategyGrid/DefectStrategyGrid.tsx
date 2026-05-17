@@ -15,15 +15,17 @@ interface DefectStrategyGridProps {
   mainTitle?: React.ReactNode;
   descBlock?: React.ReactNode;
   bottomText?: React.ReactNode;
+  strategies?: StrategyItem[];
 }
 
 export default function DefectStrategyGrid({
   kicker = "[법무법인 플로우만의 '하자소송' 필승 전략]",
   mainTitle,
   descBlock,
-  bottomText
+  bottomText,
+  strategies: customStrategies
 }: DefectStrategyGridProps) {
-  const strategies: StrategyItem[] = [
+  const defaultStrategies: StrategyItem[] = [
     {
       id: 1,
       title: '건설전문변호사 직접 상담',
@@ -132,7 +134,7 @@ export default function DefectStrategyGrid({
 
         {/* 6-Card Deep Navy Grid (Image 1 layout) */}
         <div className={styles.strategyGrid}>
-          {strategies.map((item) => (
+          {(customStrategies || defaultStrategies).map((item) => (
             <div className={styles.strategyCard} key={item.id}>
               <div className={styles.iconBox}>
                 {item.icon}

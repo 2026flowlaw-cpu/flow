@@ -71,10 +71,13 @@ export default function DefectLitigationPage() {
               <div className={styles.heroLeft}>
                 <div className={styles.blueSquare}></div>
                 <h1 className={styles.heroMainTitle}>
-                  하자소송 특화,<br />ONE STOP 종합 법률서비스
+                  하자소송 특화,<br />
+                  <span className={styles.goldHighlight}>ONE-STOP</span> 종합 법률서비스
+                </h1>
+                <div className={styles.heroSubtitles}>
                   <span className={styles.titleSub1}>하자조사 · 진단 · 보수까지 올인원(All-in-One) 토털케어</span>
                   <span className={styles.titleSub2}>하자소송의 처음과 끝, 법무법인 플로우가 함께합니다.</span>
-                </h1>
+                </div>
                 <p className={styles.heroDescription}>
                   아파트 단지와 상가의 부실시공 및 하자는 입주민의 안전과 재산을 위협합니다. <br />
                   법무법인 플로우는 상주 건축 엔지니어링 TF와 법률 계산팀이 긴밀히 연대하여, 하자를 과학적으로 입증하고 판결 보상액을 최대로 끌어올립니다.

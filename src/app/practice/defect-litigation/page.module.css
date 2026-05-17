@@ -63,20 +63,45 @@
 }
 
 .heroMainTitle {
-  font-size: 42px;
+  font-size: 52px;
   font-weight: 800;
   color: #ffffff;
-  margin: 0 0 24px 0;
-  line-height: 1.3;
-  letter-spacing: -1.5px;
+  margin: 0 0 28px 0;
+  line-height: 1.35;
+  letter-spacing: -2px;
+  word-break: keep-all;
 }
 
-.titleSub {
-  color: #C5A059; /* Accent gold */
-  font-size: 28px;
-  font-weight: 700;
+.goldHighlight {
+  color: #C5A059;
+}
+
+.heroSubtitles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 35px;
+  align-items: center;
+}
+
+.titleSub1 {
+  font-size: 21px;
+  font-weight: 800;
+  color: #C5A059;
   display: block;
-  margin-top: 8px;
+  line-height: 1.45;
+  letter-spacing: -0.5px;
+  word-break: keep-all;
+}
+
+.titleSub2 {
+  font-size: 17.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  display: block;
+  line-height: 1.45;
+  letter-spacing: -0.3px;
+  word-break: keep-all;
 }
 
 .heroDescription {

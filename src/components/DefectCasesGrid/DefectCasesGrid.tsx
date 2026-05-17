@@ -6,6 +6,7 @@ import styles from './DefectCasesGrid.module.css';
 interface CasePill {
   id: number;
   label: string;
+  subtitle?: string;
   coreDiagnosis: string;
   engineeringSolution?: string;
   legalStrategy?: string;
@@ -23,9 +24,13 @@ interface DefectCasesGridProps {
   diagnosisLabel?: string;
   diagnosisEnglishLabel?: string;
   diagnosisBadge?: string;
+  engineeringLabel?: string;
+  engineeringEnglishLabel?: string;
+  engineeringBadge?: string;
   legalStrategyLabel?: string;
   legalStrategyEnglishLabel?: string;
   legalStrategyBadge?: string;
+  isVertical?: boolean;
 }
 
 export default function DefectCasesGrid({
@@ -44,9 +49,13 @@ export default function DefectCasesGrid({
   diagnosisLabel = '핵심 진단',
   diagnosisEnglishLabel = 'Diagnosis',
   diagnosisBadge = 'DIAGNOSIS',
+  engineeringLabel = '엔지니어링 솔루션',
+  engineeringEnglishLabel = 'Engineering',
+  engineeringBadge = 'ENGINEERING',
   legalStrategyLabel = '법적 대응 전략',
   legalStrategyEnglishLabel = 'Legal Strategy',
-  legalStrategyBadge = 'LEGAL'
+  legalStrategyBadge = 'LEGAL',
+  isVertical = false
 }: DefectCasesGridProps) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
@@ -184,15 +193,22 @@ export default function DefectCasesGrid({
           )}
         </div>
 
-        {/* 12-Pill Grid */}
-        <div className={`${styles.pillsGrid} ${cases.length === 6 ? styles.gridOf6 : ''}`}>
+        {/* Pills Grid or Vertical List */}
+        <div className={`${isVertical ? styles.verticalGrid : styles.pillsGrid} ${(!isVertical && cases.length === 6) ? styles.gridOf6 : ''}`}>
           {cases.map((item) => (
             <div 
               key={item.id}
-              className={`${styles.pillCard} ${selectedId === item.id ? styles.pillActive : ''}`}
+              className={`${isVertical ? styles.verticalPillCard : styles.pillCard} ${selectedId === item.id ? styles.pillActive : ''}`}
               onClick={() => setSelectedId(item.id)}
             >
-              {item.label}
+              {isVertical ? (
+                <div className={styles.verticalPillContent}>
+                  <div className={styles.verticalPillLabel}>{item.label}</div>
+                  {item.subtitle && <div className={styles.verticalPillSubtitle}>{item.subtitle}</div>}
+                </div>
+              ) : (
+                item.label
+              )}
             </div>
           ))}
         </div>
@@ -212,6 +228,7 @@ export default function DefectCasesGrid({
                 <div className={styles.headerLeftInfo}>
                   <span className={styles.detailBadge}>CASE {currentCase.id.toString().padStart(2, '0')}</span>
                   <h4 className={styles.detailTitle}>{currentCase.label}</h4>
+                  {currentCase.subtitle && <span className={styles.detailTitleSubtitle}>— {currentCase.subtitle}</span>}
                 </div>
                 <div className={styles.headerSubtitle}>
                   {reportSubtitle || (currentCase.engineeringSolution 
@@ -272,10 +289,10 @@ export default function DefectCasesGrid({
                               <line x1="12" y1="8" x2="12.01" y2="8"/>
                             </svg>
                             <span className={styles.cardTitle}>
-                              엔지니어링 솔루션 <span className={styles.englishSub}>(Engineering)</span>
+                              {engineeringLabel} <span className={styles.englishSub}>({engineeringEnglishLabel})</span>
                             </span>
                           </div>
-                          <span className={styles.cardBadgeEngineering}>ENGINEERING</span>
+                          <span className={styles.cardBadgeEngineering}>{engineeringBadge}</span>
                         </div>
                         <p className={styles.cardText}>{currentCase.engineeringSolution}</p>
                       </div>

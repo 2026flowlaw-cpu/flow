@@ -40,12 +40,24 @@ const centerData: Record<string, {
   customCases: Array<{
     id: number;
     label: string;
+    subtitle?: string;
     coreDiagnosis: string;
-    legalStrategy: string;
+    engineeringSolution?: string;
+    legalStrategy?: string;
   }>;
   reviewsKicker: string;
   reviewsTitle: string;
   reviewsDesc: string;
+  isVertical?: boolean;
+  diagnosisLabel?: string;
+  diagnosisEnglishLabel?: string;
+  diagnosisBadge?: string;
+  engineeringLabel?: string;
+  engineeringEnglishLabel?: string;
+  engineeringBadge?: string;
+  legalStrategyLabel?: string;
+  legalStrategyEnglishLabel?: string;
+  legalStrategyBadge?: string;
   strategies?: Array<{
     id: number;
     title: string;
@@ -321,51 +333,74 @@ const centerData: Record<string, {
         desc: '합의 전문 인력과 형사전문변호사가 직접 피해자 측과 조율하여, 과도한 합의금 요구를 방지하고 처벌불원서 확보 및 형사 공탁 절차를 완벽히 대리합니다.'
       }
     ],
-    casesKicker: '음주·교통 분쟁 특화 · 신속 구제 토탈 솔루션',
-    casesTitle: '음주·교통 사건은 초기 면허 구제와 합의 골든타임이 핵심입니다',
-    casesDescLines: [
-      '음주 및 교통사고는 단속 직후 또는 사고 발생 직후의 대응이 행정·형사 결과를 결정짓습니다.',
-      '면허를 구제하고 실형 위기에서 벗어나기 위해서',
-      '법무법인 플로우 교통 센터를 찾아주시는 이유, 압도적인 면허 구제 및 선처 사례 때문입니다.'
-    ],
-    difficultyTitle: '* 음주 및 교통 사고, 상황에 따른 맞춤 전략이 필요합니다.',
-    difficultySubtitle: '법무법인 플로우 교통 센터는 음주 삼진아웃, 뺑소니, 인명피해에 대한 정밀 해결 방안을 보유하고 있습니다.',
+    casesKicker: '지금 어떤 상황에 처해 계신가요?',
+    casesTitle: '음주·교통 사건, 상황마다 전략이 다릅니다.',
+    casesDescLines: [],
+    difficultyTitle: '',
+    difficultySubtitle: '',
+    isVertical: true,
+    diagnosisLabel: '상황 설명',
+    diagnosisEnglishLabel: 'Analysis',
+    diagnosisBadge: 'ANALYSIS',
+    engineeringLabel: '대응 방안',
+    engineeringEnglishLabel: 'Solution',
+    engineeringBadge: 'SOLUTION',
     customCases: [
       {
         id: 1,
-        label: '음주 3진 아웃',
-        coreDiagnosis: '과거 동종 전력이 누적된 경우 실형 선고 가능성이 매우 높습니다.',
-        legalStrategy: '• 과거 전력 간 시간적 간격 및 이동 거리 정밀 분석\n• 차량 매각, 금주 치료 등 적극적인 재범 방지 노력 소명\n• 집행유예 등 최선의 양형 선처 유도'
+        label: '음주운전 초범',
+        subtitle: '처음으로 음주운전으로 적발됐습니다',
+        coreDiagnosis: '초범이고 수치가 낮다면 사안에 맞는 처분 최소화 방향을 검토합니다. 수사 초기 대응 방향 설정이 중요합니다.',
+        engineeringSolution: '• 측정치·기기 오차·위드마크 역추산 정밀 분석\n• 치료 프로그램 참여·반성 정상참작 자료 구성\n• 불기소 또는 벌금형 가능성 높이기 위한 전략적 대응'
       },
       {
         id: 2,
-        label: '위험운전치상',
-        coreDiagnosis: '음주로 인한 정상적 운전 곤란 상태에서 대인 사고 발생 시 특가법이 적용됩니다.',
-        legalStrategy: '• 당시 혈중알코올농도 수치 및 보행 상태 검토\n• 사고 현장 도로 여건 및 가해/피해자 과실 비율 입증\n• 단순 교통사고처리특례법(치상)으로의 죄명 변경 주장'
+        label: '음주운전 재범 이상',
+        subtitle: '음주운전 전과가 있는데 또 적발됐습니다',
+        coreDiagnosis: '재범부터 형량이 크게 가중됩니다. 집행유예 전환을 위한 치료·재활 노력이 핵심입니다.',
+        engineeringSolution: '• 재범 이상 경위·음주 패턴 정상참작 자료 구성\n• 가족 지지체계·환경 개선 소명 자료 수집\n• 알코올 치료센터 입소 - 재발 방지 노력 입증'
       },
       {
         id: 3,
-        label: '도주치상 (뺑소니)',
-        coreDiagnosis: '인명 피해 발생 사실을 알고도 도주한 고의성이 있었는지가 핵심 쟁점입니다.',
-        legalStrategy: '• 사고 사실 자체를 인지하지 못했던 상황 맥락 입증\n• 피해자의 상해 정도가 극히 경미하여 구호 필요성 없었음 주장\n• 자발적 신고 및 블랙박스 분석을 통한 도주 혐의 탄핵'
+        label: '음주측정 거부',
+        subtitle: '음주측정을 거부했습니다',
+        coreDiagnosis: '측정 거부는 실제 음주운전보다 처벌이 더 무거울 수 있습니다. 거부 경위와 불가피성을 소명해야 합니다.',
+        engineeringSolution: '• 거부 경위·당시 상황 정밀 분석 및 소명\n• 체포 절차 이해 부족·불안으로 인한 거부 입증\n• 자발적 혈액검사 요청 여부 확인'
       },
       {
         id: 4,
-        label: '면허취소 구제',
-        coreDiagnosis: '생계형 운전자의 경우 면허취소로 인한 생계 유지가 곤란함을 적극 소명해야 합니다.',
-        legalStrategy: '• 행정처분 통지 즉시 임시운전면허 신청 및 행정심판 청구\n• 운전을 생업으로 하는 불가피성 및 가족 부양 사정 강력 변론\n• 처분 집행정지 신청을 통한 소송 중 운전 면허 상태 유지'
+        label: '면허취소 행정심판',
+        subtitle: '면허가 취소됐습니다. 되찾을 수 있나요?',
+        coreDiagnosis: '처분 통보 후 90일 이내가 기한입니다. 기한을 놓치면 불복이 불가능합니다. 빠른 대응 검토가 필요합니다.',
+        engineeringSolution: '• 생계형·직업상 운전 필요성 입증 자료 수집\n• 재량권 일탈·남용 주장으로 정지로 경감\n• 행정심판 기각 시 행정소송으로 대응'
       },
       {
         id: 5,
-        label: '피해자 합의',
-        coreDiagnosis: '형사 처벌 수위를 낮추기 위해서는 신속하고 원만한 합의가 최우선입니다.',
-        legalStrategy: '• 교통사고 전문 변호사가 직접 중재하여 합리적 합의 선 도출\n• 피해자 감정 자극 없이 처벌불원서 확보\n• 과도한 합의 요구 시 형사공탁 제도를 통한 공탁 사실 소명'
+        label: '위험운전치상·보복운전·운전자폭행',
+        subtitle: '음주 중 사고·보복운전·운전자 폭행 혐의입니다',
+        coreDiagnosis: '모두 중형 사건입니다. 피해자 합의가 양형에서 가장 강력한 요소입니다. 즉시 대응하세요.',
+        engineeringSolution: '• 피해자 합의 협상 즉시 대리\n• 치료비 공탁으로 합의 전 양형 방어\n• 위험운전 해당 여부·보복 목적 법리 검토'
       },
       {
         id: 6,
-        label: '항소심 선처',
-        coreDiagnosis: '1심 판결 형량이 무거운 경우 양형 부당을 이유로 즉시 항소해야 합니다.',
-        legalStrategy: '• 1심 판결 이후 발생한 추가 합의 또는 피해 회복 소명\n• 1심 판결문 분석을 통한 양형 부당 사유 정밀 구성\n• 항소심을 통한 벌금형 감형 또는 집행유예 변경'
+        label: '뺑소니',
+        subtitle: '뺑소니로 고소됐습니다',
+        coreDiagnosis: '사고 인식 여부와 구호 조치 여부가 핵심입니다. 뺑소니 인정 여부에 따라 형량 차이가 크게 납니다.',
+        engineeringSolution: '• 사고 인식 여부 — CCTV·블랙박스 즉시 확보\n• 현장 이탈 경위·구호 조치 노력 입증\n• 뺑소니 → 일반 교통사고 경감 전략'
+      },
+      {
+        id: 7,
+        label: '약물운전',
+        subtitle: '약물운전으로 적발됐습니다',
+        coreDiagnosis: '처방약도 해당할 수 있습니다. \'운전이 곤란한 상태\' 여부가 핵심 쟁점입니다.',
+        engineeringSolution: '• 약물 종류·체내 농도·복용 경위 정밀 분석\n• 처방 의약품 여부 — 의사 처방·용법 입증\n• 운전 곤란 상태 여부 다투기 — 정상 운전 상태 입증'
+      },
+      {
+        id: 8,
+        label: '무면허운전',
+        subtitle: '무면허로 운전하다 적발됐습니다',
+        coreDiagnosis: '면허 취소·미취득·정지 상태에 따라 전략이 달라집니다. 음주운전과 동시 적발 시 가중처벌됩니다.',
+        engineeringSolution: '• 면허 상태 확인 — 취소·미취득·정지 중 분류별 대응\n• 음주+무면허 동시 적발 — 경합범 처리 최소화 전략\n• 운전 불가피성·긴급 상황 소명 정상참작 자료 구성'
       }
     ],
     reviewsKicker: '실제 해결 사례',
@@ -1136,13 +1171,17 @@ export default function CriminalCenterPage() {
           difficultyTitle={data.difficultyTitle}
           difficultySubtitle={data.difficultySubtitle}
           reportSubtitle={`법무법인 플로우(FLOW) ${data.title} 대응 서비스 상세 안내서`}
-          diagnosisLabel="주요 대응 쟁점"
-          diagnosisEnglishLabel="Key Issues"
-          diagnosisBadge="ISSUES"
-          legalStrategyLabel="전략적 변론 내용"
-          legalStrategyEnglishLabel="Defense Strategy"
-          legalStrategyBadge="STRATEGY"
+          diagnosisLabel={data.diagnosisLabel || "주요 대응 쟁점"}
+          diagnosisEnglishLabel={data.diagnosisEnglishLabel || "Key Issues"}
+          diagnosisBadge={data.diagnosisBadge || "ISSUES"}
+          engineeringLabel={data.engineeringLabel || "엔지니어링 솔루션"}
+          engineeringEnglishLabel={data.engineeringEnglishLabel || "Engineering"}
+          engineeringBadge={data.engineeringBadge || "ENGINEERING"}
+          legalStrategyLabel={data.legalStrategyLabel || "전략적 변론 내용"}
+          legalStrategyEnglishLabel={data.legalStrategyEnglishLabel || "Defense Strategy"}
+          legalStrategyBadge={data.legalStrategyBadge || "STRATEGY"}
           customCases={data.customCases}
+          isVertical={data.isVertical}
         />
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}

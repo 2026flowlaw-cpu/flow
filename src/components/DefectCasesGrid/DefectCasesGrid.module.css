@@ -482,3 +482,90 @@
     white-space: normal;
   }
 }
+
+/* ====================================================
+    VERTICAL PILLS LAYOUT (Luxury custom style)
+   ==================================================== */
+.verticalGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.verticalPillCard {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 22px 28px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+
+.verticalPillCard:hover {
+  background-color: #0A1B39;
+  border-color: #0A1B39;
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 12px 24px -10px rgba(10, 27, 57, 0.25);
+}
+
+.verticalPillCard:hover .verticalPillLabel {
+  color: #ffffff;
+}
+
+.verticalPillCard:hover .verticalPillSubtitle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.verticalPillContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.verticalPillLabel {
+  font-size: 21px;
+  font-weight: 800;
+  color: #0F172A;
+  transition: color 0.3s ease;
+  letter-spacing: -0.5px;
+}
+
+.verticalPillSubtitle {
+  font-size: 15.5px;
+  font-weight: 500;
+  color: #64748b;
+  transition: color 0.3s ease;
+  letter-spacing: -0.3px;
+}
+
+/* Active State override */
+.verticalPillCard.pillActive {
+  background-color: #C5A059 !important;
+  border-color: #C5A059 !important;
+  box-shadow: 0 12px 24px -10px rgba(197, 160, 89, 0.35) !important;
+}
+
+.verticalPillCard.pillActive .verticalPillLabel {
+  color: #ffffff !important;
+}
+
+.verticalPillCard.pillActive .verticalPillSubtitle {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.detailTitleSubtitle {
+  font-size: 19px;
+  font-weight: 500;
+  color: #64748b;
+  margin-left: 8px;
+}

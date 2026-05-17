@@ -145,8 +145,8 @@
 }
 
 .detailBox {
-  background: #ffffff;
-  border: 1px solid rgba(197, 160, 89, 0.22);
+  background: linear-gradient(135deg, #0A152A 0%, #060D1A 100%);
+  border: 1px solid rgba(197, 160, 89, 0.25);
   border-radius: 28px;
   padding: 44px 48px;
   display: flex;
@@ -157,9 +157,9 @@
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 40px 100px rgba(10, 27, 57, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   animation: modalPopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  color: #1e293b;
+  color: #ffffff;
 }
 
 @keyframes modalPopIn {
@@ -177,10 +177,10 @@
   position: absolute;
   top: 24px;
   right: 24px;
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
-  color: #64748b;
+  color: #94a3b8;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -190,9 +190,9 @@
 }
 
 .closeButton:hover {
-  color: #855f1f;
-  background: rgba(197, 160, 89, 0.12);
-  border-color: rgba(197, 160, 89, 0.35);
+  color: #ffffff;
+  background: rgba(197, 160, 89, 0.2);
+  border-color: rgba(197, 160, 89, 0.5);
   transform: rotate(90deg);
 }
 
@@ -200,7 +200,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding-bottom: 20px;
   margin-bottom: 8px;
   gap: 20px;
@@ -216,9 +216,9 @@
 .headerSubtitle {
   font-size: 13px;
   font-weight: 600;
-  color: #a88241;
+  color: #C5A059;
   letter-spacing: 0.5px;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 .detailBadge {
@@ -229,13 +229,13 @@
   padding: 5px 12px;
   border-radius: 6px;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 10px rgba(197, 160, 89, 0.2);
+  box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
 }
 
 .detailTitle {
   font-size: 24px;
   font-weight: 600;
-  color: #0f172a;
+  color: #ffffff;
   margin: 0;
   letter-spacing: -0.5px;
 }
@@ -258,41 +258,39 @@
   flex-direction: column;
   gap: 12px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 6px 20px rgba(10, 27, 57, 0.03);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
-  background: #0B1528; /* Premium Rich Dark Navy background */
 }
 
 .diagnosisCard:hover,
 .engineeringCard:hover,
 .legalCard:hover {
   transform: translateY(-2px);
-  box-shadow: 0 15px 35px rgba(10, 27, 57, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
 }
 
 /* 1. Diagnosis Card Styling */
 .diagnosisCard {
-  background: linear-gradient(135deg, #0B1528 0%, #070e1c 100%);
-  border: 1px solid rgba(239, 68, 68, 0.22);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(15, 23, 42, 0.4) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.15);
 }
 
 .diagnosisCard:hover {
-  border-color: rgba(239, 68, 68, 0.45);
-  background: linear-gradient(135deg, #111c34 0%, #091224 100%);
-  box-shadow: 0 12px 30px rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.35);
+  box-shadow: 0 15px 35px rgba(239, 68, 68, 0.1);
 }
 
 .diagnosisIcon {
   color: #f87171;
-  filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.35));
+  filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.4));
 }
 
 .cardBadgeDiagnosis {
   font-size: 9px;
   font-weight: 700;
   color: #f87171;
-  background: rgba(239, 68, 68, 0.14);
+  background: rgba(239, 68, 68, 0.12);
   padding: 3px 8px;
   border-radius: 4px;
   letter-spacing: 1px;
@@ -301,26 +299,25 @@
 
 /* 2. Engineering Card Styling */
 .engineeringCard {
-  background: linear-gradient(135deg, #0B1528 0%, #070e1c 100%);
-  border: 1px solid rgba(59, 130, 246, 0.22);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.06) 0%, rgba(15, 23, 42, 0.4) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.15);
 }
 
 .engineeringCard:hover {
-  border-color: rgba(59, 130, 246, 0.45);
-  background: linear-gradient(135deg, #111c34 0%, #091224 100%);
-  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 15px 35px rgba(59, 130, 246, 0.1);
 }
 
 .engineeringIcon {
   color: #60a5fa;
-  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.35));
+  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.4));
 }
 
 .cardBadgeEngineering {
   font-size: 9px;
   font-weight: 700;
   color: #60a5fa;
-  background: rgba(59, 130, 246, 0.14);
+  background: rgba(59, 130, 246, 0.12);
   padding: 3px 8px;
   border-radius: 4px;
   letter-spacing: 1px;
@@ -329,26 +326,25 @@
 
 /* 3. Legal Card Styling */
 .legalCard {
-  background: linear-gradient(135deg, #0B1528 0%, #070e1c 100%);
-  border: 1px solid rgba(197, 160, 89, 0.22);
+  background: linear-gradient(135deg, rgba(197, 160, 89, 0.06) 0%, rgba(15, 23, 42, 0.4) 100%);
+  border: 1px solid rgba(197, 160, 89, 0.15);
 }
 
 .legalCard:hover {
-  border-color: rgba(197, 160, 89, 0.45);
-  background: linear-gradient(135deg, #111c34 0%, #091224 100%);
-  box-shadow: 0 12px 30px rgba(197, 160, 89, 0.08);
+  border-color: rgba(197, 160, 89, 0.35);
+  box-shadow: 0 15px 35px rgba(197, 160, 89, 0.1);
 }
 
 .legalIcon {
   color: #fbbf24;
-  filter: drop-shadow(0 0 6px rgba(197, 160, 89, 0.35));
+  filter: drop-shadow(0 0 6px rgba(197, 160, 89, 0.4));
 }
 
 .cardBadgeLegal {
   font-size: 9px;
   font-weight: 700;
   color: #fbbf24;
-  background: rgba(197, 160, 89, 0.14);
+  background: rgba(197, 160, 89, 0.12);
   padding: 3px 8px;
   border-radius: 4px;
   letter-spacing: 1px;
@@ -381,7 +377,7 @@
 .englishSub {
   font-size: 12.5px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.65);
+  opacity: 0.7;
   margin-left: 4px;
 }
 

@@ -167,7 +167,16 @@ export default function ConstructionDisputePage() {
         />
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
-        <VerdictSection />
+        <VerdictSection 
+          kicker="승소, 결코 우연이 아닙니다"
+          mainTitle="데이터가 증명하는 압도적 실력"
+          descText={(
+            <>
+              건설소송의 승패는 '누가 더 현장을 잘 아는가'에서 갈립니다. <br />
+              법무법인 플로우는 결과로 증명했습니다!
+            </>
+          )}
+        />
 
 
 

@@ -218,7 +218,7 @@ export default function DefectPromise({
           {actualCounters.map((item, index) => (
             <div className={styles.metricCard} key={item.id || index}>
               <div className={styles.metricNum}>
-                {counts[index] !== undefined ? counts[index].toLocaleString() : 0}{item.suffix}
+                {item.target > 0 && counts[index] !== undefined ? counts[index].toLocaleString() : ''}{item.suffix}
               </div>
               <h4 className={styles.metricTitle}>{item.title}</h4>
               <p className={styles.metricDesc}>{item.desc}</p>

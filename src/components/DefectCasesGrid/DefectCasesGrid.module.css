@@ -424,6 +424,11 @@
   margin: 20px 0 0 0;
   font-weight: 500;
   word-break: keep-all;
+  white-space: pre-wrap;
+}
+
+.gridOf6 {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 /* ====================================================

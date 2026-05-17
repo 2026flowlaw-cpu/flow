@@ -173,7 +173,7 @@ export default function DefectCasesGrid({
         </div>
 
         {/* 12-Pill Grid */}
-        <div className={styles.pillsGrid}>
+        <div className={`${styles.pillsGrid} ${cases.length === 6 ? styles.gridOf6 : ''}`}>
           {cases.map((item) => (
             <div 
               key={item.id}

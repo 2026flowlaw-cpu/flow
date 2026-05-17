@@ -12,7 +12,7 @@ import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
 import CTA from '@/components/CTA/CTA';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import styles from './page.module.css';
-import PracticeCases from '@/components/PracticeCases/PracticeCases';
+import ClassActionCases from '@/components/ClassActionCases/ClassActionCases';
 
 export default function ClassActionPage() {
   const features = [
@@ -73,8 +73,8 @@ export default function ClassActionPage() {
         <Stats />
       <PainPoints />
 
-        {/* 2. 케이스 */}
-        <PracticeCases />
+        {/* 2. 주요 진행 사건 현황 (케이스) */}
+        <ClassActionCases />
 
 
 

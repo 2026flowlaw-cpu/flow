@@ -50,15 +50,17 @@
    ==================================================== */
 .carouselContainer {
   position: relative;
-  max-width: 660px; /* Narrowed to create a gorgeous, tall, majestic letterhead ratio! */
+  max-width: 1200px; /* Fully expanded to show 3 cards side-by-side! */
   margin: 0 auto;
   display: flex;
   align-items: center;
+  padding: 0 10px; /* Adjust layout padding */
 }
 
 .carouselViewport {
   overflow: hidden;
   width: 100%;
+  padding: 40px 0; /* Critical vertical padding to prevent scaled central cards from getting clipped */
 }
 
 .carouselTrack {
@@ -68,10 +70,26 @@
 }
 
 .carouselSlide {
-  flex: 0 0 100%;
-  width: 100%;
+  flex: 0 0 33.333%; /* 3 cards visible side-by-side */
+  width: 33.333%;
   box-sizing: border-box;
-  padding: 0 40px; /* Generous breathing room for navigation buttons */
+  padding: 0 18px; /* Elegant spacing between cards */
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  opacity: 0.45; /* Lowered opacity for flanking side cards */
+  transform: scale(0.9); /* Shrunk scale for 3D focus effect */
+  will-change: transform, opacity;
+}
+
+.activeSlide {
+  opacity: 1 !important;
+  transform: scale(1.06) !important;
+  z-index: 5;
+}
+
+.activeSlide .reviewCard {
+  border-color: rgba(197, 160, 89, 0.38) !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 25px 50px rgba(10, 27, 57, 0.08) !important;
 }
 
 /* ====================================================
@@ -252,7 +270,11 @@
   }
 
   .carouselSlide {
+    flex: 0 0 100%;
+    width: 100%;
     padding: 0 15px;
+    opacity: 1 !important;
+    transform: scale(1) !important;
   }
   
   .reviewCard {

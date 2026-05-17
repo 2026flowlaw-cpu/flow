@@ -14,6 +14,7 @@ interface ReviewItem {
 export default function DefectReviews() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const autoPlayTimer = useRef<NodeJS.Timeout | null>(null);
 
   const reviews: ReviewItem[] = [
@@ -54,6 +55,15 @@ export default function DefectReviews() {
     }
   ];
 
+  // Extended list at both ends for infinite loop with 3 visible cards
+  const extendedReviews = [
+    reviews[reviews.length - 2],
+    reviews[reviews.length - 1],
+    ...reviews,
+    reviews[0],
+    reviews[1],
+  ];
+
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? reviews.length - 1 : prev - 1));
   };
@@ -61,6 +71,16 @@ export default function DefectReviews() {
   const handleNext = () => {
     setCurrentIndex((prev) => (prev === reviews.length - 1 ? 0 : prev + 1));
   };
+
+  // Detect screen size for mobile responsiveness
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Auto-play effect
   useEffect(() => {
@@ -76,6 +96,11 @@ export default function DefectReviews() {
       }
     };
   }, [isPaused]);
+
+  // Dynamic calculation of horizontal translate offset
+  const translation = isMobile
+    ? `-${(currentIndex + 2) * 100}%`
+    : `calc(-${(currentIndex + 2) * 33.333}% + 33.333%)`;
 
   return (
     <section className={styles.sectionWrapper}>
@@ -108,43 +133,47 @@ export default function DefectReviews() {
           <div className={styles.carouselViewport}>
             <div 
               className={styles.carouselTrack}
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              style={{ transform: `translateX(${translation})` }}
             >
-              {reviews.map((item) => (
-                <div className={styles.carouselSlide} key={item.id}>
-                  <div className={styles.reviewCard}>
-                    
-                    {/* Floating Quote Icon */}
-                    <div className={styles.quoteIcon}>
-                      <svg width="48" height="36" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 18C0 8.05888 8.05888 0 18 0V7.2C12.0355 7.2 7.2 12.0355 7.2 18H18V32H0V18ZM22 18C22 8.05888 30.0589 0 40 0V7.2C34.0355 7.2 29.2 12.0355 29.2 18H40V32H22V18Z" fill="#C5A059" fillOpacity="0.18"/>
-                      </svg>
-                    </div>
-
-                    {/* Star Rating & Card Body */}
-                    <div className={styles.cardTop}>
-                      <div className={styles.starRating}>
-                        {[...Array(5)].map((_, i) => (
-                          <span key={i} className={styles.star}>★</span>
-                        ))}
+              {extendedReviews.map((item, i) => {
+                const isCenter = i === currentIndex + 2;
+                const slideClassName = `${styles.carouselSlide} ${isCenter ? styles.activeSlide : ''}`;
+                return (
+                  <div className={slideClassName} key={`${item.id}-${i}`}>
+                    <div className={styles.reviewCard}>
+                      
+                      {/* Floating Quote Icon */}
+                      <div className={styles.quoteIcon}>
+                        <svg width="48" height="36" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M0 18C0 8.05888 8.05888 0 18 0V7.2C12.0355 7.2 7.2 12.0355 7.2 18H18V32H0V18ZM22 18C22 8.05888 30.0589 0 40 0V7.2C34.0355 7.2 29.2 12.0355 29.2 18H40V32H22V18Z" fill="#C5A059" fillOpacity="0.18"/>
+                        </svg>
                       </div>
-                      <p className={styles.reviewText}>"{item.content}"</p>
-                    </div>
 
-                    {/* Client Info Footer */}
-                    <div className={styles.cardBottom}>
-                      <div className={styles.avatar}>
-                        {item.initial}
+                      {/* Star Rating & Card Body */}
+                      <div className={styles.cardTop}>
+                        <div className={styles.starRating}>
+                          {[...Array(5)].map((_, i) => (
+                            <span key={i} className={styles.star}>★</span>
+                          ))}
+                        </div>
+                        <p className={styles.reviewText}>"{item.content}"</p>
                       </div>
-                      <div className={styles.clientDetails}>
-                        <span className={styles.clientName}>{item.clientType}</span>
-                        <span className={styles.clientSub}>{item.location}</span>
-                      </div>
-                    </div>
 
+                      {/* Client Info Footer */}
+                      <div className={styles.cardBottom}>
+                        <div className={styles.avatar}>
+                          {item.initial}
+                        </div>
+                        <div className={styles.clientDetails}>
+                          <span className={styles.clientName}>{item.clientType}</span>
+                          <span className={styles.clientSub}>{item.location}</span>
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 

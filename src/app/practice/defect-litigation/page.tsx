@@ -211,7 +211,26 @@ export default function DefectLitigationPage() {
                     </div>
                   </div>
 
+                  <div className={styles.divider}></div>
 
+                  <div className={styles.shinmoongoBox}>
+                    <div className={styles.shinmoongoHeader}>
+                      <div className={styles.shinmoongoIconBox}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                          <path d="M12 16v-4"/>
+                          <path d="M12 8h.01"/>
+                        </svg>
+                      </div>
+                      <div className={styles.shinmoongoHeaderText}>
+                        <h5 className={styles.shinmoongoTitle}>하자 피해 자가진단 신고센터</h5>
+                        <span className={styles.shinmoongoSubtitle}>무료 결함 계측 및 변호사 기술 진단</span>
+                      </div>
+                    </div>
+                    <p className={styles.shinmoongoDesc}>
+                      단지 내 지하주차장 천장 누수, 세대 벽면 대량 결로, 타일 파손 등 보수 요청을 거부당하신 경우 플로우 진단 신고 센터로 즉시 신고 접수해 주시면 특화 진단을 제공해 드립니다.
+                    </p>
+                  </div>
 
                 </div>
               </div>

@@ -1,8 +1,6 @@
 "use client";
 
 import React from 'react';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
 import ClassActionSuccess from '@/components/ClassActionSuccess/ClassActionSuccess';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import styles from './page.module.css';
@@ -63,8 +61,6 @@ const defectCases: DefectCaseItem[] = [
 export default function DefectLitigationPage() {
   return (
     <div className={styles.page}>
-      <Header />
-      
       <main className={styles.main}>
         
         {/* 1. Hero Section */}
@@ -297,8 +293,6 @@ export default function DefectLitigationPage() {
         </div>
 
       </main>
-
-      <Footer />
     </div>
   );
 }

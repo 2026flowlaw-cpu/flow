@@ -1,8 +1,6 @@
 "use client";
 
 import React from 'react';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
 import ClassActionSuccess from '@/components/ClassActionSuccess/ClassActionSuccess';
 import ClassActionStrength from '@/components/ClassActionStrength/ClassActionStrength';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
@@ -18,8 +16,6 @@ export default function ClassActionPage() {
 
   return (
     <div className={styles.container}>
-      <Header />
-      
       <main className={styles.main}>
         {/* Banner Section */}
         <section className={styles.heroSection}>
@@ -67,16 +63,12 @@ export default function ClassActionPage() {
         {/* 2. 주요 진행 사건 현황 (수행사례 아래 배치) */}
         <ClassActionCases />
 
-
-
         <div style={{ backgroundColor: '#f8fafc', padding: '80px 0' }}>
           <div className="container">
             <InquiryForm />
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

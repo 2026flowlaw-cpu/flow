@@ -6,6 +6,7 @@ import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import DefectPromise from '@/components/DefectPromise/DefectPromise';
 import DefectCasesGrid from '@/components/DefectCasesGrid/DefectCasesGrid';
 import VerdictSection from '@/components/VerdictSection/VerdictSection';
+import DefectStrategyGrid from '@/components/DefectStrategyGrid/DefectStrategyGrid';
 import DefectFaq from '@/components/DefectFaq/DefectFaq';
 import styles from './page.module.css';
 
@@ -239,6 +240,9 @@ export default function DefectLitigationPage() {
 
           </div>
         </section>
+
+        {/* 4.5. Specialized Win Strategy Grid (Image 1 layout) */}
+        <DefectStrategyGrid />
 
         {/* 4.8. Frequently Asked Questions (Image 1 Accordion FAQ) */}
         <DefectFaq />

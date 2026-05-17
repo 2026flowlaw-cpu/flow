@@ -1,0 +1,168 @@
+.sectionWrapper {
+  background-color: #f8fafc; /* Premium subtle light background */
+  padding: 100px 0;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ====================================================
+    HEADER AREA (Image 1 replica styled with Image 2 text)
+   ==================================================== */
+.headerArea {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 55px auto;
+}
+
+.kicker {
+  font-size: 14px;
+  font-weight: 700;
+  color: #C5A059; /* Gold */
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.mainTitle {
+  font-size: 38px;
+  font-weight: 800;
+  color: #0A1B39; /* Deep Navy */
+  letter-spacing: -1.5px;
+  margin: 0 0 20px 0;
+  line-height: 1.35;
+}
+
+.descBlock {
+  font-size: 15.5px;
+  color: #475569;
+  line-height: 1.8;
+  font-weight: 500;
+  margin: 0;
+  word-break: keep-all;
+}
+
+.descLine {
+  display: block;
+}
+
+/* ====================================================
+    GRID STRUCTURE (Image 1 replica)
+   ==================================================== */
+.strategyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 55px;
+}
+
+.strategyCard {
+  background-color: #0A1B39; /* Premium deep navy card */
+  border-radius: 14px;
+  padding: 40px 30px;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 10px 30px rgba(10, 27, 57, 0.08);
+}
+
+.strategyCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(10, 27, 57, 0.25);
+}
+
+/* Outline SVG Icon styling */
+.iconBox {
+  width: 55px;
+  height: 55px;
+  margin-bottom: 25px;
+  color: #C5A059; /* Gold icons */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.strategyCard:hover .iconBox {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 15px 0;
+  letter-spacing: -0.5px;
+}
+
+.cardDesc {
+  font-size: 13.8px;
+  color: #cbd5e1; /* Soft silver gray */
+  line-height: 1.65;
+  font-weight: 500;
+  margin: 0;
+  word-break: keep-all;
+}
+
+/* ====================================================
+    BOTTOM SUMMARY BLOCK (Image 2 text footer)
+   ==================================================== */
+.bottomSummary {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 30px 40px;
+  max-width: 950px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.summaryText {
+  font-size: 14.5px;
+  color: #475569;
+  line-height: 1.8;
+  font-weight: 600;
+  margin: 0;
+  word-break: keep-all;
+}
+
+/* ====================================================
+    RESPONSIVE MEDIA QUERIES
+   ==================================================== */
+@media (max-width: 1024px) {
+  .strategyGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .mainTitle {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .strategyGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .mainTitle {
+    font-size: 28px;
+  }
+  
+  .bottomSummary {
+    padding: 20px;
+  }
+  
+  .summaryText {
+    font-size: 13.5px;
+  }
+}

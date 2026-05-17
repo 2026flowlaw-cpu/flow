@@ -304,27 +304,21 @@ const centerData: Record<string, {
     promises: [
       {
         id: 0,
-        iconType: 'shield',
-        title: '음주 3진 아웃 방어',
-        desc: '과거 전력 분석 및 재범 우려 조각 자료를 통한 실형 방어 및 선처 유도'
+        iconType: 'lawyer',
+        title: '경찰 조사 전 초기 진술 코칭',
+        desc: '첫 조사 전 예상 질문 검토, 진술 충돌 및 번복 가능성을 사전에 예방하여 유리한 방향의 명확한 진술 가이드라인을 제공합니다.'
       },
       {
         id: 1,
-        iconType: 'scale',
-        title: '수사 초기 즉시 대응',
-        desc: '단속 시점 및 위드마크 공식의 치밀한 분석으로 불합리한 수치 무력화'
+        iconType: 'tech',
+        title: '블랙박스·CCTV·측정 수치 분석',
+        desc: '단속 당시의 구체적인 경위, 차량 블랙박스 및 주변 CCTV 분석, 위드마크 공식을 통한 치밀한 역산 분석으로 불합리한 혐의를 무력화합니다.'
       },
       {
         id: 2,
-        iconType: 'certificate',
-        title: '즉각적 면허 구제',
-        desc: '생계형 운전자를 위한 면허취소 처분 집행정지 및 조기 면허 회복 추진'
-      },
-      {
-        id: 3,
-        iconType: 'gavel',
-        title: '경험 기반 전략 설계',
-        desc: '교통사고 피해자와의 형사전문 변호사 직접 중재로 처벌불원 합의 달성'
+        iconType: 'shield',
+        title: '피해자 합의 및 공탁 대리',
+        desc: '합의 전문 인력과 형사전문변호사가 직접 피해자 측과 조율하여, 과도한 합의금 요구를 방지하고 처벌불원서 확보 및 형사 공탁 절차를 완벽히 대리합니다.'
       }
     ],
     casesKicker: '음주·교통 분쟁 특화 · 신속 구제 토탈 솔루션',

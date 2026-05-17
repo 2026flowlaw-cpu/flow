@@ -76,6 +76,9 @@ const centerData: Record<string, {
     question: string;
     answer: string;
   }>;
+  verdictKicker?: string;
+  verdictTitle?: string;
+  verdictDesc?: string;
 }> = {
   'sex-offense': {
     title: '성범죄',
@@ -405,7 +408,10 @@ const centerData: Record<string, {
     ],
     reviewsKicker: '실제 해결 사례',
     reviewsTitle: '유사 사건 대응 사례를 직접 확인해보세요',
-    reviewsDesc: '음주운전 초범부터 음주측정 거부·뺑소니까지,\n다양한 음주·교통 사건에서 의뢰인의 편에 섰습니다.'
+    reviewsDesc: '음주운전 초범부터 음주측정 거부·뺑소니까지,\n다양한 음주·교통 사건에서 의뢰인의 편에 섰습니다.',
+    verdictKicker: '실제 해결 사례',
+    verdictTitle: '유사 사건 대응 사례를 직접 확인해보세요',
+    verdictDesc: '음주운전 초범부터 음주측정 거부·뺑소니까지,\n다양한 음주·교통 사건에서 의뢰인의 편에 섰습니다.'
   },
   'drugs': {
     title: '마약',
@@ -1186,18 +1192,50 @@ export default function CriminalCenterPage() {
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
         <VerdictSection 
-          kicker="PROVEN RESULTS"
+          kicker={data.verdictKicker || "PROVEN RESULTS"}
           mainTitle={
-            <>
-              무죄와 선처, 결코 우연이 아닙니다<br />
-              판결문이 증명하는 압도적 승소 실력
-            </>
+            data.verdictTitle ? (
+              typeof data.verdictTitle === 'string' ? (
+                (() => {
+                  const lines = data.verdictTitle.split('\n');
+                  return lines.map((line, i) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      {i < lines.length - 1 && <br />}
+                    </React.Fragment>
+                  ));
+                })()
+              ) : (
+                data.verdictTitle
+              )
+            ) : (
+              <>
+                무죄와 선처, 결코 우연이 아닙니다<br />
+                판결문이 증명하는 압도적 승소 실력
+              </>
+            )
           }
           descText={
-            <>
-              수사기관의 압박과 불리한 증거 속에서도 빈틈없는 법리 구성으로 이뤄낸 쾌거.<br />
-              법무법인 플로우는 오직 결과로 말합니다.
-            </>
+            data.verdictDesc ? (
+              typeof data.verdictDesc === 'string' ? (
+                (() => {
+                  const lines = data.verdictDesc.split('\n');
+                  return lines.map((line, i) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      {i < lines.length - 1 && <br />}
+                    </React.Fragment>
+                  ));
+                })()
+              ) : (
+                data.verdictDesc
+              )
+            ) : (
+              <>
+                수사기관의 압박과 불리한 증거 속에서도 빈틈없는 법리 구성으로 이뤄낸 쾌거.<br />
+                법무법인 플로우는 오직 결과로 말합니다.
+              </>
+            )
           }
           verdicts={[
             {

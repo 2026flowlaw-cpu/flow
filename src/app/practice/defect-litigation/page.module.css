@@ -268,7 +268,8 @@
 
 .verticalMarqueeWrapper {
   flex: 1;
-  min-height: 540px;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   position: relative;
   width: 100%;

@@ -172,7 +172,70 @@ export default function RealEstateDisputePage() {
 
 
         {/* 4.5. Specialized Win Strategy Grid (Image 1 layout) */}
-        <DefectStrategyGrid />
+        <DefectStrategyGrid 
+          kicker="[법무법인 플로우만의 '부동산 분쟁' 필승 전략]"
+          mainTitle={
+            <>
+              "경험의 차이가 결과의 차이를 만듭니다"<br />
+              차별화된 전략과 남다른 통찰력으로 여러분을 조력합니다.
+            </>
+          }
+          descBlock=""
+          bottomText={
+            <>
+              법무법인 플로우는 다수의 부동산 분쟁 및 소송에서 독보적인 실적과 실무 노하우를 보유하고 있으며, 
+              수많은 부동산 분쟁 케이스를 분석하여 의뢰인의 소중한 자산과 권리를 보호하는데 앞장서고 있습니다. 
+              여러분의 사례가 승소 사례가 될 수 있도록 조력하겠습니다.
+            </>
+          }
+          strategies={[
+            {
+              id: 1,
+              title: '권리관계 정밀 분석',
+              desc: '계약서, 등기부, 토지대장 등 관련 서류에 감춰진 리스크를 즉시 분석합니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              )
+            },
+            {
+              id: 2,
+              title: '부동산 분쟁 TF팀 협업',
+              desc: '공인중개사, 세무사, 건축기사 등으로 이뤄진 부동산 분쟁 TF팀이 변호사와 협업하여 빈틈없이 조력합니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              )
+            },
+            {
+              id: 3,
+              title: '집행 불능 리스크 차단',
+              desc: '가압류·가처분 등 보전처분을 실행하여 승소 후 집행 불능 위험성을 원천 차단합니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              )
+            },
+            {
+              id: 4,
+              title: '철저한 사후 관리',
+              desc: '승소판결문 받는데 그치지 않고 명도 집행, 소유권이전등기, 세무 이슈까지 섬세하게 조력합니다.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              )
+            }
+          ]}
+        />
 
         {/* 4.6. Real Client Testimonial Reviews (Interactive filter grid) */}
         <DefectReviews />

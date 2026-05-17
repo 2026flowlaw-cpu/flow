@@ -1,7 +1,7 @@
 .promiseSection {
-  background-color: #061226; /* Dark slate background matching Gam-myeong theme */
+  background-color: #ffffff; /* Premium pure white background as requested */
   padding: 100px 0;
-  color: #ffffff;
+  color: #1e293b;
   position: relative;
   overflow: hidden;
 }
@@ -14,7 +14,7 @@
   transform: translate(-50%, -50%);
   width: 80%;
   height: 80%;
-  background: radial-gradient(circle, rgba(197, 160, 89, 0.04) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(197, 160, 89, 0.03) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -23,7 +23,7 @@
   max-width: 800px;
   margin: 0 auto 60px auto;
   position: relative;
-  zIndex: 2;
+  z-index: 2;
 }
 
 .kicker {
@@ -39,17 +39,20 @@
 .sectionTitle {
   font-size: 36px;
   font-weight: 800;
-  color: #ffffff;
+  color: #0A1B39; /* Premium deep navy for white bg */
   margin: 0 0 18px 0;
   letter-spacing: -1.5px;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .sectionSubtitle {
   font-size: 15.5px;
-  color: #94a3b8;
-  line-height: 1.7;
+  color: #475569; /* Soft slate grey */
+  line-height: 1.75;
   margin: 0;
   word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* ====================================================
@@ -61,12 +64,12 @@
   gap: 30px;
   margin-bottom: 80px;
   position: relative;
-  zIndex: 2;
+  z-index: 2;
 }
 
 .metricCard {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #f8fafc; /* Premium light grey card */
+  border: 1px solid #e2e8f0;
   border-radius: 20px;
   padding: 30px 20px;
   text-align: center;
@@ -75,14 +78,15 @@
 
 .metricCard:hover {
   transform: translateY(-5px);
-  border-color: rgba(197, 160, 89, 0.3);
-  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(197, 160, 89, 0.4);
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(10, 27, 57, 0.04);
 }
 
 .metricNum {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: 900;
-  color: #C5A059; /* Gold Accent */
+  color: #0A1B39; /* Deep navy text for numbers */
   margin-bottom: 10px;
   letter-spacing: -1px;
 }
@@ -90,16 +94,18 @@
 .metricTitle {
   font-size: 15px;
   font-weight: 800;
-  color: #ffffff;
+  color: #0A1B39;
   margin: 0 0 8px 0;
+  word-break: keep-all;
 }
 
 .metricDesc {
   font-size: 12.5px;
-  color: #94a3b8;
-  line-height: 1.5;
+  color: #475569;
+  line-height: 1.6;
   margin: 0;
   word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* ====================================================
@@ -110,7 +116,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 25px;
   position: relative;
-  zIndex: 2;
+  z-index: 2;
 }
 
 .promiseCard {
@@ -142,12 +148,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.05));
   transition: filter 0.3s ease;
 }
 
 .promiseCard:hover .hexagonSvg {
-  filter: drop-shadow(0 8px 25px rgba(197, 160, 89, 0.25));
+  filter: drop-shadow(0 8px 20px rgba(197, 160, 89, 0.2));
 }
 
 .hexagonIcon {
@@ -158,23 +164,25 @@
 
 .promiseCard:hover .hexagonIcon {
   transform: scale(1.1);
-  color: #ffffff;
+  color: #0A1B39;
 }
 
 .cardTitle {
   font-size: 17px;
   font-weight: 800;
-  color: #ffffff;
+  color: #0A1B39;
   margin: 0 0 12px 0;
   letter-spacing: -0.5px;
+  word-break: keep-all;
 }
 
 .cardDesc {
   font-size: 13px;
-  color: #94a3b8;
-  line-height: 1.6;
+  color: #475569;
+  line-height: 1.65;
   margin: 0;
   word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* ====================================================
@@ -194,6 +202,7 @@
 @media (max-width: 640px) {
   .metricsGrid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
   
   .promiseGrid {

@@ -102,7 +102,7 @@ export default function DefectPromise() {
           <span className={styles.kicker}>NUMBERS & PROMISES</span>
           <h2 className={styles.sectionTitle}>하자소송 특화! 압도적 경험과 실력</h2>
           <p className={styles.sectionSubtitle}>
-            입주민의 한 치의 손해도 허용하지 않는 법무법인 플로우의 정밀 소송 전략입니다. <br />
+            입주민의 한 치의 손해도 허용하지 않는 법무법인 플로우의 정밀 소송 전략입니다. 
             대형 시공사를 압도하는 완벽한 지표와 최고의 맨파워를 직접 증명합니다.
           </p>
         </div>

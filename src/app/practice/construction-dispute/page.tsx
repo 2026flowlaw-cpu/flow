@@ -90,7 +90,39 @@ export default function ConstructionDisputePage() {
         </section>
 
         {/* 2. Strengths & Promises (Hexagon & Count-up Section) */}
-        <DefectPromise />
+        <DefectPromise 
+          sectionSubtitle="건설 현장의 복잡한 이해관계 속에서 의뢰인의 권익을 끝까지 보호하는 법무법인 플로우의 정밀 소송 전략입니다. 압도적인 지표와 최고의 맨파워를 직접 증명합니다."
+          counters={[
+            {
+              id: 0,
+              target: 2000,
+              suffix: '건+',
+              title: '건설 분쟁 수행 및 자문',
+              desc: '다양한 건설 소송 및 자문 등을 성공적으로 해결하며 축적한 실적'
+            },
+            {
+              id: 1,
+              target: 25,
+              suffix: '년+ 경력',
+              title: '전문가 결합 TF팀',
+              desc: '변호사, 시공기술사, 건축기사로 구성된 건설분쟁 TF팀의 밀착 협업'
+            },
+            {
+              id: 2,
+              target: 20,
+              suffix: '억 원+',
+              title: '단일 사건 최대 승소액',
+              desc: '플로우가 철저한 기술 감정 입증을 통해 받아낸 단일 사건 최대 승소액'
+            },
+            {
+              id: 3,
+              target: 100,
+              suffix: '% 직접상담',
+              title: '건설전문변호사 밀착 케어',
+              desc: '대한변협등록 건설전문변호사가 모든 초기 상담부터 책임지고 직접 조력'
+            }
+          ]}
+        />
 
         {/* 2.5. Specialized Defect Cases Pill Grid (Image 1 layout) */}
         <DefectCasesGrid />

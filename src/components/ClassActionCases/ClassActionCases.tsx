@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './ClassActionCases.module.css';
 
 interface CaseItem {
@@ -55,24 +55,6 @@ const scrollingCases: CaseItem[] = [
 ];
 
 const ClassActionCases = () => {
-  // Live toggle states inside marquee cards
-  const [toggleStates, setToggleStates] = useState<{ [key: string]: boolean }>({
-    '1-orig': true, '1-dup': true,
-    '2-orig': true, '2-dup': true,
-    '3-orig': true, '3-dup': true,
-    '4-orig': true, '4-dup': true,
-    '5-orig': true, '5-dup': true,
-    '6-orig': true, '6-dup': true
-  });
-
-  const handleToggle = (key: string, e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent card bubbling
-    setToggleStates((prev) => ({
-      ...prev,
-      [key]: !prev[key]
-    }));
-  };
-
   return (
     <section className={styles.section}>
       <div className="container">
@@ -101,7 +83,7 @@ const ClassActionCases = () => {
                   return (
                     <div 
                       key={key} 
-                      className={`${styles.caseCard} ${toggleStates[key] ? styles.activeCard : ''}`}
+                      className={styles.caseCard}
                     >
                       <div className={styles.cardContent}>
                         <div className={styles.cardTitleRow}>
@@ -111,13 +93,6 @@ const ClassActionCases = () => {
                           </span>
                         </div>
                         <p className={styles.cardDesc}>{item.description}</p>
-                      </div>
-
-                      {/* IOS-style toggle switch */}
-                      <div className={styles.toggleWrapper} onClick={(e) => handleToggle(key, e)}>
-                        <div className={`${styles.switch} ${toggleStates[key] ? styles.switchOn : ''}`}>
-                          <div className={styles.switchHandle}></div>
-                        </div>
                       </div>
                     </div>
                   );
@@ -129,7 +104,7 @@ const ClassActionCases = () => {
                   return (
                     <div 
                       key={key} 
-                      className={`${styles.caseCard} ${toggleStates[key] ? styles.activeCard : ''}`}
+                      className={styles.caseCard}
                     >
                       <div className={styles.cardContent}>
                         <div className={styles.cardTitleRow}>
@@ -140,13 +115,6 @@ const ClassActionCases = () => {
                         </div>
                         <p className={styles.cardDesc}>{item.description}</p>
                       </div>
-
-                      {/* IOS-style toggle switch */}
-                      <div className={styles.toggleWrapper} onClick={(e) => handleToggle(key, e)}>
-                        <div className={`${styles.switch} ${toggleStates[key] ? styles.switchOn : ''}`}>
-                          <div className={styles.switchHandle}></div>
-                        </div>
-                      </div>
                     </div>
                   );
                 })}
@@ -155,7 +123,7 @@ const ClassActionCases = () => {
             </div>
             
             <div className={styles.marqueeNotice}>
-              * 사건 카드에 마우스를 올리시면(Hover) 위로 올라가는 롤링이 일시정지되며, 토글 조작이 가능합니다.
+              * 사건 카드에 마우스를 올리시면(Hover) 위로 올라가는 롤링이 일시정지됩니다.
             </div>
           </div>
 

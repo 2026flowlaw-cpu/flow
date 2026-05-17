@@ -15,7 +15,7 @@
 }
 
 .kicker {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 800;
   color: #C5A059; /* Gold */
   text-transform: uppercase;
@@ -25,7 +25,7 @@
 }
 
 .sectionTitle {
-  font-size: 36px;
+  font-size: 46px;
   font-weight: 800;
   color: #0A1B39; /* Deep navy */
   margin: 0 0 18px 0;
@@ -35,7 +35,7 @@
 }
 
 .sectionSubtitle {
-  font-size: 15.5px;
+  font-size: 21px;
   color: #475569;
   line-height: 1.75;
   margin: 0;

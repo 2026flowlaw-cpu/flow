@@ -14,8 +14,9 @@ interface ReviewItem {
 export default function DefectReviews() {
   const [trackIndex, setTrackIndex] = useState(2);
   const [isTransitioning, setIsTransitioning] = useState(true);
-  const [isSliding, setIsSliding] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const autoPlayTimer = useRef<NodeJS.Timeout | null>(null);
 
   const reviews: ReviewItem[] = [
     {
@@ -65,51 +66,34 @@ export default function DefectReviews() {
   ];
 
   const handlePrev = () => {
-    setIsSliding((sliding) => {
-      if (sliding) return sliding;
-      setTrackIndex((prev) => prev - 1);
-      return true;
-    });
+    setTrackIndex((prev) => prev - 1);
   };
 
   const handleNext = () => {
-    setIsSliding((sliding) => {
-      if (sliding) return sliding;
-      setTrackIndex((prev) => prev + 1);
-      return true;
-    });
+    setTrackIndex((prev) => prev + 1);
   };
 
-  // Listen to trackIndex changes to unlock sliding and perform seamless clone jumps
-  useEffect(() => {
+  const handleTransitionEnd = () => {
     if (trackIndex === 7) {
-      const timer = setTimeout(() => {
-        setIsTransitioning(false);
-        setTrackIndex(2);
-        setTimeout(() => {
-          setIsTransitioning(true);
-          setIsSliding(false);
-        }, 50);
-      }, 450); // Match CSS transition duration perfectly
-      return () => clearTimeout(timer);
+      setIsTransitioning(false);
+      setTrackIndex(2);
     } else if (trackIndex === 1) {
-      const timer = setTimeout(() => {
-        setIsTransitioning(false);
-        setTrackIndex(6);
-        setTimeout(() => {
-          setIsTransitioning(true);
-          setIsSliding(false);
-        }, 50);
-      }, 450);
-      return () => clearTimeout(timer);
-    } else {
-      // Normal slide lock
-      const timer = setTimeout(() => {
-        setIsSliding(false);
-      }, 450);
-      return () => clearTimeout(timer);
+      setIsTransitioning(false);
+      setTrackIndex(6);
     }
-  }, [trackIndex]);
+  };
+
+  // Re-enable transitioning class smoothly on next frame
+  useEffect(() => {
+    if (!isTransitioning) {
+      const raf = requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsTransitioning(true);
+        });
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+  }, [isTransitioning]);
 
   // Detect screen size for mobile responsiveness
   useEffect(() => {
@@ -121,17 +105,20 @@ export default function DefectReviews() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Safe and clean Autoplay interval (runs once, never pauses on hover)
+  // Auto-play effect
   useEffect(() => {
-    const timer = setInterval(() => {
-      setIsSliding((sliding) => {
-        if (sliding) return sliding;
-        setTrackIndex((prev) => prev + 1);
-        return true;
-      });
-    }, 5000); // Autoplay slide every 5 seconds
-    return () => clearInterval(timer);
-  }, []);
+    if (!isPaused) {
+      autoPlayTimer.current = setInterval(() => {
+        handleNext();
+      }, 5000); // Auto slide every 5 seconds
+    }
+
+    return () => {
+      if (autoPlayTimer.current) {
+        clearInterval(autoPlayTimer.current);
+      }
+    };
+  }, [isPaused]);
 
   // Dynamic calculation of horizontal translate offset
   const translation = isMobile
@@ -156,7 +143,11 @@ export default function DefectReviews() {
         </div>
 
         {/* Carousel Slider Outer Wrapper */}
-        <div className={styles.carouselContainer}>
+        <div 
+          className={styles.carouselContainer}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           {/* Navigation Prev Button */}
           <button className={`${styles.navBtn} ${styles.prevBtn}`} onClick={handlePrev} aria-label="Previous review">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -170,8 +161,9 @@ export default function DefectReviews() {
               className={styles.carouselTrack}
               style={{ 
                 transform: `translateX(${translation})`,
-                transition: isTransitioning ? 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)' : 'none'
+                transition: isTransitioning ? 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)' : 'none'
               }}
+              onTransitionEnd={handleTransitionEnd}
             >
               {extendedReviews.map((item, i) => {
                 const isCenter = i === trackIndex;
@@ -223,23 +215,7 @@ export default function DefectReviews() {
           </button>
         </div>
 
-        {/* Premium Navigation Dots */}
-        <div className={styles.paginationDots}>
-          {reviews.map((_, i) => (
-            <button
-              key={i}
-              className={`${styles.dot} ${activeDotIndex === i ? styles.activeDot : ''}`}
-              onClick={() => {
-                setIsSliding((sliding) => {
-                  if (sliding) return sliding;
-                  setTrackIndex(i + 2);
-                  return true;
-                });
-              }}
-              aria-label={`Go to review slide ${i + 1}`}
-            />
-          ))}
-        </div>
+
 
       </div>
     </section>

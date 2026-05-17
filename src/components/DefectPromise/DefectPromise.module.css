@@ -141,8 +141,9 @@
 }
 
 .hexagonWrapper {
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
+  aspect-ratio: 1 / 1;
   position: relative;
   display: flex;
   align-items: center;
@@ -176,7 +177,7 @@
 }
 
 .cardTitle {
-  font-size: 17px;
+  font-size: 19px; /* Increased from 17px */
   font-weight: 800;
   color: #ffffff; /* White text for contrast on navy */
   margin: 0 0 12px 0;
@@ -185,9 +186,9 @@
 }
 
 .cardDesc {
-  font-size: 13px;
-  color: #94a3b8; /* Slate gray on navy */
-  line-height: 1.65;
+  font-size: 14.5px; /* Increased from 13px for high legibility */
+  color: #cbd5e1; /* Replaced #94a3b8 with high-contrast slate gray */
+  line-height: 1.7;
   margin: 0;
   word-break: keep-all;
   overflow-wrap: break-word;

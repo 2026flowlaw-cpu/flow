@@ -11,7 +11,27 @@ interface CasePill {
   legalStrategy: string;
 }
 
-export default function DefectCasesGrid() {
+interface DefectCasesGridProps {
+  kicker?: string;
+  mainTitle?: string;
+  descLines?: string[];
+  difficultyTitle?: string;
+  difficultySubtitle?: string;
+  hideKicker?: boolean;
+}
+
+export default function DefectCasesGrid({
+  kicker = '하자소송 전문로펌 · 공동주택 및 집합건물 하자 분쟁',
+  mainTitle = '"현장을 알아야 이깁니다"',
+  descLines = [
+    '법리에 기술을 더한 법무법인 플로우만의 토탈 솔루션!',
+    '로펌 내 자체 기술인력이 숨은 하자까지 정밀 진단합니다.',
+    '800여 단지에서 축적한 실무 데이터를 기반으로 거대 건설사의 주장을 완벽 방어합니다.'
+  ],
+  difficultyTitle = '* 현재 어떤 어려움을 겪고 계신가요?',
+  difficultySubtitle = '아래 하자 분류를 클릭하시면 법률 및 엔지니어링 실무 해법을 조회하실 수 있습니다.',
+  hideKicker = false
+}: DefectCasesGridProps) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   useEffect(() => {
@@ -120,20 +140,32 @@ export default function DefectCasesGrid() {
         
         {/* Section Header */}
         <div className={styles.headerArea}>
-          <span className={styles.kicker}>하자소송 전문로펌 · 공동주택 및 집합건물 하자 분쟁</span>
-          <h2 className={styles.mainTitle}>"현장을 알아야 이깁니다"</h2>
+          {!hideKicker && kicker && <span className={styles.kicker}>{kicker}</span>}
+          {mainTitle && <h2 className={styles.mainTitle}>{mainTitle}</h2>}
           <div className={styles.goldDivider}></div>
-          <div className={styles.descBlock}>
-            <span className={styles.descLine}>법리에 기술을 더한 법무법인 플로우만의 토탈 솔루션!</span>
-            <span className={styles.descLine}>로펌 내 자체 기술인력이 숨은 하자까지 정밀 진단합니다.</span>
-            <span className={styles.descLine}>800여 단지에서 축적한 실무 데이터를 기반으로 거대 건설사의 주장을 완벽 방어합니다.</span>
-          </div>
+          {descLines && descLines.length > 0 && (
+            <div className={styles.descBlock}>
+              {descLines.map((line, idx) => (
+                <span key={idx} className={styles.descLine}>{line}</span>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Difficulty Area */}
         <div className={styles.difficultyArea}>
-          <h3 className={styles.difficultyTitle}>* 현재 어떤 어려움을 겪고 계신가요?</h3>
-          <p className={styles.difficultySubtitle}>아래 하자 분류를 클릭하시면 법률 및 엔지니어링 실무 해법을 조회하실 수 있습니다.</p>
+          <div className={styles.dashDivider}>—</div>
+          {difficultyTitle && <h3 className={styles.difficultyTitle}>{difficultyTitle}</h3>}
+          {difficultySubtitle && (
+            <p className={styles.difficultySubtitle}>
+              {difficultySubtitle.split('\n').map((line, i) => (
+                <React.Fragment key={i}>
+                  {line}
+                  {i < difficultySubtitle.split('\n').length - 1 && <br />}
+                </React.Fragment>
+              ))}
+            </p>
+          )}
         </div>
 
         {/* 12-Pill Grid */}

@@ -98,7 +98,17 @@ export default function ResaleCancellationPage() {
         <DefectPromise />
 
         {/* 2.5. Specialized Defect Cases Pill Grid (Image 1 layout) */}
-        <DefectCasesGrid />
+        <DefectCasesGrid 
+          hideKicker={true}
+          mainTitle="분양계약해제 토탈 솔루션"
+          descLines={[
+            '계약해제 = 계약금 몰수라고 생각하기 쉽습니다.',
+            '그러나 분양사의 귀책이나 위법성이 입증되면 계약금 손실없이 계약취소 할 수 있습니다.',
+            '오랜 실무경험을 바탕으로 의뢰인의 상황과 입장에 맞는 최적의 솔루션을 제안합니다.'
+          ]}
+          difficultyTitle="* 현재 어떤 어려움을 겪고 계신가요?"
+          difficultySubtitle="법무법인 플로우는 모든 케이스를 축적하고 있습니다."
+        />
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
         <VerdictSection />

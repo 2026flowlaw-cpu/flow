@@ -63,6 +63,14 @@
   margin-bottom: 45px;
 }
 
+.dashDivider {
+  font-size: 24px;
+  color: #C5A059; /* Gold */
+  margin-bottom: 25px;
+  font-weight: 300;
+  text-align: center;
+}
+
 .difficultyTitle {
   font-size: 26px;
   font-weight: 700;

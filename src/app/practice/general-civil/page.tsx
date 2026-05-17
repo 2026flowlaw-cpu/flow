@@ -246,7 +246,51 @@ export default function GeneralCivilPage() {
         />
 
         {/* 4.6. Real Client Testimonial Reviews (Interactive filter grid) */}
-        <DefectReviews />
+        <DefectReviews 
+          descText={
+            <>
+              예기치 못한 민사 분쟁의 고비마다 플로우 민사 전문 TF가 한 몸으로 뛰며 <br />
+              의뢰인의 소중한 권리와 정당한 재산적 결과를 지켜낸 진짜 이야기입니다.
+            </>
+          }
+          items={[
+            {
+              id: 1,
+              content: '물건은 받아 가고 대금 지급은 계속 미루는 악성 거래처 때문에 저희 회사 자금줄이 막혀서 정말 힘들었습니다. 그런데 변호사님 선임하자마자 바로 입금했어요 ㅎㅎㅎ 정말 최고입니다!!',
+              clientType: '제조기업 대표이사',
+              location: '물품대금 청구 분쟁',
+              initial: '김'
+            },
+            {
+              id: 2,
+              content: '동업자랑 수익 배분 문제로 갈라섰는데 변호사님 자문 덕분에 문제없게 정리하고 정산도 제대로 받았습니다. 새로운 사업 구상중인데 그때도 잘 부탁드립니다~~',
+              clientType: 'IT 스타트업 창업자',
+              location: '동업 해지 및 정산금',
+              initial: '최'
+            },
+            {
+              id: 3,
+              content: '친한 친구라 차용증 없이 빌려줬다가 뒤통수 맞았습니다. 솔직히 포기하고 있었는데 변호사님이 예전 카톡이랑 계좌 내역 싹 정리해서 대여 사실 입증해주셔서 돈 돌려받을 수 있었습니다.',
+              clientType: '개인 채권자 의뢰인',
+              location: '차용증 없는 대여금 반환',
+              initial: '이'
+            },
+            {
+              id: 4,
+              content: '악성 소문 퍼트린 사람이 지인이라 진짜 힘들었거든요? 소송해봐야 위자료 얼마 안된다고 해서 참으려 했는데 변호사님 응원에 끝까지 올 수 있었습니다. 정말 감사합니다.',
+              clientType: '자영업 소상공인',
+              location: '명예훼손 및 위자료 청구',
+              initial: '박'
+            },
+            {
+              id: 5,
+              content: '소송 이기고도 돈 없다는 상대방 때문에 진짜 막막했어요. 그런데 저보다 더 분노하면서 숨은 재산 집요하게 찾아 가압류 진행해주시더라고요. 정말 든든합니다.',
+              clientType: '개인 채권자 의뢰인',
+              location: '숨은 재산 추적 및 가압류',
+              initial: '정'
+            }
+          ]}
+        />
 
         {/* 4.8. Frequently Asked Questions (Image 1 Accordion FAQ) */}
         <DefectFaq />

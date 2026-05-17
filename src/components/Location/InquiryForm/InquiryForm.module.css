@@ -1,247 +1,471 @@
 .section {
   padding: 100px 0;
-  background-color: #f8fafc;
+  background-color: #ffffff; /* Spacious pure white theme as in mockup */
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1000px; /* Aligned tight layout for neatness */
   margin: 0 auto;
   padding: 0 20px;
 }
 
 /* ====================================================
-    TOP BANNER STATS / DESC
+    MINIMALIST HEADER
    ==================================================== */
-.topBannerText {
+.header {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 45px;
 }
 
-.topInfoTag {
-  font-size: 14px;
-  color: #2563eb; /* Royal blue */
+.mainTitle {
+  font-size: 32px;
   font-weight: 800;
-  margin-bottom: 10px;
+  color: #0f172a;
+  margin: 0 0 12px 0;
+  letter-spacing: -1px;
 }
 
-.topInfoTitle {
-  font-size: 26px;
-  font-weight: 800;
-  color: #0A1B39;
-  margin: 0 0 10px 0;
-  letter-spacing: -0.8px;
-}
-
-.topInfoDesc {
-  font-size: 14.5px;
-  color: #64748b;
-  margin: 0;
-}
-
-/* ====================================================
-    HEADER BLUE BOARD PANEL
-   ==================================================== */
-.formHeaderBg {
-  background: linear-gradient(135deg, #0A1B39 0%, #162a52 100%);
-  border-radius: 24px 24px 0 0;
-  padding: 40px 45px;
-  color: #ffffff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 30px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.headerTextCol {
-  flex: 1;
-  max-width: 70%;
-}
-
-.kicker {
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: #C5A059; /* Brand Gold */
-  font-weight: 800;
-  display: block;
-  margin-bottom: 10px;
-}
-
-.title {
-  font-size: 26px;
-  font-weight: 800;
-  color: #ffffff;
-  margin: 0 0 10px 0;
-  letter-spacing: -0.8px;
+.titleUnderline {
+  width: 45px;
+  height: 3px;
+  background-color: #C5A059; /* Accent gold line */
+  margin-bottom: 25px;
 }
 
 .subtitle {
+  font-size: 15.5px;
+  color: #475569;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0;
+  word-break: keep-all;
+}
+
+.subtitle strong {
+  color: #0f172a;
+  font-weight: 800;
+  border-bottom: 2px solid #fee2e2; /* Subtle highlighted baseline */
+}
+
+/* Bullet guidelines */
+.bulletList {
+  background-color: #f8fafc;
+  border: 1px dashed #e2e8f0;
+  border-radius: 12px;
+  padding: 24px 30px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bulletItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.bulletDot {
+  color: #3b82f6;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.bulletItem p {
   font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.7);
+  color: #64748b;
   line-height: 1.6;
   margin: 0;
   word-break: keep-all;
 }
 
-.headerDescCol {
-  flex-shrink: 0;
-  text-align: right;
+/* ====================================================
+    4-STEP CIRCULAR PROCESS MAP
+   ==================================================== */
+.processWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 40px 30px;
+  margin-bottom: 60px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+}
+
+.stepItem {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 15px;
+  flex: 1;
 }
 
-.highlightText {
-  font-size: 13.5px;
-  color: #ef4444; /* Alert red */
-  line-height: 1.5;
+.circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #ffffff;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
-.highlightText strong {
-  color: #fee2e2;
+.circle:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.blueDash1 {
+  border: 2px dashed #2563eb;
+}
+
+.navyDash {
+  border: 2px dashed #0f172a;
+}
+
+.blueDash2 {
+  border: 2px dashed #3b82f6;
+}
+
+.goldDash {
+  border: 2px dashed #C5A059;
+}
+
+.innerBadge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: #0f172a;
+  color: #ffffff;
+  font-size: 9px;
   font-weight: 800;
+  padding: 3px 6px;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
 }
 
-.badgeText {
-  font-size: 12.5px;
-  color: rgba(255, 255, 255, 0.95);
-  line-height: 1.4;
-}
-
-.badgeText span {
-  color: #fca5a5;
+.stepLabel {
+  font-size: 13px;
   font-weight: 700;
+  color: #334155;
+  line-height: 1.45;
+  word-break: keep-all;
+}
+
+.chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0 10px;
+  animation: pulseChevron 2s infinite ease-in-out;
+}
+
+@keyframes pulseChevron {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateX(4px);
+  }
 }
 
 /* ====================================================
-    GRID FORM & CARD LAYOUT
+    MINIMALIST HORIZONTAL FORM
    ==================================================== */
-.grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 30px;
-  align-items: stretch;
-}
-
-/* Left Card: White form container */
-.formCard {
-  background-color: #ffffff;
-  border-radius: 0 0 0 24px;
-  padding: 45px;
-  border-left: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
-  border-right: 1px solid #e2e8f0;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
-}
-
-.formCardHeader {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 30px;
-  border-bottom: 2px solid #0A1B39;
-  padding-bottom: 15px;
-}
-
-.headerIcon {
-  color: #C5A059;
-  display: flex;
-  align-items: center;
-}
-
-.formCardTitle {
-  font-size: 18px;
-  font-weight: 800;
-  color: #0A1B39;
-  margin: 0;
-}
-
-/* Forms styling */
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  border-top: 2px solid #0f172a;
+  padding-top: 25px;
 }
 
-.formRow {
+.formRequiredNotice {
+  text-align: right;
+  font-size: 12.5px;
+  color: #94a3b8;
+  margin-bottom: 25px;
+}
+
+.formRowInline {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  margin-bottom: 30px;
 }
 
-.formGroup {
+.formGroupInline {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.labelInline {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.textInput {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  background-color: #f8fafc;
+  color: #0f172a;
+  transition: all 0.2s ease;
+}
+
+.textInput::placeholder {
+  color: #94a3b8;
+}
+
+.textInput:focus {
+  border-color: #2563eb;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.05);
+}
+
+.phoneGroup {
+  flex: 1;
+  display: flex;
+  align-items: center;
   gap: 8px;
 }
 
-.formLabel {
-  font-size: 13px;
+.phoneInput {
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: center;
+  outline: none;
+  background-color: #f8fafc;
+  color: #0f172a;
+  transition: all 0.2s ease;
+}
+
+.phoneInput:focus {
+  border-color: #2563eb;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.05);
+}
+
+.dash {
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+/* Radio Group: Referral */
+.formGroupLine {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 35px;
+}
+
+.sectionLabelInline {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.radioGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.radioInput {
+  display: none;
+}
+
+.customRadio {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  background-color: #ffffff;
+  transition: all 0.2s;
+}
+
+.radioInput:checked + .customRadio {
+  border-color: #2563eb;
+  background-color: #2563eb;
+}
+
+.radioInput:checked + .customRadio::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.radioText {
+  font-size: 13.5px;
   font-weight: 700;
   color: #475569;
 }
 
-.req {
-  color: #ef4444;
+.radioInput:checked ~ .radioText {
+  color: #2563eb;
 }
 
-.input, .select {
-  padding: 12px 18px;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
+/* Checkbox Grid: Cases */
+.formGroupCheckboxSection {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 35px;
+}
+
+.checkboxSectionTitle {
   font-size: 14px;
+  font-weight: 800;
   color: #0f172a;
-  outline: none;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.3px;
+}
+
+.checkboxGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.checkboxLabelCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
   background-color: #ffffff;
-  transition: border-color 0.2s;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.input::placeholder {
-  color: #94a3b8;
+.checkboxLabelCard:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
 }
 
-.input:focus, .select:focus {
+.checkedCard {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+}
+
+.hiddenCheckbox {
+  display: none;
+}
+
+.customCheckIcon {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.checkedCard .customCheckIcon {
+  background-color: #2563eb;
   border-color: #2563eb;
 }
 
+.checkboxText {
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+  word-break: keep-all;
+}
+
+.checkedCard .checkboxText {
+  color: #1e3a8a;
+}
+
+/* Extra fields row */
+.extraFieldsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 35px;
+}
+
+/* Textarea & file inputs */
 .textarea {
+  width: 100%;
+  min-height: 130px;
   padding: 15px 18px;
-  border: 1px solid #cbd5e1;
-  border-radius: 12px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
   font-size: 14px;
-  color: #0f172a;
   outline: none;
-  background-color: #ffffff;
-  min-height: 120px;
+  background-color: #f8fafc;
+  color: #0f172a;
   resize: vertical;
-  transition: border-color 0.2s;
+  transition: all 0.2s ease;
 }
 
 .textarea:focus {
   border-color: #2563eb;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.05);
 }
 
-/* File attachments styling */
-.fileInputWrapper {
-  position: relative;
+.fileBox {
+  flex: 1;
   width: 100%;
 }
 
-.fileHiddenInput {
+.hiddenFileInput {
   display: none;
 }
 
-.fileLabelBtn {
+.fileTriggerBtn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 18px;
-  border: 1px dashed #cbd5e1;
-  border-radius: 10px;
+  padding: 14px 20px;
+  border: 1.5px dashed #cbd5e1;
+  border-radius: 8px;
   background-color: #f8fafc;
   font-size: 13.5px;
   color: #475569;
@@ -251,17 +475,23 @@
   width: 100%;
 }
 
-.fileLabelBtn:hover {
+.fileTriggerBtn:hover {
   background-color: #f1f5f9;
   border-color: #94a3b8;
 }
 
-/* Consent Checkbox styling */
-.consentRow {
+/* Consent Box */
+.consentBox {
+  display: flex;
+  justify-content: center;
+  margin: 35px 0;
+}
+
+.consentLabel {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 10px 0;
+  cursor: pointer;
 }
 
 .checkbox {
@@ -270,199 +500,126 @@
   cursor: pointer;
 }
 
-.checkboxLabel {
-  font-size: 13px;
-  color: #475569;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.viewDetailsBtn {
-  color: #2563eb;
+.consentText {
+  font-size: 13.5px;
   font-weight: 700;
+  color: #334155;
 }
 
-/* Submit Button styling */
-.submitButton {
-  background-color: #0A1B39;
-  color: #ffffff;
-  padding: 16px 30px;
-  border: none;
-  border-radius: 10px;
-  font-size: 15px;
+.viewDetailsLink {
+  font-size: 13px;
+  color: #2563eb;
   font-weight: 800;
+  text-decoration: none;
+  margin-left: 4px;
+  border-bottom: 1px solid #2563eb;
+}
+
+/* Submit Button */
+.submitWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.submitBtn {
+  background-color: #0f172a;
+  color: #ffffff;
+  border: none;
+  padding: 16px 80px;
+  font-size: 15.5px;
+  font-weight: 800;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
-  text-align: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
 }
 
-.submitButton:hover {
-  background-color: #162a52;
+.submitBtn:hover {
+  background-color: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 25px rgba(15, 23, 42, 0.12);
 }
 
-.submitButton:disabled {
+.submitBtn:disabled {
   background-color: #cbd5e1;
   cursor: not-allowed;
-}
-
-/* ====================================================
-    RIGHT COLUMN - CONTACT INFO CARDS
-   ==================================================== */
-.contactCol {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.infoCard {
-  background-color: #0A1B39;
-  color: #ffffff;
-  border-radius: 0 0 24px 0;
-  padding: 45px 35px;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  box-shadow: 0 20px 40px rgba(10, 27, 57, 0.15);
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.infoCardHeader {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 15px;
-}
-
-.infoAccentLine {
-  width: 4px;
-  height: 16px;
-  background-color: #C5A059;
-  border-radius: 2px;
-}
-
-.infoTitle {
-  font-size: 18px;
-  font-weight: 800;
-  color: #ffffff;
-  margin: 0;
-}
-
-.infoItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.infoIconBox {
-  width: 36px;
-  height: 36px;
-  background-color: rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #C5A059;
-  flex-shrink: 0;
-}
-
-.infoText {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.infoLabel {
-  font-size: 11px;
-  letter-spacing: 1px;
-  color: rgba(255, 255, 255, 0.55);
-  font-weight: 700;
-}
-
-.infoVal {
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 600;
-  line-height: 1.4;
-  word-break: keep-all;
-}
-
-/* Bright Yellow KakaoTalk Button */
-.kakaoButton {
-  background-color: #FFE600; /* Bright KakaoTalk yellow */
-  color: #3A1D1D;
-  font-size: 15px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 16px 30px;
-  border-radius: 15px;
-  text-decoration: none;
-  transition: transform 0.2s, background-color 0.2s;
-  box-shadow: 0 10px 20px rgba(255, 230, 0, 0.15);
-}
-
-.kakaoButton:hover {
-  transform: translateY(-2px);
-  background-color: #ffd200;
-}
-
-.kakaoIcon {
-  color: #3A1D1D;
-  display: flex;
-  align-items: center;
+  transform: none;
+  box-shadow: none;
 }
 
 /* ====================================================
     RESPONSIVE MEDIA QUERIES
    ==================================================== */
-@media (max-width: 1024px) {
-  .formHeaderBg {
+@media (max-width: 900px) {
+  .processWrapper {
     flex-direction: column;
-    align-items: flex-start;
-    padding: 35px;
-  }
-  
-  .headerTextCol {
-    max-width: 100%;
-  }
-  
-  .headerDescCol {
-    text-align: left;
-    margin-top: 10px;
-  }
-  
-  .grid {
-    grid-template-columns: 1fr;
     gap: 30px;
+    padding: 30px 20px;
   }
   
-  .formCard {
-    border-radius: 0 0 24px 24px;
-    border-right: 1px solid #e2e8f0;
+  .chevron {
+    transform: rotate(90deg);
+    animation: pulseChevronVertical 2s infinite ease-in-out;
   }
   
-  .infoCard {
-    border-radius: 24px;
-    border-left: 1px solid rgba(255, 255, 255, 0.05);
+  @keyframes pulseChevronVertical {
+    0%, 100% {
+      opacity: 0.5;
+      transform: rotate(90deg) translateX(0);
+    }
+    50% {
+      opacity: 0.9;
+      transform: rotate(90deg) translateX(4px);
+    }
+  }
+  
+  .checkboxGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .extraFieldsRow {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
 @media (max-width: 768px) {
-  .topInfoTitle {
-    font-size: 20px;
+  .section {
+    padding: 80px 0;
   }
   
-  .formRow {
+  .mainTitle {
+    font-size: 26px;
+  }
+  
+  .formRowInline {
     grid-template-columns: 1fr;
     gap: 20px;
   }
   
-  .formCard {
-    padding: 30px 20px;
+  .formGroupInline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .labelInline {
+    min-width: unset;
+  }
+  
+  .checkboxGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .formGroupLine {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .submitBtn {
+    width: 100%;
+    padding: 16px;
   }
 }

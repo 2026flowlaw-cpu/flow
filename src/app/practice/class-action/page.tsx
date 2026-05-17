@@ -28,14 +28,38 @@ export default function ClassActionPage() {
       <main className={styles.main}>
         {/* Banner Section */}
         <section className={styles.heroSection}>
-          <div className={styles.heroContent}>
-            <span className={styles.label}>COLLECTIVE LITIGATION CENTER</span>
-            <h1 className={styles.title}>흩어진 힘을 하나로,<br /><span>집단소송의 새로운 기준</span>을 세웁니다.</h1>
-            <p className={styles.desc}>
-              다수의 권리가 침해된 현장, 법무법인 플로우가 체계적인 시스템과 <br />
-              압도적인 전문성으로 가장 강력한 목소리를 냅니다.
-            </p>
-            <a href="/consult" className={styles.mainCta}>집단소송 의뢰/참여 문의 ➔</a>
+          <div className={styles.heroContentGrid}>
+            
+            {/* Left side: Definition & Description */}
+            <div className={styles.heroLeft}>
+              <div className={styles.blueSquare}></div>
+              <h1 className={styles.heroMainTitle}>집단소송<span className={styles.titleSub}>(단체소송)</span> 이란?</h1>
+              <p className={styles.heroDescription}>
+                다수의 피해자가 함께 모여 동일하거나 유사한 위법행위로 인한 손해를 구제받기 위해 공동으로 하나의 소송을 통해 권리를 행사하는 것
+              </p>
+              <div className={styles.heroUrl}>www.flowlaw-classaction.com</div>
+            </div>
+
+            {/* Right side: 2x2 Glassmorphic Feature Cards */}
+            <div className={styles.heroRight}>
+              <div className={styles.glassCard}>
+                <h3 className={styles.glassCardTitle}>담합·불공정거래</h3>
+                <p className={styles.glassCardDesc}>기업 간 담합으로 인한 가격인상 피해</p>
+              </div>
+              <div className={styles.glassCard}>
+                <h3 className={styles.glassCardTitle}>차액가맹금 전가</h3>
+                <p className={styles.glassCardDesc}>가맹본사의 차액가맹금 부당 전가</p>
+              </div>
+              <div className={styles.glassCard}>
+                <h3 className={styles.glassCardTitle}>개인정보 유출</h3>
+                <p className={styles.glassCardDesc}>수만~수천만 명의 대규모 정보 유출</p>
+              </div>
+              <div className={styles.glassCard}>
+                <h3 className={styles.glassCardTitle}>구조적 피해</h3>
+                <p className={styles.glassCardDesc}>개인이 대기업 상대소송이 어려운 구조</p>
+              </div>
+            </div>
+
           </div>
         </section>
 

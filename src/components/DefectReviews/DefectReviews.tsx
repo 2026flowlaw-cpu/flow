@@ -11,14 +11,26 @@ interface ReviewItem {
   initial: string;
 }
 
-export default function DefectReviews() {
+interface DefectReviewsProps {
+  kicker?: string;
+  mainTitle?: string;
+  descText?: React.ReactNode;
+  items?: ReviewItem[];
+}
+
+export default function DefectReviews({
+  kicker = "REAL CLIENT REVIEWS",
+  mainTitle = '"의뢰인이 직접 작성한 법무법인 플로우 생생한 후기"',
+  descText,
+  items
+}: DefectReviewsProps) {
   const [trackIndex, setTrackIndex] = useState(2);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const autoPlayTimer = useRef<NodeJS.Timeout | null>(null);
 
-  const reviews: ReviewItem[] = [
+  const defaultReviews: ReviewItem[] = [
     {
       id: 1,
       content: '신축 빌라 입주 후 벽면에 미세한 균열과 곰팡이가 생겨 시공사에 항의했지만, 단순 습기 관리 소홀이라며 제 탓만 하더군요. 너무 억울해서 변호사사무실 왔는데 직접 현장에 오셔서 분석도 해주시고 기술 감정도 지원해주신 덕분에 시공사로부터 전면 재시공과 피해보상금까지 받아낼 수 있었습니다.',
@@ -55,6 +67,8 @@ export default function DefectReviews() {
       initial: '정'
     }
   ];
+
+  const reviews = items || defaultReviews;
 
   // Extended list at both ends for infinite loop with 3 visible cards
   const extendedReviews = [
@@ -134,12 +148,16 @@ export default function DefectReviews() {
         
         {/* Header Block */}
         <div className={styles.headerArea}>
-          <span className={styles.kicker}>REAL CLIENT REVIEWS</span>
-          <h2 className={styles.mainTitle}>"의뢰인이 직접 작성한 법무법인 플로우 생생한 후기"</h2>
-          <p className={styles.descText}>
-            어려운 하자 분쟁의 고비마다 변호사와 기술진이 한 몸으로 뛰며 <br />
-            의뢰인의 소중한 권리와 안전한 보수 결과를 지켜낸 진짜 이야기입니다.
-          </p>
+          <span className={styles.kicker}>{kicker}</span>
+          <h2 className={styles.mainTitle}>{mainTitle}</h2>
+          <div className={styles.descText}>
+            {descText || (
+              <>
+                어려운 하자 분쟁의 고비마다 변호사와 기술진이 한 몸으로 뛰며 <br />
+                의뢰인의 소중한 권리와 안전한 보수 결과를 지켜낸 진짜 이야기입니다.
+              </>
+            )}
+          </div>
         </div>
 
         {/* Carousel Slider Outer Wrapper */}

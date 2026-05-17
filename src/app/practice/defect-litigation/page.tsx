@@ -7,6 +7,7 @@ import DefectPromise from '@/components/DefectPromise/DefectPromise';
 import DefectCasesGrid from '@/components/DefectCasesGrid/DefectCasesGrid';
 import VerdictSection from '@/components/VerdictSection/VerdictSection';
 import DefectStrategyGrid from '@/components/DefectStrategyGrid/DefectStrategyGrid';
+import DefectReviews from '@/components/DefectReviews/DefectReviews';
 import DefectFaq from '@/components/DefectFaq/DefectFaq';
 import styles from './page.module.css';
 
@@ -243,6 +244,9 @@ export default function DefectLitigationPage() {
 
         {/* 4.5. Specialized Win Strategy Grid (Image 1 layout) */}
         <DefectStrategyGrid />
+
+        {/* 4.6. Real Client Testimonial Reviews (Interactive filter grid) */}
+        <DefectReviews />
 
         {/* 4.8. Frequently Asked Questions (Image 1 Accordion FAQ) */}
         <DefectFaq />

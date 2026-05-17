@@ -1,0 +1,214 @@
+.sectionWrapper {
+  background-color: #ffffff; /* Clean contrast against grey-blue Strategy section */
+  padding: 100px 0;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ====================================================
+    HEADER AREA
+   ==================================================== */
+.headerArea {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 50px auto;
+}
+
+.kicker {
+  font-size: 14px;
+  font-weight: 700;
+  color: #C5A059; /* Gold */
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.mainTitle {
+  font-size: 38px;
+  font-weight: 800;
+  color: #0A1B39; /* Deep Navy */
+  letter-spacing: -1.5px;
+  margin: 0 0 20px 0;
+}
+
+.descText {
+  font-size: 15.5px;
+  color: #475569;
+  line-height: 1.8;
+  font-weight: 500;
+  margin: 0;
+  word-break: keep-all;
+}
+
+/* ====================================================
+    FILTER TABS (Premium Interactive Feel)
+   ==================================================== */
+.filterTabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 45px;
+}
+
+.tabBtn {
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 30px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.tabBtn:hover {
+  background-color: #e2e8f0;
+  color: #0A1B39;
+}
+
+.activeTab {
+  background-color: #0A1B39 !important;
+  border-color: #0A1B39 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(10, 27, 57, 0.15);
+}
+
+/* ====================================================
+    REVIEWS GRID
+   ==================================================== */
+.reviewsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.reviewCard {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 35px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 440px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+}
+
+.reviewCard:hover {
+  transform: translateY(-8px);
+  border-color: rgba(197, 160, 89, 0.3);
+  box-shadow: 0 20px 40px rgba(10, 27, 57, 0.08);
+  background-color: #ffffff;
+}
+
+/* Top Meta & Stars */
+.cardTop {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.starRating {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  font-size: 16px;
+  color: #C5A059; /* Gold stars */
+}
+
+.reviewTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0A1B39;
+  line-height: 1.5;
+  letter-spacing: -0.5px;
+  word-break: keep-all;
+}
+
+.reviewText {
+  font-size: 14.2px;
+  color: #475569;
+  line-height: 1.75;
+  font-weight: 500;
+  word-break: keep-all;
+  margin: 0;
+}
+
+/* Bottom Client Meta */
+.cardBottom {
+  margin-top: 25px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(197, 160, 89, 0.1);
+  border: 1.5px solid #C5A059;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #C5A059;
+  font-size: 18px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.clientDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.clientName {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.clientSub {
+  font-size: 12.5px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* ====================================================
+    RESPONSIVE MEDIA QUERIES
+   ==================================================== */
+@media (max-width: 1024px) {
+  .reviewsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .reviewsGrid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .mainTitle {
+    font-size: 28px;
+  }
+  
+  .filterTabs {
+    flex-wrap: wrap;
+  }
+}

@@ -169,57 +169,56 @@ export default function DefectCasesGrid() {
               </div>
               
               <div className={styles.modalContent}>
-                {/* 1. 핵심 진단 (Full Width at Top) */}
+                {/* 1. 핵심 진단 (Diagnosis) */}
                 <div className={styles.diagnosisCard}>
-                  <div className={styles.diagnosisHeader}>
-                    <div className={styles.diagnosisTitleArea}>
-                      <svg className={styles.warningIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <div className={styles.cardHeader}>
+                    <div className={styles.titleArea}>
+                      <svg className={styles.diagnosisIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                         <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
                         <line x1="12" y1="9" x2="12" y2="13"/>
                         <line x1="12" y1="17" x2="12.01" y2="17"/>
                       </svg>
-                      <span className={styles.diagnosisTitle}>핵심 진단 (Diagnosis)</span>
+                      <span className={styles.cardTitle}>
+                        핵심 진단 <span className={styles.englishSub}>(Diagnosis)</span>
+                      </span>
                     </div>
-                    <span className={styles.diagnosisBadge}>DIAGNOSIS</span>
+                    <span className={styles.cardBadgeDiagnosis}>DIAGNOSIS</span>
                   </div>
-                  <p className={styles.diagnosisText}>{currentCase.coreDiagnosis}</p>
+                  <p className={styles.cardText}>{currentCase.coreDiagnosis}</p>
                 </div>
 
-                {/* 2. Solutions Grid (Two Equal Columns below) */}
-                <div className={styles.solutionsGrid}>
-                  
-                  {/* Engineering Card */}
-                  <div className={`${styles.solutionCard} ${styles.engCard}`}>
-                    <div className={styles.solutionHeader}>
-                      <div className={styles.solutionIconBox}>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <circle cx="12" cy="12" r="10"/>
-                          <line x1="12" y1="16" x2="12" y2="12"/>
-                          <line x1="12" y1="8" x2="12.01" y2="8"/>
-                        </svg>
-                      </div>
-                      <span className={styles.solutionTitle}>
+                {/* 2. 엔지니어링 솔루션 (Engineering) */}
+                <div className={styles.engineeringCard}>
+                  <div className={styles.cardHeader}>
+                    <div className={styles.titleArea}>
+                      <svg className={styles.engineeringIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                      </svg>
+                      <span className={styles.cardTitle}>
                         엔지니어링 솔루션 <span className={styles.englishSub}>(Engineering)</span>
                       </span>
                     </div>
-                    <p className={styles.solutionText}>{currentCase.engineeringSolution}</p>
+                    <span className={styles.cardBadgeEngineering}>ENGINEERING</span>
                   </div>
+                  <p className={styles.cardText}>{currentCase.engineeringSolution}</p>
+                </div>
 
-                  {/* Legal Card */}
-                  <div className={`${styles.solutionCard} ${styles.lawCard}`}>
-                    <div className={styles.solutionHeader}>
-                      <div className={styles.solutionIconBox}>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        </svg>
-                      </div>
-                      <span className={styles.solutionTitle}>
+                {/* 3. 법적 대응 전략 (Legal Strategy) */}
+                <div className={styles.legalCard}>
+                  <div className={styles.cardHeader}>
+                    <div className={styles.titleArea}>
+                      <svg className={styles.legalIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                      </svg>
+                      <span className={styles.cardTitle}>
                         법적 대응 전략 <span className={styles.englishSub}>(Legal Strategy)</span>
                       </span>
                     </div>
-                    <p className={styles.solutionText}>{currentCase.legalStrategy}</p>
+                    <span className={styles.cardBadgeLegal}>LEGAL</span>
                   </div>
-
+                  <p className={styles.cardText}>{currentCase.legalStrategy}</p>
                 </div>
               </div>
             </div>

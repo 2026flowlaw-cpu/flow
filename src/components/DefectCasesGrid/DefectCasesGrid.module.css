@@ -241,39 +241,118 @@
 }
 
 /* ====================================================
-    RESTRUCTURED MODAL CONTENT
+    RESTRUCTURED 3-ROW VERTICAL MODAL CONTENT
    ==================================================== */
 .modalContent {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
-/* 1. Core Diagnosis Card (Top, Full Width) */
-.diagnosisCard {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(249, 115, 22, 0.01) 100%);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+.diagnosisCard,
+.engineeringCard,
+.legalCard {
   border-radius: 18px;
   padding: 24px 28px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), inset 0 0 20px rgba(239, 68, 68, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
 }
 
-.diagnosisCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(to bottom, #ef4444, #f97316);
+.diagnosisCard:hover,
+.engineeringCard:hover,
+.legalCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
 }
 
-.diagnosisHeader {
+/* 1. Diagnosis Card Styling */
+.diagnosisCard {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(15, 23, 42, 0.4) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+.diagnosisCard:hover {
+  border-color: rgba(239, 68, 68, 0.35);
+  box-shadow: 0 15px 35px rgba(239, 68, 68, 0.1);
+}
+
+.diagnosisIcon {
+  color: #f87171;
+  filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.4));
+}
+
+.cardBadgeDiagnosis {
+  font-size: 9px;
+  font-weight: 700;
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.12);
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* 2. Engineering Card Styling */
+.engineeringCard {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.06) 0%, rgba(15, 23, 42, 0.4) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+.engineeringCard:hover {
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 15px 35px rgba(59, 130, 246, 0.1);
+}
+
+.engineeringIcon {
+  color: #60a5fa;
+  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.4));
+}
+
+.cardBadgeEngineering {
+  font-size: 9px;
+  font-weight: 700;
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.12);
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* 3. Legal Card Styling */
+.legalCard {
+  background: linear-gradient(135deg, rgba(197, 160, 89, 0.06) 0%, rgba(15, 23, 42, 0.4) 100%);
+  border: 1px solid rgba(197, 160, 89, 0.15);
+}
+
+.legalCard:hover {
+  border-color: rgba(197, 160, 89, 0.35);
+  box-shadow: 0 15px 35px rgba(197, 160, 89, 0.1);
+}
+
+.legalIcon {
+  color: #fbbf24;
+  filter: drop-shadow(0 0 6px rgba(197, 160, 89, 0.4));
+}
+
+.cardBadgeLegal {
+  font-size: 9px;
+  font-weight: 700;
+  color: #fbbf24;
+  background: rgba(197, 160, 89, 0.12);
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Common Card Typography */
+.cardHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -282,142 +361,32 @@
   gap: 10px;
 }
 
-.diagnosisTitleArea {
+.titleArea {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
-.warningIcon {
-  color: #ef4444;
-  filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.4));
-}
-
-.diagnosisTitle {
+.cardTitle {
   font-size: 16.5px;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.3px;
 }
 
-.diagnosisBadge {
-  font-size: 9.5px;
-  font-weight: 700;
-  color: #ef4444;
-  background: rgba(239, 68, 68, 0.12);
-  padding: 3px 8px;
-  border-radius: 4px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.diagnosisText {
-  font-size: 14.5px;
-  color: #e2e8f0;
-  line-height: 1.8;
-  margin: 0;
-  word-break: keep-all;
-}
-
-/* 2. Solutions Grid (Bottom, Two Equal Columns) */
-.solutionsGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.solutionCard {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  padding: 26px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.solutionCard:hover {
-  background: rgba(255, 255, 255, 0.04);
-  transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
-}
-
-.solutionHeader {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.solutionIconBox {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.solutionTitle {
-  font-size: 15.5px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-}
-
 .englishSub {
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 500;
   opacity: 0.7;
   margin-left: 4px;
 }
 
-.solutionText {
-  font-size: 13.5px;
-  color: #cbd5e1;
-  line-height: 1.75;
+.cardText {
+  font-size: 14.5px;
+  color: #e2e8f0;
+  line-height: 1.8;
   margin: 0;
   word-break: keep-all;
-}
-
-/* Engineering card theme */
-.engCard {
-  border-left: 3px solid #3b82f6;
-}
-
-.engCard:hover {
-  border-color: rgba(59, 130, 246, 0.5);
-  box-shadow: 0 15px 35px rgba(59, 130, 246, 0.12);
-}
-
-.engCard .solutionIconBox {
-  background: rgba(59, 130, 246, 0.1);
-  color: #3b82f6;
-}
-
-.engCard .solutionTitle {
-  color: #60a5fa;
-}
-
-/* Legal card theme */
-.lawCard {
-  border-left: 3px solid #C5A059;
-}
-
-.lawCard:hover {
-  border-color: rgba(197, 160, 89, 0.5);
-  box-shadow: 0 15px 35px rgba(197, 160, 89, 0.12);
-}
-
-.lawCard .solutionIconBox {
-  background: rgba(197, 160, 89, 0.1);
-  color: #C5A059;
-}
-
-.lawCard .solutionTitle {
-  color: #facc15;
 }
 
 /* ====================================================
@@ -454,12 +423,9 @@
     padding-bottom: 16px;
   }
 
-  .solutionsGrid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .solutionCard {
+  .diagnosisCard,
+  .engineeringCard,
+  .legalCard {
     padding: 20px;
   }
 }

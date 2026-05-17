@@ -92,7 +92,66 @@ export default function EduLawPage() {
         </section>
 
         {/* 2. Strengths & Promises (Hexagon & Count-up Section) */}
-        <DefectPromise />
+        <DefectPromise 
+          sectionTitle="법무법인 플로우 에듀법률센터의 압도적 실력"
+          sectionSubtitle="학원업계의 독특한 사업 구조와 법적 리스크를 완벽하게 꿰뚫어 보며, 신속하고 영민한 대처로 원장님의 소중한 교육 사업을 안전하게 보호합니다."
+          counters={[
+            {
+              id: 0,
+              target: 1000,
+              suffix: '건+',
+              title: '학원 사건 수행 건수',
+              desc: '설립, 노무, 양도양수, 형사 고발까지 축적된 압도적 소송 데이터'
+            },
+            {
+              id: 1,
+              target: 1,
+              suffix: '개 전문센터',
+              title: '에듀법률센터 별도 운영',
+              desc: '학원 행정 및 분쟁 해결만을 위해 조직된 전문 브랜드'
+            },
+            {
+              id: 2,
+              target: 1,
+              suffix: '팀 전담 가동',
+              title: '학원분쟁 전담 TF팀 조직',
+              desc: '법률 분석팀과 노무 연계 시스템이 상시 연대하여 신속 방어'
+            },
+            {
+              id: 3,
+              target: 100,
+              suffix: '% 직행 상담',
+              title: '강남학원연합회 자문변호사',
+              desc: '강남구 학원연합회 공식 자문을 직접 수행 중인 변호사가 직접 담당'
+            }
+          ]}
+          promises={[
+            {
+              id: 0,
+              title: '학원전문변호사 책임 상담',
+              desc: '강남구 학원연합회 공식 자문변호사 등 학원/에듀 법률 분야의 독보적 실무 경력을 지닌 전담 변호사가 외주 없이 100% 밀착하여 소통합니다.',
+              iconType: 'lawyer'
+            },
+            {
+              id: 1,
+              title: '에듀 특화 전담 TF팀 가동',
+              desc: '설립 인허가, 교육청 행정조치, 강사 노무 계약, 동업 해지 정산금 및 형사 대응까지 원스톱으로 명쾌한 솔루션을 제공합니다.',
+              iconType: 'tech'
+            },
+            {
+              id: 2,
+              title: '운영 맞춤형 컨설팅',
+              desc: '학원 양도양수 권리금 보전, 허위 광고 및 명예훼손, 학파라치(무신고 포상금) 대응 등 학원 운영 현장 맞춤형 솔루션 패키지를 가동합니다.',
+              iconType: 'custom'
+            },
+            {
+              id: 3,
+              title: '철저한 영업권 및 지식재산 보호',
+              desc: '강사의 무단 수강생 스카웃, 학원 상표권 및 교육 교재 무단 도용, 가맹 프랜차이즈 계약 해지 갈등 등에서 원장님의 영업권을 완벽히 수호합니다.',
+              iconType: 'custom'
+            }
+          ]}
+        />
 
         {/* 2.5. Specialized Defect Cases Pill Grid (Image 1 layout) */}
         <DefectCasesGrid />

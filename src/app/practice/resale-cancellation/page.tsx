@@ -108,6 +108,7 @@ export default function ResaleCancellationPage() {
           ]}
           difficultyTitle="* 현재 어떤 어려움을 겪고 계신가요?"
           difficultySubtitle="법무법인 플로우는 모든 케이스를 축적하고 있습니다."
+          columns={2}
           customCases={[
             {
               id: 1,

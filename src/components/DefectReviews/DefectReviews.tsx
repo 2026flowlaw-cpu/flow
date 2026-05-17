@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './DefectReviews.module.css';
 
 interface ReviewItem {
@@ -12,6 +12,10 @@ interface ReviewItem {
 }
 
 export default function DefectReviews() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const autoPlayTimer = useRef<NodeJS.Timeout | null>(null);
+
   const reviews: ReviewItem[] = [
     {
       id: 1,
@@ -50,6 +54,29 @@ export default function DefectReviews() {
     }
   ];
 
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? reviews.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === reviews.length - 1 ? 0 : prev + 1));
+  };
+
+  // Auto-play effect
+  useEffect(() => {
+    if (!isPaused) {
+      autoPlayTimer.current = setInterval(() => {
+        handleNext();
+      }, 5000); // Auto slide every 5 seconds
+    }
+
+    return () => {
+      if (autoPlayTimer.current) {
+        clearInterval(autoPlayTimer.current);
+      }
+    };
+  }, [isPaused]);
+
   return (
     <section className={styles.sectionWrapper}>
       <div className={styles.container}>
@@ -64,33 +91,73 @@ export default function DefectReviews() {
           </p>
         </div>
 
-        {/* 5-Card Dynamic Grid Layout */}
-        <div className={styles.reviewsGridDynamic}>
-          {reviews.map((item) => (
-            <div className={styles.reviewCard} key={item.id}>
-              
-              {/* Star Rating & Card Body */}
-              <div className={styles.cardTop}>
-                <div className={styles.starRating}>
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className={styles.star}>★</span>
-                  ))}
-                </div>
-                <p className={styles.reviewText}>"{item.content}"</p>
-              </div>
+        {/* Carousel Slider Outer Wrapper */}
+        <div 
+          className={styles.carouselContainer}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {/* Navigation Prev Button */}
+          <button className={`${styles.navBtn} ${styles.prevBtn}`} onClick={handlePrev} aria-label="Previous review">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
 
-              {/* Client Info Footer */}
-              <div className={styles.cardBottom}>
-                <div className={styles.avatar}>
-                  {item.initial}
-                </div>
-                <div className={styles.clientDetails}>
-                  <span className={styles.clientName}>{item.clientType}</span>
-                  <span className={styles.clientSub}>{item.location}</span>
-                </div>
-              </div>
+          {/* Viewport Box */}
+          <div className={styles.carouselViewport}>
+            <div 
+              className={styles.carouselTrack}
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {reviews.map((item) => (
+                <div className={styles.carouselSlide} key={item.id}>
+                  <div className={styles.reviewCard}>
+                    
+                    {/* Star Rating & Card Body */}
+                    <div className={styles.cardTop}>
+                      <div className={styles.starRating}>
+                        {[...Array(5)].map((_, i) => (
+                          <span key={i} className={styles.star}>★</span>
+                        ))}
+                      </div>
+                      <p className={styles.reviewText}>"{item.content}"</p>
+                    </div>
 
+                    {/* Client Info Footer */}
+                    <div className={styles.cardBottom}>
+                      <div className={styles.avatar}>
+                        {item.initial}
+                      </div>
+                      <div className={styles.clientDetails}>
+                        <span className={styles.clientName}>{item.clientType}</span>
+                        <span className={styles.clientSub}>{item.location}</span>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              ))}
             </div>
+          </div>
+
+          {/* Navigation Next Button */}
+          <button className={`${styles.navBtn} ${styles.nextBtn}`} onClick={handleNext} aria-label="Next review">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Bottom Pagination Dots */}
+        <div className={styles.paginationDots}>
+          {reviews.map((_, index) => (
+            <button
+              key={index}
+              className={`${styles.dot} ${currentIndex === index ? styles.activeDot : ''}`}
+              onClick={() => setCurrentIndex(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
           ))}
         </div>
 

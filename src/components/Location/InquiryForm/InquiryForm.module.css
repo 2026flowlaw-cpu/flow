@@ -25,16 +25,16 @@
 
 .topInfoTag {
   font-size: 14.5px;
-  color: #B89B63; /* Official Muted Gold Kicker */
-  font-weight: 600;
+  color: #C5A059; /* Brand Gold Kicker */
+  font-weight: 800;
   margin-bottom: 18px;
   letter-spacing: 1.5px;
 }
 
 .sloganTitle {
   font-size: 40px; /* Massive hero scale slogan! */
-  font-weight: 600;
-  color: #162233; /* Deep Flow Navy */
+  font-weight: 900;
+  color: #0A1B39; /* Deep Navy */
   letter-spacing: -2px;
   line-height: 1.45;
   margin: 0 0 20px 0;
@@ -42,14 +42,14 @@
 }
 
 .sloganRed {
-  color: #162233; /* Changed to Deep Flow Navy for clean, high-end tone and manner */
+  color: #0A1B39; /* Changed from red to Deep Navy for clean, high-end tone and manner */
 }
 
 .sloganDesc {
   font-size: 19px; /* Expanded sub-slogan */
   color: #334155;
   line-height: 1.7;
-  font-weight: 600;
+  font-weight: 700;
   margin: 40px 0 0 0; /* Clear 40px gap above sloganDesc, below topInfoBadge */
   word-break: keep-all;
 }
@@ -64,7 +64,7 @@
   gap: 10px;
   align-items: center;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(22, 34, 51, 0.02);
+  box-shadow: 0 10px 30px rgba(10, 27, 57, 0.02);
   max-width: 580px;
   width: 100%;
 }
@@ -72,14 +72,14 @@
 .topInfoBadgeLabel {
   font-size: 16px;
   color: #334155;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.5px;
 }
 
 .sloganPhone {
   font-size: 28px; /* High impact prominent phone number! */
-  color: #162233; /* Deep Flow Navy color */
-  font-weight: 600;
+  color: #0A1B39; /* Deep navy color */
+  font-weight: 800;
   text-decoration: underline;
   text-decoration-thickness: 2.5px;
   text-underline-offset: 6px;
@@ -98,7 +98,7 @@
     HEADER BLUE BOARD PANEL
    ==================================================== */
 .formHeaderBg {
-  background: linear-gradient(135deg, #162233 0%, #222d3d 100%); /* Deep Flow Navy Gradient */
+  background: linear-gradient(135deg, #0A1B39 0%, #162a52 100%);
   border-radius: 24px 24px 0 0;
   padding: 40px 45px;
   color: #ffffff;
@@ -134,32 +134,32 @@
 
 .headerContactLabel {
   font-size: 12.5px; /* Larger tag text */
-  font-weight: 600;
-  color: #B89B63; /* Brand Muted Gold label text */
+  font-weight: 800;
+  color: #C5A059; /* Brand Gold label text */
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  background-color: rgba(184, 155, 99, 0.18); /* Premium muted gold container tag */
+  background-color: rgba(197, 160, 89, 0.18); /* Premium gold container tag */
   padding: 3px 10px;
   border-radius: 6px;
 }
 
 .headerContactDivider {
   color: rgba(255, 255, 255, 0.3);
-  font-weight: 400300;
+  font-weight: 300;
 }
 
 .kicker {
   font-size: 13px; /* Slightly larger professional tracker */
   letter-spacing: 2.5px;
-  color: #B89B63; /* Brand Muted Gold */
-  font-weight: 600;
+  color: #C5A059; /* Brand Gold */
+  font-weight: 800;
   display: block;
   margin-bottom: 12px;
 }
 
 .title {
   font-size: 30px; /* Magnificent expanded title */
-  font-weight: 600;
+  font-weight: 800;
   color: #ffffff;
   margin: 0 0 12px 0;
   letter-spacing: -0.8px;
@@ -210,7 +210,7 @@
 
 .formCardTitle {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 800;
   color: #0A1B39;
   margin: 0;
 }
@@ -236,7 +236,7 @@
 
 .formLabel {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   color: #475569;
 }
 
@@ -337,7 +337,7 @@
 .checkboxLabel {
   font-size: 13.5px;
   color: #475569;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -345,7 +345,7 @@
   background: none;
   border: none;
   color: #C5A059; /* Elegant Brand Gold */
-  font-weight: 600;
+  font-weight: 800;
   font-size: 13.5px;
   cursor: pointer;
   padding: 0;
@@ -370,7 +370,7 @@
 
 .privacyDetailsBox h5 {
   font-size: 13.5px;
-  font-weight: 600;
+  font-weight: 800;
   color: #0A1B39;
   margin: 0 0 10px 0;
 }
@@ -386,7 +386,7 @@
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -403,7 +403,7 @@
   border: none;
   border-radius: 10px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 800;
   cursor: pointer;
   transition: background-color 0.2s;
   text-align: center;
@@ -440,7 +440,7 @@
 .orText {
   font-size: 13.5px;
   color: #94a3b8;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -449,7 +449,7 @@
   background-color: #FFE600; /* Bright KakaoTalk yellow */
   color: #3A1D1D;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -120,7 +120,7 @@ export default function DefectLitigationPage() {
             <div className={styles.casesGrid}>
               
               {/* Left Column: Vertical Defect Marquee */}
-              <div>
+              <div className={styles.leftCol}>
                 <div className={styles.verticalMarqueeWrapper}>
                   <div className={styles.verticalMarqueeTrack}>
                     

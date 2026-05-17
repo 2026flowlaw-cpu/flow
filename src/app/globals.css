@@ -1,11 +1,9 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
-
 :root {
   /* Core Brand Colors - High Fidelity */
-  --primary: #162233; /* Deep Flow Navy */
-  --primary-light: #222d3d;
-  --accent: #B89B63; /* Muted Gold */
-  --accent-light: #c9ad79;
+  --primary: #0A1B39;
+  --primary-light: #162C52;
+  --accent: #C5A059;
+  --accent-light: #D4B476;
   --background: #FFFFFF;
   --foreground: #111111;
   --text-muted: #777777;
@@ -37,15 +35,9 @@ body {
   overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-  font-weight: 400; /* Pretendard Regular for body */
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-}
-
-h1, h2, h3, h4, h5, h6, .title {
-  font-family: inherit;
-  font-weight: 600; /* Pretendard SemiBold for titles */
 }
 
 a {

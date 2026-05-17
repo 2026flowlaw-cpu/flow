@@ -134,7 +134,7 @@ export default function DefectPromise() {
             <div className={styles.promiseCard}>
               <div className={styles.hexagonWrapper}>
                 <svg className={styles.hexagonSvg} viewBox="0 0 100 100">
-                  <polygon points="50,5 89,27.5 89,72.5 50,95 11,72.5 11,27.5" fill="rgba(255, 255, 255, 0.02)" stroke="#B89B63" strokeWidth="1.5" />
+                  <polygon points="50,5 89,27.5 89,72.5 50,95 11,72.5 11,27.5" fill="rgba(255, 255, 255, 0.02)" stroke="#C5A059" strokeWidth="1.5" />
                 </svg>
                 <div className={styles.hexagonIcon}>
                   <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -155,7 +155,7 @@ export default function DefectPromise() {
             <div className={styles.promiseCard}>
               <div className={styles.hexagonWrapper}>
                 <svg className={styles.hexagonSvg} viewBox="0 0 100 100">
-                  <polygon points="50,5 89,27.5 89,72.5 50,95 11,72.5 11,27.5" fill="rgba(255, 255, 255, 0.02)" stroke="#B89B63" strokeWidth="1.5" />
+                  <polygon points="50,5 89,27.5 89,72.5 50,95 11,72.5 11,27.5" fill="rgba(255, 255, 255, 0.02)" stroke="#C5A059" strokeWidth="1.5" />
                 </svg>
                 <div className={styles.hexagonIcon}>
                   <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -175,7 +175,7 @@ export default function DefectPromise() {
             <div className={styles.promiseCard}>
               <div className={styles.hexagonWrapper}>
                 <svg className={styles.hexagonSvg} viewBox="0 0 100 100">
-                  <polygon points="50,5 89,27.5 89,72.5 50,95 11,72.5 11,27.5" fill="rgba(255, 255, 255, 0.02)" stroke="#B89B63" strokeWidth="1.5" />
+                  <polygon points="50,5 89,27.5 89,72.5 50,95 11,72.5 11,27.5" fill="rgba(255, 255, 255, 0.02)" stroke="#C5A059" strokeWidth="1.5" />
                 </svg>
                 <div className={styles.hexagonIcon}>
                   <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -196,7 +196,7 @@ export default function DefectPromise() {
             <div className={styles.promiseCard}>
               <div className={styles.hexagonWrapper}>
                 <svg className={styles.hexagonSvg} viewBox="0 0 100 100">
-                  <polygon points="50,5 89,27.5 89,72.5 50,95 11,72.5 11,27.5" fill="rgba(255, 255, 255, 0.02)" stroke="#B89B63" strokeWidth="1.5" />
+                  <polygon points="50,5 89,27.5 89,72.5 50,95 11,72.5 11,27.5" fill="rgba(255, 255, 255, 0.02)" stroke="#C5A059" strokeWidth="1.5" />
                 </svg>
                 <div className={styles.hexagonIcon}>
                   <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

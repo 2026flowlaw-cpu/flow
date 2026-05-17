@@ -16,8 +16,8 @@
 
 .kicker {
   font-size: 14px;
-  font-weight: 600;
-  color: #B89B63; /* Brand Muted Gold */
+  font-weight: 800;
+  color: #C5A059; /* Gold */
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 12px;
@@ -26,8 +26,8 @@
 
 .sectionTitle {
   font-size: 36px;
-  font-weight: 600;
-  color: #162233; /* Deep Flow Navy */
+  font-weight: 800;
+  color: #0A1B39; /* Deep navy */
   margin: 0 0 18px 0;
   letter-spacing: -1.5px;
   word-break: keep-all;
@@ -66,15 +66,15 @@
 
 .metricCard:hover {
   transform: translateY(-5px);
-  border-color: rgba(184, 155, 99, 0.4); /* Muted Gold hover stroke */
+  border-color: rgba(197, 160, 89, 0.4);
   background: #ffffff;
-  box-shadow: 0 15px 35px rgba(22, 34, 51, 0.05);
+  box-shadow: 0 15px 35px rgba(10, 27, 57, 0.05);
 }
 
 .metricNum {
   font-size: 34px; /* Reduced to fit on one line perfectly */
-  font-weight: 600;
-  color: #B89B63; /* Brand Muted Gold highlight numbers */
+  font-weight: 900;
+  color: #1a56db; /* Premium Trust Sapphire Blue for professional highlight */
   margin-bottom: 10px;
   letter-spacing: -1.2px;
   white-space: nowrap; /* Prevent any split or wrapping */
@@ -82,8 +82,8 @@
 
 .metricTitle {
   font-size: 15.5px;
-  font-weight: 600;
-  color: #162233; /* Deep Flow Navy */
+  font-weight: 800;
+  color: #0A1B39;
   margin: 0 0 8px 0;
   word-break: keep-all;
 }
@@ -101,7 +101,7 @@
     DARK NAVY LOWER SECTION (ONLY FOR PROMISE CARDS)
    ==================================================== */
 .promiseDarkSection {
-  background-color: #162233; /* Deep Flow Navy background */
+  background-color: #061226; /* Deep premium navy bg as requested */
   padding: 100px 0;
   position: relative;
   z-index: 2;
@@ -115,7 +115,7 @@
   transform: translate(-50%, -50%);
   width: 85%;
   height: 85%;
-  background: radial-gradient(circle, rgba(184, 155, 99, 0.04) 0%, transparent 70%); /* Muted gold glow */
+  background: radial-gradient(circle, rgba(197, 160, 89, 0.04) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -162,11 +162,11 @@
 }
 
 .promiseCard:hover .hexagonSvg {
-  filter: drop-shadow(0 8px 25px rgba(184, 155, 99, 0.25)); /* Muted gold hover drop shadow */
+  filter: drop-shadow(0 8px 25px rgba(197, 160, 89, 0.25));
 }
 
 .hexagonIcon {
-  color: #B89B63; /* Brand Muted Gold icon color */
+  color: #C5A059;
   z-index: 2;
   transition: transform 0.3s ease, color 0.3s ease;
 }
@@ -178,7 +178,7 @@
 
 .cardTitle {
   font-size: 19px; /* Increased from 17px */
-  font-weight: 600;
+  font-weight: 800;
   color: #ffffff; /* White text for contrast on navy */
   margin: 0 0 12px 0;
   letter-spacing: -0.5px;

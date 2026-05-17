@@ -260,8 +260,15 @@
   align-items: stretch;
 }
 
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .verticalMarqueeWrapper {
-  height: 540px;
+  flex: 1;
+  min-height: 540px;
   overflow: hidden;
   position: relative;
   width: 100%;

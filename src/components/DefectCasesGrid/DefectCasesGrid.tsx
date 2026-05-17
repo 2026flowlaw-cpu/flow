@@ -7,7 +7,7 @@ interface CasePill {
   id: number;
   label: string;
   coreDiagnosis: string;
-  engineeringSolution: string;
+  engineeringSolution?: string;
   legalStrategy: string;
 }
 

@@ -1,21 +1,9 @@
 .promiseSection {
-  background-color: #ffffff; /* Premium pure white background as requested */
-  padding: 100px 0;
+  background-color: #ffffff; /* Upper section stays pure white */
+  padding: 100px 0 0 0; /* No bottom padding to align perfectly with the dark container */
   color: #1e293b;
   position: relative;
   overflow: hidden;
-}
-
-.promiseSection::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 80%;
-  background: radial-gradient(circle, rgba(197, 160, 89, 0.03) 0%, transparent 70%);
-  pointer-events: none;
 }
 
 .sectionHeader {
@@ -39,7 +27,7 @@
 .sectionTitle {
   font-size: 36px;
   font-weight: 800;
-  color: #0A1B39; /* Premium deep navy for white bg */
+  color: #0A1B39; /* Deep navy */
   margin: 0 0 18px 0;
   letter-spacing: -1.5px;
   word-break: keep-all;
@@ -48,7 +36,7 @@
 
 .sectionSubtitle {
   font-size: 15.5px;
-  color: #475569; /* Soft slate grey */
+  color: #475569;
   line-height: 1.75;
   margin: 0;
   word-break: keep-all;
@@ -56,22 +44,22 @@
 }
 
 /* ====================================================
-    METRICS GRID (COUNT UP)
+    METRICS GRID (ON WHITE BACKGROUND)
    ==================================================== */
 .metricsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
-  margin-bottom: 80px;
+  margin-bottom: 100px;
   position: relative;
   z-index: 2;
 }
 
 .metricCard {
-  background: #f8fafc; /* Premium light grey card */
+  background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 20px;
-  padding: 30px 20px;
+  padding: 35px 20px;
   text-align: center;
   transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
@@ -80,19 +68,20 @@
   transform: translateY(-5px);
   border-color: rgba(197, 160, 89, 0.4);
   background: #ffffff;
-  box-shadow: 0 10px 30px rgba(10, 27, 57, 0.04);
+  box-shadow: 0 15px 35px rgba(10, 27, 57, 0.05);
 }
 
 .metricNum {
-  font-size: 38px;
+  font-size: 34px; /* Reduced to fit on one line perfectly */
   font-weight: 900;
-  color: #0A1B39; /* Deep navy text for numbers */
+  color: #0A1B39;
   margin-bottom: 10px;
-  letter-spacing: -1px;
+  letter-spacing: -1.2px;
+  white-space: nowrap; /* Prevent any split or wrapping */
 }
 
 .metricTitle {
-  font-size: 15px;
+  font-size: 15.5px;
   font-weight: 800;
   color: #0A1B39;
   margin: 0 0 8px 0;
@@ -109,14 +98,33 @@
 }
 
 /* ====================================================
-    HEXAGON PROMISE CARDS
+    DARK NAVY LOWER SECTION (ONLY FOR PROMISE CARDS)
    ==================================================== */
+.promiseDarkSection {
+  background-color: #061226; /* Deep premium navy bg as requested */
+  padding: 100px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.promiseDarkSection::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  height: 85%;
+  background: radial-gradient(circle, rgba(197, 160, 89, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
 .promiseGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 25px;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .promiseCard {
@@ -148,12 +156,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.05));
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.3));
   transition: filter 0.3s ease;
 }
 
 .promiseCard:hover .hexagonSvg {
-  filter: drop-shadow(0 8px 20px rgba(197, 160, 89, 0.2));
+  filter: drop-shadow(0 8px 25px rgba(197, 160, 89, 0.25));
 }
 
 .hexagonIcon {
@@ -164,13 +172,13 @@
 
 .promiseCard:hover .hexagonIcon {
   transform: scale(1.1);
-  color: #0A1B39;
+  color: #ffffff;
 }
 
 .cardTitle {
   font-size: 17px;
   font-weight: 800;
-  color: #0A1B39;
+  color: #ffffff; /* White text for contrast on navy */
   margin: 0 0 12px 0;
   letter-spacing: -0.5px;
   word-break: keep-all;
@@ -178,7 +186,7 @@
 
 .cardDesc {
   font-size: 13px;
-  color: #475569;
+  color: #94a3b8; /* Slate gray on navy */
   line-height: 1.65;
   margin: 0;
   word-break: keep-all;
@@ -191,6 +199,7 @@
 @media (max-width: 1024px) {
   .metricsGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
   
   .promiseGrid {

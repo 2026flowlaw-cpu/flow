@@ -1,8 +1,37 @@
 .mapSection {
-  padding: 120px 0;
+  padding: 100px 0 120px;
   background-color: #f8fafc; /* Luxury soft background */
   position: relative;
   overflow: hidden;
+}
+
+/* Luxurious Section Boundary Divider at the top */
+.sectionDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  padding: 0 20px;
+}
+
+.dividerLine {
+  height: 1px;
+  flex-grow: 1;
+  background: linear-gradient(to right, transparent, rgba(197, 160, 89, 0.4), transparent);
+}
+
+.dividerBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 0 24px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #C5A059; /* Brand warm gold */
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
 .grid {
@@ -15,7 +44,7 @@
 }
 
 .mapWrapper {
-  height: 600px;
+  height: 660px;
   border-radius: 30px;
   overflow: hidden;
   box-shadow: 0 30px 60px rgba(10, 27, 57, 0.08);
@@ -29,19 +58,20 @@
   gap: 24px;
 }
 
+/* 1. By Car Card (차량 이용 시) - Golden Accent Luxury Card */
 .addressBox {
-  background: white;
+  background: linear-gradient(135deg, #ffffff 0%, #fdfbf7 100%);
   padding: 35px;
   border-radius: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 30px rgba(197, 160, 89, 0.03);
+  border: 1px solid rgba(197, 160, 89, 0.25);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .addressBox:hover {
   transform: translateY(-3px);
   border-color: #C5A059;
-  box-shadow: 0 15px 35px rgba(197, 160, 89, 0.08);
+  box-shadow: 0 15px 35px rgba(197, 160, 89, 0.1);
 }
 
 .titleWithIcon {
@@ -51,16 +81,17 @@
   margin-bottom: 20px;
 }
 
-.iconBox {
-  width: 48px;
-  height: 48px;
-  background: rgba(197, 160, 89, 0.08); /* Sophisticated light gold tint */
-  color: #C5A059; /* Brand warm gold */
+.carIconBox {
+  width: 46px;
+  height: 46px;
+  background: #C5A059; /* Outstanding gold */
+  color: white;
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
 }
 
 .label {
@@ -70,131 +101,306 @@
   letter-spacing: -0.5px;
 }
 
+.carDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .address {
-  font-size: 16px;
-  font-weight: 500;
-  color: #475569; /* Warm slate gray */
-  line-height: 1.6;
-  word-break: keep-all;
+  font-size: 18px;
+  font-weight: 800;
+  color: #0A1B39;
+  line-height: 1.5;
   margin: 0;
 }
 
-.phone {
+.buildingName {
   display: block;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.phoneBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(197, 160, 89, 0.05);
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(197, 160, 89, 0.1);
+}
+
+.phoneLabel {
+  font-size: 13px;
   font-weight: 700;
-  color: #C5A059; /* Elegant gold highlight */
-  margin-top: 10px;
+  color: #64748b;
 }
 
-.transportList {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.phoneLink {
+  font-size: 16px;
+  font-weight: 800;
+  color: #C5A059;
+  text-decoration: none;
+  transition: opacity 0.2s;
 }
 
-.transportItem {
+.phoneLink:hover {
+  opacity: 0.8;
+}
+
+.mapButtons {
+  margin-top: 20px;
+}
+
+.mapBtn {
+  display: block;
+  background: #C5A059;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.mapBtn:hover {
+  background: #b08c4b;
+  transform: translateY(-1px);
+}
+
+/* 2. Subway Card (지하철) - Clean White Card with Timeline */
+.subwayCard {
   background: white;
-  padding: 30px;
+  padding: 35px;
   border-radius: 24px;
-  display: flex;
-  gap: 20px;
   border: 1px solid #e2e8f0;
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
 }
 
-.transportItem:hover {
+.subwayCard:hover {
   transform: translateY(-3px);
   border-color: #C5A059;
-  box-shadow: 0 15px 35px rgba(197, 160, 89, 0.08);
+  box-shadow: 0 15px 35px rgba(197, 160, 89, 0.06);
 }
 
-/* Adjust gold icon inside transport items as well */
-.transportItem .iconBox {
+.subwayIconBox {
+  width: 46px;
+  height: 46px;
   background: rgba(10, 27, 57, 0.04);
   color: #0A1B39;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.transportItem:hover .iconBox {
+.subwayCard:hover .subwayIconBox {
   background: rgba(197, 160, 89, 0.08);
   color: #C5A059;
 }
 
-.details {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex-grow: 1;
-}
-
 .trLabel {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 800;
   color: #0A1B39;
+  letter-spacing: -0.5px;
 }
 
-.details p {
+/* Timeline Layout */
+.timeline {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 4px;
+  width: 2px;
+  background-color: #e2e8f0;
+}
+
+.timelineItem {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.timelineDot {
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2.5px solid white;
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.05);
+}
+
+.bgLine9 { background-color: #c59e31; }
+.bgLine7 { background-color: #788a1e; }
+.bgLine2 { background-color: #30a728; }
+
+.timelineContent {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.subwayBadgeLine9 {
+  color: #c59e31;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.subwayBadgeLine7 {
+  color: #788a1e;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.subwayBadgeLine2 {
+  color: #30a728;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.timelineDesc {
   font-size: 14px;
   color: #64748b;
-  line-height: 1.8;
-  margin: 0;
+  font-weight: 500;
 }
 
-/* Seoul Subway Signature Colors - Elegant Luxury Tones */
-.subwayLine9 {
-  color: #c59e31; /* Soft Line 9 Gold */
+/* 3. Bus Card (버스) - Grid pills card */
+.busCard {
+  background: white;
+  padding: 35px;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+}
+
+.busCard:hover {
+  transform: translateY(-3px);
+  border-color: #C5A059;
+  box-shadow: 0 15px 35px rgba(197, 160, 89, 0.06);
+}
+
+.busIconBox {
+  width: 46px;
+  height: 46px;
+  background: rgba(10, 27, 57, 0.04);
+  color: #0A1B39;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.busCard:hover .busIconBox {
+  background: rgba(197, 160, 89, 0.08);
+  color: #C5A059;
+}
+
+.busStation {
+  font-size: 14px;
   font-weight: 700;
-  margin-right: 8px;
+  color: #475569;
+  margin: 15px 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed #e2e8f0;
+  letter-spacing: -0.2px;
 }
 
-.subwayLine7 {
-  color: #788a1e; /* Soft Line 7 Olive Green */
-  font-weight: 700;
-  margin-right: 8px;
+.busRoutes {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.subwayLine2 {
-  color: #30a728; /* Soft Line 2 Muted Green */
-  font-weight: 700;
-  margin-right: 8px;
+.routeGroup {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-/* Seoul Bus Type Colors - Soft Muted tone-on-tone Badges */
+/* Bus type badges */
 .busBlue {
   color: #3a69a7;
-  font-weight: 700;
-  margin-right: 6px;
+  font-weight: 800;
   background: rgba(58, 105, 167, 0.08);
   border: 1px solid rgba(58, 105, 167, 0.15);
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
   display: inline-block;
+  min-width: 36px;
+  text-align: center;
 }
 
 .busGreen {
   color: #40916c;
-  font-weight: 700;
-  margin-right: 6px;
+  font-weight: 800;
   background: rgba(64, 145, 108, 0.08);
   border: 1px solid rgba(64, 145, 108, 0.15);
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
   display: inline-block;
+  min-width: 36px;
+  text-align: center;
 }
 
 .busRed {
   color: #b34747;
-  font-weight: 700;
-  margin-right: 6px;
+  font-weight: 800;
   background: rgba(179, 71, 71, 0.08);
   border: 1px solid rgba(179, 71, 71, 0.15);
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
   display: inline-block;
+  min-width: 36px;
+  text-align: center;
+}
+
+.busPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.busPills span {
+  background: #f8fafc;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.busCard:hover .busPills span {
+  background: white;
 }
 
 @media (max-width: 1200px) {
@@ -211,19 +417,18 @@
   .mapSection {
     padding: 80px 20px;
   }
-  .addressBox {
-    padding: 30px;
+  .sectionDivider {
+    margin-bottom: 40px;
+  }
+  .addressBox, .subwayCard, .busCard {
+    padding: 24px;
   }
   .address {
-    font-size: 15px;
+    font-size: 16px;
   }
-  .transportItem {
-    padding: 24px;
+  .timelineContent {
     flex-direction: column;
-    gap: 15px;
-  }
-  .iconBox {
-    width: 42px;
-    height: 42px;
+    align-items: flex-start;
+    gap: 2px;
   }
 }

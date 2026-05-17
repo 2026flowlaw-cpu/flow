@@ -3,12 +3,8 @@
 import React from 'react';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
-import Stats from '@/components/Stats/Stats';
-import PainPoints from '@/components/PainPoints/PainPoints';
 import ClassActionSuccess from '@/components/ClassActionSuccess/ClassActionSuccess';
-import FAQ from '@/components/FAQ/FAQ';
 import ClassActionStrength from '@/components/ClassActionStrength/ClassActionStrength';
-import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
 import CTA from '@/components/CTA/CTA';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import styles from './page.module.css';
@@ -72,21 +68,7 @@ export default function ClassActionPage() {
         {/* 2. 주요 진행 사건 현황 (수행사례 아래 배치) */}
         <ClassActionCases />
 
-        {/* 1. 실적 카드 */}
-        <Stats />
-      <PainPoints />
 
-
-
-
-
-        {/* 4. FAQ */}
-        <FAQ />
-
-        {/* 5. 회사 강점소개 (히어로 뒤로 이동됨) */}
-
-        {/* 6. 의뢰인후기 */}
-        <CustomerReviews />
 
         {/* 7. 상담 */}
         <div style={{ backgroundColor: '#f8fafc', padding: '80px 0' }}>

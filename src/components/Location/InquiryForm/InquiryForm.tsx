@@ -95,39 +95,42 @@ const InquiryForm = () => {
     <section className={styles.section} id="inquiry">
       <div className={styles.container}>
         
-        {/* Top Header Text & Slogans (Large and Prominent as requested!) */}
+        {/* Top Header Text & Slogans */}
         <div className={styles.topBannerText}>
           <span className={styles.topInfoTag}>법무법인 플로우 상담신청</span>
           <h2 className={styles.sloganTitle}>
             <span className={styles.sloganRed}>혼자 감당하지 마세요.</span> <br />
             플로우가 처음부터 끝까지, 당신 편입니다.
           </h2>
-          <p className={styles.sloganDesc}>
-            복잡한 고민, 지금 바로 남겨주세요. 검토 후 영업일 기준 1시간 이내에 회신드립니다.
-          </p>
-          <div className={styles.topInfoBadge}>
-            <span className={styles.topInfoBadgeLabel}>문의내용 남겨주시면 검토 후</span>
-            <strong className={styles.sloganPhone}>02-517-8300</strong>
-            <span className={styles.topInfoBadgeLabel}>으로 회신드립니다.</span>
-            <span className={styles.topInfoDesc}>(※ 24시간 상담 가능 / 영업일 기준 1시간 내 회신 / 주말 방문상담 가능)</span>
-          </div>
         </div>
 
-        {/* Brand Background Heading Board */}
-        <div className={styles.formHeaderBg}>
-          <div className={styles.headerTextColFull}>
-            <span className={styles.kicker}>PROFESSIONAL LEGAL SHIELD</span>
-            <h2 className={styles.title}>신속한 법률 지원, 변호사와 바로 연결됩니다.</h2>
-            <p className={styles.subtitle}>
-              하자소송의 정밀한 분석부터 전략적 대응까지, 법무법인 플로우가 귀하의 권리를 단단하게 보호합니다.
-            </p>
+        {/* Centered Premium Inquiry Form Card */}
+        <div className={styles.centeredFormWrapper}>
+          {/* Brand Background Heading Board */}
+          <div className={styles.formHeaderBg}>
+            <div className={styles.headerTextColFull}>
+              <span className={styles.kicker}>PROFESSIONAL LEGAL SHIELD</span>
+              <h2 className={styles.title}>신속한 법률 지원, 변호사와 바로 연결됩니다.</h2>
+              <p className={styles.subtitle}>
+                하자소송의 정밀한 분석부터 전략적 대응까지, 법무법인 플로우가 귀하의 권리를 단단하게 보호합니다.
+              </p>
+              
+              {/* Clean, premium horizontal contact links inside the blue board */}
+              <div className={styles.headerContactRow}>
+                <span className={styles.headerContactItem}>
+                  <span className={styles.headerContactLabel}>직통전화</span> 02-517-8300
+                </span>
+                <span className={styles.headerContactDivider}>|</span>
+                <span className={styles.headerContactItem}>
+                  <span className={styles.headerContactLabel}>사무실</span> 서울특별시 서초구 서초대로 314 법조타워 12층
+                </span>
+                <span className={styles.headerContactDivider}>|</span>
+                <span className={styles.headerContactItem}>
+                  <span className={styles.headerContactLabel}>실시간회신</span> 24시간 상담 가능 (영업일 기준 1시간 내 회신)
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
-
-        {/* 2-Column Form & Card Grid */}
-        <div className={styles.grid}>
-          
-          {/* Left Column: White Inquiry Form Card */}
           <div className={styles.formCard}>
             <div className={styles.formCardHeader}>
               <div className={styles.headerIcon}>
@@ -314,77 +317,29 @@ const InquiryForm = () => {
               <button type="submit" disabled={loading} className={styles.submitButton}>
                 {loading ? '상담 신청 제출 중...' : '상담 신청하기'}
               </button>
+
+              {/* Transitional elegant Divider & Kakao Button centered at the bottom of the card */}
+              <div className={styles.orDivider}>
+                <span className={styles.dividerLine}></span>
+                <span className={styles.orText}>또는</span>
+                <span className={styles.dividerLine}></span>
+              </div>
+
+              <a 
+                href="https://pf.kakao.com/_xgxjxoxb" 
+                target="_blank" 
+                rel="noreferrer" 
+                className={styles.kakaoButtonCentered}
+              >
+                <div className={styles.kakaoIcon}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.558 1.706 4.8 4.315 6.09-.18.665-.65 2.403-.743 2.77-.116.457.16.452.336.333.14-.094 2.22-1.507 3.11-2.11.64.09 1.3.136 1.98.136 4.97 0 9-3.185 9-7.114C21 6.185 16.97 3 12 3z"/>
+                  </svg>
+                </div>
+                카카오톡 실시간 상담
+              </a>
             </form>
           </div>
-
-          {/* Right Column: Dark Navy Contact Info Cards */}
-          <div className={styles.contactCol}>
-            
-            {/* Info Card */}
-            <div className={styles.infoCard}>
-              <div className={styles.infoCardHeader}>
-                <span className={styles.infoAccentLine}></span>
-                <h4 className={styles.infoTitle}>Contact Info</h4>
-              </div>
-
-              <div className={styles.infoItem}>
-                <div className={styles.infoIconBox}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                  </svg>
-                </div>
-                <div className={styles.infoText}>
-                  <span className={styles.infoLabel}>DIRECT LINE</span>
-                  <strong className={styles.infoVal}>02-517-8300</strong>
-                </div>
-              </div>
-
-              <div className={styles.infoItem}>
-                <div className={styles.infoIconBox}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                    <circle cx="12" cy="10" r="3"/>
-                  </svg>
-                </div>
-                <div className={styles.infoText}>
-                  <span className={styles.infoLabel}>OFFICE ADDRESS</span>
-                  <strong className={styles.infoVal}>
-                    서울특별시 서초구 서초대로 314 법조타워 12층
-                  </strong>
-                </div>
-              </div>
-
-              <div className={styles.infoItem}>
-                <div className={styles.infoIconBox}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                    <polyline points="22,6 12,13 2,6"/>
-                  </svg>
-                </div>
-                <div className={styles.infoText}>
-                  <span className={styles.infoLabel}>EMAIL</span>
-                  <strong className={styles.infoVal}>contact@flowlaw.co.kr</strong>
-                </div>
-              </div>
-            </div>
-
-            {/* Kakao Button */}
-            <a 
-              href="https://pf.kakao.com/_xgxjxoxb" 
-              target="_blank" 
-              rel="noreferrer" 
-              className={styles.kakaoButton}
-            >
-              <div className={styles.kakaoIcon}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.558 1.706 4.8 4.315 6.09-.18.665-.65 2.403-.743 2.77-.116.457.16.452.336.333.14-.094 2.22-1.507 3.11-2.11.64.09 1.3.136 1.98.136 4.97 0 9-3.185 9-7.114C21 6.185 16.97 3 12 3z"/>
-                </svg>
-              </div>
-              카카오톡 실시간 상담
-            </a>
-
-          </div>
-
         </div>
         
       </div>

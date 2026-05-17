@@ -50,7 +50,7 @@
   color: #334155;
   line-height: 1.7;
   font-weight: 700;
-  margin: 0 0 35px 0;
+  margin: 40px 0 0 0; /* Clear 40px gap above sloganDesc, below topInfoBadge */
   word-break: keep-all;
 }
 
@@ -114,50 +114,83 @@
   width: 100%;
 }
 
+.headerContactRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px; /* Generous gap for premium spacing */
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15); /* Subtle divider line */
+  font-size: 15.5px; /* Scaled up for crystal-clear readability */
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.headerContactItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerContactLabel {
+  font-size: 12.5px; /* Larger tag text */
+  font-weight: 800;
+  color: #C5A059; /* Brand Gold label text */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-color: rgba(197, 160, 89, 0.18); /* Premium gold container tag */
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+.headerContactDivider {
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 300;
+}
+
 .kicker {
-  font-size: 11px;
-  letter-spacing: 2px;
+  font-size: 13px; /* Slightly larger professional tracker */
+  letter-spacing: 2.5px;
   color: #C5A059; /* Brand Gold */
   font-weight: 800;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .title {
-  font-size: 26px;
+  font-size: 30px; /* Magnificent expanded title */
   font-weight: 800;
   color: #ffffff;
-  margin: 0 0 10px 0;
+  margin: 0 0 12px 0;
   letter-spacing: -0.8px;
 }
 
 .subtitle {
-  font-size: 14.5px;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.65;
+  font-size: 16px; /* Highly readable luxury intro text */
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
   margin: 0;
   word-break: keep-all;
 }
 
 /* ====================================================
-    GRID FORM & CARD LAYOUT
+    CENTERED STANDALONE FORM LAYOUT
    ==================================================== */
-.grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 30px;
-  align-items: stretch;
+.centeredFormWrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-/* Left Card: White form container */
+/* Standalone Card: White form container */
 .formCard {
   background-color: #ffffff;
-  border-radius: 0 0 0 24px;
+  border-radius: 0 0 24px 24px; /* Unified bottom corners */
   padding: 45px;
   border-left: 1px solid #e2e8f0;
   border-bottom: 1px solid #e2e8f0;
   border-right: 1px solid #e2e8f0;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 20px 45px rgba(10, 27, 57, 0.04);
 }
 
 .formCardHeader {
@@ -386,91 +419,33 @@
 }
 
 /* ====================================================
-    RIGHT COLUMN - CONTACT INFO CARDS
+    TRANSITIONAL OR DIVIDER & CENTERED KAKAO BUTTON
    ==================================================== */
-.contactCol {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.infoCard {
-  background-color: #0A1B39;
-  color: #ffffff;
-  border-radius: 0 0 24px 0;
-  padding: 45px 35px;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  box-shadow: 0 20px 40px rgba(10, 27, 57, 0.15);
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.infoCardHeader {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 15px;
-}
-
-.infoAccentLine {
-  width: 4px;
-  height: 16px;
-  background-color: #C5A059;
-  border-radius: 2px;
-}
-
-.infoTitle {
-  font-size: 18px;
-  font-weight: 800;
-  color: #ffffff;
-  margin: 0;
-}
-
-.infoItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.infoIconBox {
-  width: 36px;
-  height: 36px;
-  background-color: rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
+.orDivider {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #C5A059;
-  flex-shrink: 0;
+  gap: 15px;
+  margin: 30px 0;
+  width: 100%;
 }
 
-.infoText {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background-color: #cbd5e1; /* Elegant subtle divider line */
+  opacity: 0.7;
 }
 
-.infoLabel {
-  font-size: 11px;
-  letter-spacing: 1px;
-  color: rgba(255, 255, 255, 0.55);
-  font-weight: 700;
-}
-
-.infoVal {
+.orText {
   font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 600;
-  line-height: 1.4;
-  word-break: keep-all;
+  color: #94a3b8;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-/* Bright Yellow KakaoTalk Button */
-.kakaoButton {
+.kakaoButtonCentered {
   background-color: #FFE600; /* Bright KakaoTalk yellow */
   color: #3A1D1D;
   font-size: 15px;
@@ -479,14 +454,17 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 16px 30px;
+  padding: 16px 35px;
   border-radius: 15px;
   text-decoration: none;
   transition: transform 0.2s, background-color 0.2s;
-  box-shadow: 0 10px 20px rgba(255, 230, 0, 0.15);
+  box-shadow: 0 10px 25px rgba(255, 230, 0, 0.15);
+  width: 100%;
+  max-width: 340px; /* Perfectly centered button wrapper width */
+  margin: 0 auto;
 }
 
-.kakaoButton:hover {
+.kakaoButtonCentered:hover {
   transform: translateY(-2px);
   background-color: #ffd200;
 }
@@ -506,37 +484,9 @@
     align-items: flex-start;
     padding: 35px;
   }
-  
-  .headerTextCol {
-    max-width: 100%;
-  }
-  
-  .headerDescCol {
-    text-align: left;
-    margin-top: 10px;
-  }
-  
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  
-  .formCard {
-    border-radius: 0 0 24px 24px;
-    border-right: 1px solid #e2e8f0;
-  }
-  
-  .infoCard {
-    border-radius: 24px;
-    border-left: 1px solid rgba(255, 255, 255, 0.05);
-  }
 }
 
 @media (max-width: 768px) {
-  .topInfoTitle {
-    font-size: 20px;
-  }
-  
   .formRow {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -544,5 +494,17 @@
   
   .formCard {
     padding: 30px 20px;
+  }
+
+  .sloganTitle {
+    font-size: 32px;
+  }
+
+  .topInfoBadge {
+    padding: 20px 25px;
+  }
+
+  .sloganPhone {
+    font-size: 24px;
   }
 }

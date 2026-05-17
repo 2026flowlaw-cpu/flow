@@ -1,65 +1,175 @@
 .section {
   padding: 100px 0;
-  background-color: #e6edf5; /* Light blue background as in sketch */
-  position: relative;
-  overflow: hidden;
+  background-color: #f8fafc;
 }
 
-/* Faint legal scale watermark effect */
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0.05;
-  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 10 L50 90 M20 40 L80 40 M20 40 L20 70 M80 40 L80 70 M10 70 L30 70 M70 70 L90 70" stroke="black" stroke-width="2" fill="none"/></svg>');
-  background-size: 50%;
-  background-position: center;
-  background-repeat: no-repeat;
-  pointer-events: none;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-.header {
+/* ====================================================
+    TOP BANNER STATS / DESC
+   ==================================================== */
+.topBannerText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   margin-bottom: 50px;
 }
 
+.topInfoTag {
+  font-size: 14px;
+  color: #2563eb; /* Royal blue */
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.topInfoTitle {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0A1B39;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.8px;
+}
+
+.topInfoDesc {
+  font-size: 14.5px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ====================================================
+    HEADER BLUE BOARD PANEL
+   ==================================================== */
+.formHeaderBg {
+  background: linear-gradient(135deg, #0A1B39 0%, #162a52 100%);
+  border-radius: 24px 24px 0 0;
+  padding: 40px 45px;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.headerTextCol {
+  flex: 1;
+  max-width: 70%;
+}
+
+.kicker {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #C5A059; /* Brand Gold */
+  font-weight: 800;
+  display: block;
+  margin-bottom: 10px;
+}
+
 .title {
-  font-size: 42px;
-  font-weight: 900;
-  color: #000;
-  margin: 0 0 20px 0;
-  letter-spacing: -1px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.8px;
 }
 
 .subtitle {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin: 0;
+  word-break: keep-all;
+}
+
+.headerDescCol {
+  flex-shrink: 0;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.highlightText {
+  font-size: 13.5px;
+  color: #ef4444; /* Alert red */
+  line-height: 1.5;
+}
+
+.highlightText strong {
+  color: #fee2e2;
+  font-weight: 800;
+}
+
+.badgeText {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.4;
+}
+
+.badgeText span {
+  color: #fca5a5;
+  font-weight: 700;
+}
+
+/* ====================================================
+    GRID FORM & CARD LAYOUT
+   ==================================================== */
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 30px;
+  align-items: stretch;
+}
+
+/* Left Card: White form container */
+.formCard {
+  background-color: #ffffff;
+  border-radius: 0 0 0 24px;
+  padding: 45px;
+  border-left: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+}
+
+.formCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #0A1B39;
+  padding-bottom: 15px;
+}
+
+.headerIcon {
+  color: #C5A059;
+  display: flex;
+  align-items: center;
+}
+
+.formCardTitle {
   font-size: 18px;
   font-weight: 800;
-  font-style: italic;
-  color: #333;
-  margin-bottom: 30px;
+  color: #0A1B39;
+  margin: 0;
 }
 
-.notice {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #475569;
-}
-
-.notice strong {
-  color: #2563eb; /* Blue highlight for phone number */
-}
-
-.formContainer {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
+/* Forms styling */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
 .formGroup {
@@ -68,153 +178,291 @@
   gap: 8px;
 }
 
-.formGroup label {
-  font-size: 14px;
+.formLabel {
+  font-size: 13px;
   font-weight: 700;
-  color: #333;
+  color: #475569;
 }
 
 .req {
-  color: #e53e3e; /* Red asterisk */
+  color: #ef4444;
 }
 
-.inputFull {
-  width: 100%;
-  padding: 15px 20px;
+.input, .select {
+  padding: 12px 18px;
   border: 1px solid #cbd5e1;
-  border-radius: 30px; /* Rounded pill shape as in sketch */
-  font-size: 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #0f172a;
   outline: none;
-  background: white;
+  background-color: #ffffff;
   transition: border-color 0.2s;
 }
 
-.inputFull:focus {
-  border-color: #94a3b8;
-}
-
-.phoneInputs {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.inputPhone {
-  width: 100px;
-  padding: 15px;
-  border: 1px solid #cbd5e1;
-  border-radius: 30px;
-  font-size: 15px;
-  text-align: center;
-  outline: none;
-  background: white;
-  transition: border-color 0.2s;
-}
-
-.inputPhone:focus {
-  border-color: #94a3b8;
-}
-
-.dash {
+.input::placeholder {
   color: #94a3b8;
 }
 
+.input:focus, .select:focus {
+  border-color: #2563eb;
+}
+
 .textarea {
-  width: 100%;
-  padding: 20px;
+  padding: 15px 18px;
   border: 1px solid #cbd5e1;
   border-radius: 12px;
-  font-size: 15px;
+  font-size: 14px;
+  color: #0f172a;
   outline: none;
-  background: white;
-  min-height: 150px;
+  background-color: #ffffff;
+  min-height: 120px;
   resize: vertical;
   transition: border-color 0.2s;
 }
 
 .textarea:focus {
-  border-color: #94a3b8;
+  border-color: #2563eb;
 }
 
-.fileBtn {
-  display: inline-flex;
+/* File attachments styling */
+.fileInputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.fileHiddenInput {
+  display: none;
+}
+
+.fileLabelBtn {
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 12px 24px;
-  background: white;
-  border: 1px solid #cbd5e1;
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 12px 18px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  background-color: #f8fafc;
+  font-size: 13.5px;
   color: #475569;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  width: 100%;
 }
 
-.fileBtn:hover {
-  background: #f8fafc;
+.fileLabelBtn:hover {
+  background-color: #f1f5f9;
   border-color: #94a3b8;
 }
 
-.termsBox {
-  width: 100%;
-  height: 120px;
-  padding: 15px;
-  border: 1px solid #cbd5e1;
-  border-radius: 4px;
-  background: white;
-  overflow-y: auto;
+/* Consent Checkbox styling */
+.consentRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.checkboxLabel {
   font-size: 13px;
-  color: #64748b;
-  line-height: 1.6;
+  color: #475569;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.termsBox p {
-  margin: 0 0 10px 0;
+.viewDetailsBtn {
+  color: #2563eb;
+  font-weight: 700;
 }
 
-.termsBox p:last-child {
-  margin: 0;
-}
-
-.submitWrap {
-  margin-top: 20px;
+/* Submit Button styling */
+.submitButton {
+  background-color: #0A1B39;
+  color: #ffffff;
+  padding: 16px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 0.2s;
   text-align: center;
 }
 
-.submitBtn {
-  background-color: #0A1B39; /* Navy */
-  color: white;
-  border: none;
-  padding: 18px 60px;
-  font-size: 18px;
-  font-weight: 800;
-  border-radius: 40px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.submitButton:hover {
+  background-color: #162a52;
 }
 
-.submitBtn:hover {
-  background-color: #1e293b;
-}
-
-.submitBtn:disabled {
-  background-color: #94a3b8;
+.submitButton:disabled {
+  background-color: #cbd5e1;
   cursor: not-allowed;
 }
 
+/* ====================================================
+    RIGHT COLUMN - CONTACT INFO CARDS
+   ==================================================== */
+.contactCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.infoCard {
+  background-color: #0A1B39;
+  color: #ffffff;
+  border-radius: 0 0 24px 0;
+  padding: 45px 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  box-shadow: 0 20px 40px rgba(10, 27, 57, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.infoCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 15px;
+}
+
+.infoAccentLine {
+  width: 4px;
+  height: 16px;
+  background-color: #C5A059;
+  border-radius: 2px;
+}
+
+.infoTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.infoIconBox {
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #C5A059;
+  flex-shrink: 0;
+}
+
+.infoText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.infoLabel {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 700;
+}
+
+.infoVal {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+/* Bright Yellow KakaoTalk Button */
+.kakaoButton {
+  background-color: #FFE600; /* Bright KakaoTalk yellow */
+  color: #3A1D1D;
+  font-size: 15px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  transition: transform 0.2s, background-color 0.2s;
+  box-shadow: 0 10px 20px rgba(255, 230, 0, 0.15);
+}
+
+.kakaoButton:hover {
+  transform: translateY(-2px);
+  background-color: #ffd200;
+}
+
+.kakaoIcon {
+  color: #3A1D1D;
+  display: flex;
+  align-items: center;
+}
+
+/* ====================================================
+    RESPONSIVE MEDIA QUERIES
+   ==================================================== */
+@media (max-width: 1024px) {
+  .formHeaderBg {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 35px;
+  }
+  
+  .headerTextCol {
+    max-width: 100%;
+  }
+  
+  .headerDescCol {
+    text-align: left;
+    margin-top: 10px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .formCard {
+    border-radius: 0 0 24px 24px;
+    border-right: 1px solid #e2e8f0;
+  }
+  
+  .infoCard {
+    border-radius: 24px;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
+
 @media (max-width: 768px) {
-  .title {
-    font-size: 32px;
+  .topInfoTitle {
+    font-size: 20px;
   }
-  .phoneInputs {
-    gap: 5px;
+  
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
-  .inputPhone {
-    width: 80px;
-    padding: 12px;
-  }
-  .submitBtn {
-    width: 100%;
+  
+  .formCard {
+    padding: 30px 20px;
   }
 }

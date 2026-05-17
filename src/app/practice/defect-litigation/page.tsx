@@ -6,6 +6,7 @@ import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import DefectPromise from '@/components/DefectPromise/DefectPromise';
 import DefectCasesGrid from '@/components/DefectCasesGrid/DefectCasesGrid';
 import VerdictSection from '@/components/VerdictSection/VerdictSection';
+import DefectFaq from '@/components/DefectFaq/DefectFaq';
 import styles from './page.module.css';
 
 interface DefectCaseItem {
@@ -238,6 +239,9 @@ export default function DefectLitigationPage() {
 
           </div>
         </section>
+
+        {/* 4.8. Frequently Asked Questions (Image 1 Accordion FAQ) */}
+        <DefectFaq />
 
         {/* 5. Inquire Form Section */}
         <div style={{ backgroundColor: '#f8fafc', padding: '80px 0' }}>

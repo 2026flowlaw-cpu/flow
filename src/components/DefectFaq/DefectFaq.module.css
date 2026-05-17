@@ -1,0 +1,172 @@
+.sectionWrapper {
+  background-color: #ffffff;
+  padding: 100px 0;
+  position: relative;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ====================================================
+    HEADER STYLES (Image 1 replica)
+   ==================================================== */
+.headerArea {
+  margin-bottom: 50px;
+}
+
+.kicker {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #C5A059; /* Accent gold */
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.mainTitle {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0A1B39; /* Deep navy */
+  letter-spacing: -1.2px;
+  margin: 0 0 14px 0;
+}
+
+.subTitle {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ====================================================
+    ACCORDION LIST
+   ==================================================== */
+.faqList {
+  display: flex;
+  flex-direction: column;
+}
+
+.faqItem {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Trigger Button */
+.faqHeader {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 28px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.2s ease;
+}
+
+.questionLeft {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding-right: 20px;
+}
+
+.qLabel {
+  font-size: 20px;
+  font-weight: 800;
+  color: #C5A059; /* Gold Q */
+  line-height: 1.2;
+}
+
+.questionText {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.5;
+  letter-spacing: -0.5px;
+  word-break: keep-all;
+  transition: color 0.2s ease;
+}
+
+.faqHeader:hover .questionText {
+  color: #C5A059;
+}
+
+/* Accordion Expand/Collapse Sign */
+.toggleSign {
+  font-size: 24px;
+  font-weight: 400;
+  color: #64748b;
+  transition: transform 0.3s ease, color 0.3s ease;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.faqItemActive .toggleSign {
+  transform: rotate(180deg);
+  color: #C5A059;
+}
+
+/* Answer Body Card */
+.answerWrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s ease;
+}
+
+.faqItemActive .answerWrapper {
+  /* Dynamic height is handled in JS or using max-height bound */
+  max-height: 1000px; /* Big enough to fit long text */
+}
+
+.answerContent {
+  background-color: #f8fafc; /* Simulated grey card from Image 1 */
+  border-radius: 12px;
+  padding: 24px 30px;
+  margin-bottom: 24px;
+  font-size: 14.5px;
+  color: #475569;
+  line-height: 1.8;
+  font-weight: 500;
+  word-break: keep-all;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.01);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ====================================================
+    RESPONSIVE MEDIA QUERIES
+   ==================================================== */
+@media (max-width: 768px) {
+  .mainTitle {
+    font-size: 26px;
+  }
+  
+  .questionText {
+    font-size: 15px;
+  }
+  
+  .qLabel {
+    font-size: 18px;
+  }
+  
+  .answerContent {
+    padding: 20px;
+    font-size: 13.5px;
+  }
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './DefectCasesGrid.module.css';
 
 interface CasePill {
@@ -12,7 +12,18 @@ interface CasePill {
 }
 
 export default function DefectCasesGrid() {
-  const [selectedId, setSelectedId] = useState<number>(1); // Default to first item
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (selectedId !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedId]);
 
   const cases: CasePill[] = [
     {
@@ -101,7 +112,7 @@ export default function DefectCasesGrid() {
     }
   ];
 
-  const currentCase = cases.find(c => c.id === selectedId) || cases[0];
+  const currentCase = selectedId !== null ? cases.find(c => c.id === selectedId) : null;
 
   return (
     <section className={styles.sectionWrapper}>
@@ -138,51 +149,62 @@ export default function DefectCasesGrid() {
           ))}
         </div>
 
-        {/* Dynamic Detail Card */}
-        <div className={styles.detailBox} key={currentCase.id}>
-          <div className={styles.detailHeader}>
-            <span className={styles.detailBadge}>CASE {currentCase.id.toString().padStart(2, '0')}</span>
-            <h4 className={styles.detailTitle}>{currentCase.label}</h4>
-          </div>
-          
-          <div className={styles.detailGrid}>
-            <div className={styles.detailColCore}>
-              <div className={styles.detailSubHeader}>
-                <svg className={styles.detailIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                  <line x1="12" y1="9" x2="12" y2="13"/>
-                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+        {/* Dynamic Modal Popup */}
+        {currentCase && (
+          <div className={styles.modalOverlay} onClick={() => setSelectedId(null)}>
+            <div className={styles.detailBox} onClick={(e) => e.stopPropagation()}>
+              <button className={styles.closeButton} onClick={() => setSelectedId(null)} aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
-                <span>핵심 진단 (Diagnosis)</span>
-              </div>
-              <p className={styles.detailTextCore}>{currentCase.coreDiagnosis}</p>
-            </div>
-            
-            <div className={styles.detailColAction}>
-              <div className={styles.actionBlock}>
-                <div className={`${styles.detailSubHeader} ${styles.engHeader}`}>
-                  <svg className={styles.detailIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <circle cx="12" cy="12" r="10"/>
-                    <line x1="12" y1="16" x2="12" y2="12"/>
-                    <line x1="12" y1="8" x2="12.01" y2="8"/>
-                  </svg>
-                  <span>엔지니어링 솔루션 (Engineering)</span>
-                </div>
-                <p className={styles.detailTextAction}>{currentCase.engineeringSolution}</p>
-              </div>
+              </button>
 
-              <div className={styles.actionBlock}>
-                <div className={`${styles.detailSubHeader} ${styles.lawHeader}`}>
-                  <svg className={styles.detailIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  </svg>
-                  <span>법적 대응 전략 (Legal Strategy)</span>
+              <div className={styles.detailHeader}>
+                <span className={styles.detailBadge}>CASE {currentCase.id.toString().padStart(2, '0')}</span>
+                <h4 className={styles.detailTitle}>{currentCase.label}</h4>
+              </div>
+              
+              <div className={styles.detailGrid}>
+                <div className={styles.detailColCore}>
+                  <div className={styles.detailSubHeader}>
+                    <svg className={styles.detailIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                      <line x1="12" y1="9" x2="12" y2="13"/>
+                      <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <span>핵심 진단 (Diagnosis)</span>
+                  </div>
+                  <p className={styles.detailTextCore}>{currentCase.coreDiagnosis}</p>
                 </div>
-                <p className={styles.detailTextAction}>{currentCase.legalStrategy}</p>
+                
+                <div className={styles.detailColAction}>
+                  <div className={styles.actionBlock}>
+                    <div className={`${styles.detailSubHeader} ${styles.engHeader}`}>
+                      <svg className={styles.detailIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                      </svg>
+                      <span>엔지니어링 솔루션 (Engineering)</span>
+                    </div>
+                    <p className={styles.detailTextAction}>{currentCase.engineeringSolution}</p>
+                  </div>
+
+                  <div className={styles.actionBlock}>
+                    <div className={`${styles.detailSubHeader} ${styles.lawHeader}`}>
+                      <svg className={styles.detailIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                      </svg>
+                      <span>법적 대응 전략 (Legal Strategy)</span>
+                    </div>
+                    <p className={styles.detailTextAction}>{currentCase.legalStrategy}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
       </div>
     </section>

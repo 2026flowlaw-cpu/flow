@@ -18,7 +18,7 @@
 }
 
 .kicker {
-  font-size: 13.5px;
+  font-size: 16px;
   font-weight: 600;
   color: #C5A059; /* Accent gold */
   text-transform: uppercase;
@@ -28,7 +28,7 @@
 }
 
 .mainTitle {
-  font-size: 32px;
+  font-size: 38px;
   font-weight: 600;
   color: #0A1B39; /* Deep navy */
   letter-spacing: -1.2px;
@@ -36,7 +36,7 @@
 }
 
 .subTitle {
-  font-size: 14px;
+  font-size: 17px;
   color: #64748b;
   font-weight: 600;
   margin: 0;
@@ -77,14 +77,14 @@
 }
 
 .qLabel {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
   color: #C5A059; /* Gold Q */
   line-height: 1.2;
 }
 
 .questionText {
-  font-size: 16.5px;
+  font-size: 19.5px;
   font-weight: 600;
   color: #1e293b;
   line-height: 1.5;
@@ -129,10 +129,10 @@
   border-radius: 12px;
   padding: 24px 30px;
   margin-bottom: 24px;
-  font-size: 14.5px;
+  font-size: 17px;
   color: #475569;
   line-height: 1.8;
-  font-weight: 400500;
+  font-weight: 500;
   word-break: keep-all;
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.01);
   animation: slideIn 0.3s ease;

@@ -72,7 +72,7 @@
 }
 
 .metricNum {
-  font-size: 34px; /* Reduced to fit on one line perfectly */
+  font-size: 40px; /* Scaled up from 34px */
   font-weight: 900;
   color: #1a56db; /* Premium Trust Sapphire Blue for professional highlight */
   margin-bottom: 10px;
@@ -81,7 +81,7 @@
 }
 
 .metricTitle {
-  font-size: 15.5px;
+  font-size: 19.5px; /* Scaled up from 15.5px */
   font-weight: 800;
   color: #0A1B39;
   margin: 0 0 8px 0;
@@ -89,7 +89,7 @@
 }
 
 .metricDesc {
-  font-size: 12.5px;
+  font-size: 15px; /* Scaled up from 12.5px */
   color: #475569;
   line-height: 1.6;
   margin: 0;
@@ -177,7 +177,7 @@
 }
 
 .cardTitle {
-  font-size: 19px; /* Increased from 17px */
+  font-size: 23px; /* Scaled up from 19px */
   font-weight: 800;
   color: #ffffff; /* White text for contrast on navy */
   margin: 0 0 12px 0;
@@ -186,7 +186,7 @@
 }
 
 .cardDesc {
-  font-size: 14.5px; /* Increased from 13px for high legibility */
+  font-size: 17px; /* Scaled up from 14.5px */
   color: #cbd5e1; /* Replaced #94a3b8 with high-contrast slate gray */
   line-height: 1.7;
   margin: 0;

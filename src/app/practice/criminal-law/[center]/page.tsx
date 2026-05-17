@@ -565,26 +565,20 @@ const centerData: Record<string, {
       {
         id: 0,
         iconType: 'shield',
-        title: '단약 및 치료 소명',
-        desc: '단약 서약 및 전문 재활 프로그램 이수를 통한 재범 우려 배제 입증'
+        title: '기소유예 가능성 검토',
+        desc: '치료조건부 기소유예 가능성 검토 및 대응 전략 수립'
       },
       {
         id: 1,
         iconType: 'scale',
-        title: '수사 초기 즉시 대응',
-        desc: '단순 투약/유통 등 가담 형태에 따른 신속하고 유리한 자백 전략 제시'
+        title: '모발·소변 검사 분석',
+        desc: '모발·소변 검사 결과 분석 및 절차 적법성 검토'
       },
       {
         id: 2,
-        iconType: 'certificate',
-        title: '구속영장 기각 방어',
-        desc: '도주 및 증거 인멸 우려가 없음을 정밀 입증하여 불구속 수사 전환 확보'
-      },
-      {
-        id: 3,
         iconType: 'gavel',
-        title: '경험 기반 전략 설계',
-        desc: '국과수 정밀 감정 결과의 빈틈 분석 및 과학적이고 정밀한 양형 서류 설계'
+        title: '신속한 구속 대응',
+        desc: '구속 대응 — 구속적부심·보석 절차 신속 검토'
       }
     ],
     casesKicker: '마약 사건 특화 · 양형 조건 정밀 분석 솔루션',

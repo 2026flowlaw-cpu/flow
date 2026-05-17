@@ -17,6 +17,14 @@ const centerData: Record<string, {
   heroTitleLine1: string;
   heroTitleLine2: string;
   heroDescLines: string[];
+  promiseTitle: string;
+  counters: Array<{
+    id: number;
+    target: number;
+    suffix: string;
+    title: string;
+    desc: string;
+  }>;
 }> = {
   'sex-offense': {
     title: '성범죄',
@@ -27,6 +35,30 @@ const centerData: Record<string, {
       '강제추행·강간·디지털성범죄 등 성범죄 혐의',
       '수사 초기부터 재판까지 원스톱 솔루션',
       '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+    ],
+    promiseTitle: '수치가 증명하는 실력',
+    counters: [
+      {
+        id: 0,
+        target: 800,
+        suffix: '+',
+        title: '성범죄 수행 건수',
+        desc: '강간, 강제추행, 디지털 성범죄 등 축적된 성범죄 성공 데이터'
+      },
+      {
+        id: 1,
+        target: 0,
+        suffix: '당일 긴급 상담 및 초기 대응 가능',
+        title: '24시간 즉시 출동',
+        desc: '체포, 압수수색, 구속영장 등 긴급 상황 즉시 출동 및 밀착 조력'
+      },
+      {
+        id: 2,
+        target: 100,
+        suffix: '% 비밀보장',
+        title: '철저한 보안 유지',
+        desc: '의뢰인의 신원 노출 방지 및 철저한 보안 하에 1:1 전담 변론'
+      }
     ]
   },
   'dui-traffic': {
@@ -38,6 +70,30 @@ const centerData: Record<string, {
       '음주운전 3진 아웃·뺑소니·12대 중과실 등 교통 사건',
       '경찰 조사부터 합의 대행, 형사 재판까지 완벽하게 방어',
       '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+    ],
+    promiseTitle: '신속함이 결정하는 면허 구제',
+    counters: [
+      {
+        id: 0,
+        target: 1200,
+        suffix: '건+',
+        title: '음주·교통 수행 건수',
+        desc: '음주운전 3진 아웃, 위험운전치상, 뺑소니 사건 특화 방어'
+      },
+      {
+        id: 1,
+        target: 0,
+        suffix: '당일 행정처분 구제 조치 착수',
+        title: '원스톱 면허 구제',
+        desc: '생계형 운전자를 위한 즉각적인 행정심판 및 임시운전면허 신청'
+      },
+      {
+        id: 2,
+        target: 100,
+        suffix: '% 합의 전문 조율',
+        title: '피해자 신속 합의',
+        desc: '형사전문변호사가 직접 원만한 합의와 처벌불원서 즉각 확보'
+      }
     ]
   },
   'drugs': {
@@ -49,6 +105,30 @@ const centerData: Record<string, {
       '단순 투약·소지·유통 및 밀수 등 마약 사건',
       '초기 수사 대응부터 재활 치료 연계까지 선처 솔루션',
       '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+    ],
+    promiseTitle: '과학적 입증과 양형의 수치',
+    counters: [
+      {
+        id: 0,
+        target: 500,
+        suffix: '건+',
+        title: '마약 사건 수행 건수',
+        desc: '단순 투약, 소지부터 유통 및 밀수까지 철저한 법리 방어'
+      },
+      {
+        id: 1,
+        target: 0,
+        suffix: '당일 소변·모발 정밀 대응',
+        title: '과학적 정밀 진단',
+        desc: '국과수 정밀 감정 결과 사전 시뮬레이션 및 소명자료 즉각 구성'
+      },
+      {
+        id: 2,
+        target: 100,
+        suffix: '% 치료·재활 솔루션 연계',
+        title: '체계적 재활 솔루션',
+        desc: '전문 재활 병원 연계 및 단약 프로그램 이수 양형 조건 극대화'
+      }
     ]
   },
   'voice-phishing': {
@@ -60,6 +140,30 @@ const centerData: Record<string, {
       '단순 전달책·인출책 등 억울하게 연루된 보이스피싱 사건',
       '무혐의 입증과 피해 최소화를 위한 명확한 법리 구성',
       '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+    ],
+    promiseTitle: '기망과 억울함의 법리적 소명',
+    counters: [
+      {
+        id: 0,
+        target: 600,
+        suffix: '건+',
+        title: '보이스피싱 수행 건수',
+        desc: '단순 전달책, 수거책, 계좌 대여 등 억울하게 가담된 사건'
+      },
+      {
+        id: 1,
+        target: 0,
+        suffix: '당일 미필적 고의 조각 입증',
+        title: '신속한 고의성 조각',
+        desc: '취업 사기, 고수익 알바 등 기망당한 사실을 객관적으로 입증'
+      },
+      {
+        id: 2,
+        target: 100,
+        suffix: '% 구속영장 기각 전략 가동',
+        title: '불구속 상태 방어',
+        desc: '도주 및 증거 인멸 우려가 없음을 밝혀 불구속 상태 방어 확보'
+      }
     ]
   },
   'construction': {
@@ -71,6 +175,30 @@ const centerData: Record<string, {
       '산업안전보건법 위반·중대재해처벌법·건설현장 사고',
       '기업과 대표를 지키는 강력한 형사 방어막 제공',
       '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+    ],
+    promiseTitle: '산업 현장의 안전과 대표자 보호',
+    counters: [
+      {
+        id: 0,
+        target: 400,
+        suffix: '건+',
+        title: '건설·산업 사건 수행 건수',
+        desc: '산업안전보건법 및 중대재해처벌법 위반 사건 집중 대응'
+      },
+      {
+        id: 1,
+        target: 0,
+        suffix: '당일 안전의무 이행 진단',
+        title: '안전체계 구축 입증',
+        desc: '현장 안전 관리 체계 구축 및 실제 이행 여부를 과학적으로 소명'
+      },
+      {
+        id: 2,
+        target: 100,
+        suffix: '% 경영 책임자 밀착 방어',
+        title: '대표이사 구속 방어',
+        desc: '대표이사의 과실 책임을 정밀 분리하여 형사 책임 최소화'
+      }
     ]
   },
   'economic': {
@@ -82,6 +210,30 @@ const centerData: Record<string, {
       '사기·횡령·배임 등 복잡한 자금 흐름 사건',
       '정밀한 분석과 증거 수집으로 혐의를 완전히 탈피',
       '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+    ],
+    promiseTitle: '금융과 자금의 흐름을 꿰뚫는 실력',
+    counters: [
+      {
+        id: 0,
+        target: 700,
+        suffix: '건+',
+        title: '사기·횡령·배임 수행 건수',
+        desc: '특경법 고액 사기부터 기업 횡령 및 업무상 배임 사건 집중'
+      },
+      {
+        id: 1,
+        target: 0,
+        suffix: '당일 회계 증적 분석 착수',
+        title: '회계 증적 분석',
+        desc: '자금의 실질적 흐름과 용처를 정밀 추적하여 부당이득 없음 입증'
+      },
+      {
+        id: 2,
+        target: 100,
+        suffix: '% 경영 판단 원칙 소명',
+        title: '기망 행위 부존재 입증',
+        desc: '정당한 비즈니스 결정이었음을 논리적으로 소명하여 혐의 탈피'
+      }
     ]
   },
   'juvenile': {
@@ -93,6 +245,30 @@ const centerData: Record<string, {
       '학교폭력위원회 대응부터 소년보호사건 전환까지',
       '우리 아이의 미래가 걸린 일, 부모의 마음으로 변호',
       '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+    ],
+    promiseTitle: '우리 아이의 미래와 소중한 평온 보호',
+    counters: [
+      {
+        id: 0,
+        target: 450,
+        suffix: '건+',
+        title: '학폭 및 소년 사건 수행',
+        desc: '학교폭력심의위원회 조치 결정 및 소년보호처분 맞춤 변론'
+      },
+      {
+        id: 1,
+        target: 0,
+        suffix: '당일 심의위원 맞춤 대응 분석',
+        title: '학폭 조치 수위 방어',
+        desc: '심의위원들의 성향과 쟁점을 분석하여 처분 수위 최소화 전략'
+      },
+      {
+        id: 2,
+        target: 100,
+        suffix: '% 아이 시각 맞춤 동행',
+        title: '정서적 동행 조력',
+        desc: '경찰 조사 시 상처받지 않도록 따뜻하고 정서적인 동행 조력'
+      }
     ]
   },
   'general': {
@@ -104,6 +280,30 @@ const centerData: Record<string, {
       '폭행·상해·명예훼손 등 일상에서 발생하는 모든 형사 사건',
       '가장 빠르고 정확한 법률 솔루션 제공',
       '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+    ],
+    promiseTitle: '빠르고 완벽한 일상으로의 복귀',
+    counters: [
+      {
+        id: 0,
+        target: 1500,
+        suffix: '건+',
+        title: '일반 형사 수행 건수',
+        desc: '폭행, 상해, 명예훼손 등 일상 생활 속 다양한 형사 고소 사건'
+      },
+      {
+        id: 1,
+        target: 0,
+        suffix: '당일 전담 합의 대행 가동',
+        title: '신속 합의 중재',
+        desc: '감정이 격해진 당사자들을 대신해 원만한 합의와 처벌불원 도출'
+      },
+      {
+        id: 2,
+        target: 100,
+        suffix: '% 조기 무혐의 종결 조력',
+        title: '기소 전 빠른 종결',
+        desc: '경찰 단계에서 혐의 없음을 입증하여 기소 전 빠른 종결 도모'
+      }
     ]
   }
 };
@@ -201,38 +401,9 @@ export default function CriminalCenterPage() {
         {/* 2. Strengths & Promises (Hexagon & Count-up Section) */}
         <DefectPromise 
           kicker="CRIMINAL DEFENSE"
-          sectionTitle="법무법인 플로우 형사 전담 센터의 압도적 실력"
+          sectionTitle={data.promiseTitle}
           sectionSubtitle="초기 수사 단계부터 재판까지, 빈틈없는 방어와 치밀한 전략으로 의뢰인의 일상을 되찾아 드립니다."
-          counters={[
-            {
-              id: 0,
-              target: 3000,
-              suffix: '건+',
-              title: '형사 사건 수행 건수',
-              desc: '경찰 조사부터 항소심까지 수많은 사건을 성공적으로 방어'
-            },
-            {
-              id: 1,
-              target: 0,
-              suffix: '형사 특화',
-              title: '분야별 전문 센터 가동',
-              desc: '성범죄, 마약, 보이스피싱, 경제범죄 등 각 분야별 특화 대응'
-            },
-            {
-              id: 2,
-              target: 0,
-              suffix: '긴급 대응',
-              title: '24시간 TF팀 가동',
-              desc: '압수수색, 체포 등 긴급 상황 발생 시 즉각적인 법률 조력'
-            },
-            {
-              id: 3,
-              target: 0,
-              suffix: '무죄·선처',
-              title: '압도적인 성공 사례',
-              desc: '치밀한 법리 분석과 철저한 증거 수집으로 만들어낸 결과'
-            }
-          ]}
+          counters={data.counters}
           promises={[
             {
               id: 0,

@@ -80,11 +80,11 @@ export default function CriminalLawPage() {
                 </h1>
                 <div className={styles.heroSubtitles}>
                   <span className={styles.titleSub1}>하자조사 · 진단 · 보수까지 올인원(All-in-One) 토털케어</span>
-                  <span className={styles.titleSub2}>형사의 처음과 끝, 법무법인 플로우가 함께합니다.</span>
+                  <span className={styles.titleSub2}>형사의 처음과 끝, 법무법인 일신이 함께합니다.</span>
                 </div>
                 <p className={styles.heroDescription}>
                   아파트 단지와 상가의 부실시공 및 하자는 입주민의 안전과 재산을 위협합니다. <br />
-                  법무법인 플로우는 상주 건축 엔지니어링 TF와 법률 계산팀이 긴밀히 연대하여, 하자를 과학적으로 입증하고 판결 보상액을 최대로 끌어올립니다.
+                  법무법인 일신은 상주 건축 엔지니어링 TF와 법률 계산팀이 긴밀히 연대하여, 하자를 과학적으로 입증하고 판결 보상액을 최대로 끌어올립니다.
                 </p>
               </div>
 
@@ -110,7 +110,7 @@ export default function CriminalLawPage() {
             <div className={styles.sectionHeader}>
               <h2 className={styles.panelTitle}>형사 실시간 진행 현황</h2>
               <p className={styles.panelSubtitle}>
-                전국 대규모 단지 및 상가 입주민들이 플로우 하자 전담 TF와 함께 정당한 가치를 찾고 있습니다.
+                전국 대규모 단지 및 상가 입주민들이 일신 하자 전담 TF와 함께 정당한 가치를 찾고 있습니다.
               </p>
             </div>
 
@@ -225,7 +225,7 @@ export default function CriminalLawPage() {
                       </div>
                     </div>
                     <p className={styles.shinmoongoDesc}>
-                      단지 내 지하주차장 천장 누수, 세대 벽면 대량 결로, 타일 파손 등 보수 요청을 거부당하신 경우 플로우 진단 신고 센터로 즉시 신고 접수해 주시면 특화 진단을 제공해 드립니다.
+                      단지 내 지하주차장 천장 누수, 세대 벽면 대량 결로, 타일 파손 등 보수 요청을 거부당하신 경우 일신 진단 신고 센터로 즉시 신고 접수해 주시면 특화 진단을 제공해 드립니다.
                     </p>
                   </div>
 

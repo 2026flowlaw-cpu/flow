@@ -53,7 +53,7 @@ export default function CriminalPracticeOverviewPage() {
         <div className="container">
           <h1 className={styles.heroTitle}>형사 업무분야</h1>
           <p className={styles.heroText}>
-            법무법인 플로우 형사 전담 센터는 각 분야의 전문성 있는 센터를 통해 <br />
+            법무법인 일신 형사 전담 센터는 각 분야의 전문성 있는 센터를 통해 <br />
             의뢰인의 권익을 가장 확실하게 보호하는 법률 솔루션을 제공합니다.
           </p>
         </div>

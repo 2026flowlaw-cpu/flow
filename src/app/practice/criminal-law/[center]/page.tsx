@@ -106,7 +106,7 @@ const centerData: Record<string, {
     heroDescLines: [
       '강제추행·강간·디지털성범죄 등 성범죄 혐의',
       '수사 초기부터 재판까지 원스톱 솔루션',
-      '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+      '법무법인 일신이 처음부터 끝까지 함께합니다.'
     ],
     promiseTitle: '수치가 증명하는 실력',
     counters: [
@@ -163,10 +163,10 @@ const centerData: Record<string, {
     casesDescLines: [
       '성범죄 사건은 초기 경찰 조사 단계에서의 진술과 대응이 전체 방향을 결정짓습니다.',
       '억울한 누명을 벗기 위해서, 혹은 최대한의 선처를 구하기 위해서',
-      '법무법인 플로우 성범죄 센터를 찾아주시는 이유, 압도적인 성공 사례 때문입니다.'
+      '법무법인 일신 성범죄 센터를 찾아주시는 이유, 압도적인 성공 사례 때문입니다.'
     ],
     difficultyTitle: '* 성범죄 사건, 상황마다 전략이 다릅니다.',
-    difficultySubtitle: '법무법인 플로우 성범죄 센터는 모든 성범죄 유형별 방어 데이터베이스를 보유하고 있습니다.',
+    difficultySubtitle: '법무법인 일신 성범죄 센터는 모든 성범죄 유형별 방어 데이터베이스를 보유하고 있습니다.',
     customCases: [
       {
         id: 1,
@@ -224,7 +224,7 @@ const centerData: Record<string, {
       {
         id: 3,
         title: '디지털 포렌식·증거 분석 중심 대응',
-        desc: '성범죄 사건은 진술만으로 결정되지 않습니다. CCTV, 통화내역, 위치기록, 디지털 포렌식 결과 등 객관적 자료 분석이 핵심입니다. 법무법인 플로우는 사건 초기부터 증거 확보와 진술 구조 분석을 병행합니다.',
+        desc: '성범죄 사건은 진술만으로 결정되지 않습니다. CCTV, 통화내역, 위치기록, 디지털 포렌식 결과 등 객관적 자료 분석이 핵심입니다. 법무법인 일신은 사건 초기부터 증거 확보와 진술 구조 분석을 병행합니다.',
         iconType: 'screen'
       },
       {
@@ -308,7 +308,7 @@ const centerData: Record<string, {
       '음주운전 초범·재범·무면허운전부터 측정거부·약물운전',
       '보복운전·운전자폭행·뺑소니·위험운전치사상까지.',
       '형사·행정 음주·교통 분야 전 영역을',
-      '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+      '법무법인 일신이 처음부터 끝까지 함께합니다.'
     ],
     promiseTitle: '수치가 증명하는 실력',
     counters: [
@@ -358,7 +358,7 @@ const centerData: Record<string, {
     casesTitle: '음주·교통 사건, 상황마다 전략이 다릅니다.',
     casesDescLines: [],
     difficultyTitle: '* 현재 어떤 상황에 처해 계신가요?',
-    difficultySubtitle: '법무법인 플로우 교통 센터는 모든 음주·교통 상황별 맞춤 솔루션을 제공합니다.',
+    difficultySubtitle: '법무법인 일신 교통 센터는 모든 음주·교통 상황별 맞춤 솔루션을 제공합니다.',
     isVertical: true,
     diagnosisLabel: '상황 설명',
     diagnosisEnglishLabel: 'Analysis',
@@ -472,8 +472,8 @@ const centerData: Record<string, {
     ],
     strategyKicker: '음주·교통 형사·행정 전문변호사',
     strategyTitle: '음주·교통 사건은\n형사와 행정을 함께 대응해야 결과가 달라집니다',
-    strategyDesc: '음주운전은 형사와 행정이 동시에 진행됩니다.\n두 가지를 함께 고려하지 않으면 한 쪽에서 손해를 볼 수 있습니다.\n법무법인 플로우는 통합적인 전략으로 의뢰인의 피해를 최소화합니다.',
-    strategyBottomText: '법무법인 플로우 음주교통 전담 센터는 수많은 면허 구제, 무죄 및 벌금 감경 판결을 이끌어낸 검증된 노하우를 바탕으로, 의뢰인의 인생이 걸린 절체절명의 위기에서 가장 든든한 방패가 되어드립니다.',
+    strategyDesc: '음주운전은 형사와 행정이 동시에 진행됩니다.\n두 가지를 함께 고려하지 않으면 한 쪽에서 손해를 볼 수 있습니다.\n법무법인 일신은 통합적인 전략으로 의뢰인의 피해를 최소화합니다.',
+    strategyBottomText: '법무법인 일신 음주교통 전담 센터는 수많은 면허 구제, 무죄 및 벌금 감경 판결을 이끌어낸 검증된 노하우를 바탕으로, 의뢰인의 인생이 걸린 절체절명의 위기에서 가장 든든한 방패가 되어드립니다.',
     strategies: [
       {
         id: 1,
@@ -546,7 +546,7 @@ const centerData: Record<string, {
     heroDescLines: [
       '마약 투약·소지·밀수·제조 사건까지.',
       '치료조건부 기소유예 가능성 검토부터 구속 대응·양형 방어까지',
-      '법무법인 플로우가 수사 초기부터 끝까지 함께합니다.'
+      '법무법인 일신이 수사 초기부터 끝까지 함께합니다.'
     ],
     promiseTitle: '수치가 증명하는 실력',
     counters: [
@@ -642,7 +642,7 @@ const centerData: Record<string, {
     reviewsDesc: '초범 투약부터 밀수까지,\n다양한 마약 사건에서 의뢰인의 편에 섰습니다.',
     verdictKicker: 'PROVEN RESULTS',
     verdictTitle: '무죄와 선처, 결코 우연이 아닙니다\n판결문이 증명하는 압도적 승소 실력',
-    verdictDesc: '수사기관의 압박과 불리한 증거 속에서도 빈틈없는 법리 구성으로 이뤄낸 쾌거.\n법무법인 플로우는 오직 결과로 말합니다.',
+    verdictDesc: '수사기관의 압박과 불리한 증거 속에서도 빈틈없는 법리 구성으로 이뤄낸 쾌거.\n법무법인 일신은 오직 결과로 말합니다.',
     reviews: [
       {
         id: 1,
@@ -653,7 +653,7 @@ const centerData: Record<string, {
       },
       {
         id: 2,
-        content: '모발 검사에서 양성이 나와 무척 억울하고 막막했습니다. 법무법인 플로우 변호사님들이 검체 채취 절차의 기술적인 문제점과 제가 평소 복용하던 약물과의 교차 반응 가능성을 과학적으로 명쾌하게 입증해주신 덕분에 혐의를 벗을 수 있었습니다.',
+        content: '모발 검사에서 양성이 나와 무척 억울하고 막막했습니다. 법무법인 일신 변호사님들이 검체 채취 절차의 기술적인 문제점과 제가 평소 복용하던 약물과의 교차 반응 가능성을 과학적으로 명쾌하게 입증해주신 덕분에 혐의를 벗을 수 있었습니다.',
         clientType: '모발 양성 반응 무혐의 처분',
         location: '경기',
         initial: '이'
@@ -723,7 +723,7 @@ const centerData: Record<string, {
     heroDescLines: [
       '단순 전달책·인출책 등 억울하게 연루된 보이스피싱 사건',
       '무혐의 입증과 피해 최소화를 위한 명확한 법리 구성',
-      '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+      '법무법인 일신이 처음부터 끝까지 함께합니다.'
     ],
     promiseTitle: '기망과 억울함의 법리적 소명',
     counters: [
@@ -780,10 +780,10 @@ const centerData: Record<string, {
     casesDescLines: [
       '보이스피싱 단순 가담은 체포 직후의 미필적 고의 조각 입증이 구속 여부를 결정짓습니다.',
       '억울한 전달책/인출책 혐의를 벗고 무고함을 증명하기 위해서',
-      '법무법인 플로우 보이스피싱 센터를 찾아주시는 이유, 압도적인 불구속 및 무혐의 성공 사례 때문입니다.'
+      '법무법인 일신 보이스피싱 센터를 찾아주시는 이유, 압도적인 불구속 및 무혐의 성공 사례 때문입니다.'
     ],
     difficultyTitle: '* 보이스피싱 단순 가담 혐의, 사기의 미필적 고의 여부를 입증해야 합니다.',
-    difficultySubtitle: '법무법인 플로우 보이스피싱 센터는 억울한 현금 전달책, 구인 사기 피해자의 무죄를 확보합니다.',
+    difficultySubtitle: '법무법인 일신 보이스피싱 센터는 억울한 현금 전달책, 구인 사기 피해자의 무죄를 확보합니다.',
     customCases: [
       {
         id: 1,
@@ -834,7 +834,7 @@ const centerData: Record<string, {
     heroDescLines: [
       '산업안전보건법 위반·중대재해처벌법·건설현장 사고',
       '기업과 대표를 지키는 강력한 형사 방어막 제공',
-      '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+      '법무법인 일신이 처음부터 끝까지 함께합니다.'
     ],
     promiseTitle: '산업 현장의 안전과 대표자 보호',
     counters: [
@@ -891,10 +891,10 @@ const centerData: Record<string, {
     casesDescLines: [
       '건설 및 산업 재해는 사고 발생 직후의 현장 감식 대응과 안전의무 이행 입증이 대표이사의 구속 여부를 결정합니다.',
       '경영 책임자의 무죄를 입증하고 기업의 형사 책임을 면하기 위해서',
-      '법무법인 플로우 건설형사 센터를 찾아주시는 이유, 압도적인 무죄 및 영장기각 사례 때문입니다.'
+      '법무법인 일신 건설형사 센터를 찾아주시는 이유, 압도적인 무죄 및 영장기각 사례 때문입니다.'
     ],
     difficultyTitle: '* 건설 현장 및 제조업 중대 재해 발생, 기업 보호가 최우선입니다.',
-    difficultySubtitle: '법무법인 플로우 건설형사 전담팀은 공단/노동청 합동 수사 대응 및 대표이사 책임 면책을 확보합니다.',
+    difficultySubtitle: '법무법인 일신 건설형사 전담팀은 공단/노동청 합동 수사 대응 및 대표이사 책임 면책을 확보합니다.',
     customCases: [
       {
         id: 1,
@@ -944,8 +944,8 @@ const centerData: Record<string, {
     heroTitleLine2: '자금 흐름의 철저한 규명과 입증이 해법입니다.',
     heroDescLines: [
       '사기·횡령·배임 등 복잡한 자금 흐름 사건',
-      '정밀한 분석과 증거 수집으로 혐의를 완전히 탈피',
-      '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+      '정밀 분석과 증거 수집으로 혐의를 완전히 탈피',
+      '법무법인 일신이 처음부터 끝까지 함께합니다.'
     ],
     promiseTitle: '금융과 자금의 흐름을 꿰뚫는 실력',
     counters: [
@@ -1002,10 +1002,10 @@ const centerData: Record<string, {
     casesDescLines: [
       '경제 범죄는 수사 초기 자금 흐름의 철저한 규명과 경영판단 원칙의 입증이 혐의 유무를 결정짓습니다.',
       '억울한 편취 의도 누명을 벗거나 특경법 가중처벌을 방어하기 위해서',
-      '법무법인 플로우 경제범죄 센터를 찾아주시는 이유, 정밀한 회계 분석과 무혐의 종결 실력 때문입니다.'
+      '법무법인 일신 경제범죄 센터를 찾아주시는 이유, 정밀한 회계 분석과 무혐의 종결 실력 때문입니다.'
     ],
     difficultyTitle: '* 사기·횡령·배임 혐의 연루, 회계 증적 분석과 경영 판단 증명이 해법입니다.',
-    difficultySubtitle: '법무법인 플로우 경제범죄팀은 고액 특경법 사기, 횡령, 배임 혐의에 대한 정밀 재무 입증 방어망을 제공합니다.',
+    difficultySubtitle: '법무법인 일신 경제범죄팀은 고액 특경법 사기, 횡령, 배임 혐의에 대한 정밀 재무 입증 방어망을 제공합니다.',
     customCases: [
       {
         id: 1,
@@ -1056,7 +1056,7 @@ const centerData: Record<string, {
     heroDescLines: [
       '학교폭력위원회 대응부터 소년보호사건 전환까지',
       '우리 아이의 미래가 걸린 일, 부모의 마음으로 변호',
-      '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+      '법무법인 일신이 처음부터 끝까지 함께합니다.'
     ],
     promiseTitle: '우리 아이의 미래와 소중한 평온 보호',
     counters: [
@@ -1113,10 +1113,10 @@ const centerData: Record<string, {
     casesDescLines: [
       '소년 학폭 사건은 조사 단계에서의 조리 있는 진술과 신속한 피해 합의가 소년보호처분 수위를 결정합니다.',
       '억울한 강제 전학/퇴학 조치를 막고 아이의 미래를 지키기 위해서',
-      '법무법인 플로우 소년학폭 센터를 찾아주시는 이유, 부모의 마음으로 동행하여 이뤄낸 선처 사례 때문입니다.'
+      '법무법인 일신 소년학폭 센터를 찾아주시는 이유, 부모의 마음으로 동행하여 이뤄낸 선처 사례 때문입니다.'
     ],
     difficultyTitle: '* 학교폭력 및 소년 보호 사건 연루, 아이의 마음에 상처 없는 해결이 우선입니다.',
-    difficultySubtitle: '법무법인 플로우 소년학폭 센터는 학폭 조치 수위 방어 및 소년보호처분 경감 대책을 보유하고 있습니다.',
+    difficultySubtitle: '법무법인 일신 소년학폭 센터는 학폭 조치 수위 방어 및 소년보호처분 경감 대책을 보유하고 있습니다.',
     customCases: [
       {
         id: 1,
@@ -1167,7 +1167,7 @@ const centerData: Record<string, {
     heroDescLines: [
       '폭행·상해·명예훼손 등 일상에서 발생하는 모든 형사 사건',
       '가장 빠르고 정확한 법률 솔루션 제공',
-      '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+      '법무법인 일신이 처음부터 끝까지 함께합니다.'
     ],
     promiseTitle: '빠르고 완벽한 일상으로의 복귀',
     counters: [
@@ -1224,10 +1224,10 @@ const centerData: Record<string, {
     casesDescLines: [
       '일반 형사 사건은 검찰 기소 전, 경찰 단계에서의 신속한 불송치 결정 도출과 합의 중재가 최선입니다.',
       '일상으로 신속히 복귀하고 억울한 형사 처벌 기록을 피하기 위해서',
-      '법무법인 플로우 형사 전담 센터를 찾아주시는 이유, 압도적인 기소 전 조기 종결 성공 사례 때문입니다.'
+      '법무법인 일신 형사 전담 센터를 찾아주시는 이유, 압도적인 기소 전 조기 종결 성공 사례 때문입니다.'
     ],
     difficultyTitle: '* 일상 속 형사 사건 연루, 신속한 경찰 단계 대응 및 합의가 지름길입니다.',
-    difficultySubtitle: '법무법인 플로우 형사 센터는 폭행, 상해, 명예훼손 등 일반 형사 혐의의 조기 해결 데이터베이스를 구축하고 있습니다.',
+    difficultySubtitle: '법무법인 일신 형사 센터는 폭행, 상해, 명예훼손 등 일반 형사 혐의의 조기 해결 데이터베이스를 구축하고 있습니다.',
     customCases: [
       {
         id: 1,
@@ -1367,7 +1367,7 @@ export default function CriminalCenterPage() {
           descLines={data.casesDescLines}
           difficultyTitle={data.difficultyTitle}
           difficultySubtitle={data.difficultySubtitle}
-          reportSubtitle={`법무법인 플로우(FLOW) ${data.title} 대응 서비스 상세 안내서`}
+          reportSubtitle={`법무법인 일신 ${data.title} 대응 서비스 상세 안내서`}
           diagnosisLabel={data.diagnosisLabel || "주요 대응 쟁점"}
           diagnosisEnglishLabel={data.diagnosisEnglishLabel || "Key Issues"}
           diagnosisBadge={data.diagnosisBadge || "ISSUES"}
@@ -1427,7 +1427,7 @@ export default function CriminalCenterPage() {
             ) : (
               <>
                 수사기관의 압박과 불리한 증거 속에서도 빈틈없는 법리 구성으로 이뤄낸 쾌거.<br />
-                법무법인 플로우는 오직 결과로 말합니다.
+                법무법인 일신은 오직 결과로 말합니다.
               </>
             )
           }
@@ -1471,7 +1471,7 @@ export default function CriminalCenterPage() {
 
         {/* 4.5. Specialized Win Strategy Grid (Image 1 layout) */}
         <DefectStrategyGrid 
-          kicker={data.strategyKicker || "[법무법인 플로우만의 '형사 방어' 필승 전략]"}
+          kicker={data.strategyKicker || "[법무법인 일신만의 '형사 방어' 필승 전략]"}
           mainTitle={
             data.strategyTitle ? (
               typeof data.strategyTitle === 'string' ? (
@@ -1490,7 +1490,7 @@ export default function CriminalCenterPage() {
             ) : (
               <>
                 "경험의 차이가 무죄와 유죄를 가릅니다"<br />
-                절체절명의 위기, 형사전문 플로우에 맡기세요
+                절체절명의 위기, 형사전문 일신에 맡기세요
               </>
             )
           }
@@ -1568,7 +1568,7 @@ export default function CriminalCenterPage() {
               )
             ) : (
               <>
-                법무법인 플로우 형사 전담 센터는 수많은 구속영장 기각, 무혐의, 무죄 판결을 이끌어낸 검증된 노하우를 바탕으로, 의뢰인의 인생이 걸린 절체절명의 위기에서 가장 든든한 방패가 되어드립니다.
+                법무법인 일신 형사 전담 센터는 수많은 구속영장 기각, 무혐의, 무죄 판결을 이끌어낸 검증된 노하우를 바탕으로, 의뢰인의 인생이 걸린 절체절명의 위기에서 가장 든든한 방패가 되어드립니다.
               </>
             )
           }

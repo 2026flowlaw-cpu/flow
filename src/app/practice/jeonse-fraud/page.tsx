@@ -92,7 +92,61 @@ export default function JeonseFraudPage() {
         </section>
 
         {/* 2. Strengths & Promises (Hexagon & Count-up Section) */}
-        <DefectPromise />
+        <DefectPromise 
+          kicker="NUMBERS & PROMISES"
+          sectionTitle="법무법인 플로우의 압도적 경험과 실력"
+          sectionSubtitle="전세사기 피해자들의 정당한 권리 보호를 최우선으로 생각하는 법무법인 플로우의 전문 솔루션입니다. 완벽한 지표와 최고의 맨파워로 실력과 결과를 직접 증명합니다."
+          counters={[
+            {
+              id: 0,
+              target: 2000,
+              suffix: '+',
+              title: '전세피해 수행 건수',
+              desc: '풍부한 실전 전세 사기 및 피해 구제 해결 실적'
+            },
+            {
+              id: 1,
+              target: 95,
+              suffix: '%',
+              title: '보증금 회수 성공률',
+              desc: '의뢰인의 소중한 재산인 보증금 회수 성공 비율'
+            },
+            {
+              id: 2,
+              target: 6,
+              suffix: '개월 (평균)',
+              title: '신속한 해결 기일',
+              desc: '체계화된 노하우를 바탕으로 한 신속한 분쟁 종결 기일'
+            },
+            {
+              id: 3,
+              target: 25,
+              suffix: '년+',
+              title: '전세사기 전담 경력',
+              desc: '전세사기 전담 법률 대리인단의 축적된 전문성'
+            }
+          ]}
+          promises={[
+            {
+              id: 0,
+              title: '대항력·우선변제권 즉시 점검',
+              desc: '상담 당일 대항력 및 우선변제권을 정밀하게 즉시 분석하여 가장 신속하고 확실한 법적 방어막을 구축합니다.',
+              iconType: 'consult'
+            },
+            {
+              id: 1,
+              title: '형사·민사 투트랙 동시 대응',
+              desc: '형사 고소와 민사 보증금 반환 청구 소송을 유기적으로 동시에 전개하여 피의자를 압박하고 회수율을 극대화합니다.',
+              iconType: 'twotrack'
+            },
+            {
+              id: 2,
+              title: '경매 절차 밀착 대응',
+              desc: '경매 진행 시 임차인의 우선매수권 및 낙찰을 통한 최종 채권 보전까지 경매 절차 전 과정을 완벽히 조력합니다.',
+              iconType: 'auction'
+            }
+          ]}
+        />
 
         {/* 2.5. Specialized Defect Cases Pill Grid (Image 1 layout) */}
         <DefectCasesGrid />

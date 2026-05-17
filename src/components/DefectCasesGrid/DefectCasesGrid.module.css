@@ -1,0 +1,210 @@
+.sectionWrapper {
+  background-color: #ffffff;
+  padding: 100px 0;
+  position: relative;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ====================================================
+    HEADER STYLES (Image 1 replica)
+   ==================================================== */
+.headerArea {
+  text-align: center;
+  margin-bottom: 65px;
+}
+
+.kicker {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #C5A059; /* Gold accent */
+  letter-spacing: -0.3px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.mainTitle {
+  font-size: 42px;
+  font-weight: 800;
+  color: #0A1B39; /* Deep navy */
+  letter-spacing: -2px;
+  margin: 0 0 24px 0;
+}
+
+.goldDivider {
+  width: 50px;
+  height: 2.5px;
+  background-color: #C5A059;
+  margin: 0 auto 30px auto;
+}
+
+.descBlock {
+  font-size: 16px;
+  color: #475569; /* Slate gray */
+  line-height: 1.8;
+  font-weight: 600;
+  margin: 0;
+  word-break: keep-all;
+}
+
+.descLine {
+  display: block;
+}
+
+/* ====================================================
+    DIFFICULTY PROMPT
+   ==================================================== */
+.difficultyArea {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.difficultyTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.5px;
+}
+
+.difficultySubtitle {
+  font-size: 13.5px;
+  color: #64748b;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ====================================================
+    GRID PILLS (Image 1 replica)
+   ==================================================== */
+.pillsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.pillCard {
+  background-color: #f1f5f9; /* Warm grey light background */
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 22px 15px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #334155;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+}
+
+.pillCard:hover {
+  background-color: #0A1B39; /* Transformed navy background on hover */
+  color: #ffffff;
+  border-color: #0A1B39;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(10, 27, 57, 0.15);
+}
+
+.pillActive {
+  background-color: #C5A059 !important;
+  color: #ffffff !important;
+  border-color: #C5A059 !important;
+  box-shadow: 0 8px 20px rgba(197, 160, 89, 0.2) !important;
+}
+
+/* ====================================================
+    MODAL DETAIL SHOW (Smooth popup description)
+   ==================================================== */
+.detailBox {
+  margin-top: 40px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 30px 40px;
+  animation: fadeIn 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detailHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.detailBadge {
+  background-color: #0A1B39;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.detailTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0A1B39;
+  margin: 0;
+}
+
+.detailContent {
+  font-size: 14.5px;
+  color: #475569;
+  line-height: 1.7;
+  margin: 0;
+  word-break: keep-all;
+}
+
+/* ====================================================
+    RESPONSIVE MEDIA QUERIES
+   ==================================================== */
+@media (max-width: 1024px) {
+  .pillsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .mainTitle {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .mainTitle {
+    font-size: 28px;
+  }
+  
+  .detailBox {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pillsGrid {
+    grid-template-columns: 1fr;
+  }
+}

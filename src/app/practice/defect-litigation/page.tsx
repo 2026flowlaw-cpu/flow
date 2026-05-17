@@ -3,6 +3,8 @@
 import React from 'react';
 import ClassActionSuccess from '@/components/ClassActionSuccess/ClassActionSuccess';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
+import DefectPromise from '@/components/DefectPromise/DefectPromise';
+import DefectCasesGrid from '@/components/DefectCasesGrid/DefectCasesGrid';
 import styles from './page.module.css';
 
 interface DefectCaseItem {
@@ -89,48 +91,11 @@ export default function DefectLitigationPage() {
           </div>
         </section>
 
-        {/* 2. Strengths Section */}
-        <section className={styles.strengthWrapper}>
-          <div className={styles.container}>
-            <div className={styles.ivoryPanel}>
-              
-              <div className={styles.panelHeader}>
-                <h2 className={styles.panelTitle}>하자소송, 왜 법무법인 플로우여야 하는가?</h2>
-                <p className={styles.panelSubtitle}>
-                  대기업 건설사와 보증기관을 상대로 한 소송은 일반적인 법리 주장만으로는 승소하기 어렵습니다. <br />
-                  기술적 입증 능력과 탄탄한 소송 관리 시스템을 보유한 플로우가 귀하의 재산을 지켜드립니다.
-                </p>
-              </div>
+        {/* 2. Strengths & Promises (Hexagon & Count-up Section) */}
+        <DefectPromise />
 
-              <div className={styles.designGrid}>
-                <div className={styles.designCard}>
-                  <div className={styles.cardAccentLine}></div>
-                  <h4 className={styles.designCardTitle}>과학적 기술 감정</h4>
-                  <p className={styles.designCardDesc}>
-                    제휴 건축안전진단기관 및 자체 건축 엔지니어와의 상주 협업으로 눈에 보이지 않는 구조적 결함까지 정밀 감정합니다.
-                  </p>
-                </div>
-
-                <div className={styles.designCard}>
-                  <div className={styles.cardAccentLine}></div>
-                  <h4 className={styles.designCardTitle}>판결 증액 계산사 전담</h4>
-                  <p className={styles.designCardDesc}>
-                    수년간의 판례 데이터를 기반으로 법원 감정인의 하자 평가액을 정교하게 검토 및 보완하여 소송 판결액을 대폭 증액시킵니다.
-                  </p>
-                </div>
-
-                <div className={styles.designCard}>
-                  <div className={styles.cardAccentLine}></div>
-                  <h4 className={styles.designCardTitle}>투명한 실시간 소송 현황</h4>
-                  <p className={styles.designCardDesc}>
-                    동 대표 및 입주민 대표 회의와의 긴밀한 핫라인 소통망 구축으로 감정 일정, 재판 진행 상황을 투명하게 실시간 공개합니다.
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
+        {/* 2.5. Specialized Defect Cases Pill Grid (Image 1 layout) */}
+        <DefectCasesGrid />
 
         {/* 3. Success Stories Carousel */}
         <ClassActionSuccess />

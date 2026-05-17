@@ -404,8 +404,8 @@ const centerData: Record<string, {
       }
     ],
     reviewsKicker: '실제 해결 사례',
-    reviewsTitle: '다양한 음주·교통 사건 해결 경험을 보유하고 있습니다',
-    reviewsDesc: '음주운전 3진 아웃부터 뺑소니, 인명 사고까지, 위기에 처한 의뢰인의 일상을 지키기 위해 노력해왔습니다.'
+    reviewsTitle: '유사 사건 대응 사례를 직접 확인해보세요',
+    reviewsDesc: '음주운전 초범부터 음주측정 거부·뺑소니까지,\n다양한 음주·교통 사건에서 의뢰인의 편에 섰습니다.'
   },
   'drugs': {
     title: '마약',

@@ -20,6 +20,12 @@ interface DefectCasesGridProps {
   hideKicker?: boolean;
   customCases?: CasePill[];
   reportSubtitle?: string;
+  diagnosisLabel?: string;
+  diagnosisEnglishLabel?: string;
+  diagnosisBadge?: string;
+  legalStrategyLabel?: string;
+  legalStrategyEnglishLabel?: string;
+  legalStrategyBadge?: string;
 }
 
 export default function DefectCasesGrid({
@@ -34,7 +40,13 @@ export default function DefectCasesGrid({
   difficultySubtitle = '법무법인 플로우는 모든 케이스를 축적하고 있습니다.',
   hideKicker = false,
   customCases,
-  reportSubtitle
+  reportSubtitle,
+  diagnosisLabel = '핵심 진단',
+  diagnosisEnglishLabel = 'Diagnosis',
+  diagnosisBadge = 'DIAGNOSIS',
+  legalStrategyLabel = '법적 대응 전략',
+  legalStrategyEnglishLabel = 'Legal Strategy',
+  legalStrategyBadge = 'LEGAL'
 }: DefectCasesGridProps) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
@@ -240,10 +252,10 @@ export default function DefectCasesGrid({
                               <line x1="12" y1="17" x2="12.01" y2="17"/>
                             </svg>
                             <span className={styles.cardTitle}>
-                              핵심 진단 <span className={styles.englishSub}>(Diagnosis)</span>
+                              {diagnosisLabel} <span className={styles.englishSub}>({diagnosisEnglishLabel})</span>
                             </span>
                           </div>
-                          <span className={styles.cardBadgeDiagnosis}>DIAGNOSIS</span>
+                          <span className={styles.cardBadgeDiagnosis}>{diagnosisBadge}</span>
                         </div>
                         <p className={styles.cardText}>{currentCase.coreDiagnosis}</p>
                       </div>
@@ -278,10 +290,10 @@ export default function DefectCasesGrid({
                               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                             </svg>
                             <span className={styles.cardTitle}>
-                              법적 대응 전략 <span className={styles.englishSub}>(Legal Strategy)</span>
+                              {legalStrategyLabel} <span className={styles.englishSub}>({legalStrategyEnglishLabel})</span>
                             </span>
                           </div>
-                          <span className={styles.cardBadgeLegal}>LEGAL</span>
+                          <span className={styles.cardBadgeLegal}>{legalStrategyBadge}</span>
                         </div>
                         <p className={styles.cardText}>{currentCase.legalStrategy}</p>
                       </div>

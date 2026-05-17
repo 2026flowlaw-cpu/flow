@@ -164,7 +164,13 @@ export default function EduLawPage() {
           ]}
           difficultyTitle="* 현재 학원 운영에 어떤 어려움이 있으신가요?"
           difficultySubtitle="법무법인 플로우 에듀TF는 모든 학원 분쟁 분과별 데이터베이스를 보유하고 있습니다."
-          reportSubtitle="법무법인 플로우(FLOW) 학원·에듀 분쟁 진단 보고서"
+          reportSubtitle="법무법인 플로우(FLOW) 학원·에듀 서비스 상세 안내서"
+          diagnosisLabel="주요 세부 쟁점"
+          diagnosisEnglishLabel="Key Issues"
+          diagnosisBadge="ISSUES"
+          legalStrategyLabel="제공 서비스 내용"
+          legalStrategyEnglishLabel="Provided Services"
+          legalStrategyBadge="SERVICES"
           customCases={[
             {
               id: 1,

@@ -20,7 +20,7 @@ interface VerdictSectionProps {
 
 export default function VerdictSection({
   kicker = '데이터가 증명하는 압도적 실력',
-  mainTitle = '"승소, 결코 우연이 아닙니다"',
+  mainTitle = '모두가 불가능하다고 했던 사건, 법무법인 플로우는 결과로 증명했습니다!',
   descText
 }: VerdictSectionProps) {
   const verdicts: VerdictItem[] = [

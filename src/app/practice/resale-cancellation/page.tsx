@@ -7,6 +7,7 @@ import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import styles from './ResaleCancellation.module.css';
 
 import Stats from '@/components/Stats/Stats';
+import PainPoints from '@/components/PainPoints/PainPoints';
 import SuccessStories from '@/components/SuccessStories/SuccessStories';
 import FAQ from '@/components/FAQ/FAQ';
 import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
@@ -69,6 +70,7 @@ const ResaleCancellationPage = () => {
 
         {/* 1. 실적 카드 */}
         <Stats />
+      <PainPoints />
 
         {/* 2. 케이스 */}
         <PracticeCases />

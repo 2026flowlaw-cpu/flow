@@ -1,0 +1,144 @@
+.section {
+  padding: 100px 0;
+  background-color: #f8fafc; /* Very light subtle background */
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #64748b;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0A1B39;
+  margin: 0 0 20px 0;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: #475569;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.bubbleContainer {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.verticalLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: #e2e8f0;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.bubbleWrapper {
+  display: flex;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.bubbleWrapper:last-child {
+  margin-bottom: 0;
+}
+
+.leftWrapper {
+  justify-content: flex-start;
+  padding-right: 50%;
+}
+
+.rightWrapper {
+  justify-content: flex-end;
+  padding-left: 50%;
+}
+
+.bubble {
+  background: white;
+  padding: 16px 24px;
+  border-radius: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  max-width: 90%;
+  border: 1px solid #f1f5f9;
+}
+
+/* Tail for left bubbles */
+.leftWrapper .bubble::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  transform: translateY(-50%);
+  border-width: 10px 0 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent white;
+  filter: drop-shadow(3px 0px 2px rgba(0,0,0,0.02));
+}
+
+/* Tail for right bubbles */
+.rightWrapper .bubble::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  transform: translateY(-50%);
+  border-width: 10px 10px 10px 0;
+  border-style: solid;
+  border-color: transparent white transparent transparent;
+  filter: drop-shadow(-3px 0px 2px rgba(0,0,0,0.02));
+}
+
+.emoji {
+  font-size: 24px;
+}
+
+.text {
+  font-size: 16px;
+  color: #334155;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .verticalLine {
+    left: 20px;
+  }
+  
+  .leftWrapper, .rightWrapper {
+    justify-content: flex-start;
+    padding-left: 50px;
+    padding-right: 0;
+  }
+
+  .leftWrapper .bubble::after, .rightWrapper .bubble::after {
+    left: -10px;
+    right: auto;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+    filter: drop-shadow(-3px 0px 2px rgba(0,0,0,0.02));
+  }
+  
+  .bubble {
+    max-width: 100%;
+  }
+}

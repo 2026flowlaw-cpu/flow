@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Stats from '@/components/Stats/Stats';
+import PainPoints from '@/components/PainPoints/PainPoints';
 import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
 import LawyerProfiles from '@/components/LawyerProfiles/LawyerProfiles';
 import CTA from '@/components/CTA/CTA';
@@ -71,6 +72,7 @@ export default function CriminalLawPage() {
 
       {/* 2. Stats (Reused from Main) */}
       <Stats />
+      <PainPoints />
 
       {/* 3. Custom Criminal Practice Areas */}
       <section className={styles.section}>

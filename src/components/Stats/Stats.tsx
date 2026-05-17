@@ -1,43 +1,78 @@
-import React from 'react';
+"use client";
+
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './Stats.module.css';
 
-const painPoints = [
-  { emoji: '😥', text: '좋은 조건에 혹했는데 다 거짓말이었어요..', align: 'left' },
-  { emoji: '😓', text: '공사지연, 입주지연.. 더는 못참겠어요', align: 'right' },
-  { emoji: '🤨', text: '건물 곳곳이 하자 투성이에요. 부실시공이 의심됩니다..', align: 'left' },
-  { emoji: '😩', text: '건축법 등 법령 위반 정황이 다수 발견됐는데 어떻게 해야하죠..?', align: 'right' },
-  { emoji: '😡', text: '계약 당시에 고지받지 못한 시설물과, 계약 조건이 저도 모르게 변경됐어요', align: 'left' },
+interface CounterProps {
+  end: number;
+  duration?: number;
+}
+
+const CountUpText = ({ end, duration = 2000 }: CounterProps) => {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    let startTimestamp: number | null = null;
+    const animate = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      
+      // Ease-out cubic: 수치가 목표에 가까워질수록 천천히 감속
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      
+      setCount(Math.floor(easedProgress * end));
+
+      if (progress < 1) {
+        window.requestAnimationFrame(animate);
+      }
+    };
+
+    window.requestAnimationFrame(animate);
+  }, [isVisible, end, duration]);
+
+  return <span ref={containerRef}>{count.toLocaleString()}</span>;
+};
+
+const stats = [
+  { label: '누적 업무 사례', value: 1542, suffix: '+' },
+  { label: '승소 및 해결 확률', value: 92, suffix: '%' },
+  { label: '전문 변호사 수', value: 10, suffix: '명' },
+  { label: '월 평균 상담 건수', value: 439, suffix: '건' },
 ];
 
 const Stats = () => {
   return (
-    <section className={styles.section}>
-      <div className="container">
-        <div className={styles.header}>
-          <span className={styles.label}>전문 로펌</span>
-          <h2 className={styles.title}>법무법인 플로우 강남분사무소</h2>
-          <p className={styles.subtitle}>
-            "혼자 고민은 그만, 정당한 사유가 있다면 여러분도 해결할 수 있습니다"
-          </p>
-        </div>
-
-        <div className={styles.bubbleContainer}>
-          <div className={styles.verticalLine}></div>
-          {painPoints.map((point, idx) => (
-            <div key={idx} className={`${styles.bubbleWrapper} ${point.align === 'left' ? styles.leftWrapper : styles.rightWrapper}`}>
-              <div className={styles.bubble}>
-                {point.align === 'left' ? (
-                  <>
-                    <span className={styles.emoji}>{point.emoji}</span>
-                    <span className={styles.text}>{point.text}</span>
-                  </>
-                ) : (
-                  <>
-                    <span className={styles.text}>{point.text}</span>
-                    <span className={styles.emoji}>{point.emoji}</span>
-                  </>
-                )}
-              </div>
+    <section className={styles.statsSection}>
+      <div className={`${styles.container} container`}>
+        <div className={styles.grid}>
+          {stats.map((stat, index) => (
+            <div key={index} className={styles.statCard}>
+              <h3 className={styles.value}>
+                <CountUpText end={stat.value} />
+                <span className={styles.suffix}>{stat.suffix}</span>
+              </h3>
+              <p className={styles.label}>{stat.label}</p>
             </div>
           ))}
         </div>

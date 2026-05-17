@@ -5,6 +5,7 @@ import CTA from '@/components/CTA/CTA';
 import LawyerProfiles from '@/components/LawyerProfiles/LawyerProfiles';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import Stats from '@/components/Stats/Stats';
+import PainPoints from '@/components/PainPoints/PainPoints';
 import SuccessStories from '@/components/SuccessStories/SuccessStories';
 import FAQ from '@/components/FAQ/FAQ';
 import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
@@ -80,6 +81,7 @@ export default async function CriminalCenterPage({ params }: { params: Promise<{
 
       {/* 1. 실적 카드 */}
       <Stats />
+      <PainPoints />
 
         {/* 2. 케이스 */}
         <PracticeCases />

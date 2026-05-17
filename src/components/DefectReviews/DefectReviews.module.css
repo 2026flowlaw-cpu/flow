@@ -15,7 +15,7 @@
    ==================================================== */
 .headerArea {
   text-align: center;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto 60px auto;
 }
 
@@ -34,6 +34,7 @@
   color: #0A1B39; /* Deep Navy */
   letter-spacing: -1.5px;
   margin: 0 0 20px 0;
+  white-space: nowrap;
 }
 
 .descText {
@@ -289,6 +290,7 @@
   
   .mainTitle {
     font-size: 28px;
+    white-space: normal;
   }
 
   .navBtn {

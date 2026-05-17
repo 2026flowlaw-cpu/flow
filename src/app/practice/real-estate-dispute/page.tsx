@@ -162,6 +162,7 @@ export default function RealEstateDisputePage() {
           ]}
           difficultyTitle="* 현재 어떤 부동산 법률 분쟁으로 고민하고 계신가요?"
           difficultySubtitle="법무법인 플로우 부동산 TF팀은 모든 성공 사례를 축적하고 있습니다."
+          reportSubtitle="법무법인 플로우(FLOW) 부동산 권리관계 정밀 진단 보고서"
           customCases={[
             {
               id: 1,

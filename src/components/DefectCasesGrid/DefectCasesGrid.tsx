@@ -19,6 +19,7 @@ interface DefectCasesGridProps {
   difficultySubtitle?: string;
   hideKicker?: boolean;
   customCases?: CasePill[];
+  reportSubtitle?: string;
 }
 
 export default function DefectCasesGrid({
@@ -32,7 +33,8 @@ export default function DefectCasesGrid({
   difficultyTitle = '* 현재 어떤 어려움을 겪고 계신가요?',
   difficultySubtitle = '법무법인 플로우는 모든 케이스를 축적하고 있습니다.',
   hideKicker = false,
-  customCases
+  customCases,
+  reportSubtitle
 }: DefectCasesGridProps) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
@@ -200,9 +202,9 @@ export default function DefectCasesGrid({
                   <h4 className={styles.detailTitle}>{currentCase.label}</h4>
                 </div>
                 <div className={styles.headerSubtitle}>
-                  {currentCase.engineeringSolution 
+                  {reportSubtitle || (currentCase.engineeringSolution 
                     ? '법무법인 플로우(FLOW) 기술·법률 통합 진단 보고서'
-                    : '법무법인 플로우(FLOW) 전세사기·임대차 분쟁 진단 보고서'}
+                    : '법무법인 플로우(FLOW) 전세사기·임대차 분쟁 진단 보고서')}
                 </div>
               </div>
               

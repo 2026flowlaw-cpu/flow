@@ -269,11 +269,12 @@ const centerData: Record<string, {
   'dui-traffic': {
     title: '음주·교통',
     subtitle: '음주·교통 전담센터',
-    heroTitleLine1: '음주운전 및 교통사고,',
-    heroTitleLine2: '초기 면허 구제와 행정/형사 대응이 핵심입니다.',
+    heroTitleLine1: '음주운전·교통사고,',
+    heroTitleLine2: '첫 대응이 형사처벌과 면허 결과를 바꿉니다.',
     heroDescLines: [
-      '음주운전 3진 아웃·뺑소니·12대 중과실 등 교통 사건',
-      '경찰 조사부터 합의 대행, 형사 재판까지 완벽하게 방어',
+      '음주운전 초범·재범·무면허운전부터 측정거부·약물운전',
+      '보복운전·운전자폭행·뺑소니·위험운전치사상까지.',
+      '형사·행정 음주·교통 분야 전 영역을',
       '법무법인 플로우가 처음부터 끝까지 함께합니다.'
     ],
     promiseTitle: '신속함이 결정하는 면허 구제',
@@ -1107,7 +1108,7 @@ export default function CriminalCenterPage() {
                 </div>
                 <h1 className={styles.heroMainTitle} style={{ fontSize: '42px', lineHeight: '1.4', marginBottom: '24px' }}>
                   {data.heroTitleLine1}<br />
-                  <span>{data.heroTitleLine2}</span>
+                  <span style={{ color: centerKey === 'dui-traffic' ? '#ef4444' : undefined }}>{data.heroTitleLine2}</span>
                 </h1>
                 <div className={styles.heroDescription} style={{ fontSize: '18px', lineHeight: '1.8', color: '#cbd5e1' }}>
                   {data.heroDescLines.map((line, idx) => (

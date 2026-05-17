@@ -75,17 +75,12 @@ export default function RealEstateDisputePage() {
               
               <div className={styles.heroLeft}>
                 <h1 className={styles.heroMainTitle}>
-                  부동산 특화,<br />
-                  <span className={styles.goldHighlight}>ONE-STOP</span> 종합 법률서비스
+                  부동산 분쟁, 법리만으로는 부족합니다
                 </h1>
                 <div className={styles.heroSubtitles}>
-                  <span className={styles.titleSub1}>하자조사 · 진단 · 보수까지 올인원(All-in-One) 토털케어</span>
-                  <span className={styles.titleSub2}>부동산의 처음과 끝, 법무법인 플로우가 함께합니다.</span>
+                  <span className={styles.titleSub1}>수많은 이해관계와 복잡한 권리관계... 부동산소송은 단순하지 않습니다.</span>
+                  <span className={styles.titleSub2}>법무법인 플로우는 갈등의 본질과 권리관계의 실체를 정확히 파악하여 여러분의 재산을 지킵니다.</span>
                 </div>
-                <p className={styles.heroDescription}>
-                  아파트 단지와 상가의 부실시공 및 하자는 입주민의 안전과 재산을 위협합니다. <br />
-                  법무법인 플로우는 상주 건축 엔지니어링 TF와 법률 계산팀이 긴밀히 연대하여, 하자를 과학적으로 입증하고 판결 보상액을 최대로 끌어올립니다.
-                </p>
               </div>
 
             </div>

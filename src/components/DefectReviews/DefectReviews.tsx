@@ -84,24 +84,21 @@ export default function DefectReviews() {
     if (trackIndex === 7) {
       setIsTransitioning(false);
       setTrackIndex(2);
+      setTimeout(() => {
+        setIsTransitioning(true);
+        setIsSliding(false);
+      }, 50);
     } else if (trackIndex === 1) {
       setIsTransitioning(false);
       setTrackIndex(6);
+      setTimeout(() => {
+        setIsTransitioning(true);
+        setIsSliding(false);
+      }, 50);
+    } else {
+      setIsSliding(false);
     }
-    setIsSliding(false);
   };
-
-  // Re-enable transitioning class smoothly on next frame
-  useEffect(() => {
-    if (!isTransitioning) {
-      const raf = requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setIsTransitioning(true);
-        });
-      });
-      return () => cancelAnimationFrame(raf);
-    }
-  }, [isTransitioning]);
 
   // Detect screen size for mobile responsiveness
   useEffect(() => {

@@ -63,7 +63,7 @@
 }
 
 .heroMainTitle {
-  font-size: 52px;
+  font-size: 58px;
   font-weight: 600;
   color: #ffffff;
   margin: 0 0 28px 0;
@@ -85,7 +85,7 @@
 }
 
 .titleSub1 {
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 600;
   color: #C5A059;
   display: block;
@@ -95,7 +95,7 @@
 }
 
 .titleSub2 {
-  font-size: 17.5px;
+  font-size: 20px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.9);
   display: block;
@@ -105,8 +105,8 @@
 }
 
 .heroDescription {
-  font-size: 16.5px;
-  color: #94a3b8;
+  font-size: 18.5px;
+  color: #cbd5e1;
   line-height: 1.8;
   margin: 0 0 35px 0;
   word-break: keep-all;

@@ -147,7 +147,7 @@
 }
 
 .courtBadge {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   color: #64748b;
   background-color: #f1f5f9;
@@ -157,7 +157,7 @@
 }
 
 .documentTitle {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   color: #1e293b;
   font-family: serif;
@@ -174,7 +174,7 @@
 .infoRow {
   display: flex;
   gap: 10px;
-  font-size: 12px;
+  font-size: 14px;
   color: #64748b;
   line-height: 1.4;
 }
@@ -182,14 +182,14 @@
 .infoLabel {
   font-weight: 600;
   color: #475569;
-  width: 50px;
+  width: 55px;
   flex-shrink: 0;
   font-family: serif;
 }
 
 .infoValue {
   color: #334155;
-  font-weight: 400500;
+  font-weight: 500;
 }
 
 .dummyTextLines {

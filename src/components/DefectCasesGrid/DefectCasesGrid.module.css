@@ -214,7 +214,7 @@
 }
 
 .headerSubtitle {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: #C5A059;
   letter-spacing: 0.5px;
@@ -224,7 +224,7 @@
 .detailBadge {
   background: linear-gradient(135deg, #C5A059 0%, #a88241 100%);
   color: #ffffff;
-  font-size: 11.5px;
+  font-size: 13px;
   font-weight: 700;
   padding: 5px 12px;
   border-radius: 6px;
@@ -233,7 +233,7 @@
 }
 
 .detailTitle {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 600;
   color: #ffffff;
   margin: 0;
@@ -368,21 +368,21 @@
 }
 
 .cardTitle {
-  font-size: 16.5px;
+  font-size: 18.5px;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.3px;
 }
 
 .englishSub {
-  font-size: 12.5px;
+  font-size: 14.5px;
   font-weight: 500;
   opacity: 0.7;
   margin-left: 4px;
 }
 
 .cardText {
-  font-size: 14.5px;
+  font-size: 16.5px;
   color: #e2e8f0;
   line-height: 1.8;
   margin: 0;

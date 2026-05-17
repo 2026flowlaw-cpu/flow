@@ -32,40 +32,41 @@
   align-items: flex-start;
 }
 
-.titleWrapper {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 24px;
-}
-
 .blueSquare {
-  width: 14px;
-  height: 14px;
-  background-color: #0082f6; /* Electric Blue kicker */
-  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #3b82f6; /* Accent electric blue */
+  margin-bottom: 20px;
 }
 
 .heroMainTitle {
-  font-size: 42px;
+  font-size: 48px;
   font-weight: 800;
   color: white;
-  margin: 0;
+  margin: 0 0 24px 0;
   letter-spacing: -1.5px;
   line-height: 1.2;
 }
 
+.titleSub {
+  font-size: 32px;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-left: 10px;
+  letter-spacing: -0.5px;
+}
+
 .heroDescription {
-  font-size: 16.5px;
+  font-size: 18px;
   color: #cbd5e1;
-  line-height: 1.8;
+  line-height: 1.7;
   margin: 0 0 45px 0;
   word-break: keep-all;
 }
 
 .heroUrl {
   font-size: 15px;
-  color: #0082f6;
+  color: #3b82f6;
   font-weight: 700;
   letter-spacing: 0.5px;
 }

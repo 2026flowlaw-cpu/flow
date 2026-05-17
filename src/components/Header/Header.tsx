@@ -32,7 +32,7 @@ const menuData = [
       { name: '전세사기센터', href: '/practice/jeonse-fraud' },
       { name: '부동산분쟁센터', href: '/practice/real-estate-dispute' },
       { name: '건설분쟁센터', href: '/practice/construction-dispute' },
-      { name: '하자소송센터', href: '/practice/class-action' },
+      { name: '하자소송센터', href: '/practice/defect-litigation' },
       { name: '집단소송센터', href: '/practice/class-action' },
       { name: '민사일반센터', href: '/practice/general-civil' },
       { name: '에듀법률센터', href: '/practice/edu-law' },

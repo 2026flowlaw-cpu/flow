@@ -145,10 +145,10 @@
 }
 
 .detailBox {
-  background-color: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 20px;
-  padding: 30px 40px;
+  background: linear-gradient(145deg, #0A1B39 0%, #061024 100%);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  border-radius: 24px;
+  padding: 40px 50px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -157,8 +157,9 @@
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   animation: modalPopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #ffffff;
 }
 
 @keyframes modalPopIn {
@@ -176,8 +177,8 @@
   position: absolute;
   top: 24px;
   right: 24px;
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
   color: #94a3b8;
   padding: 8px;
@@ -189,33 +190,36 @@
 }
 
 .closeButton:hover {
-  color: #0A1B39;
-  background-color: #e2e8f0;
+  color: #ffffff;
+  background: rgba(197, 160, 89, 0.2);
+  border-color: rgba(197, 160, 89, 0.5);
+  transform: rotate(90deg);
 }
 
 .detailHeader {
   display: flex;
   align-items: center;
-  gap: 12px;
-  border-bottom: 1.5px solid #e2e8f0;
-  padding-bottom: 18px;
-  margin-bottom: 6px;
+  gap: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 24px;
+  margin-bottom: 8px;
 }
 
 .detailBadge {
-  background-color: #0A1B39;
+  background: linear-gradient(135deg, #C5A059 0%, #a88241 100%);
   color: #ffffff;
   font-size: 11.5px;
-  font-weight: 600;
-  padding: 4px 10px;
+  font-weight: 700;
+  padding: 5px 12px;
   border-radius: 6px;
   letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
 }
 
 .detailTitle {
-  font-size: 19px;
+  font-size: 22px;
   font-weight: 600;
-  color: #0A1B39;
+  color: #ffffff;
   margin: 0;
   letter-spacing: -0.5px;
 }
@@ -228,14 +232,14 @@
 }
 
 .detailColCore {
-  background-color: #fffdf5; /* Sleek extremely warm premium tint */
-  border: 1px solid rgba(197, 160, 89, 0.22);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(197, 160, 89, 0.3);
   border-radius: 16px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  box-shadow: 0 4px 15px rgba(197, 160, 89, 0.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(197, 160, 89, 0.05);
 }
 
 .detailColAction {
@@ -245,29 +249,30 @@
 }
 
 .actionBlock {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 22px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  box-shadow: 0 4px 12px rgba(10, 27, 57, 0.01);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .actionBlock:hover {
-  border-color: rgba(10, 27, 57, 0.15);
-  box-shadow: 0 6px 18px rgba(10, 27, 57, 0.03);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 .detailSubHeader {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 14.5px;
+  font-size: 15px;
   font-weight: 700;
-  color: #C5A059; /* Gold accent by default */
+  color: #C5A059;
 }
 
 .detailIcon {
@@ -275,24 +280,24 @@
 }
 
 .engHeader {
-  color: #1a56db !important; /* Corporate trust sapphire blue */
+  color: #60a5fa !important; /* Brighter blue for dark mode */
 }
 
 .lawHeader {
-  color: #C5A059 !important; /* Accent gold */
+  color: #facc15 !important; /* Brighter gold for dark mode */
 }
 
 .detailTextCore {
-  font-size: 14px;
-  color: #334155;
+  font-size: 14.5px;
+  color: #e2e8f0;
   line-height: 1.8;
   margin: 0;
   word-break: keep-all;
 }
 
 .detailTextAction {
-  font-size: 13.5px;
-  color: #475569;
+  font-size: 14px;
+  color: #cbd5e1;
   line-height: 1.75;
   margin: 0;
   word-break: keep-all;

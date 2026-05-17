@@ -48,16 +48,64 @@
 }
 
 /* ====================================================
-    VERDICT CARDS GRID
+    INFINITE MARQUEE VERDICT CARDS
    ==================================================== */
-.cardsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+.marqueeWrapper {
+  margin-top: 50px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  padding: 20px 0 40px 0;
+}
+
+/* Edge gradient masks */
+.marqueeWrapper::before,
+.marqueeWrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 15vw;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.marqueeWrapper::before {
+  left: 0;
+  background: linear-gradient(to right, #f8fafc, transparent);
+}
+
+.marqueeWrapper::after {
+  right: 0;
+  background: linear-gradient(to left, #f8fafc, transparent);
+}
+
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  animation: scrollMarquee 40s linear infinite;
+}
+
+.marqueeTrack:hover {
+  animation-play-state: paused;
+}
+
+.marqueeSet {
+  display: flex;
   gap: 25px;
-  margin-top: 40px;
+  padding-right: 25px; /* Important for seamless loop */
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .paperCard {
+  width: 330px;
+  flex-shrink: 0;
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
@@ -203,19 +251,20 @@
     RESPONSIVE MEDIA QUERIES
    ==================================================== */
 @media (max-width: 1024px) {
-  .cardsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  .marqueeWrapper::before,
+  .marqueeWrapper::after {
+    width: 8vw;
   }
 }
 
 @media (max-width: 640px) {
-  .cardsGrid {
-    grid-template-columns: 1fr;
-    gap: 25px;
-  }
-  
   .mainTitle {
     font-size: 28px;
+  }
+
+  .paperCard {
+    width: 280px;
+    padding: 25px 20px;
+    min-height: 340px;
   }
 }

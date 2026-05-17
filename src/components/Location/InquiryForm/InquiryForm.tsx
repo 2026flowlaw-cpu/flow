@@ -106,7 +106,9 @@ const InquiryForm = () => {
             복잡한 고민, 지금 바로 남겨주세요. 검토 후 영업일 기준 1시간 이내에 회신드립니다.
           </p>
           <div className={styles.topInfoBadge}>
-            문의내용 남겨주시면 검토 후 <strong className={styles.sloganPhone}>02-517-8300</strong>으로 회신드립니다. 
+            <span className={styles.topInfoBadgeLabel}>문의내용 남겨주시면 검토 후</span>
+            <strong className={styles.sloganPhone}>02-517-8300</strong>
+            <span className={styles.topInfoBadgeLabel}>으로 회신드립니다.</span>
             <span className={styles.topInfoDesc}>(※ 24시간 상담 가능 / 영업일 기준 1시간 내 회신 / 주말 방문상담 가능)</span>
           </div>
         </div>

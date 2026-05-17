@@ -10,12 +10,14 @@ interface FaqItem {
 }
 
 interface DefectFaqProps {
+  kicker?: string;
   title?: string;
   subtitle?: string;
   items?: FaqItem[];
 }
 
 export default function DefectFaq({
+  kicker = "FAQ",
   title = "하자소송 자주 묻는 질문",
   subtitle = "* 여러분의 고민을 속 시원하게 해결해 드립니다.",
   items
@@ -67,7 +69,7 @@ export default function DefectFaq({
         
         {/* Section Header (Image 1 replica) */}
         <div className={styles.headerArea}>
-          <span className={styles.kicker}>FAQ</span>
+          <span className={styles.kicker}>{kicker}</span>
           <h2 className={styles.mainTitle}>{title}</h2>
           <p className={styles.subTitle}>{subtitle}</p>
         </div>

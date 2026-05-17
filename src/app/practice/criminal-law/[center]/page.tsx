@@ -530,12 +530,12 @@ const centerData: Record<string, {
   'drugs': {
     title: '마약',
     subtitle: '마약 전담센터',
-    heroTitleLine1: '마약류 관리법 위반 혐의,',
-    heroTitleLine2: '수사 초기 과학적 대응과 양형 자료 구축이 좌우합니다.',
+    heroTitleLine1: '마약 사건,',
+    heroTitleLine2: '첫 대응이 처분과 구속 여부를 바꿉니다.',
     heroDescLines: [
-      '단순 투약·소지·유통 및 밀수 등 마약 사건',
-      '초기 수사 대응부터 재활 치료 연계까지 선처 솔루션',
-      '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+      '마약 투약·소지·밀수·제조 사건까지.',
+      '치료조건부 기소유예 가능성 검토부터 구속 대응·양형 방어까지',
+      '법무법인 플로우가 수사 초기부터 끝까지 함께합니다.'
     ],
     promiseTitle: '과학적 입증과 양형의 수치',
     counters: [

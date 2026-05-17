@@ -82,6 +82,10 @@ const centerData: Record<string, {
   faqKicker?: string;
   faqTitle?: string;
   faqSubtitle?: string;
+  strategyKicker?: string;
+  strategyTitle?: string;
+  strategyDesc?: string;
+  strategyBottomText?: string;
 }> = {
   'sex-offense': {
     title: '성범죄',
@@ -453,6 +457,36 @@ const centerData: Record<string, {
         id: 7,
         question: '보보운전·운전자폭행으로 기소됐습니다. 어떻게 대응해야 하나요?',
         answer: '보복운전은 행위 방식에 따라 특수상해, 특수협박, 특수폭행 등으로 형법에 따라 처벌받습니다. 운전자폭행은 특정범죄가중처벌법에 따라 가중처벌 대상이 됩니다. 블랙박스·CCTV로 선행 행위(상대방 차량의 먼저 끼어들기 등)와 자신의 행위 수위를 정밀 분석해야 합니다. 피해 회복 여부와 합의 과정은 양형 판단에 중요한 요소로 반영됩니다.'
+      }
+    ],
+    strategyKicker: '음주·교통 형사·행정 전문변호사',
+    strategyTitle: '음주·교통 사건은\n형사와 행정을 함께 대응해야 결과가 달라집니다',
+    strategyDesc: '음주운전은 형사와 행정이 동시에 진행됩니다.\n두 가지를 함께 고려하지 않으면 한 쪽에서 손해를 볼 수 있습니다.\n법무법인 플로우는 통합적인 전략으로 의뢰인의 피해를 최소화합니다.',
+    strategyBottomText: '법무법인 플로우 음주교통 전담 센터는 수많은 면허 구제, 무죄 및 벌금 감경 판결을 이끌어낸 검증된 노하우를 바탕으로, 의뢰인의 인생이 걸린 절체절명의 위기에서 가장 든든한 방패가 되어드립니다.',
+    strategies: [
+      {
+        id: 1,
+        title: '음주측정 수치 정밀 분석',
+        desc: '단순 수치만 보지 않습니다. 측정 절차 위반·역추산 오류·기기 오차·구강 세척·대기 시간 미준수까지 검토합니다.',
+        iconType: 'screen'
+      },
+      {
+        id: 2,
+        title: '형사 + 행정 동시 대응',
+        desc: '벌금만 줄여서는 끝나지 않습니다. 면허취소·정지까지 함께 대응해야 합니다.',
+        iconType: 'shield'
+      },
+      {
+        id: 3,
+        title: '피해자 합의 대리 협상',
+        desc: '교통사고 피해자와의 합의는 양형에서 가장 강력한 요소입니다. 감정적 접근은 역효과를 냅니다. 변호사가 대리하여 합리적인 합의를 이끌어냅니다.',
+        iconType: 'user'
+      },
+      {
+        id: 4,
+        title: '사고 직후 즉각 대응',
+        desc: '교통사고·뺑소니·위험운전치사상 등 중범죄는 사고 직후 초기 대응이 결정적입니다. 초기 진술 방향에 따라 형량이 크게 달라질 수 있습니다.',
+        iconType: 'info'
       }
     ]
   },
@@ -1320,18 +1354,50 @@ export default function CriminalCenterPage() {
 
         {/* 4.5. Specialized Win Strategy Grid (Image 1 layout) */}
         <DefectStrategyGrid 
-          kicker="[법무법인 플로우만의 '형사 방어' 필승 전략]"
+          kicker={data.strategyKicker || "[법무법인 플로우만의 '형사 방어' 필승 전략]"}
           mainTitle={
-            <>
-              "경험의 차이가 무죄와 유죄를 가릅니다"<br />
-              절체절명의 위기, 형사전문 플로우에 맡기세요
-            </>
+            data.strategyTitle ? (
+              typeof data.strategyTitle === 'string' ? (
+                (() => {
+                  const lines = data.strategyTitle.split('\n');
+                  return lines.map((line, i) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      {i < lines.length - 1 && <br />}
+                    </React.Fragment>
+                  ));
+                })()
+              ) : (
+                data.strategyTitle
+              )
+            ) : (
+              <>
+                "경험의 차이가 무죄와 유죄를 가릅니다"<br />
+                절체절명의 위기, 형사전문 플로우에 맡기세요
+              </>
+            )
           }
           descBlock={
-            <>
-              수사기관의 강도 높은 조사와 불리한 증거 앞에서도 흔들리지 않는 논리로<br />
-              의뢰인의 억울함을 풀고 일상을 되찾아 드립니다.
-            </>
+            data.strategyDesc ? (
+              typeof data.strategyDesc === 'string' ? (
+                (() => {
+                  const lines = data.strategyDesc.split('\n');
+                  return lines.map((line, i) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      {i < lines.length - 1 && <br />}
+                    </React.Fragment>
+                  ));
+                })()
+              ) : (
+                data.strategyDesc
+              )
+            ) : (
+              <>
+                수사기관의 강도 높은 조사와 불리한 증거 앞에서도 흔들리지 않는 논리로<br />
+                의뢰인의 억울함을 풀고 일상을 되찾아 드립니다.
+              </>
+            )
           }
           strategies={
             data.strategies
@@ -1363,15 +1429,31 @@ export default function CriminalCenterPage() {
                   {
                     id: 4,
                     title: '안전한 합의 대행 시스템',
-                    desc: '피해자와의 직접 접촉으로 인한 2차 가해 논란을 차단하고, 변호사가 전문적으로 개입하여 유리한 조건의 합의를 도출합니다.',
+                    desc: '피해자와의 직접 접촉으로 인한 2차 가해 논란을 차단하고, 변호사가 전문적으로 개입하여 유리한 조건 of 합의를 도출합니다.',
                     icon: getStrategyIcon('info')
                   }
                 ]
           }
           bottomText={
-            <>
-              법무법인 플로우 형사 전담 센터는 수많은 구속영장 기각, 무혐의, 무죄 판결을 이끌어낸 검증된 노하우를 바탕으로, 의뢰인의 인생이 걸린 절체절명의 위기에서 가장 든든한 방패가 되어드립니다.
-            </>
+            data.strategyBottomText ? (
+              typeof data.strategyBottomText === 'string' ? (
+                (() => {
+                  const lines = data.strategyBottomText.split('\n');
+                  return lines.map((line, i) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      {i < lines.length - 1 && <br />}
+                    </React.Fragment>
+                  ));
+                })()
+              ) : (
+                data.strategyBottomText
+              )
+            ) : (
+              <>
+                법무법인 플로우 형사 전담 센터는 수많은 구속영장 기각, 무혐의, 무죄 판결을 이끌어낸 검증된 노하우를 바탕으로, 의뢰인의 인생이 걸린 절체절명의 위기에서 가장 든든한 방패가 되어드립니다.
+              </>
+            )
           }
         />
 

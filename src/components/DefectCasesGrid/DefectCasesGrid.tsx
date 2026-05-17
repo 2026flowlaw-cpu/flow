@@ -8,7 +8,7 @@ interface CasePill {
   label: string;
   coreDiagnosis: string;
   engineeringSolution?: string;
-  legalStrategy: string;
+  legalStrategy?: string;
 }
 
 interface DefectCasesGridProps {

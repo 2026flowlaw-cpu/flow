@@ -539,3 +539,33 @@
     grid-template-columns: 1fr;
   }
 }
+
+.emergencyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #C5A059 0%, #A47E3B 100%);
+  color: #ffffff;
+  font-size: 16.5px;
+  font-weight: 700;
+  padding: 16px 36px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 25px rgba(197, 160, 89, 0.3);
+  letter-spacing: -0.3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.emergencyBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(197, 160, 89, 0.5);
+  background: linear-gradient(135deg, #d4b26f 0%, #b58f4c 100%);
+  color: #ffffff;
+}
+
+.emergencyBtn:active {
+  transform: translateY(-1px);
+}

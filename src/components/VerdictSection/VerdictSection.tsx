@@ -14,7 +14,7 @@ interface VerdictItem {
 
 interface VerdictSectionProps {
   kicker?: string;
-  mainTitle?: string;
+  mainTitle?: React.ReactNode;
   descText?: React.ReactNode;
   verdicts?: VerdictItem[];
 }

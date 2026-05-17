@@ -15,7 +15,7 @@ interface PromiseCardItem {
   id: number;
   title: string;
   desc: string;
-  iconType?: 'lawyer' | 'tech' | 'consult' | 'twotrack' | 'auction' | 'custom';
+  iconType?: 'lawyer' | 'tech' | 'consult' | 'twotrack' | 'auction' | 'custom' | 'shield' | 'scale' | 'certificate' | 'gavel';
 }
 
 interface DefectPromiseProps {
@@ -187,6 +187,38 @@ export default function DefectPromise({
           <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <rect x="3" y="3" width="18" height="18" rx="2" />
             <path d="M21 16H3M21 12H3M21 8H3" />
+          </svg>
+        );
+      case 'shield':
+        return (
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+        );
+      case 'scale':
+        return (
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1" />
+            <path d="M18 8H6" />
+            <path d="M12 3v15" />
+            <path d="M3 12h18" />
+          </svg>
+        );
+      case 'certificate':
+        return (
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="8" r="7" />
+            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+          </svg>
+        );
+      case 'gavel':
+        return (
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="m14 13-5 5M16 11l-5 5" />
+            <path d="m15.5 15.5-2-2 3.5-3.5 2 2z" />
+            <path d="M2.3 21h4" />
+            <path d="M2 17h16" />
+            <path d="m12 12-9 9" />
           </svg>
         );
       default:

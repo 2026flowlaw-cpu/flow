@@ -537,28 +537,28 @@ const centerData: Record<string, {
       '치료조건부 기소유예 가능성 검토부터 구속 대응·양형 방어까지',
       '법무법인 플로우가 수사 초기부터 끝까지 함께합니다.'
     ],
-    promiseTitle: '과학적 입증과 양형의 수치',
+    promiseTitle: '수치가 증명하는 실력',
     counters: [
       {
         id: 0,
-        target: 500,
-        suffix: '건+',
+        target: 100,
+        suffix: '+',
         title: '마약 사건 수행 건수',
-        desc: '단순 투약, 소지부터 유통 및 밀수까지 철저한 법리 방어'
+        desc: '단순 투약·소지부터 유통 및 밀수까지 철저한 법리 방어'
       },
       {
         id: 1,
-        target: 0,
-        suffix: '과학 진단',
-        title: '소변·모발 정밀 대응',
-        desc: '국과수 정밀 감정 결과 사전 시뮬레이션 및 소명자료 즉각 구성'
+        target: 24,
+        suffix: '시간',
+        title: '구속 즉시 대응',
+        desc: '체포·압수수색 등 영장 집행 시 즉각 현장 출동 및 밀착 방어'
       },
       {
         id: 2,
-        target: 100,
-        suffix: '%',
-        title: '치료·재활 솔루션 연계',
-        desc: '전문 재활 병원 연계 및 단약 프로그램 이수 양형 조건 극대화'
+        target: 0,
+        suffix: '당일',
+        title: '긴급 대응 가능',
+        desc: '전담 변호사 즉시 배정으로 골든타임 내 최적의 방어 전략 수립'
       }
     ],
     promises: [

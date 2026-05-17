@@ -75,16 +75,15 @@ export default function JeonseFraudPage() {
               
               <div className={styles.heroLeft}>
                 <h1 className={styles.heroMainTitle}>
-                  전세사기 특화,<br />
-                  <span className={styles.goldHighlight}>ONE-STOP</span> 종합 법률서비스
+                  보증금반환소송,<br />
+                  승소해도 <span className={styles.goldHighlight}>끝이 아닙니다</span>
                 </h1>
                 <div className={styles.heroSubtitles}>
-                  <span className={styles.titleSub1}>하자조사 · 진단 · 보수까지 올인원(All-in-One) 토털케어</span>
-                  <span className={styles.titleSub2}>전세사기의 처음과 끝, 법무법인 플로우가 함께합니다.</span>
+                  <span className={styles.titleSub1}>전세보증금, 누군가에게는 전재산입니다.</span>
+                  <span className={styles.titleSub2}>그러나 승소 판결문만으로는 보증금을 돌려받을 수 없습니다.</span>
                 </div>
                 <p className={styles.heroDescription}>
-                  아파트 단지와 상가의 부실시공 및 하자는 입주민의 안전과 재산을 위협합니다. <br />
-                  법무법인 플로우는 상주 건축 엔지니어링 TF와 법률 계산팀이 긴밀히 연대하여, 하자를 과학적으로 입증하고 판결 보상액을 최대로 끌어올립니다.
+                  법무법인 플로우는 보증금 반환이 이뤄지는 최후의 순간까지 함께 하겠습니다.
                 </p>
               </div>
 

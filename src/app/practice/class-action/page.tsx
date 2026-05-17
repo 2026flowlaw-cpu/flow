@@ -23,7 +23,6 @@ export default function ClassActionPage() {
             
             {/* Left side: Definition & Description */}
             <div className={styles.heroLeft}>
-              <div className={styles.blueSquare}></div>
               <h1 className={styles.heroMainTitle}>집단소송<span className={styles.titleSub}>(단체소송)</span> 이란?</h1>
               <p className={styles.heroDescription}>
                 다수의 피해자가 함께 모여 동일하거나 유사한 위법행위로 인한 손해를 구제받기 위해 공동으로 하나의 소송을 통해 권리를 행사하는 것

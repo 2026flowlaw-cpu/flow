@@ -74,7 +74,6 @@ export default function DefectLitigationPage() {
             <div className={styles.heroContentGrid}>
               
               <div className={styles.heroLeft}>
-                <div className={styles.blueSquare}></div>
                 <h1 className={styles.heroMainTitle}>
                   하자소송 특화,<br />
                   <span className={styles.goldHighlight}>ONE-STOP</span> 종합 법률서비스
@@ -109,7 +108,6 @@ export default function DefectLitigationPage() {
           <div className={styles.container}>
             
             <div className={styles.sectionHeader}>
-              <div className={styles.blueSquare}></div>
               <h2 className={styles.panelTitle}>하자소송 실시간 진행 현황</h2>
               <p className={styles.panelSubtitle}>
                 전국 대규모 단지 및 상가 입주민들이 플로우 하자 전담 TF와 함께 정당한 가치를 찾고 있습니다.

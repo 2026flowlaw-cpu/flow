@@ -61,7 +61,6 @@ const ClassActionCases = () => {
         
         {/* Section Header */}
         <div className={styles.sectionHeader}>
-          <div className={styles.blueSquare}></div>
           <h2 className={styles.sectionTitle}>주요 진행 사건 현황</h2>
           <p className={styles.sectionSubtitle}>
             집단소송 TF팀 구성 & 압도적 조직력과 전문성! <br />

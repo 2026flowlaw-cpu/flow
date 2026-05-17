@@ -68,7 +68,6 @@ const ClassActionStrength = () => {
       <section className={styles.sectionPart2}>
         <div className="container">
           <div className={styles.accentHeader}>
-            <div className={styles.blueSquare}></div>
             <h2 className={styles.sectionTitle}>센터 출범 배경</h2>
           </div>
 
@@ -117,7 +116,6 @@ const ClassActionStrength = () => {
       <section className={styles.sectionPart3}>
         <div className="container">
           <div className={styles.accentHeader}>
-            <div className={styles.blueSquare}></div>
             <h2 className={styles.sectionTitleWhite}>법무법인 플로우의 강점</h2>
           </div>
 

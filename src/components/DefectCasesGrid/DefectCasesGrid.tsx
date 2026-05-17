@@ -18,6 +18,7 @@ interface DefectCasesGridProps {
   difficultyTitle?: string;
   difficultySubtitle?: string;
   hideKicker?: boolean;
+  customCases?: CasePill[];
 }
 
 export default function DefectCasesGrid({
@@ -30,7 +31,8 @@ export default function DefectCasesGrid({
   ],
   difficultyTitle = '* 현재 어떤 어려움을 겪고 계신가요?',
   difficultySubtitle = '아래 하자 분류를 클릭하시면 법률 및 엔지니어링 실무 해법을 조회하실 수 있습니다.',
-  hideKicker = false
+  hideKicker = false,
+  customCases
 }: DefectCasesGridProps) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
@@ -45,7 +47,7 @@ export default function DefectCasesGrid({
     };
   }, [selectedId]);
 
-  const cases: CasePill[] = [
+  const cases: CasePill[] = customCases || [
     {
       id: 1,
       label: '사용검사 전후 하자',
@@ -201,57 +203,79 @@ export default function DefectCasesGrid({
               </div>
               
               <div className={styles.modalContent}>
-                {/* 1. 핵심 진단 (Diagnosis) */}
-                <div className={styles.diagnosisCard}>
-                  <div className={styles.cardHeader}>
-                    <div className={styles.titleArea}>
-                      <svg className={styles.diagnosisIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                        <line x1="12" y1="9" x2="12" y2="13"/>
-                        <line x1="12" y1="17" x2="12.01" y2="17"/>
-                      </svg>
-                      <span className={styles.cardTitle}>
-                        핵심 진단 <span className={styles.englishSub}>(Diagnosis)</span>
-                      </span>
+                {(!currentCase.engineeringSolution && !currentCase.legalStrategy) ? (
+                  /* Single Premium Card for Single Detailed text */
+                  <div className={styles.singleCard}>
+                    <div className={styles.cardHeader}>
+                      <div className={styles.titleArea}>
+                        <svg className={styles.diagnosisIcon} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <circle cx="12" cy="12" r="10"/>
+                          <line x1="12" y1="16" x2="12" y2="12"/>
+                          <line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                        <span className={styles.cardTitle}>
+                          상세 법률 분석 솔루션 <span className={styles.englishSub}>(Case Details)</span>
+                        </span>
+                      </div>
+                      <span className={styles.cardBadgeDiagnosis}>SOLUTION</span>
                     </div>
-                    <span className={styles.cardBadgeDiagnosis}>DIAGNOSIS</span>
+                    <p className={styles.cardSingleText}>{currentCase.coreDiagnosis}</p>
                   </div>
-                  <p className={styles.cardText}>{currentCase.coreDiagnosis}</p>
-                </div>
+                ) : (
+                  <>
+                    {/* 1. 핵심 진단 (Diagnosis) */}
+                    <div className={styles.diagnosisCard}>
+                      <div className={styles.cardHeader}>
+                        <div className={styles.titleArea}>
+                          <svg className={styles.diagnosisIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                          </svg>
+                          <span className={styles.cardTitle}>
+                            핵심 진단 <span className={styles.englishSub}>(Diagnosis)</span>
+                          </span>
+                        </div>
+                        <span className={styles.cardBadgeDiagnosis}>DIAGNOSIS</span>
+                      </div>
+                      <p className={styles.cardText}>{currentCase.coreDiagnosis}</p>
+                    </div>
 
-                {/* 2. 엔지니어링 솔루션 (Engineering) */}
-                <div className={styles.engineeringCard}>
-                  <div className={styles.cardHeader}>
-                    <div className={styles.titleArea}>
-                      <svg className={styles.engineeringIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="12" y1="16" x2="12" y2="12"/>
-                        <line x1="12" y1="8" x2="12.01" y2="8"/>
-                      </svg>
-                      <span className={styles.cardTitle}>
-                        엔지니어링 솔루션 <span className={styles.englishSub}>(Engineering)</span>
-                      </span>
+                    {/* 2. 엔지니어링 솔루션 (Engineering) */}
+                    <div className={styles.engineeringCard}>
+                      <div className={styles.cardHeader}>
+                        <div className={styles.titleArea}>
+                          <svg className={styles.engineeringIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                          </svg>
+                          <span className={styles.cardTitle}>
+                            엔지니어링 솔루션 <span className={styles.englishSub}>(Engineering)</span>
+                          </span>
+                        </div>
+                        <span className={styles.cardBadgeEngineering}>ENGINEERING</span>
+                      </div>
+                      <p className={styles.cardText}>{currentCase.engineeringSolution}</p>
                     </div>
-                    <span className={styles.cardBadgeEngineering}>ENGINEERING</span>
-                  </div>
-                  <p className={styles.cardText}>{currentCase.engineeringSolution}</p>
-                </div>
 
-                {/* 3. 법적 대응 전략 (Legal Strategy) */}
-                <div className={styles.legalCard}>
-                  <div className={styles.cardHeader}>
-                    <div className={styles.titleArea}>
-                      <svg className={styles.legalIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                      </svg>
-                      <span className={styles.cardTitle}>
-                        법적 대응 전략 <span className={styles.englishSub}>(Legal Strategy)</span>
-                      </span>
+                    {/* 3. 법적 대응 전략 (Legal Strategy) */}
+                    <div className={styles.legalCard}>
+                      <div className={styles.cardHeader}>
+                        <div className={styles.titleArea}>
+                          <svg className={styles.legalIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                          </svg>
+                          <span className={styles.cardTitle}>
+                            법적 대응 전략 <span className={styles.englishSub}>(Legal Strategy)</span>
+                          </span>
+                        </div>
+                        <span className={styles.cardBadgeLegal}>LEGAL</span>
+                      </div>
+                      <p className={styles.cardText}>{currentCase.legalStrategy}</p>
                     </div>
-                    <span className={styles.cardBadgeLegal}>LEGAL</span>
-                  </div>
-                  <p className={styles.cardText}>{currentCase.legalStrategy}</p>
-                </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

@@ -108,6 +108,78 @@ export default function ResaleCancellationPage() {
           ]}
           difficultyTitle="* 현재 어떤 어려움을 겪고 계신가요?"
           difficultySubtitle="법무법인 플로우는 모든 케이스를 축적하고 있습니다."
+          customCases={[
+            {
+              id: 1,
+              label: '거래 중요사항 미고지',
+              coreDiagnosis: '분양 시 반드시 알려야 할 중요한 사실을 숨긴 경우 고지의무 위반을 근거로 계약 취소 및 환불이 가능합니다.',
+              engineeringSolution: '',
+              legalStrategy: ''
+            },
+            {
+              id: 2,
+              label: '미시공, 오시공, 부실시공 하자',
+              coreDiagnosis: '설계도면과 다르게 시공됐거나 심각한 부실 공사로 인해 계획대로 활용이 불가능한 경우 목적 달성 불능을 사유로 계약을 해제할 수 있습니다.',
+              engineeringSolution: '',
+              legalStrategy: ''
+            },
+            {
+              id: 3,
+              label: '착오 · 기망에 의한 계약취소',
+              coreDiagnosis: '분양사업자가 허위 설명을 했거나, 중대한 사실에 대한 착오를 유발한 경우 계약을 무효화하고 납입금을 돌려받을 수 있습니다.',
+              engineeringSolution: '',
+              legalStrategy: ''
+            },
+            {
+              id: 4,
+              label: '대출불발로 인한 계약해제',
+              coreDiagnosis: '시공사나 시행사가 약속한 담보대출이 정부 규제나 사업자 귀책으로 무산되어 잔금 마련이 불가능해진 경우 법리적 해제 가능성을 검토합니다.',
+              engineeringSolution: '',
+              legalStrategy: ''
+            },
+            {
+              id: 5,
+              label: '허위 · 과장광고',
+              coreDiagnosis: '실현 불가능한 수익률 보장이나 지하철역 연장 등 객관적 사실과 다른 광고로 계약을 유도했다면 표시광고법 위반으로 대응할 수 있습니다.',
+              engineeringSolution: '',
+              legalStrategy: ''
+            },
+            {
+              id: 6,
+              label: '설계변경',
+              coreDiagnosis: '면적이나 층수 증감 등 수분양자의 이해관계에 중대한 영향을 주는 설계변경 사실을 알리지 않았다면 이를 사유로 계약해제를 주장할 수 있습니다.',
+              engineeringSolution: '',
+              legalStrategy: ''
+            },
+            {
+              id: 7,
+              label: '사기분양',
+              coreDiagnosis: '자금난 은폐, 이중분양, 인허가 미비 등 애당초 정상적인 이행 의사 없이 분양을 진행한 경우 형사고소와 더불어 민사 소송을 진행할 필요가 있습니다.',
+              engineeringSolution: '',
+              legalStrategy: ''
+            },
+            {
+              id: 8,
+              label: '입주지연 공사지연',
+              coreDiagnosis: '약정한 입주 예정일로부터 통상 3개월 이상 공사가 지연될 경우, 수분양자는 최고 절차를 거쳐 계약해제 및 위약금 청구가 가능합니다.',
+              engineeringSolution: '',
+              legalStrategy: ''
+            },
+            {
+              id: 9,
+              label: '계약금반환',
+              coreDiagnosis: '상대방의 귀책 사유를 명확히 규명하여 납부한 계약금 전액을 돌려받을 수 있는 최적의 전략을 강구합니다.',
+              engineeringSolution: '',
+              legalStrategy: ''
+            },
+            {
+              id: 10,
+              label: '청약철회',
+              coreDiagnosis: '방문판매법위반 등 청약철회권 행사가 가능한 사안인지 검토하여 신속한 권리구제 전략을 수립합니다.',
+              engineeringSolution: '',
+              legalStrategy: ''
+            }
+          ]}
         />
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}

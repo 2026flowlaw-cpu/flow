@@ -397,6 +397,23 @@
   word-break: keep-all;
 }
 
+.singleCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(197, 160, 89, 0.35); /* Subtle gold border */
+  border-radius: 12px;
+  padding: 30px;
+  width: 100%;
+}
+
+.cardSingleText {
+  font-size: 20px;
+  color: #f8fafc;
+  line-height: 1.8;
+  margin: 20px 0 0 0;
+  font-weight: 500;
+  word-break: keep-all;
+}
+
 /* ====================================================
     RESPONSIVE MEDIA QUERIES
    ==================================================== */

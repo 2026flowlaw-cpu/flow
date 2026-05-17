@@ -87,7 +87,6 @@ export default function DefectLitigationPage() {
                   아파트 단지와 상가의 부실시공 및 하자는 입주민의 안전과 재산을 위협합니다. <br />
                   법무법인 플로우는 상주 건축 엔지니어링 TF와 법률 계산팀이 긴밀히 연대하여, 하자를 과학적으로 입증하고 판결 보상액을 최대로 끌어올립니다.
                 </p>
-                <div className={styles.heroUrl}>www.flowlaw-defect.com</div>
               </div>
 
             </div>

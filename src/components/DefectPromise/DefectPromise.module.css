@@ -47,8 +47,9 @@
     METRICS GRID (ON WHITE BACKGROUND)
    ==================================================== */
 .metricsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 30px;
   margin-bottom: 100px;
   position: relative;
@@ -56,6 +57,9 @@
 }
 
 .metricCard {
+  flex: 1;
+  min-width: 260px;
+  max-width: 340px;
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 20px;

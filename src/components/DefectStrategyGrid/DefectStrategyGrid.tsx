@@ -146,11 +146,13 @@ export default function DefectStrategyGrid({
         </div>
 
         {/* Bottom Caption Summary Block (Image 2 text footer) */}
-        <div className={styles.bottomSummary}>
-          <div className={styles.summaryText}>
-            {bottomText || defaultBottomText}
+        {bottomText !== null && (
+          <div className={styles.bottomSummary}>
+            <div className={styles.summaryText}>
+              {bottomText || defaultBottomText}
+            </div>
           </div>
-        </div>
+        )}
 
       </div>
     </section>

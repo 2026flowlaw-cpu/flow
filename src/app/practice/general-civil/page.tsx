@@ -90,7 +90,67 @@ export default function GeneralCivilPage() {
         </section>
 
         {/* 2. Strengths & Promises (Hexagon & Count-up Section) */}
-        <DefectPromise />
+        <DefectPromise 
+          kicker="NUMBERS & PROMISES"
+          sectionTitle="법무법인 플로우의 압도적 경험과 실력"
+          sectionSubtitle="의뢰인의 소중한 권익과 소송 승리를 위해 법무법인 플로우는 단 한 순간도 타협하지 않습니다. 치밀한 분석과 완벽한 지표로 최고의 법률 서비스를 증명합니다."
+          counters={[
+            {
+              id: 0,
+              target: 10000,
+              suffix: '건+',
+              title: '민사소송 및 자문 수행건수',
+              desc: '다양한 소송 사례를 통해 축적된 플로우만의 독보적인 소송 통계 자료 보유'
+            },
+            {
+              id: 1,
+              target: 14,
+              suffix: '일 이내',
+              title: '소장 접수까지 신속 대응',
+              desc: '사건 수임 시점부터 평균 14일 이내 신속한 소장 작성 및 법원 제출 완료'
+            },
+            {
+              id: 2,
+              target: 24,
+              suffix: '시간',
+              title: '언제 어디서든 간편 상담 접수',
+              desc: '전화, 카카오톡, 웹 문의 등 의뢰인이 편리한 경로로 항시 상담 연계'
+            },
+            {
+              id: 3,
+              target: 365,
+              suffix: '일',
+              title: '민사소송 긴급 대응 TF팀 운영',
+              desc: '풍부한 실무 능력을 갖춘 전담 TF가 365일 실시간 상주하며 신속 지원'
+            }
+          ]}
+          promises={[
+            {
+              id: 0,
+              title: '민사 전문 변호사 직접 상담',
+              desc: '풍부한 소송 실무를 거친 전담 변호사가 초기 면담부터 서면 작성, 변론까지 외주 없이 100% 밀착 진행합니다.',
+              iconType: 'lawyer'
+            },
+            {
+              id: 1,
+              title: '치밀한 사실관계 입증',
+              desc: '모호한 법률 해석에만 의존하지 않고, 정밀한 계좌 분석, 계약 분석을 통하여 확실한 승소 증거를 구축합니다.',
+              iconType: 'tech'
+            },
+            {
+              id: 2,
+              title: '상황 맞춤형 분쟁 솔루션',
+              desc: '무조건적인 소송 남발 대신 가압류, 가처분, 협의 대리 등 의뢰인의 실리 극대화를 최우선으로 결정합니다.',
+              iconType: 'consult'
+            },
+            {
+              id: 3,
+              title: '압도적인 승소 데이터',
+              desc: '수천 건의 민사 집행 및 채권 회수 성공 레코드를 바탕으로, 판결문 획득을 넘어 실질적 재산 보전을 이뤄냅니다.',
+              iconType: 'twotrack'
+            }
+          ]}
+        />
 
         {/* 2.5. Specialized Defect Cases Pill Grid (Image 1 layout) */}
         <DefectCasesGrid />

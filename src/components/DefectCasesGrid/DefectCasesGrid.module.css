@@ -95,16 +95,12 @@
   gap: 16px;
 }
 
-.gridCols2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
 .pillCard {
   background-color: #f1f5f9; /* Warm grey light background */
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  padding: 24px 20px;
-  font-size: 20px;
+  padding: 24px 10px;
+  font-size: 18px;
   font-weight: 700;
   color: #334155;
   text-align: center;
@@ -115,7 +111,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
-  white-space: nowrap; /* Prevent word wrap to guarantee single-line display */
+  white-space: nowrap;
 }
 
 .pillCard:hover {
@@ -427,10 +423,6 @@
     grid-template-columns: repeat(3, 1fr);
   }
   
-  .pillsGrid.gridCols2 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
   .mainTitle {
     font-size: 34px;
   }
@@ -438,10 +430,6 @@
 
 @media (max-width: 768px) {
   .pillsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .pillsGrid.gridCols2 {
     grid-template-columns: repeat(2, 1fr);
   }
   
@@ -472,8 +460,9 @@
   .pillsGrid {
     grid-template-columns: 1fr;
   }
-  
-  .pillsGrid.gridCols2 {
-    grid-template-columns: 1fr;
+  .pillCard {
+    font-size: 16px;
+    padding: 18px 12px;
+    white-space: normal;
   }
 }

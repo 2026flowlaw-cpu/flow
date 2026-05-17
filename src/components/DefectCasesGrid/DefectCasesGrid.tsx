@@ -19,7 +19,6 @@ interface DefectCasesGridProps {
   difficultySubtitle?: string;
   hideKicker?: boolean;
   customCases?: CasePill[];
-  columns?: number;
 }
 
 export default function DefectCasesGrid({
@@ -33,8 +32,7 @@ export default function DefectCasesGrid({
   difficultyTitle = '* 현재 어떤 어려움을 겪고 계신가요?',
   difficultySubtitle = '아래 하자 분류를 클릭하시면 법률 및 엔지니어링 실무 해법을 조회하실 수 있습니다.',
   hideKicker = false,
-  customCases,
-  columns = 4
+  customCases
 }: DefectCasesGridProps) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
@@ -173,7 +171,7 @@ export default function DefectCasesGrid({
         </div>
 
         {/* 12-Pill Grid */}
-        <div className={`${styles.pillsGrid} ${columns === 2 ? styles.gridCols2 : ''}`}>
+        <div className={styles.pillsGrid}>
           {cases.map((item) => (
             <div 
               key={item.id}

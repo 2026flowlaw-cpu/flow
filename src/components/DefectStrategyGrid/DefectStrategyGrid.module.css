@@ -20,11 +20,11 @@
 }
 
 .kicker {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 700;
   color: #C5A059; /* Gold */
   letter-spacing: 1px;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   display: block;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .descBlock {
-  font-size: 15.5px;
+  font-size: 18.5px;
   color: #475569;
   line-height: 1.8;
   font-weight: 500;
@@ -127,9 +127,9 @@
 }
 
 .summaryText {
-  font-size: 14.5px;
+  font-size: 18px;
   color: #475569;
-  line-height: 1.8;
+  line-height: 1.85;
   font-weight: 600;
   margin: 0;
   word-break: keep-all;

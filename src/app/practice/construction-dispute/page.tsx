@@ -79,7 +79,7 @@ export default function ConstructionDisputePage() {
                   <span className={styles.goldHighlight}>ONE-STOP</span> 종합 법률서비스
                 </h1>
                 <div className={styles.heroSubtitles}>
-                  <span className={styles.titleSub1}>하자조사 · 진단 · 보수까지 올인원(All-in-One) 토털케어</span>
+                  <span className={styles.titleSub1}>하자조사 · 진단 · 보수까지 올인원(All-in-One) 토탈케어</span>
                   <span className={styles.titleSub2}>건설의 처음과 끝, 법무법인 플로우가 함께합니다.</span>
                 </div>
                 <p className={styles.heroDescription}>
@@ -87,16 +87,23 @@ export default function ConstructionDisputePage() {
                   법무법인 플로우는 상주 건축 엔지니어링 TF와 법률 계산팀이 긴밀히 연대하여, 하자를 과학적으로 입증하고 판결 보상액을 최대로 끌어올립니다.
                 </p>
               </div>
-
+ 
             </div>
           </div>
         </section>
-
+ 
         {/* 2. Strengths & Promises (Hexagon & Count-up Section) */}
         <DefectPromise />
-
+ 
         {/* 2.5. Specialized Defect Cases Pill Grid (Image 1 layout) */}
-        <DefectCasesGrid />
+        <DefectCasesGrid 
+          mainTitle="현장을 압니다. 그래서 강합니다."
+          descLines={[
+            '수많은 이해관계인과 복잡한 공정, 외부 변수까지...',
+            '건설현장은 교과서적 지식으로 해결할 수 없는 일 투성이입니다.',
+            '건설소송은 현장의 생리와 특성을 아는 진짜 건설전문변호사와 함께 해야 합니다.'
+          ]}
+        />
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
         <VerdictSection />

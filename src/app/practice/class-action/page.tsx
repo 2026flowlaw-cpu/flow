@@ -5,7 +5,6 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import ClassActionSuccess from '@/components/ClassActionSuccess/ClassActionSuccess';
 import ClassActionStrength from '@/components/ClassActionStrength/ClassActionStrength';
-import CTA from '@/components/CTA/CTA';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import styles from './page.module.css';
 import ClassActionCases from '@/components/ClassActionCases/ClassActionCases';
@@ -70,13 +69,11 @@ export default function ClassActionPage() {
 
 
 
-        {/* 7. 상담 */}
         <div style={{ backgroundColor: '#f8fafc', padding: '80px 0' }}>
           <div className="container">
             <InquiryForm />
           </div>
         </div>
-        <CTA />
       </main>
 
       <Footer />

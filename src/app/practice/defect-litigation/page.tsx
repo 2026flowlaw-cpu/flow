@@ -71,33 +71,15 @@ export default function DefectLitigationPage() {
               <div className={styles.heroLeft}>
                 <div className={styles.blueSquare}></div>
                 <h1 className={styles.heroMainTitle}>
-                  아파트·상가 하자소송
-                  <span className={styles.titleSub}>신속하고 정밀하게, 승소로 설계합니다</span>
+                  하자소송 특화,<br />ONE STOP 종합 법률서비스
+                  <span className={styles.titleSub1}>하자조사 · 진단 · 보수까지 올인원(All-in-One) 토털케어</span>
+                  <span className={styles.titleSub2}>하자소송의 처음과 끝, 법무법인 플로우가 함께합니다.</span>
                 </h1>
                 <p className={styles.heroDescription}>
-                  아파트 단지와 상가의 부실시공 및 하자는 입주민의 자산 가치와 안전을 위협합니다. <br />
-                  법무법인 플로우는 자체 상주하는 <strong>건축구조기술사 직계 융합 TF</strong>를 통해 하자를 과학적으로 분석하고, 계산사 수행팀의 시너지를 결합해 단 한 치의 손해도 없이 완벽한 보상을 청구합니다.
+                  아파트 단지와 상가의 부실시공 및 하자는 입주민의 안전과 재산을 위협합니다. <br />
+                  법무법인 플로우는 상주 건축 엔지니어링 TF와 법률 계산팀이 긴밀히 연대하여, 하자를 과학적으로 입증하고 판결 보상액을 최대로 끌어올립니다.
                 </p>
                 <div className={styles.heroUrl}>www.flowlaw-defect.com</div>
-              </div>
-
-              <div className={styles.heroRight}>
-                <div className={styles.glassCard}>
-                  <h3 className={styles.glassCardTitle}>정밀 하자 감정</h3>
-                  <p className={styles.glassCardDesc}>건축구조기술사 상주 및 첨단 계측 장비를 활용한 미세 하자 포착</p>
-                </div>
-                <div className={styles.glassCard}>
-                  <h3 className={styles.glassCardTitle}>보증금 최대 증액</h3>
-                  <p className={styles.glassCardDesc}>법원 감정 단계에서의 적극적 변론을 통한 하자보수보증금 극대화</p>
-                </div>
-                <div className={styles.glassCard}>
-                  <h3 className={styles.glassCardTitle}>공용·전유 완벽 입증</h3>
-                  <p className={styles.glassCardDesc}>단지 외벽, 지하 주차장부터 세대 내 결로, 균열까지 꼼꼼한 조사</p>
-                </div>
-                <div className={styles.glassCard}>
-                  <h3 className={styles.glassCardTitle}>시공사 기망 단호 대응</h3>
-                  <p className={styles.glassCardDesc}>설계도면과 다른 저가 자재 무단 교체 및 미시공 하자 단죄</p>
-                </div>
               </div>
 
             </div>

@@ -86,6 +86,9 @@ const centerData: Record<string, {
   strategyTitle?: string;
   strategyDesc?: string;
   strategyBottomText?: string;
+  singleCardTitle?: string | null;
+  singleCardEnglishTitle?: string | null;
+  singleCardBadge?: string | null;
 }> = {
   'sex-offense': {
     title: '성범죄',
@@ -586,55 +589,44 @@ const centerData: Record<string, {
     casesDescLines: [],
     difficultyTitle: '',
     difficultySubtitle: '',
-    diagnosisLabel: '핵심 목표',
-    diagnosisEnglishLabel: 'Goal',
-    diagnosisBadge: 'GOAL',
-    legalStrategyLabel: '세부 대응 전략',
-    legalStrategyEnglishLabel: 'Strategy',
-    legalStrategyBadge: 'STRATEGY',
+    singleCardTitle: null,
     isVertical: true,
     customCases: [
       {
         id: 1,
         label: '투약·소지(초범)',
         subtitle: '처음으로 마약을 투약·소지하다 적발됐습니다.',
-        coreDiagnosis: '치료조건부 기소유예를 목표합니다. 전과 기록 최소화 방향 검토가 중요합니다.',
-        legalStrategy: '• 치료조건부 기소유예 가능성 검토 및 대응 전략 수립\n• 검사 결과 수치 분석 — 불복 여지 검토\n• 수사 초기 진술 전략 수립·조사 동석'
+        coreDiagnosis: '치료조건부 기소유예를 목표합니다. 전과 기록 최소화 방향 검토가 중요합니다.\n\n• 치료조건부 기소유예 가능성 검토 및 대응 전략 수립\n• 검사 결과 수치 분석 — 불복 여지 검토\n• 수사 초기 진술 전략 수립·조사 동석'
       },
       {
         id: 2,
         label: '검사 결과 불복',
         subtitle: '모발·소변 검사에서 양성이 나왔는데 억울합니다',
-        coreDiagnosis: '검사 결과의 신빙성을 다양한 각도로 분석합니다. 절차 하자가 있다면 충분히 다툴 수 있습니다.',
-        legalStrategy: '• 검체 채취 절차 적법성·교차 오염 분석\n• 복용 의약품·식품에 의한 양성 가능성 분석\n• 검사 수치 범위 — 실제 투약 여부 다투기'
+        coreDiagnosis: '검사 결과의 신빙성을 다양한 각도로 분석합니다. 절차 하자가 있다면 충분히 다툴 수 있습니다.\n\n• 검체 채취 절차 적법성·교차 오염 분석\n• 복용 의약품·식품에 의한 양성 가능성 분석\n• 검사 수치 범위 — 실제 투약 여부 다투기'
       },
       {
         id: 3,
         label: '재범·누범',
         subtitle: '마약 전과가 있는데 또 적발됐습니다',
-        coreDiagnosis: '재범은 처벌이 가중됩니다. 집행유예 전환을 위한 치료·재활 입증이 핵심입니다.',
-        legalStrategy: '• 재범 방지 프로그램 참여 증빙 자료 수집\n• 주변 지지체계·환경 개선 자료 제출\n• 집행유예 전환 목표 정상참작 자료 구성'
+        coreDiagnosis: '재범은 처벌이 가중됩니다. 집행유예 전환을 위한 치료·재활 입증이 핵심입니다.\n\n• 재범 방지 프로그램 참여 증빙 자료 수집\n• 주변 지지체계·환경 개선 자료 제출\n• 집행유예 전환 목표 정상참작 자료 구성'
       },
       {
         id: 4,
         label: '밀수·공급',
         subtitle: '마약 밀수·공급·판매로 수사를 받고 있습니다',
-        coreDiagnosis: '역할 분리 전략이 핵심입니다. 단순 운반·전달과 실질적 공급 사이의 경계를 정밀하게 다룹니다.',
-        legalStrategy: '• 단순 운반·전달 역할 분리 입증 자료 수집\n• 가담 경위·지시 구조 분석\n• 가담 정도 및 역할 범위에 따른 대응 전략 검토'
+        coreDiagnosis: '역할 분리 전략이 핵심입니다. 단순 운반·전달과 실질적 공급 사이의 경계를 정밀하게 다룹니다.\n\n• 단순 운반·전달 역할 분리 입증 자료 수집\n• 가담 경위·지시 구조 분석\n• 가담 정도 및 역할 범위에 따른 대응 전략 검토'
       },
       {
         id: 5,
         label: '수사 대응',
         subtitle: '경찰 조사 연락이 왔습니다·압수수색을 받았습니다',
-        coreDiagnosis: '첫 진술이 결과를 결정합니다. 조사 전 진술 방향을 신중히 검토해야 합니다.',
-        legalStrategy: '• 조사 전 진술 전략 수립 및 동석\n• 압수수색 현장 즉시 출동 — 영장 범위 검토\n• 마약 종류·수량 확인 — 혐의 범위 즉시 파악'
+        coreDiagnosis: '첫 진술이 결과를 결정합니다. 조사 전 진술 방향을 신중히 검토해야 합니다.\n\n• 조사 전 진술 전략 수립 및 동석\n• 압수수색 현장 즉시 출동 — 영장 범위 검토\n• 마약 종류·수량 확인 — 혐의 범위 즉시 파악'
       },
       {
         id: 6,
         label: '구속 대응',
         subtitle: '마약 혐의로 구속됐습니다',
-        coreDiagnosis: '구속 직후 구속적부심·보석 가능성을 신속히 검토합니다. 치료 의지 입증이 보석 인용에 유리하게 작용합니다.',
-        legalStrategy: '• 구속 적부심 즉시 신청 — 구속 사유 적법성 다투기\n• 보석 신청 — 치료 의지·도주 우려 없음 소명\n• 치료 기관 연계 입증으로 보석 강화'
+        coreDiagnosis: '구속 직후 구속적부심·보석 가능성을 신속히 검토합니다. 치료 의지 입증이 보석 인용에 유리하게 작용합니다.\n\n• 구속 적부심 즉시 신청 — 구속 사유 적법성 다투기\n• 보석 신청 — 치료 의지·도주 우려 없음 소명\n• 치료 기관 연계 입증으로 보석 강화'
       }
     ],
     reviewsKicker: '실제 해결 사례',
@@ -1305,6 +1297,9 @@ export default function CriminalCenterPage() {
           legalStrategyBadge={data.legalStrategyBadge || "STRATEGY"}
           customCases={data.customCases}
           isVertical={data.isVertical}
+          singleCardTitle={data.singleCardTitle}
+          singleCardEnglishTitle={data.singleCardEnglishTitle}
+          singleCardBadge={data.singleCardBadge}
         />
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}

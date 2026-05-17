@@ -31,6 +31,9 @@ interface DefectCasesGridProps {
   legalStrategyEnglishLabel?: string;
   legalStrategyBadge?: string;
   isVertical?: boolean;
+  singleCardTitle?: string | null;
+  singleCardEnglishTitle?: string | null;
+  singleCardBadge?: string | null;
 }
 
 export default function DefectCasesGrid({
@@ -55,7 +58,10 @@ export default function DefectCasesGrid({
   legalStrategyLabel = '법적 대응 전략',
   legalStrategyEnglishLabel = 'Legal Strategy',
   legalStrategyBadge = 'LEGAL',
-  isVertical = false
+  isVertical = false,
+  singleCardTitle,
+  singleCardEnglishTitle,
+  singleCardBadge
 }: DefectCasesGridProps) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
@@ -241,20 +247,24 @@ export default function DefectCasesGrid({
                 {(!currentCase.engineeringSolution && !currentCase.legalStrategy) ? (
                   /* Single Premium Card for Single Detailed text */
                   <div className={styles.singleCard}>
-                    <div className={styles.cardHeader}>
-                      <div className={styles.titleArea}>
-                        <svg className={styles.diagnosisIcon} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <circle cx="12" cy="12" r="10"/>
-                          <line x1="12" y1="16" x2="12" y2="12"/>
-                          <line x1="12" y1="8" x2="12.01" y2="8"/>
-                        </svg>
-                        <span className={styles.cardTitle}>
-                          상세 법률 분석 솔루션 <span className={styles.englishSub}>(Case Details)</span>
-                        </span>
+                    {singleCardTitle !== null && singleCardTitle !== "" && (
+                      <div className={styles.cardHeader}>
+                        <div className={styles.titleArea}>
+                          <svg className={styles.diagnosisIcon} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                          </svg>
+                          <span className={styles.cardTitle}>
+                            {singleCardTitle || "상세 법률 분석 솔루션"} {singleCardEnglishTitle && <span className={styles.englishSub}>({singleCardEnglishTitle})</span>}
+                          </span>
+                        </div>
+                        <span className={styles.cardBadgeDiagnosis}>{singleCardBadge || "SOLUTION"}</span>
                       </div>
-                      <span className={styles.cardBadgeDiagnosis}>SOLUTION</span>
-                    </div>
-                    <p className={styles.cardSingleText}>{currentCase.coreDiagnosis}</p>
+                    )}
+                    <p className={styles.cardSingleText} style={(singleCardTitle === null || singleCardTitle === "") ? { marginTop: 0 } : undefined}>
+                      {currentCase.coreDiagnosis}
+                    </p>
                   </div>
                 ) : (
                   <>

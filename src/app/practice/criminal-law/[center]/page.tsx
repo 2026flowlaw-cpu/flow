@@ -43,6 +43,9 @@ const centerData: Record<string, {
     coreDiagnosis: string;
     legalStrategy: string;
   }>;
+  reviewsKicker: string;
+  reviewsTitle: string;
+  reviewsDesc: string;
 }> = {
   'sex-offense': {
     title: '성범죄',
@@ -150,7 +153,10 @@ const centerData: Record<string, {
         coreDiagnosis: '성범죄 특유의 부수처분을 수사·재판 단계에서 최소화합니다.',
         legalStrategy: '• 신상정보 등록 면제 결정 적극 청구\n• 취업제한 최소화 → 법원 재량 적극 활용\n• 전자발찌(위치추적) 부착 명령 다투기'
       }
-    ]
+    ],
+    reviewsKicker: '실제 해결 사례',
+    reviewsTitle: '다양한 성범죄 사건 해결 경험을 보유하고 있습니다',
+    reviewsDesc: '무고부터 디지털 성범죄까지, 다양한 성범죄 피의자 사건에서 의뢰인의 편에 섰습니다.'
   },
   'dui-traffic': {
     title: '음주·교통',
@@ -258,7 +264,10 @@ const centerData: Record<string, {
         coreDiagnosis: '1심 판결 형량이 무거운 경우 양형 부당을 이유로 즉시 항소해야 합니다.',
         legalStrategy: '• 1심 판결 이후 발생한 추가 합의 또는 피해 회복 소명\n• 1심 판결문 분석을 통한 양형 부당 사유 정밀 구성\n• 항소심을 통한 벌금형 감형 또는 집행유예 변경'
       }
-    ]
+    ],
+    reviewsKicker: '실제 해결 사례',
+    reviewsTitle: '다양한 음주·교통 사건 해결 경험을 보유하고 있습니다',
+    reviewsDesc: '음주운전 3진 아웃부터 뺑소니, 인명 사고까지, 위기에 처한 의뢰인의 일상을 지키기 위해 노력해왔습니다.'
   },
   'drugs': {
     title: '마약',
@@ -366,7 +375,10 @@ const centerData: Record<string, {
         coreDiagnosis: '수사기관이 확보한 구매 내역이나 공범의 진술에 대처하는 진술 방향 정립이 시급합니다.',
         legalStrategy: '• 조사 전 예상 질문 시뮬레이션 및 불리한 자백 유도 방어\n• 마약 전문 변호사 1:1 밀착 동석을 통한 답변 검토 및 필터링\n• 억울한 구매 의도 없었음을 객관적 대화 기록으로 입증'
       }
-    ]
+    ],
+    reviewsKicker: '실제 해결 사례',
+    reviewsTitle: '다양한 마약범죄 사건 해결 경험을 보유하고 있습니다',
+    reviewsDesc: '단순 투약 및 소지 혐의부터 밀수, 유통 조직 가담까지, 조기 과학적 대응을 통해 최선의 선처 결과로 증명했습니다.'
   },
   'voice-phishing': {
     title: '보이스피싱',
@@ -474,7 +486,10 @@ const centerData: Record<string, {
         coreDiagnosis: '경찰 단계에서 무심코 뱉은 답변이 사기 미필적 고의 자백으로 가공되는 위험이 큽니다.',
         legalStrategy: '• 기망 유인 대화 증거 분석 및 정밀 답변서 사전 작성\n• 보이스피싱 전담 변호사 직접 첫 경찰 조사 동석 변론\n• 유도 신문을 원천 차단하고 불송치 의견서 조기 제출'
       }
-    ]
+    ],
+    reviewsKicker: '실제 해결 사례',
+    reviewsTitle: '다양한 재산·사기 범죄 해결 경험을 보유하고 있습니다',
+    reviewsDesc: '대형 경제 범죄부터 보이스피싱 가담, 투자 사기 혐의까지, 철저한 법리 검토로 의뢰인의 권리를 수호해왔습니다.'
   },
   'construction': {
     title: '건설 형사',
@@ -582,7 +597,10 @@ const centerData: Record<string, {
         coreDiagnosis: '유가족 및 피해 근로자 측과의 원만하고 합리적인 합의가 형사 책임 경감의 지름길입니다.',
         legalStrategy: '• 건설 전문 변호사가 직접 중재하여 감정적 다툼 차단\n• 산재 보상금과 별도의 합의금 기준 분석 및 신속 조율\n• 처벌불원서 및 민형사상 이의제기 금지 확약서 획득'
       }
-    ]
+    ],
+    reviewsKicker: '실제 해결 사례',
+    reviewsTitle: '다양한 기업형사 사건 해결 경험을 보유하고 있습니다',
+    reviewsDesc: '배임·횡령부터 자본시장법 위반, 중대재해처벌법까지, 기업 경영의 중대한 리스크에서 경영진을 철저히 보호해왔습니다.'
   },
   'economic': {
     title: '경제 범죄',
@@ -690,7 +708,10 @@ const centerData: Record<string, {
         coreDiagnosis: '경제 범죄 혐의를 인정하는 경우 피해 금액의 회복과 합의가 집행유예 선처를 짓는 기준입니다.',
         legalStrategy: '• 재무 전문 변호사가 직접 중재하여 현실적인 피해 보상 범위 협상\n• 합의 대금 조율 및 합의서/처벌불원서 직접 확보\n• 합의 완료 사실을 소명하여 기소유예 또는 벌금형 선처 유도'
       }
-    ]
+    ],
+    reviewsKicker: '실제 해결 사례',
+    reviewsTitle: '다양한 경제범죄 사건 해결 경험을 보유하고 있습니다',
+    reviewsDesc: '대형 경제 범죄부터 사기, 횡령, 배임 혐의까지, 철저한 법리 검토로 의뢰인의 권리를 수호해왔습니다.'
   },
   'juvenile': {
     title: '소년학폭',
@@ -798,7 +819,10 @@ const centerData: Record<string, {
         coreDiagnosis: '1심 소년 재판 보호 조치가 너무 무거워 미래 학생부 및 진학에 악영향이 생겼습니다.',
         legalStrategy: '• 결정문 수령 직후 14일 내 신속한 보호처분 항고 제기\n• 처분의 현저한 부당성 및 추가적으로 확보한 정상 참작 사유 입증\n• 고등법원 항고심을 통한 처분 수위 축소 및 감경 달성'
       }
-    ]
+    ],
+    reviewsKicker: '실제 해결 사례',
+    reviewsTitle: '다양한 소년보호 및 학폭 사건 해결 경험을 보유하고 있습니다',
+    reviewsDesc: '억울한 학교폭력 가해자 몰림부터 소년 재판 보호처분까지, 부모의 애타는 마음으로 학생의 미래와 명예를 철저히 지켜왔습니다.'
   },
   'general': {
     title: '일반 형사',
@@ -906,7 +930,10 @@ const centerData: Record<string, {
         coreDiagnosis: '혐의가 입증되어 재판을 피하기 힘든 경우 벌금형 또는 집행유예로 선처를 유도해야 합니다.',
         legalStrategy: '• 의뢰인의 반성, 피해 복구, 사회적 유대 등을 담은 다면적 양형 증거 설계\n• 진지한 양형 참작서 작성 및 변호인 의견서 집중 제출\n• 재판에서의 합리적이고 논리적인 변론으로 실형 위기 전면 방어'
       }
-    ]
+    ],
+    reviewsKicker: '실제 해결 사례',
+    reviewsTitle: '다양한 형사 사건 해결 경험을 보유하고 있습니다',
+    reviewsDesc: '폭행·상해부터 명예훼손, 형사 선처 합의까지, 복잡한 갈등 상황 속에서 의뢰인의 든든한 조력자로서 함께해왔습니다.'
   }
 };
 
@@ -1269,14 +1296,9 @@ export default function CriminalCenterPage() {
 
         {/* 4.6. Real Client Testimonial Reviews (Interactive filter grid) */}
         <DefectReviews 
-          kicker="REAL CLIENT REVIEWS"
-          mainTitle='"의뢰인이 직접 작성한 법무법인 플로우 생생한 후기"'
-          descText={
-            <>
-              수사기관의 압박 속에서 두려움에 떨던 의뢰인들이 <br />
-              법무법인 플로우와 함께 위기를 극복하고 일상을 되찾은 진솔한 이야기입니다.
-            </>
-          }
+          kicker={data.reviewsKicker}
+          mainTitle={data.reviewsTitle}
+          descText={data.reviewsDesc}
           items={[
             {
               id: 1,

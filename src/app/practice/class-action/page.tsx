@@ -66,6 +66,9 @@ export default function ClassActionPage() {
         {/* 강점/철학 소개 세션 (히어로 직후 배치) */}
         <ClassActionStrength />
 
+        {/* 3. 성공사례(판결문 롤링 카루셀 - 강점 세션 아래 배치) */}
+        <ClassActionSuccess />
+
         {/* 1. 실적 카드 */}
         <Stats />
       <PainPoints />
@@ -73,8 +76,7 @@ export default function ClassActionPage() {
         {/* 2. 케이스 */}
         <PracticeCases />
 
-        {/* 3. 성공사례(판결문 롤링 카루셀) */}
-        <ClassActionSuccess />
+
 
         {/* 4. FAQ */}
         <FAQ />

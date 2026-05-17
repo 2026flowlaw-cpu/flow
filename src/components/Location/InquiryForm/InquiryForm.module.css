@@ -17,28 +17,70 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .topInfoTag {
-  font-size: 14px;
-  color: #2563eb; /* Royal blue */
+  font-size: 14.5px;
+  color: #C5A059; /* Brand Gold Kicker */
   font-weight: 800;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
+  letter-spacing: 1.5px;
 }
 
-.topInfoTitle {
-  font-size: 26px;
-  font-weight: 800;
+.sloganTitle {
+  font-size: 40px; /* Massive hero scale slogan! */
+  font-weight: 900;
+  color: #0A1B39; /* Deep Navy */
+  letter-spacing: -2px;
+  line-height: 1.45;
+  margin: 0 0 20px 0;
+  word-break: keep-all;
+}
+
+.sloganRed {
+  color: #ef4444; /* Striking warning red */
+}
+
+.sloganDesc {
+  font-size: 19px; /* Expanded sub-slogan */
+  color: #334155;
+  line-height: 1.7;
+  font-weight: 700;
+  margin: 0 0 35px 0;
+  word-break: keep-all;
+}
+
+.topInfoBadge {
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 16px;
+  padding: 20px 35px;
+  font-size: 15.5px;
+  color: #475569;
+  font-weight: 600;
+  line-height: 1.6;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(10, 27, 57, 0.02);
+}
+
+.sloganPhone {
   color: #0A1B39;
-  margin: 0 0 10px 0;
-  letter-spacing: -0.8px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .topInfoDesc {
-  font-size: 14.5px;
+  font-size: 13.5px;
   color: #64748b;
-  margin: 0;
+  font-weight: 600;
 }
 
 /* ====================================================
@@ -56,9 +98,9 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.headerTextCol {
+.headerTextColFull {
   flex: 1;
-  max-width: 70%;
+  width: 100%;
 }
 
 .kicker {
@@ -79,41 +121,11 @@
 }
 
 .subtitle {
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.6;
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.65;
   margin: 0;
   word-break: keep-all;
-}
-
-.headerDescCol {
-  flex-shrink: 0;
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.highlightText {
-  font-size: 13.5px;
-  color: #ef4444; /* Alert red */
-  line-height: 1.5;
-}
-
-.highlightText strong {
-  color: #fee2e2;
-  font-weight: 800;
-}
-
-.badgeText {
-  font-size: 12.5px;
-  color: rgba(255, 255, 255, 0.95);
-  line-height: 1.4;
-}
-
-.badgeText span {
-  color: #fca5a5;
-  font-weight: 700;
 }
 
 /* ====================================================

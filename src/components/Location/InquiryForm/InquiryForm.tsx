@@ -95,31 +95,30 @@ const InquiryForm = () => {
     <section className={styles.section} id="inquiry">
       <div className={styles.container}>
         
-        {/* Top Header Text (Left side of the user's screenshot) */}
+        {/* Top Header Text & Slogans (Large and Prominent as requested!) */}
         <div className={styles.topBannerText}>
-          <div className={styles.topInfoTag}>법무법인 플로우 상담신청</div>
-          <h3 className={styles.topInfoTitle}>문의내용 남겨주시면 검토 후 02-517-8300으로 회신드립니다.</h3>
-          <p className={styles.topInfoDesc}>(※ 24시간 상담 가능 / 영업일 기준 1시간 내 회신 / 주말 방문상담 가능)</p>
+          <span className={styles.topInfoTag}>법무법인 플로우 상담신청</span>
+          <h2 className={styles.sloganTitle}>
+            <span className={styles.sloganRed}>혼자 감당하지 마세요.</span> <br />
+            플로우가 처음부터 끝까지, 당신 편입니다.
+          </h2>
+          <p className={styles.sloganDesc}>
+            복잡한 고민, 지금 바로 남겨주세요. 검토 후 영업일 기준 1시간 이내에 회신드립니다.
+          </p>
+          <div className={styles.topInfoBadge}>
+            문의내용 남겨주시면 검토 후 <strong className={styles.sloganPhone}>02-517-8300</strong>으로 회신드립니다. 
+            <span className={styles.topInfoDesc}>(※ 24시간 상담 가능 / 영업일 기준 1시간 내 회신 / 주말 방문상담 가능)</span>
+          </div>
         </div>
 
         {/* Brand Background Heading Board */}
         <div className={styles.formHeaderBg}>
-          <div className={styles.headerTextCol}>
+          <div className={styles.headerTextColFull}>
             <span className={styles.kicker}>PROFESSIONAL LEGAL SHIELD</span>
             <h2 className={styles.title}>신속한 법률 지원, 변호사와 바로 연결됩니다.</h2>
             <p className={styles.subtitle}>
               하자소송의 정밀한 분석부터 전략적 대응까지, 법무법인 플로우가 귀하의 권리를 단단하게 보호합니다.
             </p>
-          </div>
-          <div className={styles.headerDescCol}>
-            <div className={styles.highlightText}>
-              혼자 감당하지 마세요.<br />
-              <strong>플로우가 처음부터 끝까지, 당신 편입니다.</strong>
-            </div>
-            <div className={styles.badgeText}>
-              복잡한 고민, 지금 바로 남겨주세요.<br />
-              <span>검토 후 영업일 기준 1시간 이내에 회신드립니다.</span>
-            </div>
           </div>
         </div>
 

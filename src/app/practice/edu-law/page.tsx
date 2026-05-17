@@ -75,15 +75,15 @@ export default function EduLawPage() {
               
               <div className={styles.heroLeft}>
                 <h1 className={styles.heroMainTitle}>
-                  에듀 특화,<br />
-                  <span className={styles.goldHighlight}>ONE-STOP</span> 종합 법률서비스
+                  학원 문제는<br />
+                  <span className={styles.goldHighlight}>학원전문변호사</span>에게
                 </h1>
                 <div className={styles.heroSubtitles}>
-                  <span className={styles.titleSub1}>학원 문제는 학원전문변호사에게</span>
-                  <span className={styles.titleSub2}>학원업계 특성에 기반한 맞춤 솔루션!</span>
+                  <span className={styles.titleSub1}>학원업계 특성에 기반한 맞춤 솔루션!</span>
+                  <span className={styles.titleSub2}>학원전문변호사라 가능합니다. 법무법인 플로우이기에 가능합니다.</span>
                 </div>
                 <p className={styles.heroDescription}>
-                  학원전문변호사라 가능합니다. 법무법인 플로우이기에 가능합니다.
+                  학원 설립 및 인허가, 강사 고용·계약서 분쟁, 학원 권리금 및 동업 갈등부터 지식재산권 보호까지 학원 운영의 전 과정에서 발생하는 법률 리스크를 선제적으로 진단하고 해결합니다. 학원 산업의 독특한 생태계와 메커니즘을 완벽하게 이해하는 전담 TF가 의뢰인의 소중한 교육 사업을 안전하게 조력합니다.
                 </p>
               </div>
 

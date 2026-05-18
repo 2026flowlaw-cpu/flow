@@ -778,12 +778,12 @@ const centerData: Record<string, {
   'voice-phishing': {
     title: '보이스피싱',
     subtitle: '보이스피싱 전담센터',
-    heroTitleLine1: '보이스피싱 혐의 연루,',
-    heroTitleLine2: '단순 가담 및 무고함을 적극 소명해야 합니다.',
+    heroTitleLine1: '모르고 연루됐다면,',
+    heroTitleLine2: '불기소·무죄 가능성은 있습니다.',
     heroDescLines: [
-      '단순 전달책·인출책 등 억울하게 연루된 보이스피싱 사건',
-      '무혐의 입증과 피해 최소화를 위한 명확한 법리 구성',
-      '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+      '단순 가담·계좌 제공·심부름만 했는데 수사를 받고 있다면',
+      '법무법인 플로우가 수사 초기부터',
+      '사건 구조와 가담 정도를 분석해 대응 전략을 함께 설계합니다.'
     ],
     promiseTitle: '기망과 억울함의 법리적 소명',
     counters: [
@@ -1394,7 +1394,7 @@ export default function CriminalCenterPage() {
                 </div>
                 <h1 className={styles.heroMainTitle} style={{ fontSize: '42px', lineHeight: '1.4', marginBottom: '24px' }}>
                   {data.heroTitleLine1}<br />
-                  <span style={{ color: centerKey === 'dui-traffic' ? '#c5a059' : undefined }}>{data.heroTitleLine2}</span>
+                  <span style={{ color: centerKey === 'dui-traffic' ? '#c5a059' : (centerKey === 'voice-phishing' ? '#ef4444' : undefined) }}>{data.heroTitleLine2}</span>
                 </h1>
                 <div className={styles.heroDescription} style={{ fontSize: '18px', lineHeight: '1.8', color: '#cbd5e1' }}>
                   {data.heroDescLines.map((line, idx) => (

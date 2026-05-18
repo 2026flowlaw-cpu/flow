@@ -1579,12 +1579,13 @@ const centerData: Record<string, {
   },
   'general': {
     title: '일반 형사',
-    subtitle: '일반 형사 전담센터',
-    heroTitleLine1: '폭행·상해·명예훼손 등 형사 사건,',
-    heroTitleLine2: '신속한 합의와 경찰 단계 종결이 최선입니다.',
+    subtitle: '일반형사 피의자 전담센터',
+    heroTitleLine1: '첫 경찰 조사 대응이,',
+    heroTitleLine2: '불기소와 기소를 가릅니다.',
     heroDescLines: [
-      '폭행·상해·명예훼손 등 일상에서 발생하는 모든 형사 사건',
-      '가장 빠르고 정확한 법률 솔루션 제공',
+      '폭행·스토킹·협박·상해·업무방해·공무집행방해,',
+      '명예훼손·정보통신망법위반·아동학대까지',
+      '수사 초기 대응이 중요한 형사사건 전 영역에서',
       '법무법인 플로우가 처음부터 끝까지 함께합니다.'
     ],
     promiseTitle: '빠르고 완벽한 일상으로의 복귀',
@@ -1752,7 +1753,7 @@ export default function CriminalCenterPage() {
                 </div>
                 <h1 className={styles.heroMainTitle} style={{ fontSize: '42px', lineHeight: '1.4', marginBottom: '24px' }}>
                   {data.heroTitleLine1}<br />
-                  <span style={{ color: centerKey === 'dui-traffic' ? '#c5a059' : (centerKey === 'voice-phishing' || centerKey === 'economic' || centerKey === 'construction' || centerKey === 'juvenile' ? '#ef4444' : undefined) }}>{data.heroTitleLine2}</span>
+                  <span style={{ color: centerKey === 'dui-traffic' ? '#c5a059' : (centerKey === 'voice-phishing' || centerKey === 'economic' || centerKey === 'construction' || centerKey === 'juvenile' || centerKey === 'general' ? '#ef4444' : undefined) }}>{data.heroTitleLine2}</span>
                 </h1>
                 <div className={styles.heroDescription} style={{ fontSize: '18px', lineHeight: '1.8', color: '#cbd5e1' }}>
                   {data.heroDescLines.map((line, idx) => (

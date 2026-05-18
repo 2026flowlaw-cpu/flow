@@ -90,6 +90,26 @@ export default function AdminDashboardMainPage() {
   });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const startStr = dateRangeObj.from ? format(dateRangeObj.from, 'yyyy-MM-dd') : '7daysAgo';
+  const endStr = dateRangeObj.to ? format(dateRangeObj.to, 'yyyy-MM-dd') : 'today';
+
+  // SWR로 GA4 API 연동
+  const { data: ga4Res, error: ga4Error, isValidating: ga4Validating, mutate: mutateGa4 } = useSWR(
+    `/api/ga4?startDate=${startStr}&endDate=${endStr}`,
+    fetcher,
+    { revalidateOnFocus: false }
+  );
+
+  const isConfigured = ga4Res?.configured !== false;
+  const isLive = ga4Res?.success && isConfigured;
+
+  // 실시간 데이터 또는 데모 데이터 폴백 설정
+  const activeStats = isLive ? ga4Res.stats : mockStats;
+  const analyticsData = isLive ? ga4Res.data : mockAnalyticsData;
+  const topSourceNames = (analyticsData.topSourceNames && analyticsData.topSourceNames.length > 0)
+    ? analyticsData.topSourceNames 
+    : ['(direct)', 'ig', 'localhost:3000', 'threads'];
+
   const currentRange = useMemo(() => {
     const start = dateRangeObj.from || new Date();
     const end = dateRangeObj.to || start;
@@ -224,42 +244,74 @@ export default function AdminDashboardMainPage() {
             <option>법무법인 일신 GA4</option>
           </select>
           <div className="status-badge" style={{ background: '#f8fafc' }}>
-            <span className="dot active"></span> 
-            GA4 연동 완료
+            <span className={`dot ${isLive ? 'active' : ''}`}></span> 
+            {isLive ? 'GA4 실시간 연동 완료' : 'GA4 연동 대기 (데모)'}
           </div>
-          <button className="btn-refresh">
-            데이터 업데이트
+          <button className="btn-refresh" onClick={() => mutateGa4()} disabled={ga4Validating}>
+            {ga4Validating ? '로딩 중...' : '데이터 업데이트'}
           </button>
         </div>
       </div>
+
+      {/* GA4 서비스 계정 연동 가이드 (환경 변수 누락 시에만 노출) */}
+      {!isConfigured && (
+        <div className="setup-guide-box glass-card">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+            <AlertCircle size={24} color="#d97706" />
+            <h4 style={{ margin: 0, fontSize: '17px', fontWeight: 700, color: '#92400e' }}>Google Analytics 4 (GA4) 서비스 계정 연동 가이드</h4>
+          </div>
+          <p style={{ margin: '0 0 16px 0', fontSize: '14px', color: '#b45309', lineHeight: 1.6 }}>
+            현재 페이지의 웹사이트 통계는 <strong>데모 데이터</strong>로 구성되어 있습니다. 아래 연동 절차를 완료하시면 법무법인 일신의 GA4 분석 데이터가 실시간으로 자동 수집됩니다!
+          </p>
+          <ol style={{ margin: 0, paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '13.5px', color: '#78350f', lineHeight: 1.5 }}>
+            <li>
+              <strong>구글 클라우드 서비스 계정 생성 및 비밀 키 다운로드</strong>:
+              <br />구글 클라우드 콘솔에 로그인한 뒤 서비스 계정을 생성하고, 해당 계정의 <strong>비밀 키를 JSON 형태</strong>로 만들어 컴퓨터에 안전하게 다운로드합니다.
+            </li>
+            <li>
+              <strong>GA4 속성에 서비스 계정 이메일 등록</strong>:
+              <br />다운로드한 JSON 파일에 적힌 <code>"client_email"</code> 주소를 복사합니다. 그 다음, 구글 애널리틱스 4(GA4) 관리자 페이지의 <strong>[속성 액세스 관리]</strong> 메뉴에서 해당 이메일을 <strong>뷰어(조회 권한)</strong>로 추가해 줍니다.
+            </li>
+            <li>
+              <strong>프로젝트 환경변수(.env.local) 설정</strong>:
+              <br />법무법인 일신 프로젝트 루트 폴더에 있는 <code>.env.local</code> 파일을 열고, 아래 변수 이름에 맞게 각각 발급받은 값을 입력해 주세요. (입력 후 로컬 서버를 재시작해야 반영됩니다.)
+              <pre style={{ background: '#1e293b', color: '#f8fafc', padding: '14px 20px', borderRadius: '12px', marginTop: '10px', fontSize: '12px', fontFamily: 'monospace', overflowX: 'auto', border: '1px solid rgba(255,255,255,0.05)' }}>
+{`GA4_PROPERTY_ID="여기에_GA4_속성_ID_입력 (예: 401234567)"
+GOOGLE_CLIENT_EMAIL="여기에_다운로드한_JSON의_client_email_주소_입력"
+GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 (-----BEGIN PRIVATE KEY-----\\n... 로 시작하는 값)"`}
+              </pre>
+            </li>
+          </ol>
+        </div>
+      )}
 
       {/* 3. 웹사이트 지표 (4카드) */}
       <div className="stats-grid">
         <div className="stat-card glass-card">
           <label>선택 기간 방문자</label>
           <div className="value-group">
-            <h2 className="live-value">{mockStats.activeUsers.toLocaleString()}</h2>
+            <h2 className={isLive ? "live-value" : ""}>{activeStats.activeUsers.toLocaleString()}</h2>
           </div>
           <p className="desc">사용자 합계</p>
         </div>
         <div className="stat-card glass-card">
           <label>선택 기간 세션</label>
           <div className="value-group">
-            <h2>{mockStats.totalSessions.toLocaleString()}</h2>
+            <h2>{activeStats.totalSessions.toLocaleString()}</h2>
           </div>
           <p className="desc">방문 횟수</p>
         </div>
         <div className="stat-card glass-card">
           <label>평균 세션 시간</label>
           <div className="value-group">
-            <h2>{mockStats.avgSessionTime}</h2>
+            <h2>{activeStats.avgSessionTime}</h2>
           </div>
           <p className="desc">전체 평균</p>
         </div>
         <div className="stat-card glass-card">
           <label>이탈률 (Bounce Rate)</label>
           <div className="value-group">
-            <h2>{mockStats.bounceRate}</h2>
+            <h2>{activeStats.bounceRate}</h2>
           </div>
           <p className="desc">낮을수록 긍정적</p>
         </div>
@@ -272,7 +324,7 @@ export default function AdminDashboardMainPage() {
           <h3>시간 경과에 따른 매체별 세션수</h3>
           <div className="chart-container">
             <ResponsiveContainer width="100%" height={320}>
-              <LineChart data={mockAnalyticsData.sourceTrend}>
+              <LineChart data={analyticsData.sourceTrend}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.05)" />
                 <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} />
                 <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} />
@@ -281,7 +333,7 @@ export default function AdminDashboardMainPage() {
                   itemStyle={{ color: '#fff' }}
                 />
                 <Legend iconType="circle" wrapperStyle={{ paddingTop: '20px' }} />
-                {mockAnalyticsData.topSourceNames.map((name: string, i: number) => {
+                {topSourceNames.map((name: string, i: number) => {
                   const colors = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#a855f7'];
                   return (
                     <Line 
@@ -307,7 +359,7 @@ export default function AdminDashboardMainPage() {
             <ResponsiveContainer width="100%" height={250}>
               <PieChart>
                 <Pie
-                  data={mockAnalyticsData.trafficSources}
+                  data={analyticsData.trafficSources}
                   cx="50%"
                   cy="50%"
                   innerRadius={60}
@@ -315,7 +367,7 @@ export default function AdminDashboardMainPage() {
                   paddingAngle={5}
                   dataKey="value"
                 >
-                  {mockAnalyticsData.trafficSources.map((entry: any, index: number) => (
+                  {analyticsData.trafficSources.map((entry: any, index: number) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
@@ -323,7 +375,7 @@ export default function AdminDashboardMainPage() {
               </PieChart>
             </ResponsiveContainer>
             <div className="pie-legend">
-              {mockAnalyticsData.trafficSources.map((source: any, i: number) => (
+              {analyticsData.trafficSources.map((source: any, i: number) => (
                 <div key={i} className="legend-item">
                   <span className="dot" style={{ backgroundColor: source.color }}></span>
                   <span className="name">{source.name}</span>
@@ -348,7 +400,7 @@ export default function AdminDashboardMainPage() {
               </tr>
             </thead>
             <tbody>
-              {mockAnalyticsData.topPages.map((page: any, i: number) => (
+              {analyticsData.topPages.map((page: any, i: number) => (
                 <tr key={i}>
                   <td className="page-path">{page.page}</td>
                   <td className="bold">{page.views.toLocaleString()}</td>
@@ -420,7 +472,7 @@ export default function AdminDashboardMainPage() {
             </tr>
           </thead>
           <tbody>
-            {mockAnalyticsData.sourcesDetailed.map((src: any, i: number) => (
+            {analyticsData.sourcesDetailed.map((src: any, i: number) => (
               <tr key={i}>
                 <td className="source-name">🔗 {src.name}</td>
                 <td className="bold">{src.users.toLocaleString()}</td>
@@ -490,6 +542,7 @@ export default function AdminDashboardMainPage() {
         .status-badge .dot { width: 8px; height: 8px; background: #f59e0b; border-radius: 50%; box-shadow: 0 0 10px #f59e0b; }
         .status-badge .dot.active { background: #10b981; box-shadow: 0 0 8px #22c55e; }
         .btn-refresh { padding: 0.6rem 1.2rem; background: #6366f1; border: none; border-radius: 12px; color: white; font-weight: 700; cursor: pointer; font-size: 0.9rem; box-shadow: 0 4px 6px -1px rgba(99,102,241,0.2); }
+        .btn-refresh:disabled { background: #a5b4fc; cursor: not-allowed; }
         
         .property-selector { 
           padding: 0.6rem 1rem; 
@@ -502,6 +555,15 @@ export default function AdminDashboardMainPage() {
           cursor: pointer;
           font-size: 0.9rem;
           box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+        }
+
+        .setup-guide-box {
+          background: #fffbeb;
+          border: 1.5px solid #fde68a;
+          border-radius: 20px;
+          padding: 26px 32px;
+          margin-bottom: 30px;
+          box-shadow: 0 10px 15px -3px rgba(217, 119, 6, 0.03);
         }
 
         .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }

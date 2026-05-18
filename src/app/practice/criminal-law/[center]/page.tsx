@@ -1103,36 +1103,37 @@ const centerData: Record<string, {
   },
   'economic': {
     title: '경제 범죄',
-    subtitle: '경제 범죄 전담센터',
-    heroTitleLine1: '사기·횡령·배임 혐의,',
-    heroTitleLine2: '자금 흐름의 철저한 규명과 입증이 해법입니다.',
+    subtitle: '경제범죄 피의자 전담센터',
+    heroTitleLine1: '돈을 돌려주지 못했다고',
+    heroTitleLine2: '모두 사기죄가 되는 것은 아닙니다.',
     heroDescLines: [
-      '사기·횡령·배임 등 복잡한 자금 흐름 사건',
-      '정밀한 분석과 증거 수집으로 혐의를 완전히 탈피',
-      '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+      '사기·횡령·배임·투자사기·코인사기·리딩방까지.',
+      '경제범죄 사건은 단순 손해 발생만으로 판단되지 않습니다.',
+      '핵심은 계약 당시 실제 이행 의사와 자금 사용 경위입니다.',
+      '법무법인 플로우가 수사 초기부터 끝까지 함께합니다.'
     ],
-    promiseTitle: '금융과 자금의 흐름을 꿰뚫는 실력',
+    promiseTitle: '수치가 증명하는 실력',
     counters: [
       {
         id: 0,
-        target: 700,
-        suffix: '건+',
-        title: '사기·횡령·배임 수행 건수',
-        desc: '특경법 고액 사기부터 기업 횡령 및 업무상 배임 사건 집중'
+        target: 300,
+        suffix: '+',
+        title: '경제범죄 수행 건수',
+        desc: ''
       },
       {
         id: 1,
         target: 0,
-        suffix: '증적 분석',
-        title: '회계 증적 분석',
-        desc: '자금의 실질적 흐름 and 용처를 정밀 추적하여 부당이득 없음 입증'
+        suffix: '당일',
+        title: '긴급 대응 가능',
+        desc: ''
       },
       {
         id: 2,
-        target: 100,
-        suffix: '%',
-        title: '기망 행위 부존재 입증',
-        desc: '정당한 비즈니스 결정이었음을 논리적으로 소명하여 혐의 탈피'
+        target: 0,
+        suffix: '24시간',
+        title: '구속 즉시 대응',
+        desc: ''
       }
     ],
     promises: [

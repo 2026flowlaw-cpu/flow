@@ -83,6 +83,47 @@ export default function AdminDashboardMainPage() {
         ))}
       </div>
 
+      {/* 퍼널 섹션 추가 (RoasOne 디자인 적용) */}
+      <div className="funnel-section" style={{ marginBottom: '50px' }}>
+        {/* 홈페이지 유입 및 구매 전환 퍼널 */}
+        <div style={{ background: 'white', borderRadius: '32px', padding: '45px', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.03)', border: '1px solid #edf2f7' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1rem' }}>
+            <h3 style={{ margin: 0, fontSize: '24px', fontWeight: 600, color: '#0A1B39' }}>홈페이지 유입 및 전환 퍼널 ⓘ</h3>
+            <span style={{ fontSize: '0.85rem', color: '#64748b', background: '#f1f5f9', padding: '4px 10px', borderRadius: '6px', fontWeight: 600 }}>GA4 연동 대기중</span>
+          </div>
+          <div className="funnel-wrapper" style={{ marginTop: '2rem' }}>
+            {[
+              { name: '홈페이지 방문', count: 1250, color: '#e0e7ff', drop: 0 },
+              { name: '상세페이지 조회', count: 980, color: '#c7d2fe', drop: 21.6 },
+              { name: '상담 안내 확인', count: 420, color: '#a5b4fc', drop: 57.1 },
+              { name: '전화/폼 클릭', count: 180, color: '#818cf8', drop: 57.1 },
+              { name: '상담 접수 완료', count: totalCount, color: '#6366f1', drop: 0 },
+              { name: '상담 및 수임완료', count: completedCount, color: '#4f46e5', drop: 0 },
+            ].map((step, idx) => {
+              const maxCount = 1250;
+              const width = Math.max((step.count / maxCount) * 100, 1);
+              return (
+                <div className="funnel-row" key={idx}>
+                  <div className="funnel-label">
+                    <div className="label-top">
+                      <span className="name">{step.name}</span>
+                      <span className="percent">{idx === 0 ? '100%' : `${width.toFixed(1)}%`}</span>
+                    </div>
+                    <span className="count">{step.count.toLocaleString()}건</span>
+                  </div>
+                  <div className="funnel-bar-wrapper">
+                    <div className="funnel-bar" style={{ width: `${width}%`, backgroundColor: step.color }}></div>
+                    {idx > 0 && step.drop !== undefined && Number(step.drop) > 0 && (
+                      <span className="funnel-drop">이탈률 {step.drop}%</span>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
       {/* 메인 섹션: 그래프 & 최근 내역 */}
       <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '40px' }}>
         

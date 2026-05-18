@@ -1371,13 +1371,13 @@ const centerData: Record<string, {
   },
   'juvenile': {
     title: '소년학폭',
-    subtitle: '소년학폭 전담센터',
-    heroTitleLine1: '학교폭력 및 소년사건,',
-    heroTitleLine2: '우리 아이의 미래를 위한 맞춤형 변론이 필요합니다.',
+    subtitle: '소년범죄·학교폭력 전담센터',
+    heroTitleLine1: '아이의 미래,',
+    heroTitleLine2: '지금 지켜야 합니다.',
     heroDescLines: [
-      '학교폭력위원회 대응부터 소년보호사건 전환까지',
-      '우리 아이의 미래가 걸린 일, 부모의 마음으로 변호',
-      '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+      '소년보호처분·학폭위·형사입건까지.',
+      '한 번의 사건이 아이의 진학·생활기록부·형사기록으로 이어지지 않도록',
+      '법무법인 플로우가 처음부터 끝까지 함께하겠습니다.'
     ],
     promiseTitle: '우리 아이의 미래와 소중한 평온 보호',
     counters: [
@@ -1655,7 +1655,7 @@ export default function CriminalCenterPage() {
                 </div>
                 <h1 className={styles.heroMainTitle} style={{ fontSize: '42px', lineHeight: '1.4', marginBottom: '24px' }}>
                   {data.heroTitleLine1}<br />
-                  <span style={{ color: centerKey === 'dui-traffic' ? '#c5a059' : (centerKey === 'voice-phishing' || centerKey === 'economic' || centerKey === 'construction' ? '#ef4444' : undefined) }}>{data.heroTitleLine2}</span>
+                  <span style={{ color: centerKey === 'dui-traffic' ? '#c5a059' : (centerKey === 'voice-phishing' || centerKey === 'economic' || centerKey === 'construction' || centerKey === 'juvenile' ? '#ef4444' : undefined) }}>{data.heroTitleLine2}</span>
                 </h1>
                 <div className={styles.heroDescription} style={{ fontSize: '18px', lineHeight: '1.8', color: '#cbd5e1' }}>
                   {data.heroDescLines.map((line, idx) => (

@@ -785,28 +785,29 @@ const centerData: Record<string, {
       '법무법인 플로우가 수사 초기부터',
       '사건 구조와 가담 정도를 분석해 대응 전략을 함께 설계합니다.'
     ],
-    promiseTitle: '기망과 억울함의 법리적 소명',
+    promiseTitle: '수치가 증명하는 실력',
+    promiseSubtitle: '초기 수사 단계부터 재판까지, 빈틈없는 방어와 치밀한 전략으로 의뢰인의 일상을 되찾아 드립니다.',
     counters: [
       {
         id: 0,
-        target: 600,
-        suffix: '건+',
+        target: 200,
+        suffix: '+',
         title: '보이스피싱 수행 건수',
         desc: '단순 전달책, 수거책, 계좌 대여 등 억울하게 가담된 사건'
       },
       {
         id: 1,
         target: 0,
-        suffix: '고의 조각',
-        title: '미필적 고의 조각 입증',
-        desc: '취업 사기, 고수익 알바 등 기망당한 사실을 객관적으로 입증'
+        suffix: '당일',
+        title: '긴급 대응 가능',
+        desc: '체포 즉시 긴급 출동 및 최초 조사 동석을 통한 수사 방향 통제'
       },
       {
         id: 2,
-        target: 100,
-        suffix: '%',
-        title: '불구속 상태 방어',
-        desc: '도주 및 증거 인멸 우려가 없음을 밝혀 불구속 상태 방어 확보'
+        target: 0,
+        suffix: '24시간',
+        title: '구속 즉시 대응',
+        desc: '체포 즉시 긴급 접견 및 구속 사유의 적법성 신속 대응'
       }
     ],
     promises: [

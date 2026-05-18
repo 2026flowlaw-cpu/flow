@@ -43,6 +43,17 @@ const mockAnalyticsData = {
   topLocations: [
     { city: 'Seoul', users: 10 },
     { city: 'Cheonan-si', users: 5 }
+  ],
+  sourcesDetailed: [
+    { name: '(direct) / (none)', users: 5, sessions: 14, engagedSessions: 7, engagementRate: '50.0%', avgTime: '6분 52초' },
+    { name: 'google / organic', users: 5, sessions: 6, engagedSessions: 5, engagementRate: '83.3%', avgTime: '0분 40초' },
+    { name: 'threads / social', users: 3, sessions: 5, engagedSessions: 1, engagementRate: '20.0%', avgTime: '0분 0초' },
+    { name: 'ig / social', users: 2, sessions: 3, engagedSessions: 0, engagementRate: '0.0%', avgTime: '0분 0초' },
+    { name: 'bing / organic', users: 1, sessions: 1, engagedSessions: 1, engagementRate: '100.0%', avgTime: '11분 16초' },
+    { name: 'google / cpc', users: 1, sessions: 1, engagedSessions: 0, engagementRate: '0.0%', avgTime: '0분 0초' },
+    { name: 'link.naver.com / referral', users: 1, sessions: 1, engagedSessions: 0, engagementRate: '0.0%', avgTime: '0분 0초' },
+    { name: 'localhost:3000 / referral', users: 1, sessions: 7, engagedSessions: 5, engagementRate: '71.4%', avgTime: '5분 6초' },
+    { name: 'naver / organic', users: 1, sessions: 18, engagedSessions: 9, engagementRate: '50.0%', avgTime: '0분 20초' }
   ]
 };
 
@@ -394,6 +405,39 @@ export default function AdminDashboardMainPage() {
         </div>
       </div>
 
+      {/* 6. 매체별 상세 리포트 */}
+      <div className="table-section glass-card wide-table-card" style={{ marginTop: '30px' }}>
+        <h3>매체별 유입 및 참여 리포트 상세 (Source / Medium)</h3>
+        <table className="analytics-table">
+          <thead>
+            <tr>
+              <th>유입 소스 / 매체</th>
+              <th>사용자</th>
+              <th>세션수</th>
+              <th>참여 세션</th>
+              <th>참여율</th>
+              <th>평균 참여시간</th>
+            </tr>
+          </thead>
+          <tbody>
+            {mockAnalyticsData.sourcesDetailed.map((src: any, i: number) => (
+              <tr key={i}>
+                <td className="source-name">🔗 {src.name}</td>
+                <td className="bold">{src.users.toLocaleString()}</td>
+                <td>{src.sessions.toLocaleString()}</td>
+                <td>{src.engagedSessions.toLocaleString()}</td>
+                <td>
+                  <span className={`badge ${parseFloat(src.engagementRate) > 50 ? 'high' : ''}`}>
+                    {src.engagementRate}
+                  </span>
+                </td>
+                <td>{src.avgTime}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
       <style jsx>{`
         .analytics-container { padding: 40px 60px; display: flex; flex-direction: column; gap: 2rem; color: #1e293b; background: #f8fafc; min-height: 100vh; font-family: Pretendard, sans-serif; }
         
@@ -488,6 +532,9 @@ export default function AdminDashboardMainPage() {
         .analytics-table td { padding: 18px 16px; border-bottom: 1px solid #edf2f7; font-size: 0.95rem; color: #1e293b; }
         .page-path { font-family: monospace; color: #4f46e5; }
         .bold { font-weight: 700; color: #0A1B39; }
+        .source-name { font-weight: 600; color: #1e293b; }
+        .badge { padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; background: #f1f5f9; color: #475569; display: inline-block; }
+        .badge.high { background: #dcfce7; color: #15803d; }
 
         .glass-card { background: white; border: 1px solid #edf2f7; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.02); }
       `}</style>

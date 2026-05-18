@@ -1205,8 +1205,8 @@ const centerData: Record<string, {
       }
     ],
     reviewsKicker: '실제 해결 사례',
-    reviewsTitle: '다양한 경제범죄 사건 해결 경험을 보유하고 있습니다',
-    reviewsDesc: '대형 경제 범죄부터 사기, 횡령, 배임 혐의까지, 철저한 법리 검토로 의뢰인의 권리를 수호해왔습니다.',
+    reviewsTitle: '유사 사건 대응 경험을 확인해보세요',
+    reviewsDesc: '투자사기 혐의부터 업무상 횡령까지,\n다양한 경제범죄 사건에서 의뢰인의 편에 섰습니다.',
     faqKicker: '자주 묻는 질문',
     faqTitle: '경제범죄 FAQ',
     faqSubtitle: '여러분의 고민을 속 시원하게 해결해 드립니다.',

@@ -15,7 +15,7 @@ interface PromiseCardItem {
   id: number;
   title: string;
   desc: string;
-  iconType?: 'lawyer' | 'tech' | 'consult' | 'twotrack' | 'auction' | 'custom' | 'shield' | 'scale' | 'certificate' | 'gavel';
+  iconType?: string;
 }
 
 interface DefectPromiseProps {

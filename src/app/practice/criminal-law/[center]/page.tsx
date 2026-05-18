@@ -19,6 +19,7 @@ const centerData: Record<string, {
   heroTitleLine2: string;
   heroDescLines: string[];
   promiseTitle: string;
+  promiseSubtitle?: string;
   counters: Array<{
     id: number;
     target: number;
@@ -28,15 +29,15 @@ const centerData: Record<string, {
   }>;
   promises: Array<{
     id: number;
-    iconType?: 'lawyer' | 'tech' | 'consult' | 'twotrack' | 'auction' | 'custom' | 'shield' | 'scale' | 'certificate' | 'gavel';
+    iconType?: string;
     title: string;
     desc: string;
   }>;
-  casesKicker: string;
-  casesTitle: string;
-  casesDescLines: string[];
-  difficultyTitle: string;
-  difficultySubtitle: string;
+  casesKicker?: string;
+  casesTitle?: string;
+  casesDescLines?: string[] | null;
+  difficultyTitle?: string | null;
+  difficultySubtitle?: string | null;
   customCases: Array<{
     id: number;
     label: string;
@@ -45,9 +46,9 @@ const centerData: Record<string, {
     engineeringSolution?: string;
     legalStrategy?: string;
   }>;
-  reviewsKicker: string;
-  reviewsTitle: string;
-  reviewsDesc: string;
+  reviewsKicker?: string;
+  reviewsTitle?: string;
+  reviewsDesc?: string;
   isVertical?: boolean;
   diagnosisLabel?: string;
   diagnosisEnglishLabel?: string;
@@ -62,14 +63,17 @@ const centerData: Record<string, {
     id: number;
     title: string;
     desc: string;
-    iconType: 'user' | 'shield' | 'screen' | 'info';
+    iconType: 'user' | 'shield' | 'screen' | 'info' | 'scale';
   }>;
   reviews?: Array<{
     id: number;
     content: string;
-    clientType: string;
-    location: string;
-    initial: string;
+    clientType?: string;
+    location?: string;
+    initial?: string;
+    author?: string;
+    title?: string;
+    region?: string;
   }>;
   faqs?: Array<{
     id: number;
@@ -85,7 +89,7 @@ const centerData: Record<string, {
   strategyKicker?: string;
   strategyTitle?: string;
   strategyDesc?: string;
-  strategyBottomText?: string;
+  strategyBottomText?: string | null;
   singleCardTitle?: string | null;
   singleCardEnglishTitle?: string | null;
   singleCardBadge?: string | null;
@@ -1548,7 +1552,7 @@ const centerData: Record<string, {
     ],
     faqKicker: '자주 묻는 질문',
     faqTitle: '소년범죄·학교폭력 FAQ',
-    faqDesc: '학부모님들이 가장 많이 물어보시는 질문을 모았습니다.',
+    faqSubtitle: '학부모님들이 가장 많이 물어보시는 질문을 모았습니다.',
     faqs: [
       {
         id: 1,
@@ -1788,7 +1792,7 @@ const centerData: Record<string, {
   }
 };
 
-function getStrategyIcon(iconType?: 'user' | 'shield' | 'screen' | 'info') {
+function getStrategyIcon(iconType?: 'user' | 'shield' | 'screen' | 'info' | 'scale') {
   switch (iconType) {
     case 'shield':
       return (
@@ -1871,7 +1875,7 @@ export default function CriminalCenterPage() {
         <DefectPromise 
           kicker="CRIMINAL DEFENSE"
           sectionTitle={data.promiseTitle}
-          sectionSubtitle="초기 수사 단계부터 재판까지, 빈틈없는 방어와 치밀한 전략으로 의뢰인의 일상을 되찾아 드립니다."
+          sectionSubtitle={data.promiseSubtitle || "초기 수사 단계부터 재판까지, 빈틈없는 방어와 치밀한 전략으로 의뢰인의 일상을 되찾아 드립니다."}
           counters={data.counters}
           promises={data.promises}
         />

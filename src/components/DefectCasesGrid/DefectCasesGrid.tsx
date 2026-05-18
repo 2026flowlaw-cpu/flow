@@ -15,9 +15,9 @@ interface CasePill {
 interface DefectCasesGridProps {
   kicker?: string;
   mainTitle?: string;
-  descLines?: string[];
-  difficultyTitle?: string;
-  difficultySubtitle?: string;
+  descLines?: string[] | null;
+  difficultyTitle?: string | null;
+  difficultySubtitle?: string | null;
   hideKicker?: boolean;
   customCases?: CasePill[];
   reportSubtitle?: string;

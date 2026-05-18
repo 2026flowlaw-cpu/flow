@@ -6,9 +6,12 @@ import styles from './DefectReviews.module.css';
 interface ReviewItem {
   id: number;
   content: string;
-  clientType: string;
-  location: string;
-  initial: string;
+  clientType?: string;
+  location?: string;
+  initial?: string;
+  author?: string;
+  title?: string;
+  region?: string;
 }
 
 interface DefectReviewsProps {
@@ -219,11 +222,11 @@ export default function DefectReviews({
                       {/* Client Info Footer */}
                       <div className={styles.cardBottom}>
                         <div className={styles.avatar}>
-                          {item.initial}
+                          {item.initial || item.author}
                         </div>
                         <div className={styles.clientDetails}>
-                          <span className={styles.clientName}>{item.clientType}</span>
-                          <span className={styles.clientSub}>{item.location}</span>
+                          <span className={styles.clientName}>{item.clientType || item.title}</span>
+                          <span className={styles.clientSub}>{item.location || item.region}</span>
                         </div>
                       </div>
 

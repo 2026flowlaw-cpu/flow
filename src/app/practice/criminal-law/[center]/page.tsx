@@ -993,12 +993,13 @@ const centerData: Record<string, {
   'construction': {
     title: '건설 형사',
     subtitle: '건설 형사 전담센터',
-    heroTitleLine1: '현장 사고 및 중대재해법 위반,',
-    heroTitleLine2: '기업과 대표이사의 책임 범위를 정밀 방어합니다.',
+    heroTitleLine1: '건설사건은',
+    heroTitleLine2: '실제 현장 구조를 알아야 대응할 수 있습니다.',
     heroDescLines: [
-      '산업안전보건법 위반·중대재해처벌법·건설현장 사고',
-      '기업과 대표를 지키는 강력한 형사 방어막 제공',
-      '법무법인 플로우가 처음부터 끝까지 함께합니다.'
+      '건설 사건은 계약서만으로 판단되지 않습니다.',
+      '실제 시공 구조·공정 흐름·현장 책임 체계를 이해해야',
+      '책임 범위와 형사 대응 방향이 달라집니다.',
+      '법무법인 플로우는 수사 초기부터 재판까지 함께합니다.'
     ],
     promiseTitle: '산업 현장의 안전과 대표자 보호',
     counters: [
@@ -1557,7 +1558,7 @@ export default function CriminalCenterPage() {
                 </div>
                 <h1 className={styles.heroMainTitle} style={{ fontSize: '42px', lineHeight: '1.4', marginBottom: '24px' }}>
                   {data.heroTitleLine1}<br />
-                  <span style={{ color: centerKey === 'dui-traffic' ? '#c5a059' : (centerKey === 'voice-phishing' || centerKey === 'economic' ? '#ef4444' : undefined) }}>{data.heroTitleLine2}</span>
+                  <span style={{ color: centerKey === 'dui-traffic' ? '#c5a059' : (centerKey === 'voice-phishing' || centerKey === 'economic' || centerKey === 'construction' ? '#ef4444' : undefined) }}>{data.heroTitleLine2}</span>
                 </h1>
                 <div className={styles.heroDescription} style={{ fontSize: '18px', lineHeight: '1.8', color: '#cbd5e1' }}>
                   {data.heroDescLines.map((line, idx) => (

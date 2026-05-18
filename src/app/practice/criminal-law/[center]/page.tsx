@@ -1001,28 +1001,28 @@ const centerData: Record<string, {
       '책임 범위와 형사 대응 방향이 달라집니다.',
       '법무법인 플로우는 수사 초기부터 재판까지 함께합니다.'
     ],
-    promiseTitle: '산업 현장의 안전과 대표자 보호',
+    promiseTitle: '수치가 증명하는 실력',
     counters: [
       {
         id: 0,
-        target: 400,
-        suffix: '건+',
-        title: '건설·산업 사건 수행 건수',
-        desc: '산업안전보건법 및 중대재해처벌법 위반 사건 집중 대응'
+        target: 200,
+        suffix: '+',
+        title: '건설형사 수행 건수',
+        desc: '건설 현장의 특수성과 하도급·기성 분쟁 연계 형사 사건 전문 대응'
       },
       {
         id: 1,
-        target: 0,
-        suffix: '안전 진단',
-        title: '안전체계 구축 입증',
-        desc: '현장 안전 관리 체계 구축 및 실제 이행 여부를 과학적으로 소명'
+        target: 15,
+        suffix: '년+',
+        title: '건설형사 전담 경력',
+        desc: '현장 실무 구조를 꿰뚫고 있는 베테랑 변호사들의 전담 변호 체계'
       },
       {
         id: 2,
-        target: 100,
-        suffix: '%',
-        title: '대표이사 구속 방어',
-        desc: '대표이사의 과실 책임을 정밀 분리하여 형사 책임 최소화'
+        target: 24,
+        suffix: '시간',
+        title: '긴급 대응 가능',
+        desc: '건설 현장 인명 사고, 압수수색 발생 즉시 변호인 즉각 현장 파견'
       }
     ],
     promises: [

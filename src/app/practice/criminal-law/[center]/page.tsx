@@ -1782,6 +1782,9 @@ const centerData: Record<string, {
         initial: '정'
       }
     ],
+    verdictKicker: '실제 해결 사례',
+    verdictTitle: '비슷한 사건, 이미 해결 경험이 있습니다.',
+    verdictDesc: '폭행·공무집행방해·스토킹부터 아동학대까지,\n다양한 일반형사 사건에서 의뢰인의 편에 섰습니다.',
   }
 };
 

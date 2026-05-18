@@ -1588,28 +1588,28 @@ const centerData: Record<string, {
       '수사 초기 대응이 중요한 형사사건 전 영역에서',
       '법무법인 플로우가 처음부터 끝까지 함께합니다.'
     ],
-    promiseTitle: '빠르고 완벽한 일상으로의 복귀',
+    promiseTitle: '수치가 증명하는 실력',
     counters: [
       {
         id: 0,
-        target: 1500,
-        suffix: '건+',
-        title: '일반 형사 수행 건수',
-        desc: '폭행, 상해, 명예훼손 등 일상 생활 속 다양한 형사 고소 사건'
+        target: 800,
+        suffix: '+',
+        title: '일반형사 수행 건수',
+        desc: ''
       },
       {
         id: 1,
         target: 0,
-        suffix: '합의 중재',
-        title: '신속 합의 중재',
-        desc: '감정이 격해진 당사자들을 대신해 원만한 합의와 처벌불원 도출'
+        suffix: '당일',
+        title: '긴급 대응 가능',
+        desc: ''
       },
       {
         id: 2,
-        target: 100,
-        suffix: '%',
-        title: '기소 전 빠른 종결',
-        desc: '경찰 단계에서 혐의 없음을 입증하여 기소 전 빠른 종결 도모'
+        target: 10,
+        suffix: '년+',
+        title: '형사 전담 경력',
+        desc: ''
       }
     ],
     promises: [

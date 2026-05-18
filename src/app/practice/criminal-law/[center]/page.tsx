@@ -1140,26 +1140,20 @@ const centerData: Record<string, {
       {
         id: 0,
         iconType: 'shield',
-        title: '자금 흐름 추적 방어',
-        desc: '회계/재무 정밀 분석을 통해 개인적 편취 및 불법영득의사가 없음을 입증'
+        title: '사기 고의 부재 입증',
+        desc: '단순 채무불이행과 사기 혐의 구별 전략'
       },
       {
         id: 1,
         iconType: 'scale',
-        title: '수사 초기 즉시 대응',
-        desc: '첫 고소장 분석을 통한 고소인의 허위 주장 규명 및 방어 논리 선제 수립'
+        title: '수사 초기 즉시 개입',
+        desc: '압수수색·첫 진술 전 전략 수립'
       },
       {
         id: 2,
-        iconType: 'certificate',
-        title: '경영 판단 원칙 소명',
-        desc: '회사의 정상적인 투자 결정이었음을 증명하여 형사상 배임 혐의 완전 조각'
-      },
-      {
-        id: 3,
         iconType: 'gavel',
-        title: '경험 기반 전략 설계',
-        desc: '특경법 가중처벌 우회 및 금액 재산정을 통한 처벌 수위 대폭 경감 전략'
+        title: '구속 방지 대응',
+        desc: '구속 적부심·보석 절차 신속 검토'
       }
     ],
     casesKicker: '경제 범죄 특화 · 사기·횡령·배임 정밀 대응 솔루션',

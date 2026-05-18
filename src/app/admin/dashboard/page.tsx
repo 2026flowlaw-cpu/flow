@@ -1,27 +1,57 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import useSWR from 'swr';
 import { 
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer 
+  LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell
 } from 'recharts';
 import { 
-  MessageSquare, AlertCircle, CheckCircle2, 
-  TrendingUp, Calendar, ArrowRight, Phone, FileText, User, ChevronRight
+  MessageSquare, AlertCircle, CheckCircle2, Calendar, ChevronRight
 } from 'lucide-react';
 import Link from 'next/link';
+import { format, subDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth, subMonths } from 'date-fns';
+import { ko } from 'date-fns/locale';
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const visitorData = [
-  { name: '05.06', visitors: 150 },
-  { name: '05.07', visitors: 230 },
-  { name: '05.08', visitors: 210 },
-  { name: '05.09', visitors: 380 },
-  { name: '05.10', visitors: 320 },
-  { name: '05.11', visitors: 450 },
-  { name: '05.12', visitors: 410 },
-];
+type DatePreset = 'today' | 'yesterday' | 'this_week' | 'last_week' | 'recent_7_inc' | 'recent_7_exc' | 'this_month' | 'last_month' | 'recent_30_inc' | 'recent_30_exc' | 'recent_90' | 'custom';
+
+const mockAnalyticsData = {
+  sourceTrend: [
+    { date: '05.13', '(direct)': 8, 'ig': 4, 'localhost:3000': 4 },
+    { date: '05.14', '(direct)': 2, 'ig': 6, 'localhost:3000': 2 },
+    { date: '05.15', '(direct)': 2, 'ig': 6, 'localhost:3000': 1 },
+    { date: '05.16', '(direct)': 1, 'ig': 1 },
+    { date: '05.17', '(direct)': 1, 'ig': 1, 'threads': 3 },
+    { date: '05.18', '(direct)': 1, 'ig': 1, 'threads': 2 }
+  ],
+  topSourceNames: ['(direct)', 'ig', 'localhost:3000', 'threads'],
+  trafficSources: [
+    { name: 'google', value: 6, color: '#6366f1' },
+    { name: '(direct)', value: 5, color: '#818cf8' },
+    { name: 'threads', value: 3, color: '#a5b4fc' },
+    { name: 'ig', value: 2, color: '#c7d2fe' },
+    { name: 'bing', value: 1, color: '#e0e7ff' }
+  ],
+  topPages: [
+    { page: '/dashboard', views: 62, time: '0m 45s' },
+    { page: '/', views: 53, time: '0m 13s' },
+    { page: '/lawyers', views: 37, time: '1m 23s' }
+  ],
+  topLocations: [
+    { city: 'Seoul', users: 10 },
+    { city: 'Cheonan-si', users: 5 }
+  ]
+};
+
+const mockStats = {
+  activeUsers: 27,
+  totalSessions: 56,
+  avgSessionTime: '9분 58초',
+  bounceRate: '50.0%'
+};
 
 export default function AdminDashboardMainPage() {
   const { data: consultations } = useSWR('/api/consultations', fetcher);
@@ -35,39 +65,83 @@ export default function AdminDashboardMainPage() {
   const completedCount = isConsultArray ? consultations.filter((c: any) => c.status === '상담완료').length : 0;
   const totalPressCount = isPressArray ? pressReleases.length : 0;
 
-  const stats = [
+  const adminStats = [
     { label: '전체 상담 신청', value: totalCount, icon: MessageSquare, color: '#4f46e5' },
     { label: '언론보도 자료', value: totalPressCount, icon: Calendar, color: '#bd9d62' },
     { label: '현재 대기 중', value: pendingCount, icon: AlertCircle, color: '#ef4444' },
     { label: '상담 완료 건수', value: completedCount, icon: CheckCircle2, color: '#22c55e' },
   ];
 
+  const [datePreset, setDatePreset] = useState<DatePreset>('recent_7_inc');
+  const [dateRangeObj, setDateRangeObj] = useState<{ from: Date | undefined; to?: Date }>({
+    from: subDays(new Date(), 6),
+    to: new Date()
+  });
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const currentRange = useMemo(() => {
+    const start = dateRangeObj.from || new Date();
+    const end = dateRangeObj.to || start;
+    return { 
+      displayStr: `${format(start, 'yyyy.MM.dd.')} → ${format(end, 'yyyy.MM.dd.')}`
+    };
+  }, [dateRangeObj]);
+
+  const presetOptions = [
+    { value: 'today', label: '오늘' },
+    { value: 'yesterday', label: '어제' },
+    { value: 'this_week', label: '이번주' },
+    { value: 'last_week', label: '지난주' },
+    { value: 'recent_7_inc', label: '최근 7일(오늘 포함)' },
+    { value: 'recent_7_exc', label: '최근 7일(오늘 제외)' },
+    { value: 'this_month', label: '이번달' },
+    { value: 'last_month', label: '지난달' },
+    { value: 'recent_30_inc', label: '최근 30일(오늘 포함)' },
+    { value: 'recent_30_exc', label: '최근 30일(오늘 제외)' },
+    { value: 'recent_90', label: '최근 3개월(최대)' },
+  ];
+
+  const handlePresetClick = (preset: DatePreset) => {
+    setDatePreset(preset);
+    const today = new Date();
+    let start, end;
+    switch (preset) {
+      case 'today': start = today; end = today; break;
+      case 'yesterday': start = subDays(today, 1); end = subDays(today, 1); break;
+      case 'this_week': start = startOfWeek(today, { weekStartsOn: 1 }); end = today; break;
+      case 'last_week': start = startOfWeek(subDays(today, 7), { weekStartsOn: 1 }); end = endOfWeek(subDays(today, 7), { weekStartsOn: 1 }); break;
+      case 'recent_7_inc': start = subDays(today, 6); end = today; break;
+      case 'recent_7_exc': start = subDays(today, 7); end = subDays(today, 1); break;
+      case 'this_month': start = startOfMonth(today); end = today; break;
+      case 'last_month': start = startOfMonth(subMonths(today, 1)); end = endOfMonth(subMonths(today, 1)); break;
+      case 'recent_30_inc': start = subDays(today, 29); end = today; break;
+      case 'recent_30_exc': start = subDays(today, 30); end = subDays(today, 1); break;
+      case 'recent_90': start = subDays(today, 89); end = today; break;
+      default: start = subDays(today, 6); end = today;
+    }
+    setDateRangeObj({ from: start, to: end });
+    setIsDropdownOpen(false);
+  };
+
   return (
-    <div style={{ padding: '40px 60px', background: '#f8fafc', minHeight: '100vh', fontFamily: 'Pretendard, sans-serif' }}>
-      {/* 상단 헤더 섹션 */}
-      <div style={{ marginBottom: '50px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
-          <h1 style={{ fontSize: '36px', fontWeight: 600, color: '#0A1B39', marginBottom: '10px', letterSpacing: '-0.02em' }}>
-            실시간 운영 현황 <span style={{ color: '#bd9d62', fontSize: '24px', fontWeight: 400, marginLeft: '10px' }}>Dashboard</span>
-          </h1>
-          <p style={{ color: '#64748b', fontSize: '16px', fontWeight: 400 }}>법무법인 플로우의 유입 통계 및 상담 현황을 한눈에 관리합니다.</p>
+    <div className="analytics-container">
+      {/* 1. 실시간 운영 현황 헤더 & 운영 지표 */}
+      <div className="analytics-header">
+        <div className="title-area">
+          <h1>실시간 운영 현황 <span className="sub-title">Dashboard</span></h1>
+          <p>법무법인 일신의 유입 통계 및 상담 현황을 한눈에 관리합니다.</p>
         </div>
-        <div style={{ display: 'flex', gap: '15px' }}>
-          <div style={{ background: 'white', padding: '12px 24px', borderRadius: '16px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 8px #22c55e' }}></div>
-            <span style={{ fontSize: '14px', color: '#1e293b', fontWeight: 600 }}>시스템 정상 작동 중</span>
+        <div className="header-actions">
+          <div className="status-badge" style={{ background: 'white' }}>
+            <span className="dot active"></span> 
+            <span style={{ color: '#1e293b' }}>시스템 정상 작동 중</span>
           </div>
         </div>
       </div>
 
-      {/* 4분할 통계 카드 */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '30px', marginBottom: '50px' }}>
-        {stats.map((stat, i) => (
-          <div key={i} style={{ 
-            background: 'white', padding: '32px', borderRadius: '24px', 
-            boxShadow: '0 10px 15px -3px rgba(0,0,0,0.02)', border: '1px solid #edf2f7',
-            transition: 'transform 0.3s ease'
-          }}>
+      <div className="stats-grid">
+        {adminStats.map((stat, i) => (
+          <div key={i} className="stat-card glass-card">
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '24px' }}>
                 <div style={{ background: `${stat.color}10`, padding: '14px', borderRadius: '16px' }}>
                     <stat.icon size={26} color={stat.color} />
@@ -77,113 +151,230 @@ export default function AdminDashboardMainPage() {
                     <p style={{ fontSize: '13px', color: '#22c55e', fontWeight: 600 }}>+12.4% ↑</p>
                 </div>
             </div>
-            <p style={{ fontSize: '15px', color: '#64748b', fontWeight: 600, marginBottom: '6px' }}>{stat.label}</p>
-            <h3 style={{ fontSize: '34px', fontWeight: 600, color: '#0A1B39', letterSpacing: '-0.03em' }}>{stat.value}</h3>
+            <p className="desc" style={{ marginBottom: '6px' }}>{stat.label}</p>
+            <h3 style={{ fontSize: '34px', fontWeight: 600, color: '#0A1B39', margin: 0 }}>{stat.value}</h3>
           </div>
         ))}
       </div>
 
-      {/* 퍼널 섹션 추가 (RoasOne 디자인 적용) */}
-      <div className="funnel-section" style={{ marginBottom: '50px' }}>
-        {/* 홈페이지 유입 및 구매 전환 퍼널 */}
-        <div style={{ background: 'white', borderRadius: '32px', padding: '45px', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.03)', border: '1px solid #edf2f7' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1rem' }}>
-            <h3 style={{ margin: 0, fontSize: '24px', fontWeight: 600, color: '#0A1B39' }}>홈페이지 유입 및 전환 퍼널 ⓘ</h3>
-            <span style={{ fontSize: '0.85rem', color: '#64748b', background: '#f1f5f9', padding: '4px 10px', borderRadius: '6px', fontWeight: 600 }}>GA4 연동 대기중</span>
-          </div>
-          <div className="funnel-wrapper" style={{ marginTop: '2rem' }}>
-            {[
-              { name: '홈페이지 방문', count: 1250, color: '#e0e7ff', drop: 0 },
-              { name: '상세페이지 조회', count: 980, color: '#c7d2fe', drop: 21.6 },
-              { name: '상담 안내 확인', count: 420, color: '#a5b4fc', drop: 57.1 },
-              { name: '전화/폼 클릭', count: 180, color: '#818cf8', drop: 57.1 },
-              { name: '상담 접수 완료', count: totalCount, color: '#6366f1', drop: 0 },
-              { name: '상담 및 수임완료', count: completedCount, color: '#4f46e5', drop: 0 },
-            ].map((step, idx) => {
-              const maxCount = 1250;
-              const width = Math.max((step.count / maxCount) * 100, 1);
-              return (
-                <div className="funnel-row" key={idx}>
-                  <div className="funnel-label">
-                    <div className="label-top">
-                      <span className="name">{step.name}</span>
-                      <span className="percent">{idx === 0 ? '100%' : `${width.toFixed(1)}%`}</span>
+      <div style={{ height: '40px' }}></div>
+
+      {/* 2. 웹사이트 분석 섹션 헤더 */}
+      <div className="analytics-header">
+        <div className="title-area">
+          <h1 style={{ fontSize: '1.8rem' }}>실시간 웹사이트 분석</h1>
+          <p>GA4 데이터를 기반으로 한 사용자 행동 및 유입 경로 분석입니다.</p>
+        </div>
+        <div className="header-actions">
+          <div className="date-picker-wrapper">
+            <button className="date-display-btn" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+              {currentRange.displayStr} ▾
+            </button>
+            
+            {isDropdownOpen && (
+              <div className="date-dropdown-menu split-view">
+                <div className="preset-list">
+                  {presetOptions.map(opt => (
+                    <div key={opt.value} className={`dropdown-item ${datePreset === opt.value ? 'active' : ''}`} 
+                         onClick={() => handlePresetClick(opt.value as DatePreset)}>
+                      {opt.label}
                     </div>
-                    <span className="count">{step.count.toLocaleString()}건</span>
+                  ))}
+                </div>
+                <div className="calendar-panel">
+                  <div className="calendar-header-range">
+                    <div className="range-box">{dateRangeObj.from ? format(dateRangeObj.from, 'yyyy.MM.dd') : '시작일'}</div>
+                    <span className="arrow">→</span>
+                    <div className="range-box">{dateRangeObj.to ? format(dateRangeObj.to, 'yyyy.MM.dd') : '종료일'}</div>
                   </div>
-                  <div className="funnel-bar-wrapper">
-                    <div className="funnel-bar" style={{ width: `${width}%`, backgroundColor: step.color }}></div>
-                    {idx > 0 && step.drop !== undefined && Number(step.drop) > 0 && (
-                      <span className="funnel-drop">이탈률 {step.drop}%</span>
-                    )}
+                  
+                  <DayPicker
+                    mode="range"
+                    selected={dateRangeObj}
+                    onSelect={(range: any) => {
+                      setDatePreset('custom');
+                      setDateRangeObj(range || { from: undefined, to: undefined });
+                    }}
+                    locale={ko}
+                    numberOfMonths={1}
+                    className="custom-calendar"
+                  />
+                  
+                  <div className="calendar-footer">
+                    <button className="btn-cancel" onClick={() => setIsDropdownOpen(false)}>취소</button>
+                    <button className="btn-apply" onClick={() => setIsDropdownOpen(false)}>확인</button>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            )}
           </div>
+
+          <select className="property-selector">
+            <option>법무법인 일신 GA4</option>
+          </select>
+          <div className="status-badge" style={{ background: '#f8fafc' }}>
+            <span className="dot active"></span> 
+            GA4 연동 완료
+          </div>
+          <button className="btn-refresh">
+            데이터 업데이트
+          </button>
         </div>
       </div>
 
-      {/* 메인 섹션: 그래프 & 최근 내역 */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '40px' }}>
-        
-        {/* 방문자 통계 그래프 */}
-        <div style={{ background: 'white', padding: '45px', borderRadius: '32px', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.03)', border: '1px solid #edf2f7' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '45px' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: 600, color: '#0A1B39', display: 'flex', alignItems: 'center', gap: '10px' }}>
-               방문자 유입 분석 <span style={{ fontSize: '12px', color: '#bd9d62', fontWeight: 600, background: '#bd9d6215', padding: '4px 10px', borderRadius: '8px' }}>GA4 LIVE</span>
-            </h2>
+      {/* 3. 웹사이트 지표 (4카드) */}
+      <div className="stats-grid">
+        <div className="stat-card glass-card">
+          <label>선택 기간 방문자</label>
+          <div className="value-group">
+            <h2 className="live-value">{mockStats.activeUsers.toLocaleString()}</h2>
           </div>
-          <div style={{ width: '100%', height: '350px' }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={visitorData}>
-                <defs>
-                  <linearGradient id="colorVis" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.2}/>
-                    <stop offset="95%" stopColor="#4f46e5" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 13, fontWeight: 600}} dy={20} />
-                <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 13, fontWeight: 600}} />
+          <p className="desc">사용자 합계</p>
+        </div>
+        <div className="stat-card glass-card">
+          <label>선택 기간 세션</label>
+          <div className="value-group">
+            <h2>{mockStats.totalSessions.toLocaleString()}</h2>
+          </div>
+          <p className="desc">방문 횟수</p>
+        </div>
+        <div className="stat-card glass-card">
+          <label>평균 세션 시간</label>
+          <div className="value-group">
+            <h2>{mockStats.avgSessionTime}</h2>
+          </div>
+          <p className="desc">전체 평균</p>
+        </div>
+        <div className="stat-card glass-card">
+          <label>이탈률 (Bounce Rate)</label>
+          <div className="value-group">
+            <h2>{mockStats.bounceRate}</h2>
+          </div>
+          <p className="desc">낮을수록 긍정적</p>
+        </div>
+      </div>
+
+      {/* 4. 차트 레이아웃 */}
+      <div className="charts-main-grid">
+        {/* 매체별 유입 추이 차트 */}
+        <div className="chart-card glass-card wide">
+          <h3>시간 경과에 따른 매체별 세션수</h3>
+          <div className="chart-container">
+            <ResponsiveContainer width="100%" height={320}>
+              <LineChart data={mockAnalyticsData.sourceTrend}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.05)" />
+                <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} />
+                <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} />
                 <Tooltip 
-                    contentStyle={{ borderRadius: '20px', border: 'none', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.15)', padding: '15px' }} 
-                    itemStyle={{ fontWeight: 600, color: '#4f46e5' }}
+                  contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '12px', color: '#fff' }}
+                  itemStyle={{ color: '#fff' }}
                 />
-                <Area type="monotone" dataKey="visitors" stroke="#4f46e5" strokeWidth={5} fillOpacity={1} fill="url(#colorVis)" />
-              </AreaChart>
+                <Legend iconType="circle" wrapperStyle={{ paddingTop: '20px' }} />
+                {mockAnalyticsData.topSourceNames.map((name: string, i: number) => {
+                  const colors = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#a855f7'];
+                  return (
+                    <Line 
+                      key={name} 
+                      type="monotone" 
+                      dataKey={name} 
+                      stroke={colors[i % colors.length]} 
+                      strokeWidth={3} 
+                      dot={{ r: 4, strokeWidth: 2 }}
+                      activeDot={{ r: 6 }}
+                    />
+                  );
+                })}
+              </LineChart>
             </ResponsiveContainer>
           </div>
         </div>
 
-        {/* 엇갈린 배경색의 실시간 상담 리스트 */}
-        <div style={{ background: 'white', padding: '45px', borderRadius: '32px', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.03)', border: '1px solid #edf2f7' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '35px' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: 600, color: '#0A1B39' }}>최근 상담 접수</h2>
+        {/* 유입 경로 파이 차트 */}
+        <div className="chart-card glass-card">
+          <h3>트래픽 소스 비중</h3>
+          <div className="chart-container pie-container">
+            <ResponsiveContainer width="100%" height={250}>
+              <PieChart>
+                <Pie
+                  data={mockAnalyticsData.trafficSources}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={60}
+                  outerRadius={80}
+                  paddingAngle={5}
+                  dataKey="value"
+                >
+                  {mockAnalyticsData.trafficSources.map((entry: any, index: number) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+            <div className="pie-legend">
+              {mockAnalyticsData.trafficSources.map((source: any, i: number) => (
+                <div key={i} className="legend-item">
+                  <span className="dot" style={{ backgroundColor: source.color }}></span>
+                  <span className="name">{source.name}</span>
+                  <span className="val">{source.value.toLocaleString()}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 5. 테이블 레이아웃 (페이지 리포트, 최근상담) */}
+      <div className="tables-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
+        <div className="table-section glass-card">
+          <h3>인기 페이지 리포트</h3>
+          <table className="analytics-table">
+            <thead>
+              <tr>
+                <th>페이지 제목</th>
+                <th>조회수</th>
+                <th>평균 체류 시간</th>
+              </tr>
+            </thead>
+            <tbody>
+              {mockAnalyticsData.topPages.map((page: any, i: number) => (
+                <tr key={i}>
+                  <td className="page-path">{page.page}</td>
+                  <td className="bold">{page.views.toLocaleString()}</td>
+                  <td>{page.time}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="table-section glass-card" style={{ padding: '30px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px' }}>
+            <h3 style={{ margin: 0 }}>최근 상담 접수</h3>
             <Link href="/admin/consultations" style={{ 
                 fontSize: '14px', color: '#4f46e5', fontWeight: 600, textDecoration: 'none',
                 display: 'flex', alignItems: 'center', gap: '4px'
             }}>전체보기 <ChevronRight size={16} /></Link>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: '#f1f5f9', borderRadius: '24px', overflow: 'hidden', border: '1px solid #f1f5f9' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: '#f1f5f9', borderRadius: '16px', overflow: 'hidden' }}>
             {isConsultArray && consultations.length > 0 ? (
-              consultations.slice(0, 5).map((item: any, i: number) => (
+              consultations.slice(0, 4).map((item: any, i: number) => (
                 <div key={i} style={{ 
-                  padding: '25px 30px', 
-                  background: i % 2 === 0 ? '#ffffff' : '#f8fafc', // 엇갈린 배경색 적용
+                  padding: '18px 24px', 
+                  background: i % 2 === 0 ? '#ffffff' : '#f8fafc',
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center'
                 }}>
                   <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-                      <span style={{ fontWeight: 600, fontSize: '17px', color: '#1e293b' }}>{item.name}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px' }}>
+                      <span style={{ fontWeight: 600, fontSize: '15px', color: '#1e293b' }}>{item.name}</span>
                       <span style={{ 
-                          fontSize: '11px', padding: '3px 10px', borderRadius: '6px', fontWeight: 600,
+                          fontSize: '11px', padding: '3px 8px', borderRadius: '6px', fontWeight: 600,
                           background: item.status === '대기중' ? '#ef444415' : '#22c55e15',
                           color: item.status === '대기중' ? '#ef4444' : '#22c55e'
                       }}>{item.status}</span>
                     </div>
-                    <div style={{ display: 'flex', gap: '15px', fontSize: '13px', color: '#64748b', fontWeight: 600 }}>
+                    <div style={{ display: 'flex', gap: '10px', fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
                       <span>{item.case_type}</span>
                       <span style={{ color: '#cbd5e1' }}>|</span>
                       <span>{item.phone}</span>
@@ -191,26 +382,115 @@ export default function AdminDashboardMainPage() {
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <p style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 600 }}>{new Date(item.created_at).toLocaleDateString().slice(5)}</p>
-                    <p style={{ fontSize: '11px', color: '#cbd5e1', fontWeight: 400 }}>{new Date(item.created_at).toLocaleTimeString().slice(0, 5)}</p>
                   </div>
                 </div>
               ))
             ) : (
-              <div style={{ padding: '60px', textAlign: 'center', background: 'white' }}>
-                <p style={{ color: '#94a3b8', fontWeight: 600 }}>접수된 내역이 없습니다.</p>
+              <div style={{ padding: '40px', textAlign: 'center', background: 'white' }}>
+                <p style={{ color: '#94a3b8', fontWeight: 600, fontSize: '14px' }}>접수된 내역이 없습니다.</p>
               </div>
             )}
           </div>
-
-          <Link href="/admin/consultations" style={{ 
-            display: 'block', width: '100%', padding: '18px', marginTop: '30px',
-            borderRadius: '16px', background: '#0A1B39', color: 'white',
-            textAlign: 'center', textDecoration: 'none', fontWeight: 600, fontSize: '15px',
-            boxShadow: '0 10px 15px -3px rgba(10, 27, 57, 0.2)'
-          }}>상담 마스터 관리하기</Link>
         </div>
-
       </div>
+
+      <style jsx>{`
+        .analytics-container { padding: 40px 60px; display: flex; flex-direction: column; gap: 2rem; color: #1e293b; background: #f8fafc; min-height: 100vh; font-family: Pretendard, sans-serif; }
+        
+        .analytics-header { display: flex; justify-content: space-between; align-items: flex-end; }
+        .title-area h1 { font-size: 36px; font-weight: 600; margin-bottom: 10px; color: #0A1B39; letter-spacing: -0.02em; display: flex; align-items: center; }
+        .sub-title { color: #bd9d62; font-size: 24px; font-weight: 400; margin-left: 10px; }
+        .title-area p { color: #64748b; font-size: 16px; font-weight: 400; }
+        
+        .header-actions { display: flex; gap: 1rem; align-items: center; }
+        
+        .date-picker-wrapper { position: relative; }
+        .date-display-btn { background: white; color: #1e293b; padding: 0.6rem 1.2rem; border-radius: 12px; font-weight: 700; border: 1px solid rgba(0,0,0,0.05); cursor: pointer; min-width: 240px; text-align: left; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: all 0.2s; }
+        .date-display-btn:hover { background: #f8fafc; border-color: #6366f1; }
+        
+        .date-dropdown-menu.split-view { 
+          position: absolute; top: 110%; right: 0; background: white; border-radius: 16px; 
+          box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1); 
+          display: flex; z-index: 1000; overflow: hidden; border: 1px solid #e2e8f0; width: max-content;
+          color: #1e293b;
+        }
+        .preset-list { width: 180px; background: #f8fafc; border-right: 1px solid #e2e8f0; max-height: 450px; overflow-y: auto; padding: 0.5rem 0; }
+        .dropdown-item { padding: 0.7rem 1.25rem; font-size: 0.85rem; color: #475569; cursor: pointer; transition: all 0.2s; font-weight: 600; }
+        .dropdown-item:hover { background: #f1f5f9; color: #6366f1; }
+        .dropdown-item.active { background: #e0e7ff; color: #4f46e5; font-weight: 800; border-right: 3px solid #4f46e5; }
+        
+        .calendar-panel { padding: 1.5rem; display: flex; flex-direction: column; background: white; color: #000000; }
+        .calendar-header-range { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e2e8f0; }
+        .range-box { padding: 0.4rem 0.8rem; border: 1px solid #cbd5e1; border-radius: 8px; font-weight: 700; color: #1e293b; font-size: 0.85rem; min-width: 110px; text-align: center; }
+        .arrow { color: #94a3b8; font-weight: bold; }
+        
+        .calendar-footer { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem; border-top: 1px solid #e2e8f0; padding-top: 1rem; }
+        .btn-cancel { padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid #cbd5e1; background: white; color: #64748b; font-weight: 700; cursor: pointer; font-size: 0.85rem; }
+        .btn-apply { padding: 0.5rem 1rem; border-radius: 8px; border: none; background: #6366f1; color: white; font-weight: 700; cursor: pointer; font-size: 0.85rem; }
+
+        .custom-calendar { margin: 0; }
+        .custom-calendar :global(.rdp) {
+          --rdp-cell-size: 40px;
+          --rdp-accent-color: #6366f1;
+          --rdp-background-color: #f5f3ff;
+        }
+        .custom-calendar :global(.rdp-day) { color: #334155 !important; font-weight: 600; }
+        .custom-calendar :global(.rdp-day_selected),
+        .custom-calendar :global(.rdp-day_range_start),
+        .custom-calendar :global(.rdp-day_range_end) { background-color: #6366f1 !important; color: #ffffff !important; }
+        .custom-calendar :global(.rdp-day_range_middle) { background-color: #f5f3ff !important; color: #6366f1 !important; }
+        .custom-calendar :global(.rdp-caption_label),
+        .custom-calendar :global(.rdp-head_cell) { color: #0f172a !important; font-weight: 700; }
+
+        .status-badge { padding: 0.6rem 1.2rem; border-radius: 16px; font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 10px; color: #64748b; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .status-badge .dot { width: 8px; height: 8px; background: #f59e0b; border-radius: 50%; box-shadow: 0 0 10px #f59e0b; }
+        .status-badge .dot.active { background: #10b981; box-shadow: 0 0 8px #22c55e; }
+        .btn-refresh { padding: 0.6rem 1.2rem; background: #6366f1; border: none; border-radius: 12px; color: white; font-weight: 700; cursor: pointer; font-size: 0.9rem; box-shadow: 0 4px 6px -1px rgba(99,102,241,0.2); }
+        
+        .property-selector { 
+          padding: 0.6rem 1rem; 
+          background: white; 
+          border: 1px solid rgba(0, 0, 0, 0.05); 
+          border-radius: 12px; 
+          color: #1e293b; 
+          font-weight: 600; 
+          outline: none;
+          cursor: pointer;
+          font-size: 0.9rem;
+          box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+        }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .stat-card { padding: 32px; border-radius: 24px; }
+        .stat-card label { font-size: 0.9rem; color: #64748b; font-weight: 600; }
+        .value-group { display: flex; align-items: baseline; gap: 0.75rem; margin: 10px 0; }
+        .value-group h2 { font-size: 34px; font-weight: 600; color: #0A1B39; letter-spacing: -0.03em; margin: 0; }
+        .live-value { color: #10b981 !important; }
+        .desc { font-size: 0.8rem; color: #94a3b8; margin: 0; }
+
+        .charts-main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+        .chart-card { padding: 32px; border-radius: 24px; }
+        .chart-card h3 { margin: 0 0 30px 0; font-size: 1.2rem; font-weight: 600; color: #0A1B39; }
+        
+        .tables-grid { display: grid; gap: 30px; }
+        
+        .pie-container { display: flex; flex-direction: column; align-items: center; }
+        .pie-legend { width: 100%; margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+        .legend-item { display: flex; align-items: center; font-size: 0.9rem; }
+        .legend-item .dot { width: 10px; height: 10px; border-radius: 3px; margin-right: 12px; }
+        .legend-item .name { flex: 1; color: #64748b; font-weight: 500; }
+        .legend-item .val { font-weight: 700; color: #1e293b; }
+
+        .table-section { padding: 32px; border-radius: 24px; }
+        .table-section h3 { margin: 0 0 25px 0; font-size: 1.2rem; font-weight: 600; color: #0A1B39; }
+        .analytics-table { width: 100%; border-collapse: collapse; }
+        .analytics-table th { text-align: left; padding: 16px; color: #64748b; font-size: 0.9rem; border-bottom: 1px solid #edf2f7; font-weight: 600; }
+        .analytics-table td { padding: 18px 16px; border-bottom: 1px solid #edf2f7; font-size: 0.95rem; color: #1e293b; }
+        .page-path { font-family: monospace; color: #4f46e5; }
+        .bold { font-weight: 700; color: #0A1B39; }
+
+        .glass-card { background: white; border: 1px solid #edf2f7; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.02); }
+      `}</style>
     </div>
   );
 }

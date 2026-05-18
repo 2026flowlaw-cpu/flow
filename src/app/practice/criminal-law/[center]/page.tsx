@@ -637,6 +637,36 @@ const centerData: Record<string, {
         coreDiagnosis: '구속 직후 구속적부심·보석 가능성을 신속히 검토합니다. 치료 의지 입증이 보석 인용에 유리하게 작용합니다.\n\n• 구속 적부심 즉시 신청 — 구속 사유 적법성 다투기\n• 보석 신청 — 치료 의지·도주 우려 없음 소명\n• 치료 기관 연계 입증으로 보석 강화'
       }
     ],
+    strategyKicker: '마약 형사 전문변호사',
+    strategyTitle: '전과를 남기지 않는 것,\n마약 변호의 첫 번째 목표입니다',
+    strategyDesc: '마약 사건은 단순히 혐의를 다투는 것을 넘어 치료 의지와 재활 가능성을 입증하는 싸움입니다.\n법무법인 플로우가 법과 치료를 함께 설계합니다.',
+    strategyBottomText: null,
+    strategies: [
+      {
+        id: 1,
+        title: '치료조건부 기소유예 전략',
+        desc: '초범·소량 투약의 경우 수사 초기부터 자발적 치료 기관 연계, 재발 방지 계획 수립, 치료 의지 소명 자료를 체계적으로 준비하여 전과 없이 마무리합니다.',
+        iconType: 'shield'
+      },
+      {
+        id: 2,
+        title: '검사 결과 신빙성 분석',
+        desc: '모발·소변 검사의 채취 절차 적법성, 교차 오염 여부, 기기 정밀도, 2차 확인 검사 이행 여부를 정밀 분석합니다. 수치가 낮거나 절차에 하자가 있으면 다툴 여지가 있습니다.',
+        iconType: 'screen'
+      },
+      {
+        id: 3,
+        title: '역할 분리·경중 다투기',
+        desc: '마약 밀수·공급 사건에서 단순 운반·전달 역할과 실질적 공급·판매자를 분리합니다. 가담 정도와 역할의 경중에 따라 형량 차이가 크게 납니다.',
+        iconType: 'info'
+      },
+      {
+        id: 4,
+        title: '수사 초기 즉각 대응',
+        desc: '경찰 조사 전 진술 전략을 수립하고, 압수수색 현장에 즉시 출동합니다. 마약 사건은 첫 진술의 일관성이 결과를 결정합니다.',
+        iconType: 'user'
+      }
+    ],
     reviewsKicker: '실제 해결 사례',
     reviewsTitle: '유사 사건 대응 경험을 확인해보세요',
     reviewsDesc: '초범 투약부터 밀수까지,\n다양한 마약 사건에서 의뢰인의 편에 섰습니다.',
@@ -1582,19 +1612,21 @@ export default function CriminalCenterPage() {
                 ]
           }
           bottomText={
-            data.strategyBottomText ? (
-              typeof data.strategyBottomText === 'string' ? (
-                (() => {
-                  const lines = data.strategyBottomText.split('\n');
-                  return lines.map((line, i) => (
-                    <React.Fragment key={i}>
-                      {line}
-                      {i < lines.length - 1 && <br />}
-                    </React.Fragment>
-                  ));
-                })()
-              ) : (
-                data.strategyBottomText
+            data.strategyBottomText !== undefined ? (
+              data.strategyBottomText === null ? null : (
+                typeof data.strategyBottomText === 'string' ? (
+                  (() => {
+                    const lines = data.strategyBottomText.split('\n');
+                    return lines.map((line, i) => (
+                      <React.Fragment key={i}>
+                        {line}
+                        {i < lines.length - 1 && <br />}
+                      </React.Fragment>
+                    ));
+                  })()
+                ) : (
+                  data.strategyBottomText
+                )
               )
             ) : (
               <>

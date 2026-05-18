@@ -917,8 +917,8 @@ const centerData: Record<string, {
       }
     ],
     reviewsKicker: '실제 해결 사례',
-    reviewsTitle: '다양한 재산·사기 범죄 해결 경험을 보유하고 있습니다',
-    reviewsDesc: '대형 경제 범죄부터 보이스피싱 가담, 투자 사기 혐의까지, 철저한 법리 검토로 의뢰인의 권리를 수호해왔습니다.',
+    reviewsTitle: '유사 사건 대응 경험을 확인해보세요',
+    reviewsDesc: '단순 가담부터 조직 가담까지,\n다양한 보이스피싱 사건에서 의뢰인의 편에 섰습니다.',
     reviews: [
       {
         id: 1,

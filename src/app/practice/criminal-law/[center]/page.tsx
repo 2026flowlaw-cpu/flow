@@ -916,6 +916,9 @@ const centerData: Record<string, {
         legalStrategy: '• 공소사실 분석 — 가담 정도·역할 쟁점화\n• 집행유예 전환 목표 정상참작 자료 구성\n• 피해자 합의 협상 대리로 양형 감경'
       }
     ],
+    verdictKicker: '실제 해결 사례',
+    verdictTitle: '유사 사건 대응 경험을 확인해보세요',
+    verdictDesc: '단순 가담부터 조직 가담까지,\n다양한 보이스피싱 사건에서 의뢰인의 편에 섰습니다.',
     reviewsKicker: '실제 해결 사례',
     reviewsTitle: '유사 사건 대응 경험을 확인해보세요',
     reviewsDesc: '단순 가담부터 조직 가담까지,\n다양한 보이스피싱 사건에서 의뢰인의 편에 섰습니다.',

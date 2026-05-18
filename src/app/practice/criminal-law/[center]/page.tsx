@@ -1379,28 +1379,28 @@ const centerData: Record<string, {
       '한 번의 사건이 아이의 진학·생활기록부·형사기록으로 이어지지 않도록',
       '법무법인 플로우가 처음부터 끝까지 함께하겠습니다.'
     ],
-    promiseTitle: '우리 아이의 미래와 소중한 평온 보호',
+    promiseTitle: '수치가 증명하는 실력',
     counters: [
       {
         id: 0,
-        target: 450,
-        suffix: '건+',
-        title: '학폭 및 소년 사건 수행',
-        desc: '학교폭력심의위원회 조치 결정 및 소년보호처분 맞춤 변론'
+        target: 100,
+        suffix: '+',
+        title: '소년·학폭 수행 건수',
+        desc: ''
       },
       {
         id: 1,
-        target: 0,
-        suffix: '성향 분석',
-        title: '학폭 조치 수위 방어',
-        desc: '심의위원들의 성향과 쟁점을 분석하여 처분 수위 최소화 전략'
+        target: 10,
+        suffix: '년+',
+        title: '소년 전담 경력',
+        desc: ''
       },
       {
         id: 2,
-        target: 100,
-        suffix: '%',
-        title: '정서적 동행 조력',
-        desc: '경찰 조사 시 상처받지 않도록 따뜻하고 정서적인 동행 조력'
+        target: 0,
+        suffix: '당일',
+        title: '긴급 대응 가능',
+        desc: ''
       }
     ],
     promises: [

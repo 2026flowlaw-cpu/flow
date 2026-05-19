@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import styles from './write.module.css';
 
-const CATEGORIES = ['분양계약해제', '건설', '부동산', '임대차', 'HR', '민사 일반'];
+const CATEGORIES = ['분양계약해제', '건설', '부동산', '임대차', 'HR', '민사 일반', '성범죄', '음주교통', '마약', '보이스피싱', '건설형사', '경제범죄', '소년학폭', '일반형사'];
 
 export default function SuccessStoryWritePage() {
   const router = useRouter();

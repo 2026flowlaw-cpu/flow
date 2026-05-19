@@ -9,8 +9,16 @@ import { supabase } from '@/lib/supabase';
 import styles from './page.module.css';
 
 const defaultCategories = ['전체보기', '분양계약해제', '건설', '부동산', '임대차', 'HR', '민사 일반'];
+const criminalCategoriesList = ['전체보기', '성범죄', '음주교통', '마약', '보이스피싱', '건설형사', '경제범죄', '소년학폭', '일반형사'];
+
+const isCriminalStory = (storyCategory: string) => {
+  const norm = (storyCategory || '').replace(/[\s·]/g, '');
+  const criminalNorms = ['성범죄', '음주교통', '마약', '보이스피싱', '건설형사', '경제범죄', '소년학폭', '일반형사', '형사', '형사소송'];
+  return criminalNorms.includes(norm);
+};
 
 export default function SuccessStoriesPage() {
+  const [isCriminalMode, setIsCriminalMode] = useState(false);
   const [activeCategory, setActiveCategory] = useState('전체보기');
   const [tabCategories, setTabCategories] = useState(defaultCategories);
   const [allCases, setAllCases] = useState<any[]>([]);
@@ -51,7 +59,11 @@ export default function SuccessStoriesPage() {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const catParam = params.get('category');
-      if (catParam) {
+      if (catParam === '형사') {
+        setIsCriminalMode(true);
+        setTabCategories(criminalCategoriesList);
+        setActiveCategory('전체보기');
+      } else if (catParam) {
         setActiveCategory(catParam);
         if (!defaultCategories.includes(catParam)) {
           setTabCategories([...defaultCategories, catParam]);
@@ -61,12 +73,25 @@ export default function SuccessStoriesPage() {
   }, [allCases]);
 
   useEffect(() => {
-    if (activeCategory === '전체보기') {
-      setFilteredCases(allCases);
+    if (isCriminalMode) {
+      const criminalCases = allCases.filter(c => isCriminalStory(c.category));
+      if (activeCategory === '전체보기') {
+        setFilteredCases(criminalCases);
+      } else {
+        setFilteredCases(criminalCases.filter(c => {
+          const cNorm = (c.category || '').replace(/[\s·]/g, '');
+          const aNorm = (activeCategory || '').replace(/[\s·]/g, '');
+          return cNorm === aNorm;
+        }));
+      }
     } else {
-      setFilteredCases(allCases.filter(c => c.category === activeCategory));
+      if (activeCategory === '전체보기') {
+        setFilteredCases(allCases);
+      } else {
+        setFilteredCases(allCases.filter(c => c.category === activeCategory));
+      }
     }
-  }, [activeCategory, allCases]);
+  }, [activeCategory, allCases, isCriminalMode]);
 
   return (
     <div className={styles.page}>
@@ -77,10 +102,18 @@ export default function SuccessStoriesPage() {
         <section className={styles.hero}>
           <div className={`${styles.heroContent} container`}>
             <span className={styles.heroSubtitle}>OUR TRACK RECORD</span>
-            <h1 className={styles.heroTitle}>법무법인 플로우 성공사례</h1>
+            <h1 className={styles.heroTitle}>
+              {isCriminalMode ? '주요 성공사례' : '법무법인 플로우 성공사례'}
+            </h1>
             <p className={styles.heroText}>
-              승소, 결코 우연이 아닙니다.<br />
-              의뢰인의 소중한 권리를 지켜온 플로우의 남다른 노하우를 직접 확인해 보세요.
+              {isCriminalMode ? (
+                <>결과로만 말합니다. 처음부터 끝까지, 의뢰인의 편에서만 싸운 기록입니다.</>
+              ) : (
+                <>
+                  승소, 결코 우연이 아닙니다.<br />
+                  의뢰인의 소중한 권리를 지켜온 플로우의 남다른 노하우를 직접 확인해 보세요.
+                </>
+              )}
             </p>
           </div>
           <div className={styles.heroBg}></div>

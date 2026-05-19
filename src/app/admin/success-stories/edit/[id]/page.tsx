@@ -219,6 +219,14 @@ export default function AdminSuccessStoryEditPage({ params: paramsPromise }: { p
                   <option>임대차</option>
                   <option>HR</option>
                   <option>민사 일반</option>
+                  <option>성범죄</option>
+                  <option>음주교통</option>
+                  <option>마약</option>
+                  <option>보이스피싱</option>
+                  <option>건설형사</option>
+                  <option>경제범죄</option>
+                  <option>소년학폭</option>
+                  <option>일반형사</option>
                 </select>
               </div>
               <div className={styles.inputGroup}>

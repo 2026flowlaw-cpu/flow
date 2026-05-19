@@ -6,7 +6,8 @@ import {
   LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell
 } from 'recharts';
 import { 
-  MessageSquare, AlertCircle, CheckCircle2, Calendar, ChevronRight, Laptop, HelpCircle, Activity, ChevronDown
+  MessageSquare, AlertCircle, CheckCircle2, Calendar, ChevronRight, Laptop, HelpCircle, Activity, ChevronDown,
+  Filter, TrendingUp, Grid, Globe, Users, BarChart3, Settings
 } from 'lucide-react';
 import Link from 'next/link';
 import { format, subDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth, subMonths } from 'date-fns';
@@ -143,7 +144,11 @@ export default function AdminDashboardMainPage() {
   });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const [activeTab, setActiveTab] = useState<'marketing' | 'debug'>('marketing');
+  const [activeTab, setActiveTab] = useState<'marketing' | 'debug' | 'funnel'>('marketing');
+  
+  // GA4 탐색 및 퍼널 분석 상태 정의
+  const [funnelSegment, setFunnelSegment] = useState<'all' | 'direct' | 'paid' | 'mobile'>('all');
+  const [funnelView, setFunnelView] = useState<'table' | 'funnel'>('table');
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [debugEvents, setDebugEvents] = useState<any[]>([
     { id: 1, name: 'page_view', time: '오전 10:16:00', type: 'system', icon: '👀', desc: '메인 페이지 접속', duration: '60초' },
@@ -393,6 +398,26 @@ export default function AdminDashboardMainPage() {
             borderRadius: '10px',
             fontWeight: 800
           }}>LIVE</span>
+        </button>
+        <button 
+          onClick={() => setActiveTab('funnel')} 
+          style={{
+            background: activeTab === 'funnel' ? '#10b981' : 'transparent',
+            color: activeTab === 'funnel' ? '#ffffff' : '#64748b',
+            border: activeTab === 'funnel' ? 'none' : '1px solid #10b98130',
+            padding: '10px 24px',
+            borderRadius: '10px',
+            fontWeight: 700,
+            fontSize: '14px',
+            cursor: 'pointer',
+            transition: 'all 0.2s',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            boxShadow: activeTab === 'funnel' ? '0 4px 12px rgba(16, 185, 129, 0.2)' : 'none'
+          }}
+        >
+          🔍 GA4 유입 퍼널 분석
         </button>
       </div>
 
@@ -1297,6 +1322,574 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
           </div>
         </div>
       </div>
+  }
+
+  {activeTab === 'funnel' &&
+    <div className="funnel-exploration-grid" style={{
+      display: 'grid',
+      gridTemplateColumns: '260px 260px 1fr',
+      gap: '20px',
+      marginTop: '10px',
+      background: '#f1f5f9',
+      padding: '20px',
+      borderRadius: '24px',
+      border: '1px solid rgba(0,0,0,0.03)',
+      boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.02)'
+    }}>
+      {/* Panel 1: Variables (변수) */}
+      <div className="exploration-panel-vars" style={{
+        background: 'white',
+        border: '1px solid #cbd5e1',
+        borderRadius: '16px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        padding: '16px',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid #e2e8f0', paddingBottom: '12px' }}>
+          <Settings size={18} color="#0f172a" />
+          <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>변수 (Variables)</span>
+        </div>
+
+        {/* Exploration Name */}
+        <div>
+          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 700, textTransform: 'uppercase' }}>탐색 분석 이름</span>
+          <div style={{
+            background: '#f8fafc',
+            border: '1px solid #e2e8f0',
+            borderRadius: '8px',
+            padding: '8px 12px',
+            fontSize: '12.5px',
+            fontWeight: 700,
+            color: '#1e293b',
+            marginTop: '6px',
+            fontFamily: 'Pretendard'
+          }}>
+            자유 형식 1
+          </div>
+        </div>
+
+        {/* Date Preset */}
+        <div>
+          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 700, textTransform: 'uppercase' }}>날짜</span>
+          <div style={{
+            background: '#f8fafc',
+            border: '1px solid #e2e8f0',
+            borderRadius: '8px',
+            padding: '8px 12px',
+            fontSize: '12px',
+            fontWeight: 600,
+            color: '#334155',
+            marginTop: '6px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            cursor: 'pointer'
+          }}>
+            <span>지난 28일 (4월 21일 ~ 5월 18일)</span>
+            <ChevronDown size={14} color="#64748b" />
+          </div>
+        </div>
+
+        {/* Segments (세그먼트) */}
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+            <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 700, textTransform: 'uppercase' }}>세그먼트 비교</span>
+            <span style={{ fontSize: '12px', color: '#10b981', cursor: 'pointer', fontWeight: 700 }}>+ 추가</span>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {[
+              { id: 'all', name: '👥 전체 유입 트래픽', color: '#3b82f6' },
+              { id: 'direct', name: '🔗 직접 유입 트래픽', color: '#10b981' },
+              { id: 'paid', name: '🎯 유료 광고 트래픽', color: '#8b5cf6' },
+              { id: 'mobile', name: '📱 모바일 유저 세그먼트', color: '#ef4444' }
+            ].map(seg => {
+              const isActive = funnelSegment === seg.id;
+              return (
+                <div 
+                  key={seg.id}
+                  onClick={() => setFunnelSegment(seg.id as any)}
+                  style={{
+                    background: isActive ? `${seg.color}10` : '#f8fafc',
+                    border: isActive ? `2px solid ${seg.color}` : '1px solid #e2e8f0',
+                    borderRadius: '8px',
+                    padding: '10px 12px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    color: isActive ? seg.color : '#475569',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    boxShadow: isActive ? `0 2px 8px ${seg.color}15` : 'none'
+                  }}
+                >
+                  {seg.name}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Dimensions (측정기준) */}
+        <div>
+          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>측정기준 (Dimensions)</span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            {['이벤트 이름', '기기 카테고리', '첫 사용자 매체', '성별', '국가'].map(dim => (
+              <span key={dim} style={{
+                fontSize: '11px',
+                background: '#f1f5f9',
+                border: '1px solid #cbd5e1',
+                padding: '4px 8px',
+                borderRadius: '6px',
+                fontWeight: 600,
+                color: '#475569',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}>
+                🟢 {dim}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Metrics (측정항목) */}
+        <div>
+          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>측정항목 (Metrics)</span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            {['활성 사용자', '이벤트 수', '거래'].map(met => (
+              <span key={met} style={{
+                fontSize: '11px',
+                background: '#eff6ff',
+                border: '1px solid #bfdbfe',
+                padding: '4px 8px',
+                borderRadius: '6px',
+                fontWeight: 600,
+                color: '#1d4ed8',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}>
+                🔵 {met}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Panel 2: Settings (설정) */}
+      <div className="exploration-panel-settings" style={{
+        background: 'white',
+        border: '1px solid #cbd5e1',
+        borderRadius: '16px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        padding: '16px',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid #e2e8f0', paddingBottom: '12px' }}>
+          <Filter size={18} color="#0f172a" />
+          <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>탭 설정 (Settings)</span>
+        </div>
+
+        {/* Technique */}
+        <div>
+          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 700, textTransform: 'uppercase' }}>기법</span>
+          <div style={{
+            background: '#f8fafc',
+            border: '1px solid #e2e8f0',
+            borderRadius: '8px',
+            padding: '8px 12px',
+            fontSize: '12.5px',
+            fontWeight: 700,
+            color: '#1e293b',
+            marginTop: '6px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}>
+            <span>퍼널 및 유입 탐색 분석</span>
+            <ChevronDown size={14} color="#64748b" />
+          </div>
+        </div>
+
+        {/* Visualization Type */}
+        <div>
+          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>시각화</span>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '6px' }}>
+            {[
+              { id: 'table', label: '테이블', icon: <Grid size={16} /> },
+              { id: 'funnel', label: '퍼널 탐색', icon: <BarChart3 size={16} /> }
+            ].map(vis => {
+              const isActive = funnelView === vis.id;
+              return (
+                <button 
+                  key={vis.id}
+                  onClick={() => setFunnelView(vis.id as any)}
+                  style={{
+                    background: isActive ? '#0f172a' : '#f8fafc',
+                    color: isActive ? 'white' : '#64748b',
+                    border: '1px solid #cbd5e1',
+                    borderRadius: '8px',
+                    padding: '8px',
+                    cursor: 'pointer',
+                    fontSize: '11.5px',
+                    fontWeight: 700,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '4px',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  {vis.icon}
+                  {vis.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Row Settings */}
+        <div>
+          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>행 (Rows)</span>
+          <div style={{ background: '#f8fafc', border: '1px dashed #cbd5e1', borderRadius: '8px', padding: '10px', fontSize: '12px', fontWeight: 700, color: '#334155', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <span>🟢 이벤트 이름</span>
+            <span style={{ fontSize: '10px', color: '#ef4444', cursor: 'pointer' }}>✕</span>
+          </div>
+        </div>
+
+        {/* Column Settings */}
+        <div>
+          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>열 (Columns)</span>
+          <div style={{ background: '#f8fafc', border: '1px dashed #cbd5e1', borderRadius: '8px', padding: '10px', fontSize: '12px', fontWeight: 700, color: '#334155', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <span>🟢 기기 카테고리</span>
+            <span style={{ fontSize: '10px', color: '#ef4444', cursor: 'pointer' }}>✕</span>
+          </div>
+        </div>
+
+        {/* Value Settings */}
+        <div>
+          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>값 (Values)</span>
+          <div style={{ background: '#f8fafc', border: '1px dashed #cbd5e1', borderRadius: '8px', padding: '10px', fontSize: '12px', fontWeight: 700, color: '#334155', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <span>🔵 활성 사용자</span>
+            <span style={{ fontSize: '10px', color: '#ef4444', cursor: 'pointer' }}>✕</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Panel 3: Main Exploration Board */}
+      <div className="exploration-board-main" style={{
+        background: 'white',
+        border: '1px solid #cbd5e1',
+        borderRadius: '16px',
+        display: 'flex',
+        flexDirection: 'column',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
+        overflow: 'hidden'
+      }}>
+        {/* Exploration tabs */}
+        <div style={{
+          display: 'flex',
+          background: '#f8fafc',
+          borderBottom: '1px solid #cbd5e1',
+          padding: '0 12px'
+        }}>
+          <div 
+            onClick={() => setFunnelView('table')}
+            style={{
+              padding: '12px 20px',
+              fontSize: '12.5px',
+              fontWeight: 800,
+              color: funnelView === 'table' ? '#3b82f6' : '#64748b',
+              borderBottom: funnelView === 'table' ? '3px solid #3b82f6' : '3px solid transparent',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.2s'
+            }}
+          >
+            📊 자유 형식 1
+          </div>
+          <div 
+            onClick={() => setFunnelView('funnel')}
+            style={{
+              padding: '12px 20px',
+              fontSize: '12.5px',
+              fontWeight: 800,
+              color: funnelView === 'funnel' ? '#3b82f6' : '#64748b',
+              borderBottom: funnelView === 'funnel' ? '3px solid #3b82f6' : '3px solid transparent',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.2s'
+            }}
+          >
+            🎯 퍼널 탐색
+          </div>
+        </div>
+
+        {/* Content body */}
+        <div style={{ padding: '24px', flex: 1, overflowY: 'auto' }}>
+          {funnelView === 'table' ? (
+            <div>
+              {/* Header Info */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#1e293b' }}>
+                  🔍 세그먼트 분석: {
+                    funnelSegment === 'all' ? '전체 유입 트래픽' :
+                    funnelSegment === 'direct' ? '직접 유입 트래픽' :
+                    funnelSegment === 'paid' ? '유료 광고 트래픽' : '모바일 유저 세그먼트'
+                  }
+                </span>
+                <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600 }}>수치 및 가로형 퍼센테이지 그래프</span>
+              </div>
+
+              {/* Table */}
+              <div style={{ border: '1px solid #cbd5e1', borderRadius: '12px', overflow: 'hidden' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                  <thead>
+                    <tr style={{ background: '#f8fafc', borderBottom: '1px solid #cbd5e1' }}>
+                      <th style={{ padding: '14px 16px', fontSize: '12px', color: '#475569', fontWeight: 700 }}>이벤트 이름</th>
+                      {funnelSegment !== 'mobile' && (
+                        <th style={{ padding: '14px 16px', fontSize: '12px', color: '#475569', fontWeight: 700 }}>
+                          <div>desktop</div>
+                          <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 500, marginTop: '2px' }}>
+                            활성 사용자: {funnelSegment === 'all' ? '37' : funnelSegment === 'direct' ? '22' : '15'}
+                          </div>
+                        </th>
+                      )}
+                      <th style={{ padding: '14px 16px', fontSize: '12px', color: '#475569', fontWeight: 700 }}>
+                        <div>mobile</div>
+                        <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 500, marginTop: '2px' }}>
+                          활성 사용자: {funnelSegment === 'all' ? '10' : funnelSegment === 'direct' ? '4' : funnelSegment === 'paid' ? '6' : '10'}
+                        </div>
+                      </th>
+                      <th style={{ padding: '14px 16px', fontSize: '12px', color: '#475569', fontWeight: 700 }}>
+                        <div>Totals</div>
+                        <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 500, marginTop: '2px' }}>
+                          활성 사용자: {funnelSegment === 'all' ? '47' : funnelSegment === 'direct' ? '26' : funnelSegment === 'paid' ? '21' : '10'}
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { name: 'first_visit', d_val: 37, m_val: 10, t_val: 47, d_pct: 100, m_pct: 100, t_pct: 100 },
+                      { name: 'page_view', d_val: 37, m_val: 10, t_val: 47, d_pct: 100, m_pct: 100, t_pct: 100 },
+                      { name: 'session_start', d_val: 37, m_val: 10, t_val: 47, d_pct: 100, m_pct: 100, t_pct: 100 },
+                      { name: 'user_engagement', d_val: 14, m_val: 3, t_val: 17, d_pct: 37.8, m_pct: 30, t_pct: 36.2 },
+                      { name: 'scroll', d_val: 8, m_val: 3, t_val: 11, d_pct: 21.6, m_pct: 30, t_pct: 23.4 },
+                      { name: 'click', d_val: 3, m_val: 0, t_val: 3, d_pct: 8.1, m_pct: 0, t_pct: 6.4 },
+                      { name: 'form_start', d_val: 3, m_val: 0, t_val: 3, d_pct: 8.1, m_pct: 0, t_pct: 6.4 },
+                      { name: 'form_submit', d_val: 1, m_val: 0, t_val: 1, d_pct: 2.7, m_pct: 0, t_pct: 2.1 }
+                    ].map((row, idx) => {
+                      // Adjust numbers based on segment selection
+                      let d_val = row.d_val;
+                      let m_val = row.m_val;
+                      
+                      if (funnelSegment === 'direct') {
+                        d_val = Math.ceil(row.d_val * (22 / 37));
+                        m_val = Math.ceil(row.m_val * (4 / 10));
+                      } else if (funnelSegment === 'paid') {
+                        d_val = Math.ceil(row.d_val * (15 / 37));
+                        m_val = Math.ceil(row.m_val * (6 / 10));
+                      } else if (funnelSegment === 'mobile') {
+                        d_val = 0;
+                      }
+
+                      const t_val = d_val + m_val;
+                      const max_d = funnelSegment === 'all' ? 37 : funnelSegment === 'direct' ? 22 : 15;
+                      const max_m = funnelSegment === 'all' ? 10 : funnelSegment === 'direct' ? 4 : funnelSegment === 'paid' ? 6 : 10;
+                      const max_t = max_d + max_m;
+
+                      const d_pct = max_d > 0 ? (d_val / max_d) * 100 : 0;
+                      const m_pct = max_m > 0 ? (m_val / max_m) * 100 : 0;
+                      const t_pct = max_t > 0 ? (t_val / max_t) * 100 : 0;
+
+                      return (
+                        <tr key={idx} style={{ borderBottom: '1px solid #e2e8f0', transition: 'background 0.15s' }} className="funnel-table-row">
+                          <td style={{ padding: '12px 16px', fontSize: '12px', fontWeight: 800, color: '#334155', fontFamily: 'monospace' }}>
+                            {idx + 1}. {row.name}
+                          </td>
+                          {funnelSegment !== 'mobile' && (
+                            <td style={{ padding: '12px 16px', position: 'relative', width: '220px' }}>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 2 }}>
+                                <span style={{ fontSize: '12px', fontWeight: 700, color: '#1e293b' }}>{d_val}</span>
+                                <span style={{ fontSize: '10px', color: '#64748b', fontWeight: 500 }}>{d_pct.toFixed(1)}%</span>
+                              </div>
+                              <div style={{
+                                position: 'absolute',
+                                left: '8px',
+                                top: '8px',
+                                bottom: '8px',
+                                width: `${d_pct * 0.9}%`,
+                                background: '#3b82f615',
+                                borderRight: d_pct > 0 ? '2px solid #3b82f6' : 'none',
+                                borderRadius: '4px',
+                                zIndex: 1,
+                                transition: 'width 0.5s ease-out'
+                              }}></div>
+                            </td>
+                          )}
+                          <td style={{ padding: '12px 16px', position: 'relative', width: '220px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 2 }}>
+                              <span style={{ fontSize: '12px', fontWeight: 700, color: '#1e293b' }}>{m_val}</span>
+                              <span style={{ fontSize: '10px', color: '#64748b', fontWeight: 500 }}>{m_pct.toFixed(1)}%</span>
+                            </div>
+                            <div style={{
+                              position: 'absolute',
+                              left: '8px',
+                              top: '8px',
+                              bottom: '8px',
+                              width: `${m_pct * 0.9}%`,
+                              background: '#8b5cf615',
+                              borderRight: m_pct > 0 ? '2px solid #8b5cf6' : 'none',
+                              borderRadius: '4px',
+                              zIndex: 1,
+                              transition: 'width 0.5s ease-out'
+                            }}></div>
+                          </td>
+                          <td style={{ padding: '12px 16px', position: 'relative', width: '220px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 2 }}>
+                              <span style={{ fontSize: '12px', fontWeight: 700, color: '#1e293b' }}>{t_val}</span>
+                              <span style={{ fontSize: '10px', color: '#64748b', fontWeight: 500 }}>{t_pct.toFixed(1)}%</span>
+                            </div>
+                            <div style={{
+                              position: 'absolute',
+                              left: '8px',
+                              top: '8px',
+                              bottom: '8px',
+                              width: `${t_pct * 0.9}%`,
+                              background: '#10b98115',
+                              borderRight: t_pct > 0 ? '2px solid #10b981' : 'none',
+                              borderRadius: '4px',
+                              zIndex: 1,
+                              transition: 'width 0.5s ease-out'
+                            }}></div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ) : (
+            <div>
+              {/* Funnel visual exploration */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#1e293b' }}>🎯 실시간 유입 퍼널 및 이탈율 분석</span>
+                <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600 }}>메인방문부터 상담신청까지의 퍼널 전환률</span>
+              </div>
+
+              {/* Step funnel cards */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                {[
+                  { step: 1, name: 'first_visit (메인방문)', users: 47, conversion: 100, dropoff: 0, desc: '일신 웹사이트 첫 방문 유입', color: '#3b82f6' },
+                  { step: 2, name: 'user_engagement (콘텐츠 탐색)', users: 17, conversion: 36.2, dropoff: 63.8, desc: '칼럼 읽기 또는 15초 이상 체류', color: '#6366f1' },
+                  { step: 3, name: 'scroll (스크롤 깊이 90%)', users: 11, conversion: 23.4, dropoff: 35.3, desc: '메인 또는 상세 콘텐츠 끝까지 도달', color: '#8b5cf6' },
+                  { step: 4, name: 'form_start (상담작성 시작)', users: 3, conversion: 6.4, dropoff: 72.7, desc: '상담신청 폼 입력란 최초 포커스', color: '#ec4899' },
+                  { step: 5, name: 'form_submit (상담신청 완료)', users: 1, conversion: 2.1, dropoff: 66.7, desc: '최종 상담신청 성공 데이터 전송', color: '#10b981' }
+                ].map((item, idx, arr) => (
+                  <div key={item.step}>
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      borderRadius: '16px',
+                      padding: '16px 20px',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.01)'
+                    }}>
+                      {/* Colored step bar back shadow */}
+                      <div style={{
+                        position: 'absolute',
+                        left: 0,
+                        top: 0,
+                        bottom: 0,
+                        width: `${item.conversion}%`,
+                        background: `${item.color}08`,
+                        borderRight: `4px solid ${item.color}`,
+                        transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
+                      }}></div>
+
+                      {/* Content details */}
+                      <div style={{ width: '60px', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <span style={{ fontSize: '11px', fontWeight: 800, color: item.color, textTransform: 'uppercase' }}>Step</span>
+                        <span style={{ fontSize: '24px', fontWeight: 900, color: item.color, lineHeight: '1.2' }}>{item.step}</span>
+                      </div>
+
+                      <div style={{ flex: 1, paddingLeft: '20px', zIndex: 2 }}>
+                        <span style={{ fontSize: '13px', fontWeight: 800, color: '#1e293b', fontFamily: 'monospace' }}>{item.name}</span>
+                        <p style={{ margin: 0, fontSize: '11.5px', color: '#64748b', marginTop: '2px' }}>{item.desc}</p>
+                      </div>
+
+                      {/* Stats */}
+                      <div style={{ display: 'flex', gap: '30px', alignItems: 'center', zIndex: 2 }}>
+                        <div style={{ textAlign: 'right' }}>
+                          <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600, display: 'block' }}>활성 사용자</span>
+                          <span style={{ fontSize: '16px', fontWeight: 900, color: '#1e293b' }}>{item.users} <span style={{ fontSize: '12px', fontWeight: 500 }}>명</span></span>
+                        </div>
+                        <div style={{ textAlign: 'right', minWidth: '90px' }}>
+                          <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600, display: 'block' }}>최초 단계 대비</span>
+                          <span style={{ fontSize: '16px', fontWeight: 900, color: item.color }}>{item.conversion}%</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Transition arrow and dropoff badge */}
+                    {idx < arr.length - 1 && (
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '40px',
+                        position: 'relative'
+                      }}>
+                        {/* vertical connector line */}
+                        <div style={{
+                          position: 'absolute',
+                          width: '2px',
+                          background: '#cbd5e1',
+                          top: 0,
+                          bottom: 0,
+                          zIndex: 1
+                        }}></div>
+
+                        {/* dropoff badge */}
+                        <div style={{
+                          background: '#fff1f2',
+                          border: '1px solid #ffe4e6',
+                          borderRadius: '12px',
+                          padding: '3px 12px',
+                          fontSize: '11px',
+                          fontWeight: 700,
+                          color: '#f43f5e',
+                          zIndex: 2,
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          boxShadow: '0 2px 4px rgba(244,63,94,0.05)'
+                        }}>
+                          ⬇️ 이탈율 {item.dropoff}%
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   }
 
   <style jsx>{`

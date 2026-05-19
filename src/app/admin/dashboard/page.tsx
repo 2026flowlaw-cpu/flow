@@ -61,7 +61,10 @@ const mockStats = {
   activeUsers: 27,
   totalSessions: 56,
   avgSessionTime: '9분 58초',
-  bounceRate: '50.0%'
+  bounceRate: '50.0%',
+  consultationsCount: 12,
+  kakaoConversions: 8,
+  totalConversions: 20
 };
 
 const getPageKoreanName = (path: string) => {
@@ -145,7 +148,15 @@ export default function AdminDashboardMainPage() {
   // 실시간 데이터 또는 데모 데이터 폴백 설정
   const isLoading = ga4Validating;
   const activeStats = isLoading 
-    ? { activeUsers: '-', totalSessions: '-', avgSessionTime: '-', bounceRate: '-' }
+    ? { 
+        activeUsers: '-', 
+        totalSessions: '-', 
+        avgSessionTime: '-', 
+        bounceRate: '-',
+        consultationsCount: '-',
+        kakaoConversions: '-',
+        totalConversions: '-'
+      }
     : (isLive ? ga4Res.stats : mockStats);
 
   const analyticsData = isLoading
@@ -159,6 +170,16 @@ export default function AdminDashboardMainPage() {
         topSourceNames: []
       }
     : (isLive ? ga4Res.data : mockAnalyticsData);
+
+  const conversionRate = useMemo(() => {
+    const conversions = activeStats.totalConversions;
+    const sessions = activeStats.totalSessions;
+    if (conversions === '-' || sessions === '-') return '-';
+    const convNum = Number(conversions);
+    const sessNum = Number(sessions);
+    if (isNaN(convNum) || isNaN(sessNum) || sessNum === 0) return '0.0%';
+    return `${((convNum / sessNum) * 100).toFixed(1)}%`;
+  }, [activeStats]);
   const topSourceNames = (analyticsData.topSourceNames && analyticsData.topSourceNames.length > 0)
     ? analyticsData.topSourceNames 
     : ['(direct)', 'ig', 'localhost:3000', 'threads'];
@@ -357,39 +378,92 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
           flexDirection: 'column',
           gap: '40px'
         }}>
-          {/* 웹사이트 지표 (4카드) */}
-          <div className="stats-grid">
-            <div className="stat-card glass-card">
-              <label>선택 기간 방문자</label>
-              <div className="value-group">
-                <h2 className={isLive ? "live-value" : ""}>
-                  {typeof activeStats.activeUsers === 'number' ? activeStats.activeUsers.toLocaleString() : activeStats.activeUsers}
-                </h2>
+          {/* 핵심 전환 지표 (4카드) */}
+          <div>
+            <h3 style={{ margin: '0 0 16px 0', fontSize: '15.5px', fontWeight: 700, color: '#bd9d62', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              📊 핵심 비즈니스 전환 지표 (Google Tag Manager 연동 성과)
+            </h3>
+            <div className="stats-grid">
+              <div className="stat-card glass-card" style={{ borderTop: '4px solid #4f46e5' }}>
+                <label>온라인 상담 신청 완료</label>
+                <div className="value-group">
+                  <h2 style={{ color: '#4f46e5' }}>
+                    {typeof activeStats.consultationsCount === 'number' ? activeStats.consultationsCount.toLocaleString() : activeStats.consultationsCount}
+                  </h2>
+                </div>
+                <p className="desc">GTM 상담제출 이벤트</p>
               </div>
-              <p className="desc">사용자 합계</p>
+              
+              <div className="stat-card glass-card" style={{ borderTop: '4px solid #f59e0b' }}>
+                <label>카카오톡 문의 클릭</label>
+                <div className="value-group">
+                  <h2 style={{ color: '#f59e0b' }}>
+                    {typeof activeStats.kakaoConversions === 'number' ? activeStats.kakaoConversions.toLocaleString() : activeStats.kakaoConversions}
+                  </h2>
+                </div>
+                <p className="desc">카카오톡 링크 이동 수</p>
+              </div>
+
+              <div className="stat-card glass-card" style={{ borderTop: '4px solid #10b981' }}>
+                <label>총 전환 건수</label>
+                <div className="value-group">
+                  <h2 style={{ color: '#10b981' }}>
+                    {typeof activeStats.totalConversions === 'number' ? activeStats.totalConversions.toLocaleString() : activeStats.totalConversions}
+                  </h2>
+                </div>
+                <p className="desc">전체 핵심 행동 합계</p>
+              </div>
+
+              <div className="stat-card glass-card" style={{ borderTop: '4px solid #bd9d62' }}>
+                <label>문의 전환율 (CVR)</label>
+                <div className="value-group">
+                  <h2 style={{ color: '#bd9d62' }}>
+                    {conversionRate}
+                  </h2>
+                </div>
+                <p className="desc">세션 대비 전환 비중</p>
+              </div>
             </div>
-            <div className="stat-card glass-card">
-              <label>선택 기간 세션</label>
-              <div className="value-group">
-                <h2>
-                  {typeof activeStats.totalSessions === 'number' ? activeStats.totalSessions.toLocaleString() : activeStats.totalSessions}
-                </h2>
+          </div>
+
+          {/* 웹사이트 방문 지표 (4카드) */}
+          <div>
+            <h3 style={{ margin: '0 0 16px 0', fontSize: '15.5px', fontWeight: 700, color: '#475569' }}>
+              👥 기본 사이트 트래픽 지표
+            </h3>
+            <div className="stats-grid">
+              <div className="stat-card glass-card">
+                <label>선택 기간 방문자</label>
+                <div className="value-group">
+                  <h2 className={isLive ? "live-value" : ""}>
+                    {typeof activeStats.activeUsers === 'number' ? activeStats.activeUsers.toLocaleString() : activeStats.activeUsers}
+                  </h2>
+                </div>
+                <p className="desc">사용자 합계</p>
               </div>
-              <p className="desc">방문 횟수</p>
-            </div>
-            <div className="stat-card glass-card">
-              <label>평균 세션 시간</label>
-              <div className="value-group">
-                <h2>{activeStats.avgSessionTime}</h2>
+              <div className="stat-card glass-card">
+                <label>선택 기간 세션</label>
+                <div className="value-group">
+                  <h2>
+                    {typeof activeStats.totalSessions === 'number' ? activeStats.totalSessions.toLocaleString() : activeStats.totalSessions}
+                  </h2>
+                </div>
+                <p className="desc">방문 횟수</p>
               </div>
-              <p className="desc">전체 평균</p>
-            </div>
-            <div className="stat-card glass-card">
-              <label>이탈률 (Bounce Rate)</label>
-              <div className="value-group">
-                <h2>{activeStats.bounceRate}</h2>
+              <div className="stat-card glass-card">
+                <label>평균 세션 시간</label>
+                <div className="value-group">
+                  <h2>{activeStats.avgSessionTime}</h2>
+                </div>
+                <p className="desc">전체 평균</p>
               </div>
-              <p className="desc">낮을수록 긍정적</p>
+              <div className="stat-card glass-card">
+                <label>이탈률 (Bounce Rate)</label>
+                <div className="value-group">
+                  <h2>{activeStats.bounceRate}</h2>
+                </div>
+                <p className="desc">낮을수록 긍정적</p>
+              </div>
             </div>
           </div>
 
@@ -549,6 +623,7 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                   <th>유입 소스 / 매체</th>
                   <th>사용자</th>
                   <th>세션수</th>
+                  <th>전환수 (문의)</th>
                   <th>참여 세션</th>
                   <th>참여율</th>
                   <th>평균 참여시간</th>
@@ -560,6 +635,7 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                     <td className="source-name">🔗 {src.name}</td>
                     <td className="bold">{src.users.toLocaleString()}</td>
                     <td>{src.sessions.toLocaleString()}</td>
+                    <td className="bold" style={{ color: '#4f46e5' }}>{src.conversions?.toLocaleString() || 0}</td>
                     <td>{src.engagedSessions.toLocaleString()}</td>
                     <td>
                       <span className={`badge ${parseFloat(src.engagementRate) > 50 ? 'high' : ''}`}>

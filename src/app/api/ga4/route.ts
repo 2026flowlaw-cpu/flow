@@ -54,7 +54,8 @@ export async function GET(req: NextRequest) {
       [sourceTrendResponse],
       [sourcesDetailedResponse],
       [locationResponse],
-      [summaryResponse]
+      [summaryResponse],
+      [eventsResponse]
     ] = await Promise.all([
       // 1. 트렌드 (일별 활성 사용자 & 세션)
       client.runReport({
@@ -87,7 +88,7 @@ export async function GET(req: NextRequest) {
         metrics: [{ name: 'sessions' }],
         limit: 100,
       }),
-      // 5. 매체별 상세 리포트
+      // 5. 매체별 상세 리포트 (전환수 conversions 추가)
       client.runReport({
         property: parentProperty,
         dateRanges: [{ startDate, endDate }],
@@ -95,6 +96,7 @@ export async function GET(req: NextRequest) {
         metrics: [
           { name: 'activeUsers' }, 
           { name: 'sessions' }, 
+          { name: 'conversions' },
           { name: 'engagedSessions' }, 
           { name: 'userEngagementDuration' }
         ],
@@ -113,6 +115,13 @@ export async function GET(req: NextRequest) {
         property: parentProperty,
         dateRanges: [{ startDate, endDate }],
         metrics: [{ name: 'averageSessionDuration' }, { name: 'bounceRate' }],
+      }),
+      // 8. 맞춤 전환 이벤트 수량 리포트
+      client.runReport({
+        property: parentProperty,
+        dateRanges: [{ startDate, endDate }],
+        dimensions: [{ name: 'eventName' }],
+        metrics: [{ name: 'eventCount' }],
       })
     ]);
 
@@ -176,14 +185,16 @@ export async function GET(req: NextRequest) {
     const formattedDetailedSources = sourcesDetailedResponse.rows?.map((row: any) => {
       const users = Number(row.metricValues?.[0]?.value || 0);
       const sess = Number(row.metricValues?.[1]?.value || 0);
-      const engaged = Number(row.metricValues?.[2]?.value || 0);
-      const totalDuration = Number(row.metricValues?.[3]?.value || 0);
+      const conv = Number(row.metricValues?.[2]?.value || 0);
+      const engaged = Number(row.metricValues?.[3]?.value || 0);
+      const totalDuration = Number(row.metricValues?.[4]?.value || 0);
       const avgTime = sess > 0 ? Math.floor(totalDuration / sess) : 0;
       
       return {
         name: row.dimensionValues?.[0]?.value || '(unknown)',
         users,
         sessions: sess,
+        conversions: conv,
         engagedSessions: engaged,
         engagementRate: sess > 0 ? ((engaged / sess) * 100).toFixed(1) + '%' : '0%',
         avgTime: `${Math.floor(avgTime / 60)}분 ${avgTime % 60}초`
@@ -200,11 +211,31 @@ export async function GET(req: NextRequest) {
     const avgSessionSec = Math.floor(Number(summaryResponse.rows?.[0]?.metricValues?.[0]?.value || 0));
     const bounceRate = (Number(summaryResponse.rows?.[0]?.metricValues?.[1]?.value || 0) * 100).toFixed(1);
 
+    // 8. 맞춤 전환 이벤트 집계
+    let consultationsCount = 0;
+    let kakaoConversions = 0;
+    
+    eventsResponse.rows?.forEach((row: any) => {
+      const eventName = row.dimensionValues?.[0]?.value || '';
+      const count = Number(row.metricValues?.[0]?.value || 0);
+      
+      if (eventName === 'consultation_submit' || eventName === 'generate_lead') {
+        consultationsCount += count;
+      } else if (eventName === 'kakao_consult_click') {
+        kakaoConversions += count;
+      }
+    });
+
+    const totalConversions = consultationsCount + kakaoConversions;
+
     const summaryStats = {
       activeUsers: totalUsers || Number(trendResponse.rows?.reduce((sum: number, r: any) => sum + Number(r.metricValues?.[0]?.value || 0), 0) || 0),
       totalSessions: totalSessions || Number(summaryResponse.rows?.[0]?.metricValues?.[4]?.value || 0),
       avgSessionTime: `${Math.floor(avgSessionSec / 60)}분 ${avgSessionSec % 60}초`,
-      bounceRate: `${bounceRate}%`
+      bounceRate: `${bounceRate}%`,
+      consultationsCount,
+      kakaoConversions,
+      totalConversions
     };
 
     return NextResponse.json({

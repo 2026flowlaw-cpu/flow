@@ -890,18 +890,27 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
               <tbody>
                 {analyticsData.scrollAnalysis && analyticsData.scrollAnalysis.length > 0 ? (
                   analyticsData.scrollAnalysis.map((item: any, i: number) => {
-                    const maxCount = Math.max(item.pct25, item.pct50, item.pct75, item.pct90);
-                    let p25 = maxCount > 0 ? Math.round((item.pct25 / maxCount) * 100) : 92 - (i * 3);
-                    let p50 = maxCount > 0 ? Math.round((item.pct50 / maxCount) * 100) : 68 - (i * 4);
-                    let p75 = maxCount > 0 ? Math.round((item.pct75 / maxCount) * 100) : 42 - (i * 5);
-                    let p90 = maxCount > 0 ? Math.round((item.pct90 / maxCount) * 100) : 18 - (i * 2);
+                    let c90 = item.pct90 || 0;
+                    let c75 = Math.max(item.pct75 || 0, c90);
+                    let c50 = Math.max(item.pct50 || 0, c75);
+                    let c25 = Math.max(item.pct25 || 0, c50);
 
-                    // 계단식 하강 보장 (25% > 50% > 75% > 90%)
-                    if (p25 < p50) p25 = p50 + 15;
-                    if (p50 < p75) p50 = p75 + 20;
-                    if (p75 < p90) p75 = p90 + 18;
-                    if (p25 > 100) p25 = 98;
-                    if (p90 < 2) p90 = 5;
+                    const maxCount = c25;
+                    
+                    let p25, p50, p75, p90;
+                    
+                    if (maxCount > 0) {
+                      p25 = Math.round((c25 / maxCount) * 100);
+                      p50 = Math.round((c50 / maxCount) * 100);
+                      p75 = Math.round((c75 / maxCount) * 100);
+                      p90 = Math.round((c90 / maxCount) * 100);
+                    } else {
+                      // 데이터가 부족할 경우의 Mock 폴백
+                      p25 = 92 - (i * 3);
+                      p50 = 68 - (i * 4);
+                      p75 = 42 - (i * 5);
+                      p90 = 18 - (i * 2);
+                    }
 
                     const dropRate = 100 - p90;
 

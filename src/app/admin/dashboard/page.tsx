@@ -396,7 +396,7 @@ export default function AdminDashboardMainPage() {
         </button>
       </div>
 
-      {activeTab === 'marketing' ? (
+      {activeTab === 'marketing' &&
         <>
           <div className="stats-grid">
         {adminStats.map((stat, i) => (
@@ -900,8 +900,11 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
             </table>
           </div>
         </div>
-      </>
-    ) : (
+      </div>
+    </>
+  }
+
+  {activeTab === 'debug' &&
       <div className="debugview-grid" style={{
         display: 'grid',
         gridTemplateColumns: '220px 1fr 340px',
@@ -1294,8 +1297,7 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
           </div>
         </div>
       </div>
-    )}
-  </div>
+  }
 
   <style jsx>{`
         .analytics-container { padding: 40px 60px; display: flex; flex-direction: column; gap: 2rem; color: #1e293b; background: #f8fafc; min-height: 100vh; font-family: Pretendard, sans-serif; }

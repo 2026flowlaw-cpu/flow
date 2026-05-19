@@ -285,214 +285,279 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
         </div>
       )}
 
-      {/* 3. 웹사이트 지표 (4카드) */}
-      <div className="stats-grid">
-        <div className="stat-card glass-card">
-          <label>선택 기간 방문자</label>
-          <div className="value-group">
-            <h2 className={isLive ? "live-value" : ""}>{activeStats.activeUsers.toLocaleString()}</h2>
-          </div>
-          <p className="desc">사용자 합계</p>
-        </div>
-        <div className="stat-card glass-card">
-          <label>선택 기간 세션</label>
-          <div className="value-group">
-            <h2>{activeStats.totalSessions.toLocaleString()}</h2>
-          </div>
-          <p className="desc">방문 횟수</p>
-        </div>
-        <div className="stat-card glass-card">
-          <label>평균 세션 시간</label>
-          <div className="value-group">
-            <h2>{activeStats.avgSessionTime}</h2>
-          </div>
-          <p className="desc">전체 평균</p>
-        </div>
-        <div className="stat-card glass-card">
-          <label>이탈률 (Bounce Rate)</label>
-          <div className="value-group">
-            <h2>{activeStats.bounceRate}</h2>
-          </div>
-          <p className="desc">낮을수록 긍정적</p>
-        </div>
-      </div>
-
-      {/* 4. 차트 레이아웃 */}
-      <div className="charts-main-grid">
-        {/* 매체별 유입 추이 차트 */}
-        <div className="chart-card glass-card wide">
-          <h3>시간 경과에 따른 매체별 세션수</h3>
-          <div className="chart-container">
-            <ResponsiveContainer width="100%" height={320}>
-              <LineChart data={analyticsData.sourceTrend}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.05)" />
-                <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} />
-                <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} />
-                <Tooltip 
-                  contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '12px', color: '#fff' }}
-                  itemStyle={{ color: '#fff' }}
-                />
-                <Legend iconType="circle" wrapperStyle={{ paddingTop: '20px' }} />
-                {topSourceNames.map((name: string, i: number) => {
-                  const colors = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#a855f7'];
-                  return (
-                    <Line 
-                      key={name} 
-                      type="monotone" 
-                      dataKey={name} 
-                      stroke={colors[i % colors.length]} 
-                      strokeWidth={3} 
-                      dot={{ r: 4, strokeWidth: 2 }}
-                      activeDot={{ r: 6 }}
-                    />
-                  );
-                })}
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        {/* 유입 경로 파이 차트 */}
-        <div className="chart-card glass-card">
-          <h3>트래픽 소스 비중</h3>
-          <div className="chart-container pie-container">
-            <ResponsiveContainer width="100%" height={250}>
-              <PieChart>
-                <Pie
-                  data={analyticsData.trafficSources}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={80}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {analyticsData.trafficSources.map((entry: any, index: number) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-            <div className="pie-legend">
-              {analyticsData.trafficSources.map((source: any, i: number) => (
-                <div key={i} className="legend-item">
-                  <span className="dot" style={{ backgroundColor: source.color }}></span>
-                  <span className="name">{source.name}</span>
-                  <span className="val">{source.value.toLocaleString()}</span>
-                </div>
-              ))}
+      {/* 3. 로딩 상태 래퍼 */}
+      <div className="analytics-content-wrapper">
+        {ga4Validating && (
+          <div className="loading-overlay">
+            <div className="spinner-wrapper">
+              <div className="loading-spinner"></div>
+              <p>실시간 GA4 데이터 불러오는 중...</p>
             </div>
           </div>
-        </div>
-      </div>
+        )}
 
-      {/* 5. 테이블 레이아웃 (페이지 리포트, 최근상담) */}
-      <div className="tables-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
-        <div className="table-section glass-card">
-          <h3>인기 페이지 리포트</h3>
-          <table className="analytics-table">
-            <thead>
-              <tr>
-                <th>페이지 제목</th>
-                <th>조회수</th>
-                <th>평균 체류 시간</th>
-              </tr>
-            </thead>
-            <tbody>
-              {analyticsData.topPages.map((page: any, i: number) => (
-                <tr key={i}>
-                  <td className="page-path">{page.page}</td>
-                  <td className="bold">{page.views.toLocaleString()}</td>
-                  <td>{page.time}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="table-section glass-card" style={{ padding: '30px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px' }}>
-            <h3 style={{ margin: 0 }}>최근 상담 접수</h3>
-            <Link href="/admin/consultations" style={{ 
-                fontSize: '14px', color: '#4f46e5', fontWeight: 600, textDecoration: 'none',
-                display: 'flex', alignItems: 'center', gap: '4px'
-            }}>전체보기 <ChevronRight size={16} /></Link>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: '#f1f5f9', borderRadius: '16px', overflow: 'hidden' }}>
-            {isConsultArray && consultations.length > 0 ? (
-              consultations.slice(0, 4).map((item: any, i: number) => (
-                <div key={i} style={{ 
-                  padding: '18px 24px', 
-                  background: i % 2 === 0 ? '#ffffff' : '#f8fafc',
-                  display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-                }}>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px' }}>
-                      <span style={{ fontWeight: 600, fontSize: '15px', color: '#1e293b' }}>{item.name}</span>
-                      <span style={{ 
-                          fontSize: '11px', padding: '3px 8px', borderRadius: '6px', fontWeight: 600,
-                          background: item.status === '대기중' ? '#ef444415' : '#22c55e15',
-                          color: item.status === '대기중' ? '#ef4444' : '#22c55e'
-                      }}>{item.status}</span>
-                    </div>
-                    <div style={{ display: 'flex', gap: '10px', fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
-                      <span>{item.case_type}</span>
-                      <span style={{ color: '#cbd5e1' }}>|</span>
-                      <span>{item.phone}</span>
-                    </div>
-                  </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 600 }}>{new Date(item.created_at).toLocaleDateString().slice(5)}</p>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div style={{ padding: '40px', textAlign: 'center', background: 'white' }}>
-                <p style={{ color: '#94a3b8', fontWeight: 600, fontSize: '14px' }}>접수된 내역이 없습니다.</p>
+        <div style={{ 
+          opacity: ga4Validating ? 0.38 : 1, 
+          transition: 'opacity 0.25s ease',
+          pointerEvents: ga4Validating ? 'none' : 'auto'
+        }}>
+          {/* 웹사이트 지표 (4카드) */}
+          <div className="stats-grid">
+            <div className="stat-card glass-card">
+              <label>선택 기간 방문자</label>
+              <div className="value-group">
+                <h2 className={isLive ? "live-value" : ""}>{activeStats.activeUsers.toLocaleString()}</h2>
               </div>
-            )}
+              <p className="desc">사용자 합계</p>
+            </div>
+            <div className="stat-card glass-card">
+              <label>선택 기간 세션</label>
+              <div className="value-group">
+                <h2>{activeStats.totalSessions.toLocaleString()}</h2>
+              </div>
+              <p className="desc">방문 횟수</p>
+            </div>
+            <div className="stat-card glass-card">
+              <label>평균 세션 시간</label>
+              <div className="value-group">
+                <h2>{activeStats.avgSessionTime}</h2>
+              </div>
+              <p className="desc">전체 평균</p>
+            </div>
+            <div className="stat-card glass-card">
+              <label>이탈률 (Bounce Rate)</label>
+              <div className="value-group">
+                <h2>{activeStats.bounceRate}</h2>
+              </div>
+              <p className="desc">낮을수록 긍정적</p>
+            </div>
+          </div>
+
+          {/* 4. 차트 레이아웃 */}
+          <div className="charts-main-grid">
+            {/* 매체별 유입 추이 차트 */}
+            <div className="chart-card glass-card wide">
+              <h3>시간 경과에 따른 매체별 세션수</h3>
+              <div className="chart-container">
+                <ResponsiveContainer width="100%" height={320}>
+                  <LineChart data={analyticsData.sourceTrend}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.05)" />
+                    <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} />
+                    <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} />
+                    <Tooltip 
+                      contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '12px', color: '#fff' }}
+                      itemStyle={{ color: '#fff' }}
+                    />
+                    <Legend iconType="circle" wrapperStyle={{ paddingTop: '20px' }} />
+                    {topSourceNames.map((name: string, i: number) => {
+                      const colors = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#a855f7'];
+                      return (
+                        <Line 
+                          key={name} 
+                          type="monotone" 
+                          dataKey={name} 
+                          stroke={colors[i % colors.length]} 
+                          strokeWidth={3} 
+                          dot={{ r: 4, strokeWidth: 2 }}
+                          activeDot={{ r: 6 }}
+                        />
+                      );
+                    })}
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            {/* 유입 경로 파이 차트 */}
+            <div className="chart-card glass-card">
+              <h3>트래픽 소스 비중</h3>
+              <div className="chart-container pie-container">
+                <ResponsiveContainer width="100%" height={250}>
+                  <PieChart>
+                    <Pie
+                      data={analyticsData.trafficSources}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={80}
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {analyticsData.trafficSources.map((entry: any, index: number) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+                <div className="pie-legend">
+                  {analyticsData.trafficSources.map((source: any, i: number) => (
+                    <div key={i} className="legend-item">
+                      <span className="dot" style={{ backgroundColor: source.color }}></span>
+                      <span className="name">{source.name}</span>
+                      <span className="val">{source.value.toLocaleString()}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 5. 테이블 레이아웃 (페이지 리포트, 최근상담) */}
+          <div className="tables-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
+            <div className="table-section glass-card">
+              <h3>인기 페이지 리포트</h3>
+              <table className="analytics-table">
+                <thead>
+                  <tr>
+                    <th>페이지 제목</th>
+                    <th>조회수</th>
+                    <th>평균 체류 시간</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {analyticsData.topPages.map((page: any, i: number) => (
+                    <tr key={i}>
+                      <td className="page-path">{page.page}</td>
+                      <td className="bold">{page.views.toLocaleString()}</td>
+                      <td>{page.time}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="table-section glass-card" style={{ padding: '30px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px' }}>
+                <h3 style={{ margin: 0 }}>최근 상담 접수</h3>
+                <Link href="/admin/consultations" style={{ 
+                    fontSize: '14px', color: '#4f46e5', fontWeight: 600, textDecoration: 'none',
+                    display: 'flex', alignItems: 'center', gap: '4px'
+                }}>전체보기 <ChevronRight size={16} /></Link>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: '#f1f5f9', borderRadius: '16px', overflow: 'hidden' }}>
+                {isConsultArray && consultations.length > 0 ? (
+                  consultations.slice(0, 4).map((item: any, i: number) => (
+                    <div key={i} style={{ 
+                      padding: '18px 24px', 
+                      background: i % 2 === 0 ? '#ffffff' : '#f8fafc',
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                    }}>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px' }}>
+                          <span style={{ fontWeight: 600, fontSize: '15px', color: '#1e293b' }}>{item.name}</span>
+                          <span style={{ 
+                              fontSize: '11px', padding: '3px 8px', borderRadius: '6px', fontWeight: 600,
+                              background: item.status === '대기중' ? '#ef444415' : '#22c55e15',
+                              color: item.status === '대기중' ? '#ef4444' : '#22c55e'
+                          }}>{item.status}</span>
+                        </div>
+                        <div style={{ display: 'flex', gap: '10px', fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
+                          <span>{item.case_type}</span>
+                          <span style={{ color: '#cbd5e1' }}>|</span>
+                          <span>{item.phone}</span>
+                        </div>
+                      </div>
+                      <div style={{ textAlign: 'right' }}>
+                        <p style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 600 }}>{new Date(item.created_at).toLocaleDateString().slice(5)}</p>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ padding: '40px', textAlign: 'center', background: 'white' }}>
+                    <p style={{ color: '#94a3b8', fontWeight: 600, fontSize: '14px' }}>접수된 내역이 없습니다.</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* 6. 매체별 상세 리포트 */}
+          <div className="table-section glass-card wide-table-card" style={{ marginTop: '30px' }}>
+            <h3>매체별 유입 및 참여 리포트 상세 (Source / Medium)</h3>
+            <table className="analytics-table">
+              <thead>
+                <tr>
+                  <th>유입 소스 / 매체</th>
+                  <th>사용자</th>
+                  <th>세션수</th>
+                  <th>참여 세션</th>
+                  <th>참여율</th>
+                  <th>평균 참여시간</th>
+                </tr>
+              </thead>
+              <tbody>
+                {analyticsData.sourcesDetailed.map((src: any, i: number) => (
+                  <tr key={i}>
+                    <td className="source-name">🔗 {src.name}</td>
+                    <td className="bold">{src.users.toLocaleString()}</td>
+                    <td>{src.sessions.toLocaleString()}</td>
+                    <td>{src.engagedSessions.toLocaleString()}</td>
+                    <td>
+                      <span className={`badge ${parseFloat(src.engagementRate) > 50 ? 'high' : ''}`}>
+                        {src.engagementRate}
+                      </span>
+                    </td>
+                    <td>{src.avgTime}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
-
-      {/* 6. 매체별 상세 리포트 */}
-      <div className="table-section glass-card wide-table-card" style={{ marginTop: '30px' }}>
-        <h3>매체별 유입 및 참여 리포트 상세 (Source / Medium)</h3>
-        <table className="analytics-table">
-          <thead>
-            <tr>
-              <th>유입 소스 / 매체</th>
-              <th>사용자</th>
-              <th>세션수</th>
-              <th>참여 세션</th>
-              <th>참여율</th>
-              <th>평균 참여시간</th>
-            </tr>
-          </thead>
-          <tbody>
-            {analyticsData.sourcesDetailed.map((src: any, i: number) => (
-              <tr key={i}>
-                <td className="source-name">🔗 {src.name}</td>
-                <td className="bold">{src.users.toLocaleString()}</td>
-                <td>{src.sessions.toLocaleString()}</td>
-                <td>{src.engagedSessions.toLocaleString()}</td>
-                <td>
-                  <span className={`badge ${parseFloat(src.engagementRate) > 50 ? 'high' : ''}`}>
-                    {src.engagementRate}
-                  </span>
-                </td>
-                <td>{src.avgTime}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
 
       <style jsx>{`
         .analytics-container { padding: 40px 60px; display: flex; flex-direction: column; gap: 2rem; color: #1e293b; background: #f8fafc; min-height: 100vh; font-family: Pretendard, sans-serif; }
         
+        /* 로딩 오버레이 스타일 */
+        .analytics-content-wrapper {
+          position: relative;
+          transition: all 0.3s ease;
+        }
+        .loading-overlay {
+          position: absolute;
+          top: -15px; left: -15px; right: -15px; bottom: -15px;
+          background: rgba(248, 250, 252, 0.45);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
+          z-index: 100;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 28px;
+        }
+        .spinner-wrapper {
+          background: white;
+          padding: 24px 40px;
+          border-radius: 20px;
+          box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08), 0 10px 10px -5px rgba(0,0,0,0.04);
+          border: 1px solid #edf2f7;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+        }
+        .loading-spinner {
+          width: 32px;
+          height: 32px;
+          border: 3.5px solid #e2e8f0;
+          border-top-color: #6366f1;
+          border-radius: 50%;
+          animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+        .spinner-wrapper p {
+          margin: 0;
+          font-size: 13.5px;
+          font-weight: 700;
+          color: #4f46e5;
+          letter-spacing: -0.01em;
+        }
+
         .analytics-header { display: flex; justify-content: space-between; align-items: flex-end; }
         .title-area h1 { font-size: 36px; font-weight: 600; margin-bottom: 10px; color: #0A1B39; letter-spacing: -0.02em; display: flex; align-items: center; }
         .sub-title { color: #bd9d62; font-size: 24px; font-weight: 400; margin-left: 10px; }

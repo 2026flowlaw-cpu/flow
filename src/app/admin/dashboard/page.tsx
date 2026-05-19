@@ -120,9 +120,52 @@ const getPageKoreanName = (path: string) => {
   return path;
 };
 
+const parseDetails = (details: string) => {
+  if (!details) return { cleanText: '', attachment: null };
+  
+  const fileMarker = '[첨부파일_데이터]';
+  const markerIndex = details.indexOf(fileMarker);
+  
+  if (markerIndex === -1) {
+    return { cleanText: details, attachment: null };
+  }
+  
+  const cleanText = details.substring(0, markerIndex).trim();
+  const fileSection = details.substring(markerIndex + fileMarker.length).trim();
+  
+  const nameLine = fileSection.split('\n').find(l => l.startsWith('파일명:'));
+  const dataLine = fileSection.split('\n').find(l => l.startsWith('데이터:'));
+  
+  const fileName = nameLine ? nameLine.replace('파일명:', '').trim() : '첨부파일';
+  const base64 = dataLine ? dataLine.replace('데이터:', '').trim() : '';
+  
+  return {
+    cleanText,
+    attachment: base64 ? { name: fileName, data: base64 } : null
+  };
+};
+
 export default function AdminDashboardMainPage() {
-  const { data: consultations } = useSWR('/api/consultations', fetcher);
+  const { data: consultations, mutate: mutateConsultations } = useSWR('/api/consultations', fetcher);
   const { data: pressReleases } = useSWR('/api/press-releases', fetcher);
+  
+  const [selectedItem, setSelectedItem] = useState<any | null>(null);
+
+  const handleStatusChange = async (id: string, newStatus: string) => {
+    try {
+      const res = await fetch('/api/consultations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'update_status', id, status: newStatus })
+      });
+      if (res.ok) {
+        mutateConsultations();
+        setSelectedItem((prev: any) => prev ? { ...prev, status: newStatus } : null);
+      }
+    } catch (error) {
+      console.error('Error updating status:', error);
+    }
+  };
 
   const isConsultArray = Array.isArray(consultations);
   const isPressArray = Array.isArray(pressReleases);
@@ -747,11 +790,19 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: '#f1f5f9', borderRadius: '16px', overflow: 'hidden' }}>
                 {isConsultArray && consultations.length > 0 ? (
                   consultations.slice(0, 4).map((item: any, i: number) => (
-                    <div key={i} style={{ 
-                      padding: '14px 20px', 
-                      background: i % 2 === 0 ? '#ffffff' : '#f8fafc',
-                      display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-                    }}>
+                    <div 
+                      key={i} 
+                      onClick={() => setSelectedItem(item)}
+                      style={{ 
+                        padding: '14px 20px', 
+                        background: i % 2 === 0 ? '#ffffff' : '#f8fafc',
+                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.background = '#f1f5f9'}
+                      onMouseLeave={(e) => e.currentTarget.style.background = i % 2 === 0 ? '#ffffff' : '#f8fafc'}
+                    >
                       <div style={{ flex: 1 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
                           <span style={{ fontWeight: 600, fontSize: '14px', color: '#1e293b' }}>{item.name}</span>
@@ -1385,6 +1436,133 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
           )}
         </div>
       </div>
+
+      {selectedItem && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, 
+          background: 'rgba(0,0,0,0.5)', zIndex: 9999,
+          display: 'flex', alignItems: 'center', justifyContent: 'center'
+        }}>
+          <div style={{
+            background: 'white', width: '90%', maxWidth: '600px', 
+            borderRadius: '12px', padding: '30px', boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+            maxHeight: '90vh', overflowY: 'auto'
+          }}>
+            <h2 style={{ fontSize: '24px', fontWeight: 600, marginBottom: '20px', color: '#0A1B39', borderBottom: '2px solid #eee', paddingBottom: '15px' }}>
+              상담 신청 상세 내역
+            </h2>
+            
+            <div style={{ marginBottom: '15px', display: 'flex', borderBottom: '1px solid #f5f5f5', paddingBottom: '10px' }}>
+              <strong style={{ width: '120px', color: '#666' }}>의뢰인명:</strong>
+              <span>{selectedItem.name}</span>
+            </div>
+            <div style={{ marginBottom: '15px', display: 'flex', borderBottom: '1px solid #f5f5f5', paddingBottom: '10px' }}>
+              <strong style={{ width: '120px', color: '#666' }}>연락처:</strong>
+              <span style={{ fontWeight: 600 }}>{selectedItem.phone}</span>
+            </div>
+            <div style={{ marginBottom: '15px', display: 'flex', borderBottom: '1px solid #f5f5f5', paddingBottom: '10px' }}>
+              <strong style={{ width: '120px', color: '#666' }}>이메일:</strong>
+              <span>{selectedItem.email || '미입력'}</span>
+            </div>
+            <div style={{ marginBottom: '15px', display: 'flex', borderBottom: '1px solid #f5f5f5', paddingBottom: '10px' }}>
+              <strong style={{ width: '120px', color: '#666' }}>사건 유형:</strong>
+              <span>{selectedItem.case_type}</span>
+            </div>
+            <div style={{ marginBottom: '15px', display: 'flex', borderBottom: '1px solid #f5f5f5', paddingBottom: '10px' }}>
+              <strong style={{ width: '120px', color: '#666' }}>부동산 위치:</strong>
+              <span>{selectedItem.location || '미입력'}</span>
+            </div>
+            <div style={{ marginBottom: '15px', display: 'flex', borderBottom: '1px solid #f5f5f5', paddingBottom: '10px' }}>
+              <strong style={{ width: '120px', color: '#666' }}>희망 상담시간:</strong>
+              <span>{selectedItem.appointment_time || '미입력'}</span>
+            </div>
+            <div style={{ marginBottom: '15px', display: 'flex', borderBottom: '1px solid #f5f5f5', paddingBottom: '10px', alignItems: 'center' }}>
+              <strong style={{ width: '120px', color: '#666' }}>처리 상태:</strong>
+              <select 
+                value={selectedItem.status} 
+                onChange={(e) => handleStatusChange(selectedItem.id, e.target.value)}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: '6px',
+                  border: `1px solid ${selectedItem.status === '대기중' ? '#ffcdd2' : '#c8e6c9'}`,
+                  background: selectedItem.status === '대기중' ? '#ffebee' : '#e8f5e9',
+                  color: selectedItem.status === '대기중' ? '#c62828' : '#2e7d32',
+                  fontWeight: 600,
+                  cursor: 'pointer'
+                }}
+              >
+                <option value="대기중">🚨 대기중</option>
+                <option value="확인중">👀 확인중</option>
+                <option value="상담완료">✅ 상담완료</option>
+              </select>
+            </div>
+            
+            {(() => {
+              const { cleanText, attachment } = parseDetails(selectedItem.details || '');
+              return (
+                <>
+                  <div style={{ marginTop: '20px', background: '#f8f9fa', padding: '20px', borderRadius: '8px' }}>
+                    <strong style={{ display: 'block', marginBottom: '10px', color: '#333' }}>[상세 내용]</strong>
+                    <p style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6', color: '#444', margin: 0 }}>
+                      {cleanText || '내용 없음'}
+                    </p>
+                  </div>
+                  
+                  {attachment && (
+                    <div style={{ marginTop: '20px', background: '#f0f4f8', border: '1px dashed #cbd5e1', padding: '20px', borderRadius: '8px' }}>
+                      <strong style={{ display: 'block', marginBottom: '10px', color: '#1e293b' }}>📎 첨부파일</strong>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <span style={{ fontSize: '13px', fontWeight: 600, color: '#475569' }}>
+                          파일명: {attachment.name}
+                        </span>
+                        
+                        {attachment.data.startsWith('data:image/') && (
+                          <div style={{ maxWidth: '100%', maxHeight: '300px', overflow: 'hidden', borderRadius: '8px', border: '1px solid #cbd5e1' }}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={attachment.data} alt="첨부 이미지" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto', objectFit: 'contain' }} />
+                          </div>
+                        )}
+                        
+                        <div>
+                          <a 
+                            href={attachment.data} 
+                            download={attachment.name}
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '6px',
+                              padding: '8px 16px',
+                              background: '#bd9d62',
+                              color: 'white',
+                              borderRadius: '6px',
+                              fontSize: '13px',
+                              fontWeight: 700,
+                              textDecoration: 'none',
+                              boxShadow: '0 2px 4px rgba(189,157,98,0.2)',
+                              cursor: 'pointer'
+                            }}
+                          >
+                            ⬇️ 파일 다운로드
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </>
+              );
+            })()}
+
+            <div style={{ marginTop: '30px', textAlign: 'right' }}>
+              <button 
+                onClick={() => setSelectedItem(null)}
+                style={{ padding: '12px 30px', background: '#0A1B39', color: 'white', borderRadius: '6px', border: 'none', fontWeight: 600, cursor: 'pointer' }}
+              >
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   }
 

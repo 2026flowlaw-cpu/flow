@@ -142,9 +142,19 @@ export default function Header() {
         <nav className={styles.nav}>
           {currentMenuData.map((item, index) => (
             <div key={index} className={styles.navItem}>
-              <Link href={item.href} className={styles.navLink}>
-                {item.title}
-              </Link>
+              {item.subItems ? (
+                <span 
+                  className={styles.navLink} 
+                  style={{ cursor: 'pointer' }}
+                  onClick={(e) => e.preventDefault()}
+                >
+                  {item.title}
+                </span>
+              ) : (
+                <Link href={item.href} className={styles.navLink}>
+                  {item.title}
+                </Link>
+              )}
               <div className={styles.dropdown}>
                 <div className={styles.dropdownContent}>
                   {item.subItems.map((sub, sIndex) => (

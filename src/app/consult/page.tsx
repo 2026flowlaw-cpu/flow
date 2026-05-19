@@ -36,6 +36,13 @@ export default function ConsultPage() {
       });
 
       if (res.ok) {
+        // 구글 태그관리자(GTM) 맞춤 이벤트 전송
+        if (typeof window !== 'undefined' && (window as any).dataLayer) {
+          (window as any).dataLayer.push({
+            event: 'consultation_submit',
+            caseType: formData.case_type || 'unspecified'
+          });
+        }
         alert('상담 신청이 완료되었습니다. 담당자가 확인 후 연락드리겠습니다.');
         setFormData({
           name: '',
@@ -196,7 +203,17 @@ export default function ConsultPage() {
               </div>
             </div>
 
-            <a href="https://pf.kakao.com/..." target="_blank" rel="noopener noreferrer" className={styles.kakaoBtn}>
+            <a 
+              href="https://pf.kakao.com/..." 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={styles.kakaoBtn}
+              onClick={() => {
+                if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                  (window as any).dataLayer.push({ event: 'kakao_consult_click' });
+                }
+              }}
+            >
               <span className={styles.kakaoIcon}>💬</span> 카카오톡 실시간 상담
             </a>
           </aside>

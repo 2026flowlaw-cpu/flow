@@ -477,7 +477,7 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                     <tr key={i}>
                       <td style={{ padding: '16px' }}>
                         <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '14px', marginBottom: '4px' }}>
-                          ✨ {getPageKoreanName(page.page)}
+                          {getPageKoreanName(page.page)}
                         </div>
                         <div className="page-path" style={{ fontSize: '11.5px', color: '#94a3b8', fontStyle: 'normal' }}>
                           {page.page}

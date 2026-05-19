@@ -99,7 +99,20 @@ export default function AdminConsultationsPage() {
                 <tr><td colSpan={6} className={styles.center}>불러오는 중...</td></tr>
               ) : consultations.length > 0 ? (
                 consultations.map((item: any) => (
-                  <tr key={item.id} style={{ background: item.status === '대기중' ? '#fdf8f6' : 'transparent' }}>
+                  <tr 
+                    key={item.id} 
+                    onClick={(e) => {
+                      const target = e.target as HTMLElement;
+                      if (target.tagName === 'SELECT' || target.tagName === 'OPTION' || target.closest('button')) {
+                        return;
+                      }
+                      setSelectedItem(item);
+                    }}
+                    style={{ 
+                      background: item.status === '대기중' ? '#fdf8f6' : 'transparent',
+                      cursor: 'pointer' 
+                    }}
+                  >
                     <td>{new Date(item.created_at).toLocaleString('ko-KR')}</td>
                     <td className={styles.storyTitle}>{item.name}</td>
                     <td><span className={styles.categoryTag}>{item.case_type || '지정안됨'}</span></td>

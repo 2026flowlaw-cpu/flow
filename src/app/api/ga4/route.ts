@@ -46,6 +46,30 @@ export async function GET(req: NextRequest) {
   try {
     const parentProperty = `properties/${propertyId}`;
 
+    // 페이지 흐름 탐색을 위한 맞춤 이벤트 쿼리
+    const pageFlowPromise = client.runReport({
+      property: parentProperty,
+      dateRanges: [{ startDate, endDate }],
+      dimensions: [
+        { name: 'customEvent:from_page' },
+        { name: 'customEvent:to_page' }
+      ],
+      metrics: [{ name: 'eventCount' }],
+      dimensionFilter: {
+        filter: {
+          fieldName: 'eventName',
+          stringFilter: {
+            matchType: 'EXACT',
+            value: 'page_flow'
+          }
+        }
+      },
+      limit: 100
+    }).catch((err: any) => {
+      console.warn('Page flow report failed (likely dimension not synced yet):', err.message);
+      return [{ rows: [] }] as any;
+    });
+
     // 병렬로 GA4 데이터 요청 실행
     const [
       [trendResponse],
@@ -56,7 +80,8 @@ export async function GET(req: NextRequest) {
       [locationResponse],
       [summaryResponse],
       [eventsResponse],
-      [scrollResponse]
+      [scrollResponse],
+      [pageFlowResponse]
     ] = await Promise.all([
       // 1. 트렌드 (일별 활성 사용자 & 세션)
       client.runReport({
@@ -140,7 +165,9 @@ export async function GET(req: NextRequest) {
           }
         },
         limit: 100
-      })
+      }),
+      // 10. 페이지 이동 흐름 리포트 (경로 탐색용)
+      pageFlowPromise
     ]);
 
     // 1. 일별 트렌드 데이터 가공
@@ -275,6 +302,13 @@ export async function GET(req: NextRequest) {
       };
     }).sort((a, b) => (b.pct25 + b.pct50) - (a.pct25 + a.pct50)).slice(0, 5);
 
+    // 10. 페이지 이동 경로 가공
+    const formattedPageFlow = pageFlowResponse?.rows?.map((row: any) => ({
+      from: row.dimensionValues?.[0]?.value || '/',
+      to: row.dimensionValues?.[1]?.value || '/',
+      count: Number(row.metricValues?.[0]?.value || 0)
+    })) || [];
+
     const summaryStats = {
       activeUsers: totalUsers || Number(trendResponse.rows?.reduce((sum: number, r: any) => sum + Number(r.metricValues?.[0]?.value || 0), 0) || 0),
       totalSessions: totalSessions || Number(summaryResponse.rows?.[0]?.metricValues?.[4]?.value || 0),
@@ -295,6 +329,7 @@ export async function GET(req: NextRequest) {
         topLocations: formattedLocation,
         events: formattedEvents,
         scrollAnalysis: formattedScroll,
+        pageFlow: formattedPageFlow,
         topSourceNames: Array.from(topSourceSet).slice(0, 5) // 상위 5개 소스 표시
       }
     });

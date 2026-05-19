@@ -104,8 +104,22 @@ export default function AdminDashboardMainPage() {
   const isLive = ga4Res?.success && isConfigured;
 
   // 실시간 데이터 또는 데모 데이터 폴백 설정
-  const activeStats = isLive ? ga4Res.stats : mockStats;
-  const analyticsData = isLive ? ga4Res.data : mockAnalyticsData;
+  const isLoading = ga4Validating;
+  const activeStats = isLoading 
+    ? { activeUsers: '-', totalSessions: '-', avgSessionTime: '-', bounceRate: '-' }
+    : (isLive ? ga4Res.stats : mockStats);
+
+  const analyticsData = isLoading
+    ? {
+        dailyActiveUsers: [],
+        trafficSources: [],
+        sourceTrend: [],
+        topPages: [],
+        sourcesDetailed: [],
+        topLocations: [],
+        topSourceNames: []
+      }
+    : (isLive ? ga4Res.data : mockAnalyticsData);
   const topSourceNames = (analyticsData.topSourceNames && analyticsData.topSourceNames.length > 0)
     ? analyticsData.topSourceNames 
     : ['(direct)', 'ig', 'localhost:3000', 'threads'];
@@ -306,14 +320,18 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
             <div className="stat-card glass-card">
               <label>선택 기간 방문자</label>
               <div className="value-group">
-                <h2 className={isLive ? "live-value" : ""}>{activeStats.activeUsers.toLocaleString()}</h2>
+                <h2 className={isLive ? "live-value" : ""}>
+                  {typeof activeStats.activeUsers === 'number' ? activeStats.activeUsers.toLocaleString() : activeStats.activeUsers}
+                </h2>
               </div>
               <p className="desc">사용자 합계</p>
             </div>
             <div className="stat-card glass-card">
               <label>선택 기간 세션</label>
               <div className="value-group">
-                <h2>{activeStats.totalSessions.toLocaleString()}</h2>
+                <h2>
+                  {typeof activeStats.totalSessions === 'number' ? activeStats.totalSessions.toLocaleString() : activeStats.totalSessions}
+                </h2>
               </div>
               <p className="desc">방문 횟수</p>
             </div>

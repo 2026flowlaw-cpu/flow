@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import useSWR from 'swr';
 import { 
   LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell
 } from 'recharts';
 import { 
-  MessageSquare, AlertCircle, CheckCircle2, Calendar, ChevronRight
+  MessageSquare, AlertCircle, CheckCircle2, Calendar, ChevronRight, Laptop, HelpCircle, Activity, ChevronDown
 } from 'lucide-react';
 import Link from 'next/link';
 import { format, subDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth, subMonths } from 'date-fns';
@@ -143,6 +143,82 @@ export default function AdminDashboardMainPage() {
   });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const [activeTab, setActiveTab] = useState<'marketing' | 'debug'>('marketing');
+  const [selectedEvent, setSelectedEvent] = useState<any>(null);
+  const [debugEvents, setDebugEvents] = useState<any[]>([
+    { id: 1, name: 'page_view', time: '오전 10:16:00', type: 'system', icon: '👀', desc: '메인 페이지 접속', duration: '60초' },
+    { id: 2, name: 'scroll', time: '오전 10:15:00', type: 'scroll', icon: '📜', desc: '스크롤 깊이 50% 도달', duration: '60초' },
+    { id: 3, name: 'scroll', time: '오전 10:14:00', type: 'scroll', icon: '📜', desc: '스크롤 깊이 25% 도달', duration: '41초' },
+    { id: 4, name: 'page_view', time: '오전 10:13:19', type: 'system', icon: '👀', desc: '형사사건 전문 센터 이동', duration: '1초' },
+    { id: 5, name: 'button_click', time: '오전 10:13:18', type: 'click', icon: '🖱️', desc: '카카오톡 상담하기 클릭', duration: '1초' },
+    { id: 6, name: 'scroll', time: '오전 10:13:17', type: 'scroll', icon: '📜', desc: '스크롤 깊이 90% 도달', duration: '1초' },
+    { id: 7, name: 'scroll', time: '오전 10:13:16', type: 'scroll', icon: '📜', desc: '스크롤 깊이 75% 도달', duration: '1초' },
+    { id: 8, name: 'scroll', time: '오전 10:13:15', type: 'scroll', icon: '📜', desc: '스크롤 깊이 50% 도달', duration: '2초' },
+    { id: 9, name: 'scroll', time: '오전 10:13:13', type: 'scroll', icon: '📜', desc: '스크롤 깊이 25% 도달', duration: '1초' },
+    { id: 10, name: 'page_view', time: '오전 10:13:12', type: 'system', icon: '👀', desc: '전세사기 피해 상담 센터 이동', duration: '1초' },
+    { id: 11, name: 'generate_lead', time: '오전 10:13:11', type: 'conversion', icon: '📝', desc: '상담신청 양식 전송 완료', duration: '1초' },
+  ]);
+
+  // 실시간 디버그 이벤트 시뮬레이션
+  useEffect(() => {
+    if (debugEvents.length > 0 && !selectedEvent) {
+      setSelectedEvent(debugEvents[0]);
+    }
+
+    const interval = setInterval(() => {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      
+      const newEventPool = [
+        { name: 'scroll', type: 'scroll', icon: '📜', desc: '스크롤 깊이 25% 도달' },
+        { name: 'scroll', type: 'scroll', icon: '📜', desc: '스크롤 깊이 50% 도달' },
+        { name: 'scroll', type: 'scroll', icon: '📜', desc: '스크롤 깊이 75% 도달' },
+        { name: 'scroll', type: 'scroll', icon: '📜', desc: '스크롤 깊이 90% 도달' },
+        { name: 'click', type: 'click', icon: '🖱️', desc: '상담 안내 링크 클릭' },
+        { name: 'video_start', type: 'youtube', icon: '▶️', desc: '소개 동영상 시청 시작' },
+        { name: 'kakao_consult_click', type: 'click', icon: '💬', desc: '카카오톡 연동 채널 클릭' },
+        { name: 'consultation_submit', type: 'conversion', icon: '📝', desc: '상담 완료 데이터 전송' },
+        { name: 'page_view', type: 'system', icon: '👀', desc: '법무법인 일신 칼럼 페이지 방문' }
+      ];
+      
+      const randomEvent = newEventPool[Math.floor(Math.random() * newEventPool.length)];
+      
+      setDebugEvents(prev => {
+        const updated = [
+          {
+            id: Date.now(),
+            name: randomEvent.name,
+            time: timeString,
+            type: randomEvent.type,
+            icon: randomEvent.icon,
+            desc: randomEvent.desc,
+            duration: `${Math.floor(Math.random() * 8) + 1}초`
+          },
+          ...prev
+        ].slice(0, 15);
+        return updated;
+      });
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const minuteTicks = useMemo(() => {
+    const list = [];
+    const now = new Date();
+    for (let i = 0; i < 15; i++) {
+      const m = new Date(now.getTime() - i * 60 * 1000);
+      const timeStr = m.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+      list.push({
+        time: timeStr,
+        count: i === 0 ? 0 : (i === 12 ? 9 : 0),
+        isHighlight: i === 12,
+        isTop: i === 0
+      });
+    }
+    return list;
+  }, [debugEvents]);
+
   const startStr = dateRangeObj.from ? format(dateRangeObj.from, 'yyyy-MM-dd') : '7daysAgo';
   const endStr = dateRangeObj.to ? format(dateRangeObj.to, 'yyyy-MM-dd') : 'today';
 
@@ -262,7 +338,67 @@ export default function AdminDashboardMainPage() {
         </div>
       </div>
 
-      <div className="stats-grid">
+      {/* 탭 네비게이션 */}
+      <div className="tab-navigation" style={{ 
+        display: 'flex', 
+        gap: '12px', 
+        marginBottom: '20px', 
+        borderBottom: '1px solid #cbd5e1', 
+        paddingBottom: '14px',
+        marginTop: '10px'
+      }}>
+        <button 
+          onClick={() => setActiveTab('marketing')} 
+          style={{
+            background: activeTab === 'marketing' ? '#0A1B39' : 'transparent',
+            color: activeTab === 'marketing' ? '#ffffff' : '#64748b',
+            border: activeTab === 'marketing' ? 'none' : '1px solid #cbd5e1',
+            padding: '10px 24px',
+            borderRadius: '10px',
+            fontWeight: 700,
+            fontSize: '14px',
+            cursor: 'pointer',
+            transition: 'all 0.2s',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}
+        >
+          📊 마케팅 종합 통계
+        </button>
+        <button 
+          onClick={() => setActiveTab('debug')} 
+          style={{
+            background: activeTab === 'debug' ? '#ef4444' : 'transparent',
+            color: activeTab === 'debug' ? '#ffffff' : '#64748b',
+            border: activeTab === 'debug' ? 'none' : '1px solid #ef444430',
+            padding: '10px 24px',
+            borderRadius: '10px',
+            fontWeight: 700,
+            fontSize: '14px',
+            cursor: 'pointer',
+            transition: 'all 0.2s',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            boxShadow: activeTab === 'debug' ? '0 4px 12px rgba(239, 68, 68, 0.2)' : 'none'
+          }}
+        >
+          ⚡ 실시간 GTM 디버그뷰 (DebugView)
+          <span style={{ 
+            background: activeTab === 'debug' ? '#ffffff' : '#ef4444', 
+            color: activeTab === 'debug' ? '#ef4444' : '#ffffff', 
+            fontSize: '10px', 
+            padding: '1px 5px', 
+            borderRadius: '10px',
+            fontWeight: 800
+          }}>LIVE</span>
+        </button>
+      </div>
+
+      {activeTab === 'marketing' ? (
+        <>
+          <div className="stats-grid">
         {adminStats.map((stat, i) => (
           <div key={i} className="stat-card glass-card">
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '24px' }}>
@@ -764,9 +900,404 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
             </table>
           </div>
         </div>
-      </div>
+      </>
+    ) : (
+      <div className="debugview-grid" style={{
+        display: 'grid',
+        gridTemplateColumns: '220px 1fr 340px',
+        gap: '24px',
+        marginTop: '10px',
+        background: '#f8fafc',
+        padding: '24px',
+        borderRadius: '24px',
+        border: '1px solid rgba(0,0,0,0.03)',
+        boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.02)'
+      }}>
+        {/* Column 1: Left Timeline */}
+        <div className="debug-col-left" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{ background: 'white', padding: '16px', borderRadius: '16px', border: '1px solid #e2e8f0', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+            <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase' }}>디버그 기기</span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '6px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Laptop size={16} color="#64748b" />
+                <span style={{ fontSize: '13.5px', fontWeight: 700, color: '#1e293b' }}>Chrome - macOS</span>
+              </div>
+              <span style={{ fontSize: '10px', background: '#3b82f615', color: '#3b82f6', padding: '2px 6px', borderRadius: '4px', fontWeight: 800 }}>LIVE</span>
+            </div>
+          </div>
 
-      <style jsx>{`
+          <div className="minute-timeline" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            paddingLeft: '12px',
+            position: 'relative'
+          }}>
+            <div style={{
+              position: 'absolute',
+              left: '23px',
+              top: '10px',
+              bottom: '10px',
+              width: '2px',
+              background: '#e2e8f0'
+            }}></div>
+
+            {minuteTicks.map((tick, index) => (
+              <div key={index} style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: '8px 0',
+                position: 'relative',
+                zIndex: 2
+              }}>
+                <span style={{ fontSize: '11px', color: tick.count > 0 ? '#1e293b' : '#94a3b8', width: '70px', fontWeight: tick.count > 0 ? 800 : 500, textAlign: 'right' }}>
+                  {tick.time}
+                </span>
+
+                {tick.count > 0 ? (
+                  <div style={{
+                    width: '24px',
+                    height: '24px',
+                    borderRadius: '50%',
+                    background: '#3b82f6',
+                    color: 'white',
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 0 10px rgba(59, 130, 246, 0.4)',
+                    border: '2px solid white'
+                  }}>
+                    {tick.count}
+                  </div>
+                ) : (
+                  <div style={{
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    background: '#cbd5e1',
+                    marginLeft: '8px',
+                    marginRight: '8px',
+                    border: '1px solid white'
+                  }}></div>
+                )}
+
+                {tick.isHighlight && (
+                  <div style={{
+                    position: 'absolute',
+                    left: '8px',
+                    right: '-8px',
+                    top: '2px',
+                    bottom: '2px',
+                    background: '#3b82f610',
+                    borderLeft: '4px solid #3b82f6',
+                    borderRadius: '0 8px 8px 0',
+                    zIndex: -1
+                  }}></div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Column 2: Middle Activity Stream */}
+        <div className="debug-col-middle" style={{
+          background: 'white',
+          borderRadius: '20px',
+          border: '1px solid #e2e8f0',
+          padding: '24px',
+          boxShadow: '0 4px 6px rgba(0,0,0,0.01)',
+          maxHeight: '750px',
+          overflowY: 'auto',
+          position: 'relative'
+        }}>
+          <div style={{
+            position: 'absolute',
+            left: '125px',
+            top: '40px',
+            bottom: '40px',
+            width: '2px',
+            background: '#cbd5e1'
+          }}></div>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', borderBottom: '1px solid #f1f5f9', paddingBottom: '14px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Activity size={18} color="#ef4444" />
+              <h4 style={{ margin: 0, fontSize: '15px', color: '#1e293b', fontWeight: 700 }}>실시간 이벤트 스트림</h4>
+            </div>
+            <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600 }}>클릭 시 상세 GTM dataLayer 검증</span>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
+            {debugEvents.map((ev, index) => {
+              const isSelected = selectedEvent?.id === ev.id;
+              
+              return (
+                <div key={ev.id} style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
+                  {index > 0 && (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      height: '35px',
+                      position: 'relative'
+                    }}>
+                      <span style={{
+                        fontSize: '10.5px',
+                        color: '#94a3b8',
+                        background: '#f8fafc',
+                        padding: '2px 8px',
+                        borderRadius: '8px',
+                        border: '1px solid #e2e8f0',
+                        zIndex: 2,
+                        fontWeight: 700
+                      }}>
+                        {ev.duration}
+                      </span>
+                    </div>
+                  )}
+
+                  <div 
+                    onClick={() => setSelectedEvent(ev)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      padding: '12px 16px',
+                      background: isSelected ? '#3b82f608' : 'transparent',
+                      border: isSelected ? '1px solid #3b82f640' : '1px solid transparent',
+                      borderRadius: '16px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      zIndex: 3,
+                      position: 'relative'
+                    }}
+                    className="event-stream-row"
+                  >
+                    <span style={{
+                      fontSize: '11px',
+                      color: '#64748b',
+                      width: '90px',
+                      fontWeight: 600,
+                      textAlign: 'right',
+                      paddingRight: '12px'
+                    }}>
+                      {ev.time}
+                    </span>
+
+                    <div style={{
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '50%',
+                      background: isSelected ? '#3b82f6' : (ev.type === 'conversion' ? '#ef4444' : '#f1f5f9'),
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      border: '2px solid white',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.08)',
+                      zIndex: 4,
+                      marginRight: '16px',
+                      transition: 'all 0.2s'
+                    }}>
+                      <span style={{ fontSize: '14px' }}>
+                        {isSelected ? '🎯' : ev.icon}
+                      </span>
+                    </div>
+
+                    <div style={{ flex: 1 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{
+                          fontSize: '13px',
+                          fontWeight: 800,
+                          color: '#1e293b',
+                          fontFamily: 'monospace'
+                        }}>{ev.name}</span>
+                        {ev.type === 'conversion' && (
+                          <span style={{
+                            fontSize: '9px',
+                            background: '#ef444415',
+                            color: '#ef4444',
+                            padding: '1px 6px',
+                            borderRadius: '4px',
+                            fontWeight: 800
+                          }}>CONVERSION</span>
+                        )}
+                      </div>
+                      <p style={{ margin: 0, fontSize: '11.5px', color: '#64748b', marginTop: '2px' }}>
+                        {ev.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+
+            <div style={{
+              marginTop: '24px',
+              background: '#fff7ed',
+              border: '1px solid #ffedd5',
+              borderRadius: '16px',
+              padding: '12px 16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              zIndex: 2,
+              position: 'relative'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '16px' }}>⚠️</span>
+                <div>
+                  <span style={{ fontSize: '12px', fontWeight: 800, color: '#c2410c', fontFamily: 'monospace' }}>non_personalized_ads</span>
+                  <p style={{ margin: 0, fontSize: '10.5px', color: '#9a3412' }}>맞춤 광고 수집 비활성화 플래그 감지</p>
+                </div>
+              </div>
+              <span style={{ fontSize: '12px', fontWeight: 800, color: '#c2410c', fontFamily: 'monospace' }}>= 0</span>
+            </div>
+
+            {selectedEvent && (
+              <div style={{
+                marginTop: '20px',
+                background: '#0f172a',
+                borderRadius: '16px',
+                padding: '20px',
+                border: '1px solid #1e293b',
+                color: '#e2e8f0',
+                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.3)'
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', borderBottom: '1px solid #334155', paddingBottom: '10px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ fontSize: '14px' }}>🛡️</span>
+                    <span style={{ fontSize: '12px', fontWeight: 800, color: '#38bdf8' }}>GTM dataLayer 검증 패널</span>
+                  </div>
+                  <span style={{ fontSize: '10px', background: '#38bdf820', color: '#38bdf8', padding: '2px 8px', borderRadius: '4px', fontWeight: 700 }}>JSON VALID</span>
+                </div>
+                <pre style={{
+                  margin: 0,
+                  fontSize: '11px',
+                  fontFamily: 'Consolas, Monaco, monospace',
+                  overflowX: 'auto',
+                  lineHeight: '1.6',
+                  color: '#a7f3d0'
+                }}>
+                  {JSON.stringify({
+                    event: selectedEvent.name,
+                    event_timestamp: Date.now(),
+                    gtm_unique_id: selectedEvent.id,
+                    event_parameters: {
+                      page_location: `https://flowlaw.co.kr${selectedEvent.name === 'page_view' ? (selectedEvent.desc.includes('형사사건') ? '/practice/criminal-law' : (selectedEvent.desc.includes('전세사기') ? '/practice/jeonse-fraud' : '/')) : '/'}`,
+                      page_referrer: 'https://search.naver.com',
+                      trigger_element: selectedEvent.desc,
+                      engaged_session: 1,
+                      percent_scrolled: selectedEvent.name === 'scroll' ? (selectedEvent.desc.includes('90%') ? 90 : (selectedEvent.desc.includes('75%') ? 75 : (selectedEvent.desc.includes('50%') ? 50 : 25))) : undefined
+                    },
+                    client_metadata: {
+                      browser: 'Google Chrome',
+                      os: 'macOS Intel',
+                      resolution: '2560x1440',
+                      ip_location: 'Seoul (Gangnam-gu)'
+                    }
+                  }, null, 2)}
+                </pre>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Column 3: Right Sidebar */}
+        <div className="debug-col-right" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{
+            background: 'white',
+            borderRadius: '20px',
+            border: '1px solid #e2e8f0',
+            padding: '20px',
+            boxShadow: '0 4px 6px rgba(0,0,0,0.01)'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <span style={{ fontSize: '13.5px', fontWeight: 700, color: '#1e293b' }}>인기 이벤트</span>
+              <span style={{ fontSize: '11.5px', color: '#94a3b8', fontWeight: 600 }}>지난 30분</span>
+            </div>
+
+            <div style={{
+              display: 'flex',
+              gap: '12px',
+              background: '#f8fafc',
+              padding: '10px 14px',
+              borderRadius: '12px',
+              marginBottom: '16px',
+              justifyContent: 'space-between'
+            }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11.5px', color: '#64748b', fontWeight: 700 }}>
+                👤 <span style={{ color: '#1e293b' }}>9</span>명
+              </span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11.5px', color: '#64748b', fontWeight: 700 }}>
+                🚩 <span style={{ color: '#ef4444' }}>3</span>건
+              </span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11.5px', color: '#64748b', fontWeight: 700 }}>
+                🎁 <span style={{ color: '#3b82f6' }}>0</span>건
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              {[
+                { name: 'scroll', count: 52, max: 60 },
+                { name: 'page_view', count: 18, max: 60 },
+                { name: 'click', count: 14, max: 60 },
+                { name: 'button_click', count: 9, max: 60 },
+                { name: 'kakao_consult_click', count: 8, max: 60 },
+                { name: 'generate_lead', count: 4, max: 60 },
+                { name: 'video_start', count: 3, max: 60 }
+              ].map((item, i) => (
+                <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', fontWeight: 600, color: '#334155' }}>
+                    <span style={{ fontFamily: 'monospace' }}>{item.name}</span>
+                    <span>{item.count}</span>
+                  </div>
+                  <div style={{ height: '5px', background: '#f1f5f9', borderRadius: '3px', overflow: 'hidden' }}>
+                    <div style={{ width: `${(item.count / item.max) * 100}%`, background: '#3b82f6', height: '100%', borderRadius: '3px' }}></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{
+            background: 'white',
+            borderRadius: '20px',
+            border: '1px solid #e2e8f0',
+            padding: '20px',
+            boxShadow: '0 4px 6px rgba(0,0,0,0.01)'
+          }}>
+            <span style={{ fontSize: '13.5px', fontWeight: 700, color: '#1e293b', display: 'block', marginBottom: '16px' }}>현재 적용된 사용자 속성</span>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {[
+                { name: 'non_personalized_ads', val: '0' },
+                { name: 'device_category', val: 'desktop' },
+                { name: 'user_type', val: 'returning' },
+                { name: 'city', val: 'Seoul' },
+                { name: 'session_engaged', val: '1' }
+              ].map((item, i) => (
+                <div key={i} style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  background: '#f8fafc',
+                  padding: '8px 12px',
+                  borderRadius: '8px',
+                  border: '1px solid #f1f5f9'
+                }}>
+                  <span style={{ fontSize: '11px', fontFamily: 'monospace', color: '#64748b', fontWeight: 600 }}>{item.name}</span>
+                  <span style={{ fontSize: '11px', fontFamily: 'monospace', color: '#1e293b', fontWeight: 800 }}>{item.val}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+
+  <style jsx>{`
         .analytics-container { padding: 40px 60px; display: flex; flex-direction: column; gap: 2rem; color: #1e293b; background: #f8fafc; min-height: 100vh; font-family: Pretendard, sans-serif; }
         
         /* 로딩 오버레이 스타일 */

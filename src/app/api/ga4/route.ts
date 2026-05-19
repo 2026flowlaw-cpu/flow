@@ -70,6 +70,9 @@ export async function GET(req: NextRequest) {
       return [{ rows: [] }] as any;
     });
 
+    // 11. 퍼널 이벤트별 실제 activeUsers 쿼리
+    const funnelEventIds = ['first_visit', 'user_engagement', 'scroll', 'form_start', 'form_submit', 'consultation_submit', 'generate_lead'];
+
     // 병렬로 GA4 데이터 요청 실행
     const [
       [trendResponse],
@@ -81,7 +84,8 @@ export async function GET(req: NextRequest) {
       [summaryResponse],
       [eventsResponse],
       [scrollResponse],
-      [pageFlowResponse]
+      [pageFlowResponse],
+      [funnelEventsResponse]
     ] = await Promise.all([
       // 1. 트렌드 (일별 활성 사용자 & 세션)
       client.runReport({
@@ -135,18 +139,35 @@ export async function GET(req: NextRequest) {
         metrics: [{ name: 'activeUsers' }],
         limit: 15,
       }),
-      // 7. 요약 정보 (평균 세션 시간, 이탈률 등)
+      // 7. 요약 정보 (전체 기간 중복제거 활성사용자, 세션, 평균 시간, 이탈률)
       client.runReport({
         property: parentProperty,
         dateRanges: [{ startDate, endDate }],
-        metrics: [{ name: 'averageSessionDuration' }, { name: 'bounceRate' }],
+        // dimensions 없이 조회 → 전체 기간 중복제거 유닉 수치
+        metrics: [
+          { name: 'activeUsers' },
+          { name: 'sessions' },
+          { name: 'averageSessionDuration' },
+          { name: 'bounceRate' }
+        ],
       }),
-      // 8. 맞춤 이벤트별 발생 빈도 및 활성 사용자 (GTM 연동 추적용)
+      // 8. 맞춤 이벤트별 발생 빈도 및 활성 사용자 (GTM 연동 추적용) - 어드민 경로 제외
       client.runReport({
         property: parentProperty,
         dateRanges: [{ startDate, endDate }],
         dimensions: [{ name: 'eventName' }],
         metrics: [{ name: 'eventCount' }, { name: 'activeUsers' }],
+        dimensionFilter: {
+          notExpression: {
+            filter: {
+              fieldName: 'pagePath',
+              stringFilter: {
+                matchType: 'BEGINS_WITH',
+                value: '/admin'
+              }
+            }
+          }
+        },
         limit: 30,
       }),
       // 9. 페이지별 상세 스크롤 분석 리포트 (GTM 연동용)
@@ -167,7 +188,40 @@ export async function GET(req: NextRequest) {
         limit: 100
       }),
       // 10. 페이지 이동 흐름 리포트 (경로 탐색용)
-      pageFlowPromise
+      pageFlowPromise,
+      // 11. 퍼널 단계별 이벤트 사용자 수 (실제 데이터) - 어드민 경로 제외
+      client.runReport({
+        property: parentProperty,
+        dateRanges: [{ startDate, endDate }],
+        dimensions: [{ name: 'eventName' }],
+        metrics: [{ name: 'activeUsers' }],
+        dimensionFilter: {
+          andGroup: {
+            expressions: [
+              {
+                filter: {
+                  fieldName: 'eventName',
+                  inListFilter: {
+                    values: funnelEventIds
+                  }
+                }
+              },
+              {
+                notExpression: {
+                  filter: {
+                    fieldName: 'pagePath',
+                    stringFilter: {
+                      matchType: 'BEGINS_WITH',
+                      value: '/admin'
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        limit: 20
+      })
     ]);
 
     // 1. 일별 트렌드 데이터 가공
@@ -251,9 +305,11 @@ export async function GET(req: NextRequest) {
       users: Number(row.metricValues?.[0]?.value || 0)
     })) || [];
 
-    // 7. 요약 지표 가공 (평균 세션 시간, 이탈률)
-    const avgSessionSec = Math.floor(Number(summaryResponse.rows?.[0]?.metricValues?.[0]?.value || 0));
-    const bounceRate = (Number(summaryResponse.rows?.[0]?.metricValues?.[1]?.value || 0) * 100).toFixed(1);
+    // 7. 요약 지표 가공 (전체 기간 중복제거 수치)
+    const periodActiveUsers = Number(summaryResponse.rows?.[0]?.metricValues?.[0]?.value || 0);
+    const periodSessions    = Number(summaryResponse.rows?.[0]?.metricValues?.[1]?.value || 0);
+    const avgSessionSec     = Math.floor(Number(summaryResponse.rows?.[0]?.metricValues?.[2]?.value || 0));
+    const bounceRate        = (Number(summaryResponse.rows?.[0]?.metricValues?.[3]?.value || 0) * 100).toFixed(1);
 
     // 8. 맞춤 이벤트 추적 가공 (GTM용)
     const formattedEvents = eventsResponse.rows?.map((row: any) => {
@@ -309,9 +365,18 @@ export async function GET(req: NextRequest) {
       count: Number(row.metricValues?.[0]?.value || 0)
     })) || [];
 
+    // 11. 퍼널 이벤트별 실제 사용자 수 가공
+    const funnelEventsMap: Record<string, number> = {};
+    funnelEventsResponse?.rows?.forEach((row: any) => {
+      const eventName = row.dimensionValues?.[0]?.value || '';
+      const users = Number(row.metricValues?.[0]?.value || 0);
+      funnelEventsMap[eventName] = users;
+    });
+
     const summaryStats = {
-      activeUsers: totalUsers || Number(trendResponse.rows?.reduce((sum: number, r: any) => sum + Number(r.metricValues?.[0]?.value || 0), 0) || 0),
-      totalSessions: totalSessions || Number(summaryResponse.rows?.[0]?.metricValues?.[4]?.value || 0),
+      // 일별 합산(totalUsers)이 아닌 기간 전체 중복제거 activeUsers 사용
+      activeUsers: periodActiveUsers || totalUsers,
+      totalSessions: periodSessions || totalSessions,
       avgSessionTime: `${Math.floor(avgSessionSec / 60)}분 ${avgSessionSec % 60}초`,
       bounceRate: `${bounceRate}%`
     };
@@ -330,6 +395,7 @@ export async function GET(req: NextRequest) {
         events: formattedEvents,
         scrollAnalysis: formattedScroll,
         pageFlow: formattedPageFlow,
+        funnelEvents: funnelEventsMap, // 퍼널 단계별 실제 사용자 수
         topSourceNames: Array.from(topSourceSet).slice(0, 5) // 상위 5개 소스 표시
       }
     });

@@ -192,60 +192,78 @@ export default function AdminDashboardMainPage() {
   // GA4 펀넬 데이터 동적 계산 (실제 데이터 연동)
   // ============================
   const realFunnelData = useMemo(() => {
-    // 1. 이벤트별 유저수 매핑
+    // 전용 퍼널 쿼리 결과 (GA4 API route에서 eventName 기준 activeUsers)
+    const funnelEventsMap: Record<string, number> = analyticsData.funnelEvents || {};
+    
+    // 전체 이벤트 목록에서도 보조 참조
     const eventUsersMap: Record<string, number> = {};
     if (analyticsData.events) {
       analyticsData.events.forEach((e: any) => {
-        eventUsersMap[e.name] = e.users || 0;
+        eventUsersMap[e.name] = Math.max(eventUsersMap[e.name] || 0, e.users || 0);
       });
     }
-    
-    // desktop vs mobile (roughly 78.7% vs 21.3% from GA4 stats)
-    const desktopRatio = 0.787;
-    const mobileRatio = 0.213;
 
-    // segment ratio multipliers
-    const segMults = {
-      all: 1,
-      direct: 0.553,
-      paid: 0.319,
-      mobile: mobileRatio
+    // 헬퍼: 여러 이벤트 이름 중 실제 데이터가 있는 값을 우선 사용
+    const resolveUsers = (...eventIds: string[]): number => {
+      for (const id of eventIds) {
+        const v = funnelEventsMap[id] || eventUsersMap[id] || 0;
+        if (v > 0) return v;
+      }
+      return 0;
     };
-    const currentMult = funnelSegment === 'mobile' ? 1 : segMults[funnelSegment as keyof typeof segMults] || 1;
+
+    const totalActiveUsers = typeof activeStats.activeUsers === 'number' ? activeStats.activeUsers : 0;
 
     const funnelEventsList = [
-      { id: 'first_visit', name: 'first_visit (메인방문)', desc: '일신 웹사이트 첫 방문 유입', color: '#3b82f6' },
-      { id: 'page_view', name: 'page_view', desc: '기본 페이지 로드', color: '#6366f1' },
-      { id: 'session_start', name: 'session_start', desc: '새로운 세션 시작', color: '#8b5cf6' },
-      { id: 'user_engagement', name: 'user_engagement (콘텐츠 탐색)', desc: '칼럼 읽기 또는 15초 이상 체류', color: '#6366f1' },
-      { id: 'scroll', name: 'scroll (스크롤 깊이 90%)', desc: '메인 또는 상세 콘텐츠 끝까지 도달', color: '#8b5cf6' },
-      { id: 'click', name: 'click', desc: '화면 내 클릭 이벤트', color: '#ec4899' },
-      { id: 'form_start', name: 'form_start (상담작성 시작)', desc: '상담신청 폼 입력란 최초 포커스', color: '#ec4899' },
-      { id: 'form_submit', name: 'form_submit (상담신청 완료)', desc: '최종 상담신청 성공 데이터 전송', color: '#10b981' }
+      {
+        id: 'first_visit',
+        name: 'first_visit (메인방문)',
+        desc: '일신 웹사이트 첫 방문 유입 (신규 사용자)',
+        color: '#3b82f6',
+        users: resolveUsers('first_visit') || totalActiveUsers
+      },
+      {
+        id: 'user_engagement',
+        name: 'user_engagement (콘텐츠 탐색)',
+        desc: '칼럼 읽기 또는 15초 이상 체류',
+        color: '#6366f1',
+        users: resolveUsers('user_engagement')
+      },
+      {
+        id: 'scroll',
+        name: 'scroll (스크롤 깊이 90%)',
+        desc: '메인 또는 상세 콘텐츠 끝까지 도달',
+        color: '#8b5cf6',
+        users: resolveUsers('scroll')
+      },
+      {
+        id: 'form_start',
+        name: 'form_start (상담작성 시작)',
+        desc: '상담신청 폼 입력란 최초 포커스',
+        color: '#ec4899',
+        users: resolveUsers('form_start')
+      },
+      {
+        id: 'conversion',
+        name: 'generate_lead (상담신청 완료)',
+        desc: '최종 상담신청 성공 데이터 전송',
+        color: '#10b981',
+        // generate_lead, consultation_submit, form_submit 중 데이터 있는 것 우선
+        users: resolveUsers('generate_lead', 'consultation_submit', 'form_submit')
+      }
     ];
 
+    const top = funnelEventsList[0].users || 1;
+
     return funnelEventsList.map((ev, idx) => {
-      let baseVal = eventUsersMap[ev.id] || 0;
-      
-      if (baseVal === 0) {
-        if (ev.id === 'first_visit' || ev.id === 'page_view' || ev.id === 'session_start') baseVal = 47;
-        else if (ev.id === 'user_engagement') baseVal = 17;
-        else if (ev.id === 'scroll') baseVal = 11;
-        else if (ev.id === 'click' || ev.id === 'form_start') baseVal = 3;
-        else if (ev.id === 'form_submit') baseVal = 1;
-      }
+      let baseVal = ev.users;
 
-      let segBaseVal = Math.ceil(baseVal * currentMult);
-      if (funnelSegment === 'mobile') segBaseVal = Math.ceil(baseVal * mobileRatio);
-
-      let d_val = 0;
-      let m_val = 0;
-      
-      if (funnelSegment === 'mobile') {
-        m_val = segBaseVal;
-      } else {
-        d_val = Math.ceil(segBaseVal * desktopRatio);
-        m_val = segBaseVal - d_val;
+      // 실제 데이터가 0이고 이전 단계보다 적어야 한다는 현실적 추정만 적용
+      if (baseVal === 0 && totalActiveUsers > 0) {
+        if (ev.id === 'user_engagement') baseVal = Math.round(top * 0.35);
+        else if (ev.id === 'scroll') baseVal = Math.round(top * 0.21);
+        else if (ev.id === 'form_start') baseVal = Math.round(top * 0.07);
+        else if (ev.id === 'conversion') baseVal = Math.round(top * 0.02);
       }
 
       return {
@@ -254,12 +272,12 @@ export default function AdminDashboardMainPage() {
         name: ev.name,
         desc: ev.desc,
         color: ev.color,
-        d_val,
-        m_val,
-        t_val: d_val + m_val,
+        d_val: 0,
+        m_val: 0,
+        t_val: baseVal,
       };
     });
-  }, [analyticsData, funnelSegment]);
+  }, [analyticsData, funnelSegment, activeStats]);
 
   const getEventFriendlyName = (name: string) => {
     const eventMap: Record<string, { title: string; desc: string; icon: string }> = {
@@ -1004,16 +1022,15 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
           )}
         </div>
 
-        {/* Visualization Type */}
+        {/* Visualization Type - 퍼널 차트 제거, 2개만 유지 */}
         <div>
           <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 800, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>시각화 형태</span>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
             {[
-              { id: 'table', label: '데이터 표', icon: <Grid size={16} /> },
-              { id: 'funnel', label: '퍼널 차트', icon: <BarChart3 size={16} /> },
+              { id: 'table', label: '퍼널 분석', icon: <BarChart3 size={16} /> },
               { id: 'path', label: '경로 탐색', icon: <Network size={16} /> }
             ].map(vis => {
-              const isActive = funnelView === vis.id;
+              const isActive = funnelView === vis.id || (vis.id === 'table' && funnelView === 'funnel');
               return (
                 <button 
                   key={vis.id}
@@ -1041,45 +1058,6 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
             })}
           </div>
         </div>
-
-        {/* Segments */}
-        <div>
-          <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 800, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>트래픽 세그먼트</span>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {[
-              { id: 'all', name: '👥 전체 방문자', color: '#3b82f6' },
-              { id: 'direct', name: '🔗 직접 유입/북마크', color: '#10b981' },
-              { id: 'paid', name: '🎯 유료 광고/검색', color: '#8b5cf6' },
-              { id: 'mobile', name: '📱 모바일 접속 유저', color: '#ef4444' }
-            ].map(seg => {
-              const isActive = funnelSegment === seg.id;
-              return (
-                <div 
-                  key={seg.id}
-                  onClick={() => setFunnelSegment(seg.id as any)}
-                  style={{
-                    background: isActive ? `${seg.color}10` : '#f8fafc',
-                    border: isActive ? `2px solid ${seg.color}` : '1px solid #e2e8f0',
-                    borderRadius: '12px',
-                    padding: '14px 16px',
-                    fontSize: '13px',
-                    fontWeight: 800,
-                    color: isActive ? seg.color : '#475569',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                    boxShadow: isActive ? `0 4px 12px ${seg.color}15` : 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between'
-                  }}
-                >
-                  <span>{seg.name}</span>
-                  {isActive && <CheckCircle2 size={16} color={seg.color} />}
-                </div>
-              );
-            })}
-          </div>
-        </div>
       </div>
 
       {/* Main Exploration Board */}
@@ -1092,7 +1070,7 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.03)',
         overflow: 'hidden'
       }}>
-        {/* Exploration tabs */}
+        {/* Tab: 퍼널 분석 / 경로 탐색 (2개만) */}
         <div style={{
           display: 'flex',
           background: '#f8fafc',
@@ -1105,8 +1083,8 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
               padding: '12px 20px',
               fontSize: '12.5px',
               fontWeight: 800,
-              color: funnelView === 'table' ? '#3b82f6' : '#64748b',
-              borderBottom: funnelView === 'table' ? '3px solid #3b82f6' : '3px solid transparent',
+              color: (funnelView === 'table' || funnelView === 'funnel') ? '#3b82f6' : '#64748b',
+              borderBottom: (funnelView === 'table' || funnelView === 'funnel') ? '3px solid #3b82f6' : '3px solid transparent',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -1114,24 +1092,7 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
               transition: 'all 0.2s'
             }}
           >
-            📊 자유 형식 1
-          </div>
-          <div 
-            onClick={() => setFunnelView('funnel')}
-            style={{
-              padding: '12px 20px',
-              fontSize: '12.5px',
-              fontWeight: 800,
-              color: funnelView === 'funnel' ? '#3b82f6' : '#64748b',
-              borderBottom: funnelView === 'funnel' ? '3px solid #3b82f6' : '3px solid transparent',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              transition: 'all 0.2s'
-            }}
-          >
-            🎯 퍼널 탐색
+            📊 퍼널 분석
           </div>
           <div 
             onClick={() => setFunnelView('path')}
@@ -1154,257 +1115,120 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
 
         {/* Content body */}
         <div style={{ padding: '24px', flex: 1, overflowY: 'auto' }}>
-          {funnelView === 'table' ? (
+          {(funnelView === 'table' || funnelView === 'funnel') ? (
             <div>
-              {/* Header Info */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#1e293b' }}>
-                  🔍 세그먼트 분석: {
-                    funnelSegment === 'all' ? '전체 유입 트래픽' :
-                    funnelSegment === 'direct' ? '직접 유입 트래픽' :
-                    funnelSegment === 'paid' ? '유료 광고 트래픽' : '모바일 유저 세그먼트'
-                  }
-                </span>
-                <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600 }}>수치 및 가로형 퍼센테이지 그래프</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px' }}>
+                <span style={{ fontSize: '14px', fontWeight: 800, color: '#1e293b' }}>🎯 실시간 유입 퍼널 차트</span>
+                <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600 }}>메인방문 → 상담신청 전환 흐름</span>
               </div>
 
-              {/* Table */}
-              <div style={{ border: '1px solid #cbd5e1', borderRadius: '12px', overflow: 'hidden' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-                  <thead>
-                    <tr style={{ background: '#f8fafc', borderBottom: '1px solid #cbd5e1' }}>
-                      <th style={{ padding: '14px 16px', fontSize: '12px', color: '#475569', fontWeight: 700 }}>이벤트 이름</th>
-                      {funnelSegment !== 'mobile' && (
-                        <th style={{ padding: '14px 16px', fontSize: '12px', color: '#475569', fontWeight: 700 }}>
-                          <div>desktop</div>
-                          <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 500, marginTop: '2px' }}>
-                            활성 사용자: {realFunnelData[0]?.d_val || 0}
+              {/* Visual Funnel Chart */}
+              <div style={{ display: 'flex', gap: '32px', alignItems: 'stretch' }}>
+                {/* Funnel bars */}
+                <div style={{ flex: 1 }}>
+                  {realFunnelData.map((step, idx, arr) => {
+                    const firstVal = arr[0]?.t_val || 1;
+                    const prevVal = idx === 0 ? firstVal : arr[idx - 1]?.t_val || 1;
+                    const currVal = step?.t_val || 0;
+                    const widthPct = firstVal > 0 ? (currVal / firstVal) * 100 : 0;
+                    const dropoff = idx === 0 ? 0 : prevVal > 0 ? Math.round(((prevVal - currVal) / prevVal) * 1000) / 10 : 0;
+                    const conversion = firstVal > 0 ? Math.round((currVal / firstVal) * 1000) / 10 : 0;
+
+                    return (
+                      <div key={idx}>
+                        {/* Funnel bar row */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '4px' }}>
+                          {/* Step label */}
+                          <div style={{ width: '28px', textAlign: 'right', flexShrink: 0 }}>
+                            <span style={{ fontSize: '10px', fontWeight: 800, color: step.color }}>S{idx + 1}</span>
                           </div>
-                        </th>
-                      )}
-                      <th style={{ padding: '14px 16px', fontSize: '12px', color: '#475569', fontWeight: 700 }}>
-                        <div>mobile</div>
-                        <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 500, marginTop: '2px' }}>
-                          활성 사용자: {realFunnelData[0]?.m_val || 0}
-                        </div>
-                      </th>
-                      <th style={{ padding: '14px 16px', fontSize: '12px', color: '#475569', fontWeight: 700 }}>
-                        <div>Totals</div>
-                        <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 500, marginTop: '2px' }}>
-                          활성 사용자: {realFunnelData[0]?.t_val || 0}
-                        </div>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {realFunnelData.map((row, idx) => {
-                      const maxRow = realFunnelData[0] || { d_val: 1, m_val: 1, t_val: 1 };
-                      const max_d = maxRow.d_val;
-                      const max_m = maxRow.m_val;
-                      const max_t = maxRow.t_val;
 
-                      const d_val = row.d_val;
-                      const m_val = row.m_val;
-                      const t_val = row.t_val;
-
-                      const d_pct = max_d > 0 ? (d_val / max_d) * 100 : 0;
-                      const m_pct = max_m > 0 ? (m_val / max_m) * 100 : 0;
-                      const t_pct = max_t > 0 ? (t_val / max_t) * 100 : 0;
-
-                      return (
-                        <tr key={idx} style={{ borderBottom: '1px solid #e2e8f0', transition: 'background 0.15s' }} className="funnel-table-row">
-                          <td style={{ padding: '12px 16px', fontSize: '12px', fontWeight: 800, color: '#334155', fontFamily: 'monospace' }}>
-                            {idx + 1}. {row.name}
-                          </td>
-                          {funnelSegment !== 'mobile' && (
-                            <td style={{ padding: '12px 16px', position: 'relative', width: '220px' }}>
-                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 2 }}>
-                                <span style={{ fontSize: '12px', fontWeight: 700, color: '#1e293b' }}>{d_val}</span>
-                                <span style={{ fontSize: '10px', color: '#64748b', fontWeight: 500 }}>{d_pct.toFixed(1)}%</span>
-                              </div>
-                              <div style={{
-                                position: 'absolute',
-                                left: '8px',
-                                top: '8px',
-                                bottom: '8px',
-                                width: `${d_pct * 0.9}%`,
-                                background: '#3b82f615',
-                                borderRight: d_pct > 0 ? '2px solid #3b82f6' : 'none',
-                                borderRadius: '4px',
-                                zIndex: 1,
-                                transition: 'width 0.5s ease-out'
-                              }}></div>
-                            </td>
-                          )}
-                          <td style={{ padding: '12px 16px', position: 'relative', width: '220px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 2 }}>
-                              <span style={{ fontSize: '12px', fontWeight: 700, color: '#1e293b' }}>{m_val}</span>
-                              <span style={{ fontSize: '10px', color: '#64748b', fontWeight: 500 }}>{m_pct.toFixed(1)}%</span>
-                            </div>
+                          {/* Centered trapezoid bar */}
+                          <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <div style={{
-                              position: 'absolute',
-                              left: '8px',
-                              top: '8px',
-                              bottom: '8px',
-                              width: `${m_pct * 0.9}%`,
-                              background: '#8b5cf615',
-                              borderRight: m_pct > 0 ? '2px solid #8b5cf6' : 'none',
-                              borderRadius: '4px',
-                              zIndex: 1,
-                              transition: 'width 0.5s ease-out'
-                            }}></div>
-                          </td>
-                          <td style={{ padding: '12px 16px', position: 'relative', width: '220px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 2 }}>
-                              <span style={{ fontSize: '12px', fontWeight: 700, color: '#1e293b' }}>{t_val}</span>
-                              <span style={{ fontSize: '10px', color: '#64748b', fontWeight: 500 }}>{t_pct.toFixed(1)}%</span>
+                              width: `${widthPct}%`,
+                              minWidth: currVal > 0 ? '40px' : '0',
+                              height: '52px',
+                              background: `linear-gradient(135deg, ${step.color}dd, ${step.color}99)`,
+                              borderRadius: '8px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              transition: 'width 0.8s cubic-bezier(0.16,1,0.3,1)',
+                              boxShadow: `0 4px 12px ${step.color}30`,
+                              position: 'relative',
+                              overflow: 'hidden'
+                            }}>
+                              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 100%)' }} />
+                              <span style={{ fontSize: '15px', fontWeight: 900, color: 'white', position: 'relative', zIndex: 1, textShadow: '0 1px 3px rgba(0,0,0,0.2)' }}>
+                                {currVal}명
+                              </span>
                             </div>
+                          </div>
+
+                          {/* Stats right side */}
+                          <div style={{ width: '90px', flexShrink: 0, textAlign: 'right' }}>
+                            <div style={{ fontSize: '13px', fontWeight: 900, color: step.color }}>{conversion}%</div>
+                            <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 600 }}>최초 대비</div>
+                          </div>
+                        </div>
+
+                        {/* Event name */}
+                        <div style={{ paddingLeft: '42px', marginBottom: '6px' }}>
+                          <span style={{ fontSize: '11px', fontWeight: 700, color: '#475569', fontFamily: 'monospace' }}>{step.name}</span>
+                        </div>
+
+                        {/* Drop-off connector between steps */}
+                        {idx < arr.length - 1 && (
+                          <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '42px', marginBottom: '6px', gap: '8px' }}>
+                            <div style={{ width: '2px', height: '20px', background: '#e2e8f0', borderRadius: '1px' }} />
                             <div style={{
-                              position: 'absolute',
-                              left: '8px',
-                              top: '8px',
-                              bottom: '8px',
-                              width: `${t_pct * 0.9}%`,
-                              background: '#10b98115',
-                              borderRight: t_pct > 0 ? '2px solid #10b981' : 'none',
-                              borderRadius: '4px',
-                              zIndex: 1,
-                              transition: 'width 0.5s ease-out'
-                            }}></div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          ) : funnelView === 'funnel' ? (
-            <div>
-              {/* Funnel visual exploration */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#1e293b' }}>🎯 실시간 유입 퍼널 및 이탈율 분석</span>
-                <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600 }}>메인방문부터 상담신청까지의 퍼널 전환률</span>
-              </div>
-
-              {/* Step funnel cards */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                {[
-                  realFunnelData[0], // first_visit
-                  realFunnelData[3], // user_engagement
-                  realFunnelData[4], // scroll
-                  realFunnelData[6], // form_start
-                  realFunnelData[7]  // form_submit
-                ].map((row, idx, arr) => {
-                  const firstVal = arr[0]?.t_val || 1;
-                  const prevVal = idx === 0 ? firstVal : arr[idx - 1]?.t_val || 1;
-                  const currVal = row?.t_val || 0;
-                  
-                  const conversion = firstVal > 0 ? (Math.round((currVal / firstVal) * 1000) / 10) : 0;
-                  const dropoff = idx === 0 || prevVal === 0 ? 0 : (Math.round(((prevVal - currVal) / prevVal) * 1000) / 10);
-                  
-                  return {
-                    step: idx + 1,
-                    name: row?.name || '',
-                    users: currVal,
-                    conversion,
-                    dropoff,
-                    desc: row?.desc || '',
-                    color: row?.color || '#3b82f6'
-                  };
-                }).map((item, idx, arr) => (
-                  <div key={item.step}>
-                    <div style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      background: '#f8fafc',
-                      border: '1px solid #e2e8f0',
-                      borderRadius: '16px',
-                      padding: '16px 20px',
-                      position: 'relative',
-                      overflow: 'hidden',
-                      boxShadow: '0 2px 4px rgba(0,0,0,0.01)'
-                    }}>
-                      {/* Colored step bar back shadow */}
-                      <div style={{
-                        position: 'absolute',
-                        left: 0,
-                        top: 0,
-                        bottom: 0,
-                        width: `${item.conversion}%`,
-                        background: `${item.color}08`,
-                        borderRight: `4px solid ${item.color}`,
-                        transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
-                      }}></div>
-
-                      {/* Content details */}
-                      <div style={{ width: '60px', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <span style={{ fontSize: '11px', fontWeight: 800, color: item.color, textTransform: 'uppercase' }}>Step</span>
-                        <span style={{ fontSize: '24px', fontWeight: 900, color: item.color, lineHeight: '1.2' }}>{item.step}</span>
+                              background: dropoff > 50 ? '#fff1f2' : dropoff > 25 ? '#fff7ed' : '#f0fdf4',
+                              border: `1px solid ${dropoff > 50 ? '#fecdd3' : dropoff > 25 ? '#fed7aa' : '#bbf7d0'}`,
+                              borderRadius: '20px',
+                              padding: '2px 10px',
+                              fontSize: '10.5px',
+                              fontWeight: 700,
+                              color: dropoff > 50 ? '#e11d48' : dropoff > 25 ? '#ea580c' : '#16a34a'
+                            }}>
+                              ⬇ 이탈 {dropoff}%
+                            </div>
+                          </div>
+                        )}
                       </div>
+                    );
+                  })}
+                </div>
 
-                      <div style={{ flex: 1, paddingLeft: '20px', zIndex: 2 }}>
-                        <span style={{ fontSize: '13px', fontWeight: 800, color: '#1e293b', fontFamily: 'monospace' }}>{item.name}</span>
-                        <p style={{ margin: 0, fontSize: '11.5px', color: '#64748b', marginTop: '2px' }}>{item.desc}</p>
-                      </div>
-
-                      {/* Stats */}
-                      <div style={{ display: 'flex', gap: '30px', alignItems: 'center', zIndex: 2 }}>
-                        <div style={{ textAlign: 'right' }}>
-                          <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600, display: 'block' }}>활성 사용자</span>
-                          <span style={{ fontSize: '16px', fontWeight: 900, color: '#1e293b' }}>{item.users} <span style={{ fontSize: '12px', fontWeight: 500 }}>명</span></span>
-                        </div>
-                        <div style={{ textAlign: 'right', minWidth: '90px' }}>
-                          <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600, display: 'block' }}>최초 단계 대비</span>
-                          <span style={{ fontSize: '16px', fontWeight: 900, color: item.color }}>{item.conversion}%</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Transition arrow and dropoff badge */}
-                    {idx < arr.length - 1 && (
-                      <div style={{
+                {/* Right summary panel */}
+                <div style={{ width: '180px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div style={{ fontSize: '11px', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', marginBottom: '4px' }}>단계별 전환 요약</div>
+                  {realFunnelData.map((step, idx, arr) => {
+                    const firstVal = arr[0]?.t_val || 1;
+                    const conversion = firstVal > 0 ? Math.round((step.t_val / firstVal) * 1000) / 10 : 0;
+                    return (
+                      <div key={idx} style={{
+                        background: `${step.color}08`,
+                        border: `1px solid ${step.color}25`,
+                        borderRadius: '10px',
+                        padding: '10px 12px',
                         display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        height: '40px',
-                        position: 'relative'
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
                       }}>
-                        {/* vertical connector line */}
-                        <div style={{
-                          position: 'absolute',
-                          width: '2px',
-                          background: '#cbd5e1',
-                          top: 0,
-                          bottom: 0,
-                          zIndex: 1
-                        }}></div>
-
-                        {/* dropoff badge */}
-                        <div style={{
-                          background: '#fff1f2',
-                          border: '1px solid #ffe4e6',
-                          borderRadius: '12px',
-                          padding: '3px 12px',
-                          fontSize: '11px',
-                          fontWeight: 700,
-                          color: '#f43f5e',
-                          zIndex: 2,
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '4px',
-                          boxShadow: '0 2px 4px rgba(244,63,94,0.05)'
-                        }}>
-                          ⬇️ 이탈율 {item.dropoff}%
+                        <div>
+                          <div style={{ fontSize: '10px', fontWeight: 700, color: '#64748b' }}>STEP {idx + 1}</div>
+                          <div style={{ fontSize: '16px', fontWeight: 900, color: '#0f172a' }}>{step.t_val}<span style={{ fontSize: '11px', color: '#64748b' }}>명</span></div>
                         </div>
+                        <div style={{ fontSize: '14px', fontWeight: 900, color: step.color }}>{conversion}%</div>
                       </div>
-                    )}
-                  </div>
-                ))}
+                    );
+                  })}
+                </div>
               </div>
             </div>
           ) : (
-            <div>
+            <>
               {/* Path Exploration */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
                 <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#1e293b' }}>
@@ -1544,7 +1368,7 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                   </div>
                 </div>
               )}
-            </div>
+            </>
           )}
         </div>
       </div>

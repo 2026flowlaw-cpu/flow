@@ -14,6 +14,11 @@ function getAnalyticsClient() {
     return null;
   }
 
+  // Strip enclosing double quotes if they were pasted into Vercel
+  if (privateKey.startsWith('"') && privateKey.endsWith('"')) {
+    privateKey = privateKey.slice(1, -1);
+  }
+
   // private_key 포맷 정리 (줄바꿈 처리)
   privateKey = privateKey.replace(/\\n/g, '\n');
 

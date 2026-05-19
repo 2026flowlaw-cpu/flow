@@ -7,6 +7,8 @@ import styles from './InquiryForm.module.css';
 const InquiryForm = () => {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [fileBase64, setFileBase64] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<string>('');
   const [showDetails, setShowDetails] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -39,12 +41,17 @@ const InquiryForm = () => {
       }
 
       // Safeguarded insertion that bundles extra fields in details
-      const fullDetails = [
+      let fullDetails = [
         `[이메일 주소] ${formData.email || '미기재'}`,
         `[부동산 명칭/위치] ${formData.location || '미기재'}`,
         `[연락 가능 시간] ${formData.availableTime || '미기재'}`,
         formData.details ? `\n[상세 내용]\n${formData.details}` : ''
       ].filter(Boolean).join('\n');
+
+      // Append file base64 data to details if present
+      if (fileBase64) {
+        fullDetails += `\n\n[첨부파일_데이터]\n파일명: ${fileName}\n데이터: ${fileBase64}`;
+      }
 
       const { error } = await supabase
         .from('consultations')
@@ -68,6 +75,8 @@ const InquiryForm = () => {
         agree: false
       });
       setFile(null);
+      setFileBase64(null);
+      setFileName('');
     } catch (error) {
       console.error('Error submitting inquiry:', error);
       alert('신청 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
@@ -87,7 +96,27 @@ const InquiryForm = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
+      const selected = e.target.files[0];
+      
+      // Enforce a strict 5MB limit
+      if (selected.size > 5 * 1024 * 1024) {
+        alert('파일 크기는 최대 5MB까지 업로드 가능합니다.');
+        e.target.value = ''; // Reset input
+        return;
+      }
+
+      setFile(selected);
+      setFileName(selected.name);
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFileBase64(reader.result as string);
+      };
+      reader.onerror = () => {
+        console.error('FileReader error');
+        alert('파일을 읽는 도중 오류가 발생했습니다.');
+      };
+      reader.readAsDataURL(selected);
     }
   };
 

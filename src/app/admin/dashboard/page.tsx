@@ -149,9 +149,7 @@ export default function AdminDashboardMainPage() {
 
   const [activeTab, setActiveTab] = useState<'marketing' | 'funnel'>('marketing');
   
-  // GA4 탐색 및 퍼널 분석 상태 정의
-  const [funnelSegment, setFunnelSegment] = useState<'all' | 'direct' | 'paid' | 'mobile'>('all');
-  const [funnelView, setFunnelView] = useState<'table' | 'funnel' | 'path'>('table');
+  const [funnelView, setFunnelView] = useState<'funnel' | 'path'>('funnel');
   const startStr = dateRangeObj.from ? format(dateRangeObj.from, 'yyyy-MM-dd') : '7daysAgo';
   const endStr = dateRangeObj.to ? format(dateRangeObj.to, 'yyyy-MM-dd') : 'today';
 
@@ -277,7 +275,7 @@ export default function AdminDashboardMainPage() {
         t_val: baseVal,
       };
     });
-  }, [analyticsData, funnelSegment, activeStats]);
+  }, [analyticsData, activeStats]);
 
   const getEventFriendlyName = (name: string) => {
     const eventMap: Record<string, { title: string; desc: string; icon: string }> = {
@@ -1022,15 +1020,15 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
           )}
         </div>
 
-        {/* Visualization Type - 퍼널 차트 제거, 2개만 유지 */}
+        {/* Visualization Type */}
         <div>
           <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 800, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>시각화 형태</span>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
             {[
-              { id: 'table', label: '퍼널 분석', icon: <BarChart3 size={16} /> },
+              { id: 'funnel', label: '퍼널 차트', icon: <BarChart3 size={16} /> },
               { id: 'path', label: '경로 탐색', icon: <Network size={16} /> }
             ].map(vis => {
-              const isActive = funnelView === vis.id || (vis.id === 'table' && funnelView === 'funnel');
+              const isActive = funnelView === vis.id;
               return (
                 <button 
                   key={vis.id}
@@ -1058,6 +1056,8 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
             })}
           </div>
         </div>
+
+
       </div>
 
       {/* Main Exploration Board */}
@@ -1070,7 +1070,7 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.03)',
         overflow: 'hidden'
       }}>
-        {/* Tab: 퍼널 분석 / 경로 탐색 (2개만) */}
+        {/* Exploration tabs */}
         <div style={{
           display: 'flex',
           background: '#f8fafc',
@@ -1078,13 +1078,13 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
           padding: '0 12px'
         }}>
           <div 
-            onClick={() => setFunnelView('table')}
+            onClick={() => setFunnelView('funnel')}
             style={{
               padding: '12px 20px',
               fontSize: '12.5px',
               fontWeight: 800,
-              color: (funnelView === 'table' || funnelView === 'funnel') ? '#3b82f6' : '#64748b',
-              borderBottom: (funnelView === 'table' || funnelView === 'funnel') ? '3px solid #3b82f6' : '3px solid transparent',
+              color: funnelView === 'funnel' ? '#3b82f6' : '#64748b',
+              borderBottom: funnelView === 'funnel' ? '3px solid #3b82f6' : '3px solid transparent',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -1115,120 +1115,133 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
 
         {/* Content body */}
         <div style={{ padding: '24px', flex: 1, overflowY: 'auto' }}>
-          {(funnelView === 'table' || funnelView === 'funnel') ? (
+          {funnelView === 'funnel' ? (
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px' }}>
-                <span style={{ fontSize: '14px', fontWeight: 800, color: '#1e293b' }}>🎯 실시간 유입 퍼널 차트</span>
-                <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600 }}>메인방문 → 상담신청 전환 흐름</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+                <span style={{ fontSize: '14px', fontWeight: 800, color: '#1e293b' }}>
+                  🎯 실시간 유입 퍼널 및 이탈율 분석
+                </span>
+                <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600 }}>메인방문부터 상담신청까지의 퍼널 전환률</span>
               </div>
 
-              {/* Visual Funnel Chart */}
-              <div style={{ display: 'flex', gap: '32px', alignItems: 'stretch' }}>
-                {/* Funnel bars */}
-                <div style={{ flex: 1 }}>
-                  {realFunnelData.map((step, idx, arr) => {
-                    const firstVal = arr[0]?.t_val || 1;
-                    const prevVal = idx === 0 ? firstVal : arr[idx - 1]?.t_val || 1;
-                    const currVal = step?.t_val || 0;
-                    const widthPct = firstVal > 0 ? (currVal / firstVal) * 100 : 0;
-                    const dropoff = idx === 0 ? 0 : prevVal > 0 ? Math.round(((prevVal - currVal) / prevVal) * 1000) / 10 : 0;
-                    const conversion = firstVal > 0 ? Math.round((currVal / firstVal) * 1000) / 10 : 0;
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
+                {realFunnelData.map((step, idx, arr) => {
+                  const firstVal = arr[0]?.t_val || 1;
+                  const prevVal = idx === 0 ? firstVal : arr[idx - 1]?.t_val || 1;
+                  const currVal = step?.t_val || 0;
 
-                    return (
-                      <div key={idx}>
-                        {/* Funnel bar row */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '4px' }}>
-                          {/* Step label */}
-                          <div style={{ width: '28px', textAlign: 'right', flexShrink: 0 }}>
-                            <span style={{ fontSize: '10px', fontWeight: 800, color: step.color }}>S{idx + 1}</span>
-                          </div>
+                  const conversion = firstVal > 0 ? Math.round((currVal / firstVal) * 1000) / 10 : 0;
+                  const dropoff = idx === 0 || prevVal === 0 ? 0 : Math.round(((prevVal - currVal) / prevVal) * 1000) / 10;
+                  const barWidth = firstVal > 0 ? (currVal / firstVal) * 100 : 0;
 
-                          {/* Centered trapezoid bar */}
-                          <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <div style={{
-                              width: `${widthPct}%`,
-                              minWidth: currVal > 0 ? '40px' : '0',
-                              height: '52px',
-                              background: `linear-gradient(135deg, ${step.color}dd, ${step.color}99)`,
-                              borderRadius: '8px',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              transition: 'width 0.8s cubic-bezier(0.16,1,0.3,1)',
-                              boxShadow: `0 4px 12px ${step.color}30`,
-                              position: 'relative',
-                              overflow: 'hidden'
-                            }}>
-                              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 100%)' }} />
-                              <span style={{ fontSize: '15px', fontWeight: 900, color: 'white', position: 'relative', zIndex: 1, textShadow: '0 1px 3px rgba(0,0,0,0.2)' }}>
-                                {currVal}명
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Stats right side */}
-                          <div style={{ width: '90px', flexShrink: 0, textAlign: 'right' }}>
-                            <div style={{ fontSize: '13px', fontWeight: 900, color: step.color }}>{conversion}%</div>
-                            <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 600 }}>최초 대비</div>
-                          </div>
-                        </div>
-
-                        {/* Event name */}
-                        <div style={{ paddingLeft: '42px', marginBottom: '6px' }}>
-                          <span style={{ fontSize: '11px', fontWeight: 700, color: '#475569', fontFamily: 'monospace' }}>{step.name}</span>
-                        </div>
-
-                        {/* Drop-off connector between steps */}
-                        {idx < arr.length - 1 && (
-                          <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '42px', marginBottom: '6px', gap: '8px' }}>
-                            <div style={{ width: '2px', height: '20px', background: '#e2e8f0', borderRadius: '1px' }} />
-                            <div style={{
-                              background: dropoff > 50 ? '#fff1f2' : dropoff > 25 ? '#fff7ed' : '#f0fdf4',
-                              border: `1px solid ${dropoff > 50 ? '#fecdd3' : dropoff > 25 ? '#fed7aa' : '#bbf7d0'}`,
-                              borderRadius: '20px',
-                              padding: '2px 10px',
-                              fontSize: '10.5px',
-                              fontWeight: 700,
-                              color: dropoff > 50 ? '#e11d48' : dropoff > 25 ? '#ea580c' : '#16a34a'
-                            }}>
-                              ⬇ 이탈 {dropoff}%
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Right summary panel */}
-                <div style={{ width: '180px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <div style={{ fontSize: '11px', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', marginBottom: '4px' }}>단계별 전환 요약</div>
-                  {realFunnelData.map((step, idx, arr) => {
-                    const firstVal = arr[0]?.t_val || 1;
-                    const conversion = firstVal > 0 ? Math.round((step.t_val / firstVal) * 1000) / 10 : 0;
-                    return (
-                      <div key={idx} style={{
-                        background: `${step.color}08`,
-                        border: `1px solid ${step.color}25`,
-                        borderRadius: '10px',
-                        padding: '10px 12px',
+                  return (
+                    <div key={idx}>
+                      {/* Step Row */}
+                      <div style={{
+                        background: 'white',
+                        border: '1px solid #e2e8f0',
+                        borderRadius: '14px',
+                        padding: '18px 24px',
                         display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        gap: '20px',
+                        position: 'relative',
+                        overflow: 'hidden',
                       }}>
-                        <div>
-                          <div style={{ fontSize: '10px', fontWeight: 700, color: '#64748b' }}>STEP {idx + 1}</div>
-                          <div style={{ fontSize: '16px', fontWeight: 900, color: '#0f172a' }}>{step.t_val}<span style={{ fontSize: '11px', color: '#64748b' }}>명</span></div>
+                        {/* Background progress fill */}
+                        <div style={{
+                          position: 'absolute',
+                          left: 0, top: 0, bottom: 0,
+                          width: `${barWidth}%`,
+                          background: `${step.color}08`,
+                          borderRight: `3px solid ${step.color}30`,
+                          transition: 'width 0.7s cubic-bezier(0.16,1,0.3,1)',
+                          pointerEvents: 'none'
+                        }} />
+
+                        {/* Step number badge */}
+                        <div style={{
+                          width: '44px', height: '44px', borderRadius: '12px',
+                          background: `${step.color}15`,
+                          border: `2px solid ${step.color}40`,
+                          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                          flexShrink: 0, zIndex: 2
+                        }}>
+                          <span style={{ fontSize: '9px', fontWeight: 800, color: step.color, letterSpacing: '0.05em' }}>STEP</span>
+                          <span style={{ fontSize: '18px', fontWeight: 900, color: step.color, lineHeight: 1 }}>{idx + 1}</span>
                         </div>
-                        <div style={{ fontSize: '14px', fontWeight: 900, color: step.color }}>{conversion}%</div>
+
+                        {/* Event name & desc */}
+                        <div style={{ flex: 1, zIndex: 2 }}>
+                          <div style={{ fontSize: '13px', fontWeight: 800, color: '#1e293b', fontFamily: 'monospace', marginBottom: '3px' }}>
+                            {step.name}
+                          </div>
+                          <div style={{ fontSize: '11.5px', color: '#64748b', fontWeight: 500 }}>{step.desc}</div>
+                        </div>
+
+                        {/* Progress bar */}
+                        <div style={{ flex: 2, zIndex: 2 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#94a3b8', fontWeight: 600, marginBottom: '5px' }}>
+                            <span>전환 진행률</span>
+                            <span>{barWidth.toFixed(1)}%</span>
+                          </div>
+                          <div style={{ height: '8px', background: '#f1f5f9', borderRadius: '99px', overflow: 'hidden' }}>
+                            <div style={{
+                              height: '100%',
+                              width: `${barWidth}%`,
+                              background: `linear-gradient(90deg, ${step.color}80, ${step.color})`,
+                              borderRadius: '99px',
+                              transition: 'width 0.7s cubic-bezier(0.16,1,0.3,1)'
+                            }} />
+                          </div>
+                        </div>
+
+                        {/* Stats */}
+                        <div style={{ display: 'flex', gap: '24px', zIndex: 2, flexShrink: 0 }}>
+                          <div style={{ textAlign: 'right' }}>
+                            <div style={{ fontSize: '10.5px', color: '#94a3b8', fontWeight: 600, marginBottom: '2px' }}>활성 사용자</div>
+                            <div style={{ fontSize: '20px', fontWeight: 900, color: '#0f172a', lineHeight: 1 }}>
+                              {currVal}<span style={{ fontSize: '12px', fontWeight: 600, color: '#64748b' }}> 명</span>
+                            </div>
+                          </div>
+                          <div style={{ textAlign: 'right', minWidth: '72px' }}>
+                            <div style={{ fontSize: '10.5px', color: '#94a3b8', fontWeight: 600, marginBottom: '2px' }}>최초 단계 대비</div>
+                            <div style={{ fontSize: '20px', fontWeight: 900, color: step.color, lineHeight: 1 }}>
+                              {conversion}%
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    );
-                  })}
-                </div>
+
+                      {/* Drop-off connector */}
+                      {idx < arr.length - 1 && (
+                        <div style={{
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          height: '36px', position: 'relative'
+                        }}>
+                          <div style={{
+                            position: 'absolute', width: '2px', background: '#e2e8f0',
+                            top: 0, bottom: 0, zIndex: 1
+                          }} />
+                          <div style={{
+                            background: dropoff > 50 ? '#fff1f2' : dropoff > 25 ? '#fff7ed' : '#f0fdf4',
+                            border: `1px solid ${dropoff > 50 ? '#fecdd3' : dropoff > 25 ? '#fed7aa' : '#bbf7d0'}`,
+                            borderRadius: '20px', padding: '3px 14px',
+                            fontSize: '11px', fontWeight: 700,
+                            color: dropoff > 50 ? '#e11d48' : dropoff > 25 ? '#ea580c' : '#16a34a',
+                            zIndex: 2, display: 'flex', alignItems: 'center', gap: '4px'
+                          }}>
+                            ⬇ 이탈율 {dropoff}%
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           ) : (
-            <>
+            <div>
               {/* Path Exploration */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
                 <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#1e293b' }}>
@@ -1368,7 +1381,7 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                   </div>
                 </div>
               )}
-            </>
+            </div>
           )}
         </div>
       </div>

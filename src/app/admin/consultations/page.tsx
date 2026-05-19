@@ -6,6 +6,31 @@ import useSWR from 'swr';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
+const parseDetails = (details: string) => {
+  if (!details) return { cleanText: '', attachment: null };
+  
+  const fileMarker = '[첨부파일_데이터]';
+  const markerIndex = details.indexOf(fileMarker);
+  
+  if (markerIndex === -1) {
+    return { cleanText: details, attachment: null };
+  }
+  
+  const cleanText = details.substring(0, markerIndex).trim();
+  const fileSection = details.substring(markerIndex + fileMarker.length).trim();
+  
+  const nameLine = fileSection.split('\n').find(l => l.startsWith('파일명:'));
+  const dataLine = fileSection.split('\n').find(l => l.startsWith('데이터:'));
+  
+  const fileName = nameLine ? nameLine.replace('파일명:', '').trim() : '첨부파일';
+  const base64 = dataLine ? dataLine.replace('데이터:', '').trim() : '';
+  
+  return {
+    cleanText,
+    attachment: base64 ? { name: fileName, data: base64 } : null
+  };
+};
+
 export default function AdminConsultationsPage() {
   const { data: consultations, error, mutate } = useSWR('/api/consultations', fetcher);
   const isLoading = !consultations && !error;
@@ -159,12 +184,60 @@ export default function AdminConsultationsPage() {
               <span>{selectedItem.appointment_time || '미입력'}</span>
             </div>
             
-            <div style={{ marginTop: '20px', background: '#f8f9fa', padding: '20px', borderRadius: '8px' }}>
-              <strong style={{ display: 'block', marginBottom: '10px', color: '#333' }}>[상세 내용]</strong>
-              <p style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6', color: '#444' }}>
-                {selectedItem.details || '내용 없음'}
-              </p>
-            </div>
+            {(() => {
+              const { cleanText, attachment } = parseDetails(selectedItem.details || '');
+              return (
+                <>
+                  <div style={{ marginTop: '20px', background: '#f8f9fa', padding: '20px', borderRadius: '8px' }}>
+                    <strong style={{ display: 'block', marginBottom: '10px', color: '#333' }}>[상세 내용]</strong>
+                    <p style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6', color: '#444', margin: 0 }}>
+                      {cleanText || '내용 없음'}
+                    </p>
+                  </div>
+                  
+                  {attachment && (
+                    <div style={{ marginTop: '20px', background: '#f0f4f8', border: '1px dashed #cbd5e1', padding: '20px', borderRadius: '8px' }}>
+                      <strong style={{ display: 'block', marginBottom: '10px', color: '#1e293b' }}>📎 첨부파일</strong>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <span style={{ fontSize: '13px', fontWeight: 600, color: '#475569' }}>
+                          파일명: {attachment.name}
+                        </span>
+                        
+                        {attachment.data.startsWith('data:image/') && (
+                          <div style={{ maxWidth: '100%', maxHeight: '300px', overflow: 'hidden', borderRadius: '8px', border: '1px solid #cbd5e1' }}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={attachment.data} alt="첨부 이미지" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto', objectFit: 'contain' }} />
+                          </div>
+                        )}
+                        
+                        <div>
+                          <a 
+                            href={attachment.data} 
+                            download={attachment.name}
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '6px',
+                              padding: '8px 16px',
+                              background: '#bd9d62',
+                              color: 'white',
+                              borderRadius: '6px',
+                              fontSize: '13px',
+                              fontWeight: 700,
+                              textDecoration: 'none',
+                              boxShadow: '0 2px 4px rgba(189,157,98,0.2)',
+                              cursor: 'pointer'
+                            }}
+                          >
+                            ⬇️ 파일 다운로드
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </>
+              );
+            })()}
 
             <div style={{ marginTop: '30px', textAlign: 'right' }}>
               <button 

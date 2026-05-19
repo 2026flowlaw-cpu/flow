@@ -923,10 +923,10 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                         <td style={{ padding: '18px 0', verticalAlign: 'middle' }}>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                             <div style={{ height: '8px', background: '#e2e8f0', borderRadius: '4px', display: 'flex', overflow: 'hidden' }}>
-                              <div style={{ width: `${p90}%`, background: '#ef4444', height: '100%' }}></div>
-                              <div style={{ width: `${p75 - p90}%`, background: '#f97316', height: '100%' }}></div>
-                              <div style={{ width: `${p50 - p75}%`, background: '#eab308', height: '100%' }}></div>
-                              <div style={{ width: `${p25 - p50}%`, background: '#22c55e', height: '100%' }}></div>
+                              <div style={{ width: `${Math.max(0, p25 - p50)}%`, background: '#22c55e', height: '100%' }}></div>
+                              <div style={{ width: `${Math.max(0, p50 - p75)}%`, background: '#eab308', height: '100%' }}></div>
+                              <div style={{ width: `${Math.max(0, p75 - p90)}%`, background: '#f97316', height: '100%' }}></div>
+                              <div style={{ width: `${Math.max(0, p90)}%`, background: '#ef4444', height: '100%' }}></div>
                             </div>
                             
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10.5px', color: '#64748b', fontWeight: 600 }}>

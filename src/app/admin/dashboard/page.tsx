@@ -380,9 +380,12 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
         }}>
           {/* 핵심 전환 지표 (4카드) */}
           <div>
-            <h3 style={{ margin: '0 0 16px 0', fontSize: '15.5px', fontWeight: 700, color: '#bd9d62', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <h3 style={{ margin: '0 0 6px 0', fontSize: '15.5px', fontWeight: 700, color: '#bd9d62', display: 'flex', alignItems: 'center', gap: '8px' }}>
               📊 핵심 비즈니스 전환 지표 (Google Tag Manager 연동 성과)
             </h3>
+            <p style={{ margin: '0 0 18px 0', fontSize: '12.5px', color: '#64748b', fontWeight: 500, lineHeight: 1.5 }}>
+              💡 <strong>안내</strong>: 아래 수치는 구글 애널리틱스(GA4) 수집 데이터로, 구글 데이터 처리 정책에 따라 <strong>약 24~48시간의 통계 반영 지연</strong>이 발생할 수 있습니다. (상단의 "실시간 운영 현황"은 DB 직접 조회이므로 즉시 1로 표기됩니다.)
+            </p>
             <div className="stats-grid">
               <div className="stat-card glass-card" style={{ borderTop: '4px solid #4f46e5' }}>
                 <label>온라인 상담 신청 완료</label>

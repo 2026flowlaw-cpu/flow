@@ -36,7 +36,7 @@ const menuData = [
       { name: '집단소송센터', href: '/practice/class-action' },
       { name: '민사일반센터', href: '/practice/general-civil' },
       { name: '에듀법률센터', href: '/practice/edu-law' },
-      { name: '형사소송센터', href: '/practice/criminal-law' },
+      { name: '형사소송센터', href: '/practice/criminal-law/overview' },
     ]
   },
   {

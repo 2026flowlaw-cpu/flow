@@ -8,10 +8,11 @@ import RealFooter from '@/components/Footer/Footer';
 import { supabase } from '@/lib/supabase';
 import styles from './page.module.css';
 
-const categories = ['전체보기', '분양계약해제', '건설', '부동산', '임대차', 'HR', '민사 일반'];
+const defaultCategories = ['전체보기', '분양계약해제', '건설', '부동산', '임대차', 'HR', '민사 일반'];
 
 export default function SuccessStoriesPage() {
   const [activeCategory, setActiveCategory] = useState('전체보기');
+  const [tabCategories, setTabCategories] = useState(defaultCategories);
   const [allCases, setAllCases] = useState<any[]>([]);
   const [filteredCases, setFilteredCases] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -45,6 +46,19 @@ export default function SuccessStoriesPage() {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const catParam = params.get('category');
+      if (catParam) {
+        setActiveCategory(catParam);
+        if (!defaultCategories.includes(catParam)) {
+          setTabCategories([...defaultCategories, catParam]);
+        }
+      }
+    }
+  }, [allCases]);
 
   useEffect(() => {
     if (activeCategory === '전체보기') {
@@ -83,7 +97,7 @@ export default function SuccessStoriesPage() {
           {/* Filter Tabs */}
           <div className={styles.filterContainer}>
             <div className={styles.filterTabs}>
-              {categories.map((cat) => (
+              {tabCategories.map((cat) => (
                 <button 
                   key={cat} 
                   onClick={() => setActiveCategory(cat)}

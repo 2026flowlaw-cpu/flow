@@ -117,6 +117,17 @@ export default function Header() {
         ]
       };
     }
+    if (item.title === '플로우 소식' && isCriminalPage) {
+      return {
+        ...item,
+        subItems: item.subItems.map(sub => {
+          if (sub.name === '성공사례') {
+            return { ...sub, href: '/success-stories?category=형사' };
+          }
+          return sub;
+        })
+      };
+    }
     return item;
   });
 

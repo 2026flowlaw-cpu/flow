@@ -792,7 +792,10 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                   consultations.slice(0, 4).map((item: any, i: number) => (
                     <div 
                       key={i} 
-                      onClick={() => setSelectedItem(item)}
+                      onClick={() => {
+                        console.log('최근 상담 접수 클릭됨:', item);
+                        setSelectedItem(item);
+                      }}
                       style={{ 
                         padding: '14px 20px', 
                         background: i % 2 === 0 ? '#ffffff' : '#f8fafc',

@@ -112,9 +112,6 @@ export default function AdminConsultationsPage() {
                       if (target.tagName === 'SELECT' || target.tagName === 'OPTION' || target.closest('button')) {
                         return;
                       }
-                      if (typeof window !== 'undefined') {
-                        window.alert(`상담 신청 접수 정보\n━━━━━━━━━━━━━━━━━━━━\n의뢰인명: ${item.name}\n연락처: ${item.phone}\n사건 유형: ${item.case_type || '미정'}\n접수 상태: ${item.status}\n\n확인 버튼을 누르시면 상세 내역 및 첨부파일을 볼 수 있는 팝업 창이 열립니다!`);
-                      }
                       setSelectedItem(item);
                     }}
                     style={{ 

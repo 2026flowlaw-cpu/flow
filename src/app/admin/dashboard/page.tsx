@@ -171,15 +171,36 @@ export default function AdminDashboardMainPage() {
       }
     : (isLive ? ga4Res.data : mockAnalyticsData);
 
-  const conversionRate = useMemo(() => {
-    const conversions = activeStats.totalConversions;
+  // 선택한 기간 내의 DB 상담 신청 건수 필터링 (실시간 무지연 집계용)
+  const filteredDbConsultCount = useMemo(() => {
+    if (!isConsultArray) return 0;
+    if (!dateRangeObj.from) return consultations.length;
+    
+    const start = new Date(dateRangeObj.from);
+    start.setHours(0, 0, 0, 0);
+    const end = dateRangeObj.to ? new Date(dateRangeObj.to) : new Date();
+    end.setHours(23, 59, 59, 999);
+    
+    return consultations.filter((c: any) => {
+      const created = new Date(c.created_at);
+      return created >= start && created <= end;
+    }).length;
+  }, [consultations, isConsultArray, dateRangeObj]);
+
+  const totalConversionsCombined = useMemo(() => {
+    const kakao = activeStats.kakaoConversions;
+    if (kakao === '-') return '-';
+    return filteredDbConsultCount + Number(kakao);
+  }, [filteredDbConsultCount, activeStats.kakaoConversions]);
+
+  const conversionRateCombined = useMemo(() => {
     const sessions = activeStats.totalSessions;
-    if (conversions === '-' || sessions === '-') return '-';
-    const convNum = Number(conversions);
+    if (sessions === '-' || totalConversionsCombined === '-') return '-';
     const sessNum = Number(sessions);
-    if (isNaN(convNum) || isNaN(sessNum) || sessNum === 0) return '0.0%';
+    if (isNaN(sessNum) || sessNum === 0) return '0.0%';
+    const convNum = Number(totalConversionsCombined);
     return `${((convNum / sessNum) * 100).toFixed(1)}%`;
-  }, [activeStats]);
+  }, [totalConversionsCombined, activeStats.totalSessions]);
   const topSourceNames = (analyticsData.topSourceNames && analyticsData.topSourceNames.length > 0)
     ? analyticsData.topSourceNames 
     : ['(direct)', 'ig', 'localhost:3000', 'threads'];
@@ -384,17 +405,17 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
               📊 핵심 비즈니스 전환 지표 (Google Tag Manager 연동 성과)
             </h3>
             <p style={{ margin: '0 0 18px 0', fontSize: '12.5px', color: '#64748b', fontWeight: 500, lineHeight: 1.5 }}>
-              💡 <strong>안내</strong>: 아래 수치는 구글 애널리틱스(GA4) 수집 데이터로, 구글 데이터 처리 정책에 따라 <strong>약 24~48시간의 통계 반영 지연</strong>이 발생할 수 있습니다. (상단의 "실시간 운영 현황"은 DB 직접 조회이므로 즉시 1로 표기됩니다.)
+              💡 <strong>안내</strong>: "온라인 상담 신청 완료"는 DB 조회를 통해 <strong>실시간(즉시) 반영</strong>되며, "카카오톡 문의 클릭"은 구글 서버 처리 정책에 따라 약 24~48시간의 지연이 있을 수 있습니다.
             </p>
             <div className="stats-grid">
               <div className="stat-card glass-card" style={{ borderTop: '4px solid #4f46e5' }}>
                 <label>온라인 상담 신청 완료</label>
                 <div className="value-group">
                   <h2 style={{ color: '#4f46e5' }}>
-                    {typeof activeStats.consultationsCount === 'number' ? activeStats.consultationsCount.toLocaleString() : activeStats.consultationsCount}
+                    {filteredDbConsultCount.toLocaleString()}
                   </h2>
                 </div>
-                <p className="desc">GTM 상담제출 이벤트</p>
+                <p className="desc">실시간 DB 직접 조회 (지연 없음)</p>
               </div>
               
               <div className="stat-card glass-card" style={{ borderTop: '4px solid #f59e0b' }}>
@@ -404,27 +425,27 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                     {typeof activeStats.kakaoConversions === 'number' ? activeStats.kakaoConversions.toLocaleString() : activeStats.kakaoConversions}
                   </h2>
                 </div>
-                <p className="desc">카카오톡 링크 이동 수</p>
+                <p className="desc">GA4 카카오 링크 이동 수</p>
               </div>
 
               <div className="stat-card glass-card" style={{ borderTop: '4px solid #10b981' }}>
                 <label>총 전환 건수</label>
                 <div className="value-group">
                   <h2 style={{ color: '#10b981' }}>
-                    {typeof activeStats.totalConversions === 'number' ? activeStats.totalConversions.toLocaleString() : activeStats.totalConversions}
+                    {typeof totalConversionsCombined === 'number' ? totalConversionsCombined.toLocaleString() : totalConversionsCombined}
                   </h2>
                 </div>
-                <p className="desc">전체 핵심 행동 합계</p>
+                <p className="desc">실시간 상담 + 카카오 클릭 합계</p>
               </div>
 
               <div className="stat-card glass-card" style={{ borderTop: '4px solid #bd9d62' }}>
                 <label>문의 전환율 (CVR)</label>
                 <div className="value-group">
                   <h2 style={{ color: '#bd9d62' }}>
-                    {conversionRate}
+                    {conversionRateCombined}
                   </h2>
                 </div>
-                <p className="desc">세션 대비 전환 비중</p>
+                <p className="desc">세션 대비 문의(전환) 비중</p>
               </div>
             </div>
           </div>

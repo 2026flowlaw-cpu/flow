@@ -3,7 +3,10 @@ import "./globals.css";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "법무법인 플로우 - 하자소송의 명확한 해답",
+  title: {
+    template: "%s | 법무법인 플로우",
+    default: "법무법인 플로우 - 하자소송의 명확한 해답",
+  },
   description: "건설 소송 분석 및 전략 수립에 특화된 법무법인 플로우입니다.",
 };
 

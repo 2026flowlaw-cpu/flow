@@ -8,7 +8,7 @@ import RealFooter from '@/components/Footer/Footer';
 import { supabase } from '@/lib/supabase';
 import styles from './page.module.css';
 
-const categories = ['전체보기', '아파트 하자', '오피스텔/상가', '일반건축물', '손해배상', '전세사기', '분양계약해제'];
+const categories = ['전체보기', '분양계약해제', '건설', '부동산', '임대차', 'HR', '민사 일반'];
 
 export default function SuccessStoriesPage() {
   const [activeCategory, setActiveCategory] = useState('전체보기');
@@ -63,9 +63,10 @@ export default function SuccessStoriesPage() {
         <section className={styles.hero}>
           <div className={`${styles.heroContent} container`}>
             <span className={styles.heroSubtitle}>OUR TRACK RECORD</span>
-            <h1 className={styles.heroTitle}>주요 성공사례</h1>
+            <h1 className={styles.heroTitle}>법무법인 플로우 성공사례</h1>
             <p className={styles.heroText}>
-              법무법인 플로우은 건설 하자 소송의 정밀한 분석과 압도적인 전문성으로 의뢰인의 권익을 완벽하게 보호합니다.
+              승소, 결코 우연이 아닙니다.<br />
+              의뢰인의 소중한 권리를 지켜온 플로우의 남다른 노하우를 직접 확인해 보세요.
             </p>
           </div>
           <div className={styles.heroBg}></div>

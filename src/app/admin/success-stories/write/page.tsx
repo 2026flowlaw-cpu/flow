@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import styles from './write.module.css';
 
-const CATEGORIES = ['아파트 하자', '오피스텔/상가', '일반건축물', '손해배상', '전세사기', '분양계약해제'];
+const CATEGORIES = ['분양계약해제', '건설', '부동산', '임대차', 'HR', '민사 일반'];
 
 export default function SuccessStoryWritePage() {
   const router = useRouter();
@@ -14,7 +14,7 @@ export default function SuccessStoryWritePage() {
 
   const [formData, setFormData] = useState({
     title: '',
-    category: '아파트 하자',
+    category: '분양계약해제',
     description: '',
     content: '',
     badge: '승소 (FULL WIN)',

@@ -12,7 +12,7 @@ export default function AdminSuccessStoryAddPage() {
   const [formData, setFormData] = useState({
     id: '',
     displayId: '',
-    category: '아파트 하자',
+    category: '분양계약해제',
     title: '',
     description: '',
     badge: '승소 (FULL WIN)',
@@ -176,10 +176,12 @@ export default function AdminSuccessStoryAddPage() {
                   value={formData.category}
                   onChange={(e) => setFormData({...formData, category: e.target.value})}
                 >
-                  <option>아파트 하자</option>
-                  <option>오피스텔/상가</option>
-                  <option>일반건축물</option>
-                  <option>손해배상</option>
+                  <option>분양계약해제</option>
+                  <option>건설</option>
+                  <option>부동산</option>
+                  <option>임대차</option>
+                  <option>HR</option>
+                  <option>민사 일반</option>
                 </select>
               </div>
               <div className={styles.inputGroup}>

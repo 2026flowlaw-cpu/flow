@@ -55,7 +55,8 @@ export async function GET(req: NextRequest) {
       [sourcesDetailedResponse],
       [locationResponse],
       [summaryResponse],
-      [eventsResponse]
+      [eventsResponse],
+      [scrollResponse]
     ] = await Promise.all([
       // 1. 트렌드 (일별 활성 사용자 & 세션)
       client.runReport({
@@ -122,6 +123,23 @@ export async function GET(req: NextRequest) {
         dimensions: [{ name: 'eventName' }],
         metrics: [{ name: 'eventCount' }, { name: 'activeUsers' }],
         limit: 30,
+      }),
+      // 9. 페이지별 상세 스크롤 분석 리포트 (GTM 연동용)
+      client.runReport({
+        property: parentProperty,
+        dateRanges: [{ startDate, endDate }],
+        dimensions: [{ name: 'pagePath' }, { name: 'percentScrolled' }],
+        metrics: [{ name: 'eventCount' }],
+        dimensionFilter: {
+          filter: {
+            fieldName: 'eventName',
+            stringFilter: {
+              matchType: 'EXACT',
+              value: 'scroll'
+            }
+          }
+        },
+        limit: 100
       })
     ]);
 
@@ -221,6 +239,41 @@ export async function GET(req: NextRequest) {
       };
     }) || [];
 
+    // 9. 상세 스크롤 깊이 분석 가공
+    const scrollMap: Record<string, Record<string, number>> = {};
+    scrollResponse.rows?.forEach((row: any) => {
+      const page = row.dimensionValues?.[0]?.value || '/';
+      const pct = row.dimensionValues?.[1]?.value || '90';
+      const count = Number(row.metricValues?.[0]?.value || 0);
+
+      if (!scrollMap[page]) {
+        scrollMap[page] = { '25': 0, '50': 0, '75': 0, '90': 0 };
+      }
+      if (pct.includes('25')) scrollMap[page]['25'] += count;
+      else if (pct.includes('50')) scrollMap[page]['50'] += count;
+      else if (pct.includes('75')) scrollMap[page]['75'] += count;
+      else if (pct.includes('90')) scrollMap[page]['90'] += count;
+      else {
+        const num = parseInt(pct, 10);
+        if (!isNaN(num)) {
+          if (num >= 90) scrollMap[page]['90'] += count;
+          else if (num >= 75) scrollMap[page]['75'] += count;
+          else if (num >= 50) scrollMap[page]['50'] += count;
+          else if (num >= 25) scrollMap[page]['25'] += count;
+        }
+      }
+    });
+
+    const formattedScroll = Object.entries(scrollMap).map(([page, pcts]) => {
+      return {
+        page,
+        pct25: pcts['25'] || 0,
+        pct50: pcts['50'] || 0,
+        pct75: pcts['75'] || 0,
+        pct90: pcts['90'] || 0
+      };
+    }).sort((a, b) => (b.pct25 + b.pct50) - (a.pct25 + a.pct50)).slice(0, 5);
+
     const summaryStats = {
       activeUsers: totalUsers || Number(trendResponse.rows?.reduce((sum: number, r: any) => sum + Number(r.metricValues?.[0]?.value || 0), 0) || 0),
       totalSessions: totalSessions || Number(summaryResponse.rows?.[0]?.metricValues?.[4]?.value || 0),
@@ -240,6 +293,7 @@ export async function GET(req: NextRequest) {
         sourcesDetailed: formattedDetailedSources,
         topLocations: formattedLocation,
         events: formattedEvents,
+        scrollAnalysis: formattedScroll,
         topSourceNames: Array.from(topSourceSet).slice(0, 5) // 상위 5개 소스 표시
       }
     });

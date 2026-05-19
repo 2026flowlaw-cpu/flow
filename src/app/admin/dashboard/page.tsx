@@ -64,6 +64,45 @@ const mockStats = {
   bounceRate: '50.0%'
 };
 
+const getPageKoreanName = (path: string) => {
+  const cleanPath = path.split('?')[0];
+
+  const routeMap: Record<string, string> = {
+    '/': '메인 홈페이지 (홈화면)',
+    '/practice': '소송 분야 전체 목록',
+    '/practice/criminal-law': '형사사건 전문 센터',
+    '/practice/jeonse-fraud': '전세사기 대응 센터',
+    '/practice/class-action': '집단소송 대응 센터',
+    '/practice/resale-cancellation': '분양계약 취소/해제 센터',
+    '/practice/construction-dispute': '공사대금 분쟁 해결 센터',
+    '/practice/defect-litigation': '아파트/상가 하자소송 센터',
+    '/news/press': '언론 보도자료 뉴스',
+    '/admin/dashboard': '어드민 통계 대시보드',
+    '/admin/consultations': '상담 신청 접수 관리',
+    '/admin/press-releases': '보도자료 등록/편집',
+    '/admin/columns': '법률 칼럼 등록/편집',
+    '/admin/login': '관리자 로그인 화면',
+    '/admin/success-stories': '성공사례 등록/관리',
+    '/admin/defect-reviews': '하자 기획 심사 관리',
+  };
+
+  if (routeMap[cleanPath]) {
+    return routeMap[cleanPath];
+  }
+
+  // 예외 처리 및 어드민/상세 처리
+  if (cleanPath.startsWith('/practice/')) {
+    const sub = cleanPath.replace('/practice/', '');
+    return `${sub} 상세 페이지`;
+  }
+  if (cleanPath.startsWith('/admin/')) {
+    const sub = cleanPath.replace('/admin/', '');
+    return `관리자 - ${sub}`;
+  }
+
+  return path;
+};
+
 export default function AdminDashboardMainPage() {
   const { data: consultations } = useSWR('/api/consultations', fetcher);
   const { data: pressReleases } = useSWR('/api/press-releases', fetcher);
@@ -436,9 +475,16 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                 <tbody>
                   {analyticsData.topPages.map((page: any, i: number) => (
                     <tr key={i}>
-                      <td className="page-path">{page.page}</td>
-                      <td className="bold">{page.views.toLocaleString()}</td>
-                      <td>{page.time}</td>
+                      <td style={{ padding: '16px' }}>
+                        <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '14px', marginBottom: '4px' }}>
+                          ✨ {getPageKoreanName(page.page)}
+                        </div>
+                        <div className="page-path" style={{ fontSize: '11.5px', color: '#94a3b8', fontStyle: 'normal' }}>
+                          {page.page}
+                        </div>
+                      </td>
+                      <td className="bold" style={{ padding: '16px' }}>{page.views.toLocaleString()}</td>
+                      <td style={{ padding: '16px' }}>{page.time}</td>
                     </tr>
                   ))}
                 </tbody>

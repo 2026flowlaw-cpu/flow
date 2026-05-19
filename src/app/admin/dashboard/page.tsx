@@ -352,7 +352,10 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
         <div style={{ 
           opacity: ga4Validating ? 0.38 : 1, 
           transition: 'opacity 0.25s ease',
-          pointerEvents: ga4Validating ? 'none' : 'auto'
+          pointerEvents: ga4Validating ? 'none' : 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '40px'
         }}>
           {/* 웹사이트 지표 (4카드) */}
           <div className="stats-grid">

@@ -143,6 +143,7 @@ export default function AdminDashboardMainPage() {
     to: new Date()
   });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isFunnelDateOpen, setIsFunnelDateOpen] = useState(false);
 
   const [activeTab, setActiveTab] = useState<'marketing' | 'debug' | 'funnel'>('marketing');
   
@@ -1426,10 +1427,10 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
         </div>
 
         {/* Date Preset */}
-        <div>
+        <div style={{ position: 'relative' }}>
           <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 800, textTransform: 'uppercase' }}>조회 기간</span>
           <div 
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            onClick={() => setIsFunnelDateOpen(!isFunnelDateOpen)}
             style={{
             background: '#f8fafc',
             border: '1px solid #e2e8f0',
@@ -1452,6 +1453,46 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
             </span>
             <ChevronDown size={16} color="#64748b" />
           </div>
+
+          {isFunnelDateOpen && (
+            <div className="date-dropdown-menu split-view" style={{ position: 'absolute', top: '100%', left: 0, marginTop: '8px', zIndex: 100, width: 'max-content' }}>
+              <div className="preset-list">
+                {presetOptions.map(opt => (
+                  <div key={opt.value} className={`dropdown-item ${datePreset === opt.value ? 'active' : ''}`} 
+                       onClick={() => {
+                         handlePresetClick(opt.value as DatePreset);
+                         setIsFunnelDateOpen(false);
+                       }}>
+                    {opt.label}
+                  </div>
+                ))}
+              </div>
+              <div className="calendar-panel">
+                <div className="calendar-header-range">
+                  <div className="range-box">{dateRangeObj.from ? format(dateRangeObj.from, 'yyyy.MM.dd') : '시작일'}</div>
+                  <span className="arrow">→</span>
+                  <div className="range-box">{dateRangeObj.to ? format(dateRangeObj.to, 'yyyy.MM.dd') : '종료일'}</div>
+                </div>
+                
+                <DayPicker
+                  mode="range"
+                  selected={dateRangeObj}
+                  onSelect={(range: any) => {
+                    setDatePreset('custom');
+                    setDateRangeObj(range || { from: undefined, to: undefined });
+                  }}
+                  locale={ko}
+                  numberOfMonths={1}
+                  className="custom-calendar"
+                />
+                
+                <div className="calendar-footer">
+                  <button className="btn-cancel" onClick={() => setIsFunnelDateOpen(false)}>취소</button>
+                  <button className="btn-apply" onClick={() => setIsFunnelDateOpen(false)}>확인</button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Visualization Type */}

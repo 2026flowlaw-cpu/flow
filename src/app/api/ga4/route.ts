@@ -175,6 +175,7 @@ export async function GET(req: NextRequest) {
       const avgTime = views > 0 ? Math.floor(totalDuration / views) : 0;
       return {
         page: row.dimensionValues?.[0]?.value || '/',
+        title: row.dimensionValues?.[1]?.value || '제목 없음',
         views: views,
         time: `${Math.floor(avgTime / 60)}m ${avgTime % 60}s`
       };

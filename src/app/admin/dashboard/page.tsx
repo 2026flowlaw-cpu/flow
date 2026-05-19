@@ -7,7 +7,7 @@ import {
 } from 'recharts';
 import { 
   MessageSquare, AlertCircle, CheckCircle2, Calendar, ChevronRight, Laptop, HelpCircle, Activity, ChevronDown,
-  Filter, TrendingUp, Grid, Globe, Users, BarChart3, Settings
+  Filter, TrendingUp, Grid, Globe, Users, BarChart3, Settings, Network, GitMerge, ArrowRight
 } from 'lucide-react';
 import Link from 'next/link';
 import { format, subDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth, subMonths } from 'date-fns';
@@ -37,9 +37,11 @@ const mockAnalyticsData = {
     { name: 'bing', value: 1, color: '#e0e7ff' }
   ],
   topPages: [
-    { page: '/dashboard', views: 62, time: '0m 45s' },
-    { page: '/', views: 53, time: '0m 13s' },
-    { page: '/lawyers', views: 37, time: '1m 23s' }
+    { page: '/', title: '법무법인 플로우 - 메인', views: 345, time: '1m 12s' },
+    { page: '/practice/criminal-law', title: '형사/성범죄 센터', views: 182, time: '2m 45s' },
+    { page: '/consult', title: '온라인 상담신청', views: 94, time: '3m 10s' },
+    { page: '/practice/construction-dispute', title: '건설분쟁 센터', views: 67, time: '1m 55s' },
+    { page: '/lawyers/profiles', title: '변호사 소개', views: 42, time: '2m 10s' }
   ],
   topLocations: [
     { city: 'Seoul', users: 10 },
@@ -149,7 +151,7 @@ export default function AdminDashboardMainPage() {
   
   // GA4 탐색 및 퍼널 분석 상태 정의
   const [funnelSegment, setFunnelSegment] = useState<'all' | 'direct' | 'paid' | 'mobile'>('all');
-  const [funnelView, setFunnelView] = useState<'table' | 'funnel'>('table');
+  const [funnelView, setFunnelView] = useState<'table' | 'funnel' | 'path'>('table');
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [debugEvents, setDebugEvents] = useState<any[]>([
     { id: 1, name: 'page_view', time: '오전 10:16:00', type: 'system', icon: '👀', desc: '메인 페이지 접속', duration: '60초' },
@@ -1498,10 +1500,11 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
         {/* Visualization Type */}
         <div>
           <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 800, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>시각화 형태</span>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
             {[
               { id: 'table', label: '데이터 표', icon: <Grid size={16} /> },
-              { id: 'funnel', label: '퍼널 차트', icon: <BarChart3 size={16} /> }
+              { id: 'funnel', label: '퍼널 차트', icon: <BarChart3 size={16} /> },
+              { id: 'path', label: '경로 탐색', icon: <Network size={16} /> }
             ].map(vis => {
               const isActive = funnelView === vis.id;
               return (
@@ -1622,6 +1625,23 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
             }}
           >
             🎯 퍼널 탐색
+          </div>
+          <div 
+            onClick={() => setFunnelView('path')}
+            style={{
+              padding: '12px 20px',
+              fontSize: '12.5px',
+              fontWeight: 800,
+              color: funnelView === 'path' ? '#3b82f6' : '#64748b',
+              borderBottom: funnelView === 'path' ? '3px solid #3b82f6' : '3px solid transparent',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.2s'
+            }}
+          >
+            🔀 경로 탐색 분석
           </div>
         </div>
 
@@ -1752,7 +1772,7 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                 </table>
               </div>
             </div>
-          ) : (
+          ) : funnelView === 'funnel' ? (
             <div>
               {/* Funnel visual exploration */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
@@ -1874,6 +1894,77 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                     )}
                   </div>
                 ))}
+              </div>
+            </div>
+          ) : (
+            <div>
+              {/* Path Exploration */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#1e293b' }}>🔀 경로 탐색 시뮬레이션 (인기 페이지 기준)</span>
+                <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600 }}>선택된 기간의 실제 페이지뷰 기반 추정 트리</span>
+              </div>
+              <div style={{
+                background: 'white',
+                border: '1px solid #e2e8f0',
+                borderRadius: '16px',
+                padding: '30px',
+                display: 'flex',
+                gap: '40px',
+                overflowX: 'auto',
+                minWidth: '100%',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
+              }}>
+                {/* Step 1 */}
+                <div style={{ flex: '0 0 260px' }}>
+                  <div style={{ fontSize: '12px', fontWeight: 800, color: '#64748b', marginBottom: '16px', textTransform: 'uppercase' }}>시작점</div>
+                  <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '16px', position: 'relative' }}>
+                    <div style={{ fontSize: '14px', fontWeight: 800, color: '#1e40af', marginBottom: '4px' }}>session_start</div>
+                    <div style={{ fontSize: '12px', color: '#3b82f6', fontWeight: 600 }}>{analyticsData?.topPages?.[0]?.views || 0} 총 세션 시작</div>
+                    <div style={{ position: 'absolute', right: '-40px', top: '50%', transform: 'translateY(-50%)', zIndex: 10 }}>
+                      <GitMerge size={20} color="#94a3b8" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 2 (Nodes) */}
+                <div style={{ flex: '0 0 280px', display: 'flex', flexDirection: 'column', gap: '16px', position: 'relative' }}>
+                  <div style={{ fontSize: '12px', fontWeight: 800, color: '#64748b', marginBottom: '0px', textTransform: 'uppercase' }}>+1단계 (인기 랜딩 페이지)</div>
+                  {analyticsData?.topPages?.slice(0, 4).map((p: any, i: number) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center' }}>
+                      <div style={{ width: '40px', borderBottom: '2px dashed #cbd5e1', marginRight: '12px' }}></div>
+                      <div style={{ flex: 1, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '12px', position: 'relative' }}>
+                        <div style={{ fontSize: '13px', fontWeight: 800, color: '#334155', marginBottom: '4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.title || p.page}</div>
+                        <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>{p.views} 조회수 · 평균 {p.time} 체류</div>
+                        {(i === 0 || i === 1) && (
+                          <div style={{ position: 'absolute', right: '-40px', top: '50%', transform: 'translateY(-50%)', zIndex: 10 }}>
+                            <ArrowRight size={16} color="#cbd5e1" />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Step 3 (Nodes) */}
+                <div style={{ flex: '0 0 280px', display: 'flex', flexDirection: 'column', gap: '16px', position: 'relative' }}>
+                  <div style={{ fontSize: '12px', fontWeight: 800, color: '#64748b', marginBottom: '0px', textTransform: 'uppercase' }}>+2단계 (주요 이동 경로)</div>
+                  {analyticsData?.topPages?.slice(1, 3).map((p: any, i: number) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', marginTop: i === 1 ? '56px' : '0px' }}>
+                      <div style={{ width: '40px', borderBottom: '2px dashed #cbd5e1', marginRight: '12px' }}></div>
+                      <div style={{ flex: 1, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '12px' }}>
+                        <div style={{ fontSize: '13px', fontWeight: 800, color: '#334155', marginBottom: '4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.title || p.page}</div>
+                        <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>{Math.floor(p.views * 0.4)} 연속 유입 추정</div>
+                      </div>
+                    </div>
+                  ))}
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ width: '40px', borderBottom: '2px dashed #fca5a5', marginRight: '12px' }}></div>
+                    <div style={{ flex: 1, background: '#fef2f2', border: '1px solid #fecdd3', borderRadius: '12px', padding: '12px' }}>
+                      <div style={{ fontSize: '13px', fontWeight: 800, color: '#e11d48', marginBottom: '4px' }}>(not set) / 이탈</div>
+                      <div style={{ fontSize: '11px', color: '#f43f5e', fontWeight: 600 }}>{Math.floor((analyticsData?.topPages?.[0]?.views || 0) * 0.6)} 이탈 추정</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           )}

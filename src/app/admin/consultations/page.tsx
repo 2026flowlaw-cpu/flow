@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import styles from '../youtube/admin-youtube.module.css';
 import useSWR from 'swr';
 
@@ -35,6 +36,11 @@ export default function AdminConsultationsPage() {
   const { data: consultations, error, mutate } = useSWR('/api/consultations', fetcher);
   const isLoading = !consultations && !error;
   const [selectedItem, setSelectedItem] = useState<any | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const fetchConsultations = () => mutate();
 
@@ -157,10 +163,10 @@ export default function AdminConsultationsPage() {
       </div>
 
       {/* 내용 상세보기 팝업 모달 */}
-      {selectedItem && (
+      {selectedItem && mounted && typeof window !== 'undefined' && createPortal(
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, 
-          background: 'rgba(0,0,0,0.5)', zIndex: 9999,
+          background: 'rgba(0,0,0,0.5)', zIndex: 99999,
           display: 'flex', alignItems: 'center', justifyContent: 'center'
         }}>
           <div style={{
@@ -261,7 +267,8 @@ export default function AdminConsultationsPage() {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

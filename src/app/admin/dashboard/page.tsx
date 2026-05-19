@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import useSWR from 'swr';
 import { 
   LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell
@@ -150,6 +151,11 @@ export default function AdminDashboardMainPage() {
   const { data: pressReleases } = useSWR('/api/press-releases', fetcher);
   
   const [selectedItem, setSelectedItem] = useState<any | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleStatusChange = async (id: string, newStatus: string) => {
     try {
@@ -1440,10 +1446,10 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
         </div>
       </div>
 
-      {selectedItem && (
+      {selectedItem && mounted && typeof window !== 'undefined' && createPortal(
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, 
-          background: 'rgba(0,0,0,0.5)', zIndex: 9999,
+          background: 'rgba(0,0,0,0.5)', zIndex: 99999,
           display: 'flex', alignItems: 'center', justifyContent: 'center'
         }}>
           <div style={{
@@ -1564,7 +1570,8 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   }

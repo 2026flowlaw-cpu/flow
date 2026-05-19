@@ -13,6 +13,8 @@ export const metadata: Metadata = {
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import FloatingConsult from "@/components/FloatingConsult/FloatingConsult";
+import RouteTracker from "@/components/RouteTracker/RouteTracker";
+import { Suspense } from "react";
 
 export default function RootLayout({
   children,
@@ -75,6 +77,9 @@ export default function RootLayout({
         </noscript>
         {/* End Google Tag Manager (noscript) */}
 
+        <Suspense fallback={null}>
+          <RouteTracker />
+        </Suspense>
         <Header />
         {children}
         <Footer />

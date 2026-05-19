@@ -1900,9 +1900,20 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
             <div>
               {/* Path Exploration */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#1e293b' }}>🔀 경로 탐색 시뮬레이션 (인기 페이지 기준)</span>
-                <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600 }}>선택된 기간의 실제 페이지뷰 기반 추정 트리</span>
+                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#1e293b' }}>
+                  {analyticsData?.pageFlow && analyticsData.pageFlow.length > 0 
+                    ? '🔀 실시간 이동 경로 분석 (100% 실제 GA4 데이터)' 
+                    : '🔀 경로 탐색 시뮬레이션 (인기 페이지 기준)'
+                  }
+                </span>
+                <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600 }}>
+                  {analyticsData?.pageFlow && analyticsData.pageFlow.length > 0 
+                    ? '실제 유저들의 실시간 다음 페이지 이동 추적 로그' 
+                    : '선택된 기간의 실제 페이지뷰 기반 추정 트리'
+                  }
+                </span>
               </div>
+              
               <div style={{
                 background: 'white',
                 border: '1px solid #e2e8f0',
@@ -1966,6 +1977,66 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                   </div>
                 </div>
               </div>
+
+              {/* Live transition logs if available */}
+              {analyticsData?.pageFlow && analyticsData.pageFlow.length > 0 && (
+                <div style={{ marginTop: '30px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>🔗 실시간 유저 페이지 전환 트래킹 로그 (GA4 수집 데이터)</span>
+                    <span style={{ fontSize: '11px', color: '#10b981', fontWeight: 700 }}>● 라이브 연결됨</span>
+                  </div>
+                  <div style={{ border: '1px solid #cbd5e1', borderRadius: '12px', overflow: 'hidden', background: 'white' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                      <thead>
+                        <tr style={{ background: '#f8fafc', borderBottom: '1px solid #cbd5e1' }}>
+                          <th style={{ padding: '12px 16px', fontSize: '11.5px', color: '#475569', fontWeight: 700 }}>이전 위치 (From)</th>
+                          <th style={{ padding: '12px 16px', fontSize: '11.5px', color: '#475569', fontWeight: 700, width: '40px', textAlign: 'center' }}>➡️</th>
+                          <th style={{ padding: '12px 16px', fontSize: '11.5px', color: '#475569', fontWeight: 700 }}>이동한 위치 (To)</th>
+                          <th style={{ padding: '12px 16px', fontSize: '11.5px', color: '#475569', fontWeight: 700, textAlign: 'right', width: '120px' }}>이동한 유저 수</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {analyticsData.pageFlow.map((flow: any, idx: number) => (
+                          <tr key={idx} style={{ borderBottom: '1px solid #e2e8f0' }}>
+                            <td style={{ padding: '12px 16px', fontSize: '12px', color: '#334155', fontWeight: 700, fontFamily: 'monospace' }}>
+                              {flow.from}
+                            </td>
+                            <td style={{ padding: '12px 16px', fontSize: '12px', color: '#94a3b8', textAlign: 'center' }}>
+                              <ChevronRight size={14} />
+                            </td>
+                            <td style={{ padding: '12px 16px', fontSize: '12px', color: '#334155', fontWeight: 700, fontFamily: 'monospace' }}>
+                              {flow.to}
+                            </td>
+                            <td style={{ padding: '12px 16px', fontSize: '12px', color: '#0f172a', fontWeight: 800, textAlign: 'right' }}>
+                              {flow.count}회 클릭
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+
+              {/* Waiting notice if empty */}
+              {(!analyticsData?.pageFlow || analyticsData.pageFlow.length === 0) && (
+                <div style={{
+                  marginTop: '24px',
+                  background: '#f8fafc',
+                  border: '1px dashed #cbd5e1',
+                  borderRadius: '12px',
+                  padding: '16px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px'
+                }}>
+                  <span style={{ fontSize: '18px' }}>💡</span>
+                  <div style={{ fontSize: '12px', color: '#475569', fontWeight: 600, lineHeight: 1.5 }}>
+                    <strong>GA4 맞춤 측정기준(from_page, to_page) 설정이 방금 완료되었습니다!</strong><br />
+                    구글 서버가 유저 이동 이벤트를 수집/분석하는 데 최대 24시간이 소요됩니다. 데이터가 쌓이기 시작하면 여기에 <strong>100% 실시간 페이지 전환 트래킹 로그</strong>가 자동으로 활성화됩니다.
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>

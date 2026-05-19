@@ -54,6 +54,13 @@ const mockAnalyticsData = {
     { name: 'link.naver.com / referral', users: 1, sessions: 1, engagedSessions: 0, engagementRate: '0.0%', avgTime: '0분 0초' },
     { name: 'localhost:3000 / referral', users: 1, sessions: 7, engagedSessions: 5, engagementRate: '71.4%', avgTime: '5분 6초' },
     { name: 'naver / organic', users: 1, sessions: 18, engagedSessions: 9, engagementRate: '50.0%', avgTime: '0분 20초' }
+  ],
+  events: [
+    { name: 'consultation_submit', count: 15, users: 12 },
+    { name: 'kakao_consult_click', count: 32, users: 24 },
+    { name: 'click', count: 184, users: 48 },
+    { name: 'scroll', count: 96, users: 41 },
+    { name: 'video_start', count: 18, users: 14 }
   ]
 };
 
@@ -61,10 +68,7 @@ const mockStats = {
   activeUsers: 27,
   totalSessions: 56,
   avgSessionTime: '9분 58초',
-  bounceRate: '50.0%',
-  consultationsCount: 12,
-  kakaoConversions: 8,
-  totalConversions: 20
+  bounceRate: '50.0%'
 };
 
 const getPageKoreanName = (path: string) => {
@@ -148,15 +152,7 @@ export default function AdminDashboardMainPage() {
   // 실시간 데이터 또는 데모 데이터 폴백 설정
   const isLoading = ga4Validating;
   const activeStats = isLoading 
-    ? { 
-        activeUsers: '-', 
-        totalSessions: '-', 
-        avgSessionTime: '-', 
-        bounceRate: '-',
-        consultationsCount: '-',
-        kakaoConversions: '-',
-        totalConversions: '-'
-      }
+    ? { activeUsers: '-', totalSessions: '-', avgSessionTime: '-', bounceRate: '-' }
     : (isLive ? ga4Res.stats : mockStats);
 
   const analyticsData = isLoading
@@ -167,43 +163,36 @@ export default function AdminDashboardMainPage() {
         topPages: [],
         sourcesDetailed: [],
         topLocations: [],
+        events: [],
         topSourceNames: []
       }
     : (isLive ? ga4Res.data : mockAnalyticsData);
-
-  // 선택한 기간 내의 DB 상담 신청 건수 필터링 (실시간 무지연 집계용)
-  const filteredDbConsultCount = useMemo(() => {
-    if (!isConsultArray) return 0;
-    if (!dateRangeObj.from) return consultations.length;
-    
-    const start = new Date(dateRangeObj.from);
-    start.setHours(0, 0, 0, 0);
-    const end = dateRangeObj.to ? new Date(dateRangeObj.to) : new Date();
-    end.setHours(23, 59, 59, 999);
-    
-    return consultations.filter((c: any) => {
-      const created = new Date(c.created_at);
-      return created >= start && created <= end;
-    }).length;
-  }, [consultations, isConsultArray, dateRangeObj]);
-
-  const totalConversionsCombined = useMemo(() => {
-    const kakao = activeStats.kakaoConversions;
-    if (kakao === '-') return '-';
-    return filteredDbConsultCount + Number(kakao);
-  }, [filteredDbConsultCount, activeStats.kakaoConversions]);
-
-  const conversionRateCombined = useMemo(() => {
-    const sessions = activeStats.totalSessions;
-    if (sessions === '-' || totalConversionsCombined === '-') return '-';
-    const sessNum = Number(sessions);
-    if (isNaN(sessNum) || sessNum === 0) return '0.0%';
-    const convNum = Number(totalConversionsCombined);
-    return `${((convNum / sessNum) * 100).toFixed(1)}%`;
-  }, [totalConversionsCombined, activeStats.totalSessions]);
   const topSourceNames = (analyticsData.topSourceNames && analyticsData.topSourceNames.length > 0)
     ? analyticsData.topSourceNames 
     : ['(direct)', 'ig', 'localhost:3000', 'threads'];
+
+  const getEventFriendlyName = (name: string) => {
+    const eventMap: Record<string, { title: string; desc: string; icon: string }> = {
+      'consultation_submit': { title: '상담 신청 완료', desc: '상담 신청 폼 전송 성공', icon: '📝' },
+      '상담신청': { title: '상담 신청 완료', desc: '상담 신청 폼 전송 성공', icon: '📝' },
+      'generate_lead': { title: '상담 신청 완료', desc: '상담 신청 폼 전송 성공', icon: '📝' },
+      'kakao_consult_click': { title: '카카오톡 실시간 상담', desc: '카카오톡 링크 클릭', icon: '💬' },
+      'click': { title: '일반 버튼 및 요소 클릭', desc: '메뉴, 링크 등 버튼 클릭', icon: '🖱️' },
+      '버튼클릭': { title: '일반 버튼 및 요소 클릭', desc: '메뉴, 링크 등 버튼 클릭', icon: '🖱️' },
+      'scroll': { title: '페이지 스크롤 (탐색)', desc: '화면 스크롤 깊이 도달', icon: '📜' },
+      '스크롤 깊이': { title: '페이지 스크롤 (탐색)', desc: '화면 스크롤 깊이 도달', icon: '📜' },
+      'video_start': { title: '유튜브 동영상 재생', desc: '유튜브 비디오 재생 시작', icon: '▶️' },
+      'video_progress': { title: '유튜브 동영상 시청중', desc: '유튜브 시청 진행', icon: '▶️' },
+      'youtube': { title: '유튜브 동영상 재생', desc: '유튜브 비디오 재생 시작', icon: '▶️' },
+      '유튜브': { title: '유튜브 동영상 재생', desc: '유튜브 비디오 재생 시작', icon: '▶️' },
+    };
+
+    return eventMap[name] || { title: name, desc: '기타 맞춤 이벤트 신호', icon: '🔔' };
+  };
+
+  const customEvents = (analyticsData.events || [])
+    .filter((ev: any) => !['page_view', 'session_start', 'first_visit', 'user_engagement'].includes(ev.name))
+    .slice(0, 5);
 
   const currentRange = useMemo(() => {
     const start = dateRangeObj.from || new Date();
@@ -399,95 +388,39 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
           flexDirection: 'column',
           gap: '40px'
         }}>
-          {/* 핵심 전환 지표 (4카드) */}
-          <div>
-            <h3 style={{ margin: '0 0 6px 0', fontSize: '15.5px', fontWeight: 700, color: '#bd9d62', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              📊 핵심 비즈니스 전환 지표 (Google Tag Manager 연동 성과)
-            </h3>
-            <p style={{ margin: '0 0 18px 0', fontSize: '12.5px', color: '#64748b', fontWeight: 500, lineHeight: 1.5 }}>
-              💡 <strong>안내</strong>: "온라인 상담 신청 완료"는 DB 조회를 통해 <strong>실시간(즉시) 반영</strong>되며, "카카오톡 문의 클릭"은 구글 서버 처리 정책에 따라 약 24~48시간의 지연이 있을 수 있습니다.
-            </p>
-            <div className="stats-grid">
-              <div className="stat-card glass-card" style={{ borderTop: '4px solid #4f46e5' }}>
-                <label>온라인 상담 신청 완료</label>
-                <div className="value-group">
-                  <h2 style={{ color: '#4f46e5' }}>
-                    {filteredDbConsultCount.toLocaleString()}
-                  </h2>
-                </div>
-                <p className="desc">실시간 DB 직접 조회 (지연 없음)</p>
+          {/* 웹사이트 지표 (4카드) */}
+          <div className="stats-grid">
+            <div className="stat-card glass-card">
+              <label>선택 기간 방문자</label>
+              <div className="value-group">
+                <h2 className={isLive ? "live-value" : ""}>
+                  {typeof activeStats.activeUsers === 'number' ? activeStats.activeUsers.toLocaleString() : activeStats.activeUsers}
+                </h2>
               </div>
-              
-              <div className="stat-card glass-card" style={{ borderTop: '4px solid #f59e0b' }}>
-                <label>카카오톡 문의 클릭</label>
-                <div className="value-group">
-                  <h2 style={{ color: '#f59e0b' }}>
-                    {typeof activeStats.kakaoConversions === 'number' ? activeStats.kakaoConversions.toLocaleString() : activeStats.kakaoConversions}
-                  </h2>
-                </div>
-                <p className="desc">GA4 카카오 링크 이동 수</p>
-              </div>
-
-              <div className="stat-card glass-card" style={{ borderTop: '4px solid #10b981' }}>
-                <label>총 전환 건수</label>
-                <div className="value-group">
-                  <h2 style={{ color: '#10b981' }}>
-                    {typeof totalConversionsCombined === 'number' ? totalConversionsCombined.toLocaleString() : totalConversionsCombined}
-                  </h2>
-                </div>
-                <p className="desc">실시간 상담 + 카카오 클릭 합계</p>
-              </div>
-
-              <div className="stat-card glass-card" style={{ borderTop: '4px solid #bd9d62' }}>
-                <label>문의 전환율 (CVR)</label>
-                <div className="value-group">
-                  <h2 style={{ color: '#bd9d62' }}>
-                    {conversionRateCombined}
-                  </h2>
-                </div>
-                <p className="desc">세션 대비 문의(전환) 비중</p>
-              </div>
+              <p className="desc">사용자 합계</p>
             </div>
-          </div>
-
-          {/* 웹사이트 방문 지표 (4카드) */}
-          <div>
-            <h3 style={{ margin: '0 0 16px 0', fontSize: '15.5px', fontWeight: 700, color: '#475569' }}>
-              👥 기본 사이트 트래픽 지표
-            </h3>
-            <div className="stats-grid">
-              <div className="stat-card glass-card">
-                <label>선택 기간 방문자</label>
-                <div className="value-group">
-                  <h2 className={isLive ? "live-value" : ""}>
-                    {typeof activeStats.activeUsers === 'number' ? activeStats.activeUsers.toLocaleString() : activeStats.activeUsers}
-                  </h2>
-                </div>
-                <p className="desc">사용자 합계</p>
+            <div className="stat-card glass-card">
+              <label>선택 기간 세션</label>
+              <div className="value-group">
+                <h2>
+                  {typeof activeStats.totalSessions === 'number' ? activeStats.totalSessions.toLocaleString() : activeStats.totalSessions}
+                </h2>
               </div>
-              <div className="stat-card glass-card">
-                <label>선택 기간 세션</label>
-                <div className="value-group">
-                  <h2>
-                    {typeof activeStats.totalSessions === 'number' ? activeStats.totalSessions.toLocaleString() : activeStats.totalSessions}
-                  </h2>
-                </div>
-                <p className="desc">방문 횟수</p>
+              <p className="desc">방문 횟수</p>
+            </div>
+            <div className="stat-card glass-card">
+              <label>평균 세션 시간</label>
+              <div className="value-group">
+                <h2>{activeStats.avgSessionTime}</h2>
               </div>
-              <div className="stat-card glass-card">
-                <label>평균 세션 시간</label>
-                <div className="value-group">
-                  <h2>{activeStats.avgSessionTime}</h2>
-                </div>
-                <p className="desc">전체 평균</p>
+              <p className="desc">전체 평균</p>
+            </div>
+            <div className="stat-card glass-card">
+              <label>이탈률 (Bounce Rate)</label>
+              <div className="value-group">
+                <h2>{activeStats.bounceRate}</h2>
               </div>
-              <div className="stat-card glass-card">
-                <label>이탈률 (Bounce Rate)</label>
-                <div className="value-group">
-                  <h2>{activeStats.bounceRate}</h2>
-                </div>
-                <p className="desc">낮을수록 긍정적</p>
-              </div>
+              <p className="desc">낮을수록 긍정적</p>
             </div>
           </div>
 
@@ -562,36 +495,88 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
           </div>
 
           {/* 5. 테이블 레이아웃 (페이지 리포트, 최근상담) */}
-          <div className="tables-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
-            <div className="table-section glass-card">
-              <h3>인기 페이지 리포트</h3>
+          <div className="tables-grid" style={{ gridTemplateColumns: '1fr 1fr 1fr' }}>
+            {/* 1. 인기 페이지 리포트 */}
+            <div className="table-section glass-card" style={{ padding: '30px' }}>
+              <h3 style={{ marginBottom: '25px', marginTop: 0 }}>인기 페이지 리포트</h3>
               <table className="analytics-table">
                 <thead>
                   <tr>
                     <th>페이지 제목</th>
-                    <th>조회수</th>
-                    <th>평균 체류 시간</th>
+                    <th style={{ textAlign: 'right' }}>조회수</th>
+                    <th style={{ textAlign: 'right' }}>평균 체류</th>
                   </tr>
                 </thead>
                 <tbody>
                   {analyticsData.topPages.map((page: any, i: number) => (
                     <tr key={i}>
-                      <td style={{ padding: '16px' }}>
-                        <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '14px', marginBottom: '4px' }}>
+                      <td style={{ padding: '14px 0' }}>
+                        <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '13.5px', marginBottom: '4px' }}>
                           {getPageKoreanName(page.page)}
                         </div>
-                        <div className="page-path" style={{ fontSize: '11.5px', color: '#94a3b8', fontStyle: 'normal' }}>
+                        <div className="page-path" style={{ fontSize: '11px', color: '#94a3b8', fontStyle: 'normal' }}>
                           {page.page}
                         </div>
                       </td>
-                      <td className="bold" style={{ padding: '16px' }}>{page.views.toLocaleString()}</td>
-                      <td style={{ padding: '16px' }}>{page.time}</td>
+                      <td className="bold" style={{ padding: '14px 0', textAlign: 'right', fontSize: '14px' }}>{page.views.toLocaleString()}</td>
+                      <td style={{ padding: '14px 0', textAlign: 'right', fontSize: '13px', color: '#64748b' }}>{page.time}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
 
+            {/* 2. 구글 태그관리자(GTM) 추적 현황 */}
+            <div className="table-section glass-card" style={{ padding: '30px' }}>
+              <h3 style={{ marginBottom: '25px', marginTop: 0 }}>태그관리자(GTM) 추적</h3>
+              <table className="analytics-table">
+                <thead>
+                  <tr>
+                    <th>이벤트 신호</th>
+                    <th style={{ textAlign: 'right' }}>발생 건수</th>
+                    <th style={{ textAlign: 'right' }}>활성 사용자</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {customEvents.length > 0 ? (
+                    customEvents.map((ev: any, i: number) => {
+                      const info = getEventFriendlyName(ev.name);
+                      return (
+                        <tr key={i}>
+                          <td style={{ padding: '14px 0' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <span style={{ fontSize: '18px' }}>{info.icon}</span>
+                              <div>
+                                <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '13.5px' }}>
+                                  {info.title}
+                                </div>
+                                <div style={{ fontSize: '11px', color: '#94a3b8' }}>
+                                  {ev.name}
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="bold" style={{ padding: '14px 0', textAlign: 'right', fontSize: '14px', color: '#4f46e5' }}>
+                            {ev.count.toLocaleString()}회
+                          </td>
+                          <td style={{ padding: '14px 0', textAlign: 'right', fontSize: '13px', color: '#64748b', fontWeight: 600 }}>
+                            {ev.users.toLocaleString()}명
+                          </td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan={3} style={{ padding: '40px 0', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: '13px' }}>
+                        감지된 맞춤 이벤트 신호가 없습니다.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+
+            {/* 3. 최근 상담 접수 */}
             <div className="table-section glass-card" style={{ padding: '30px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px' }}>
                 <h3 style={{ margin: 0 }}>최근 상담 접수</h3>
@@ -605,33 +590,33 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                 {isConsultArray && consultations.length > 0 ? (
                   consultations.slice(0, 4).map((item: any, i: number) => (
                     <div key={i} style={{ 
-                      padding: '18px 24px', 
+                      padding: '14px 20px', 
                       background: i % 2 === 0 ? '#ffffff' : '#f8fafc',
                       display: 'flex', justifyContent: 'space-between', alignItems: 'center'
                     }}>
                       <div style={{ flex: 1 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px' }}>
-                          <span style={{ fontWeight: 600, fontSize: '15px', color: '#1e293b' }}>{item.name}</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+                          <span style={{ fontWeight: 600, fontSize: '14px', color: '#1e293b' }}>{item.name}</span>
                           <span style={{ 
-                              fontSize: '11px', padding: '3px 8px', borderRadius: '6px', fontWeight: 600,
+                              fontSize: '10.5px', padding: '2px 6px', borderRadius: '5px', fontWeight: 600,
                               background: item.status === '대기중' ? '#ef444415' : '#22c55e15',
                               color: item.status === '대기중' ? '#ef4444' : '#22c55e'
                           }}>{item.status}</span>
                         </div>
-                        <div style={{ display: 'flex', gap: '10px', fontSize: '12px', color: '#64748b', fontWeight: 600 }}>
+                        <div style={{ display: 'flex', gap: '8px', fontSize: '11.5px', color: '#64748b', fontWeight: 600 }}>
                           <span>{item.case_type}</span>
                           <span style={{ color: '#cbd5e1' }}>|</span>
                           <span>{item.phone}</span>
                         </div>
                       </div>
                       <div style={{ textAlign: 'right' }}>
-                        <p style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 600 }}>{new Date(item.created_at).toLocaleDateString().slice(5)}</p>
+                        <p style={{ fontSize: '11.5px', color: '#94a3b8', fontWeight: 600 }}>{new Date(item.created_at).toLocaleDateString().slice(5)}</p>
                       </div>
                     </div>
                   ))
                 ) : (
                   <div style={{ padding: '40px', textAlign: 'center', background: 'white' }}>
-                    <p style={{ color: '#94a3b8', fontWeight: 600, fontSize: '14px' }}>접수된 내역이 없습니다.</p>
+                    <p style={{ color: '#94a3b8', fontWeight: 600, fontSize: '13px' }}>접수된 내역이 없습니다.</p>
                   </div>
                 )}
               </div>
@@ -647,7 +632,6 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                   <th>유입 소스 / 매체</th>
                   <th>사용자</th>
                   <th>세션수</th>
-                  <th>전환수 (문의)</th>
                   <th>참여 세션</th>
                   <th>참여율</th>
                   <th>평균 참여시간</th>
@@ -659,7 +643,6 @@ GOOGLE_PRIVATE_KEY="여기에_다운로드한_JSON의_private_key_전체_복사 
                     <td className="source-name">🔗 {src.name}</td>
                     <td className="bold">{src.users.toLocaleString()}</td>
                     <td>{src.sessions.toLocaleString()}</td>
-                    <td className="bold" style={{ color: '#4f46e5' }}>{src.conversions?.toLocaleString() || 0}</td>
                     <td>{src.engagedSessions.toLocaleString()}</td>
                     <td>
                       <span className={`badge ${parseFloat(src.engagementRate) > 50 ? 'high' : ''}`}>

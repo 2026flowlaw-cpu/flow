@@ -8,6 +8,7 @@ import VerdictSection from '@/components/VerdictSection/VerdictSection';
 import DefectStrategyGrid from '@/components/DefectStrategyGrid/DefectStrategyGrid';
 import DefectReviews from '@/components/DefectReviews/DefectReviews';
 import DefectFaq from '@/components/DefectFaq/DefectFaq';
+import { verdictImages } from '@/data/verdictImages';
 import styles from './page.module.css';
 
 export default function ConstructionDisputePage() {
@@ -143,9 +144,11 @@ export default function ConstructionDisputePage() {
         <VerdictSection 
           kicker="승소, 결코 우연이 아닙니다"
           mainTitle="데이터가 증명하는 압도적 실력"
+          imageSources={verdictImages.construction}
+          imageAltPrefix="건설분쟁 판결문"
           descText={(
             <>
-              건설소송의 승패는 '누가 더 현장을 잘 아는가'에서 갈립니다. <br />
+              건설소송의 승패는 &apos;누가 더 현장을 잘 아는가&apos;에서 갈립니다. <br />
               법무법인 플로우는 결과로 증명했습니다!
             </>
           )}

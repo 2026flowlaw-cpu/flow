@@ -8,6 +8,7 @@ import VerdictSection from '@/components/VerdictSection/VerdictSection';
 import DefectStrategyGrid from '@/components/DefectStrategyGrid/DefectStrategyGrid';
 import DefectReviews from '@/components/DefectReviews/DefectReviews';
 import DefectFaq from '@/components/DefectFaq/DefectFaq';
+import { verdictImages } from '@/data/verdictImages';
 import styles from './page.module.css';
 
 
@@ -154,6 +155,8 @@ export default function JeonseFraudPage() {
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
         <VerdictSection 
+          imageSources={verdictImages.jeonseFraud}
+          imageAltPrefix="전세사기 판결문"
           descText="포기하려 했던 보증금, 법무법인 플로우 함께라면 가능합니다."
         />
 

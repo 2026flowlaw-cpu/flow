@@ -8,6 +8,7 @@ import VerdictSection from '@/components/VerdictSection/VerdictSection';
 import DefectStrategyGrid from '@/components/DefectStrategyGrid/DefectStrategyGrid';
 import DefectReviews from '@/components/DefectReviews/DefectReviews';
 import DefectFaq from '@/components/DefectFaq/DefectFaq';
+import { verdictImages } from '@/data/verdictImages';
 import styles from './page.module.css';
 
 interface DefectCaseItem {
@@ -186,6 +187,8 @@ export default function ResaleCancellationPage() {
         <VerdictSection 
           kicker="데이터가 증명하는 압도적 실력"
           mainTitle='"승소, 결코 우연이 아닙니다"'
+          imageSources={verdictImages.resaleCancellation}
+          imageAltPrefix="분양계약해제 판결문"
           descText={
             <>
               법무법인 플로우는 독보적인 승소 노하우를 바탕으로, 불가능해 보이는 계약해제도 현실로 만듭니다. <br />

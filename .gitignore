@@ -23,6 +23,8 @@
 # misc
 .DS_Store
 *.pem
+/video/
+/판결문/
 
 # debug
 npm-debug.log*

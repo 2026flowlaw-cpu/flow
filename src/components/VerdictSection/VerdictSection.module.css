@@ -122,6 +122,28 @@
   box-shadow: 0 20px 45px rgba(10, 27, 57, 0.08);
 }
 
+.imagePaperCard {
+  height: 460px;
+  min-height: 460px;
+  padding: 12px;
+  background: #ffffff;
+}
+
+.paperCard.imagePaperCard::before {
+  content: none;
+}
+
+.verdictImage {
+  object-fit: contain;
+  box-sizing: border-box;
+  padding: 12px;
+  filter: contrast(1.02);
+}
+
+.marqueeWrapper:hover .marqueeTrack {
+  animation-play-state: paused;
+}
+
 /* Watermark shadow effect behind the paper text */
 .paperCard::before {
   content: '判決書';
@@ -268,5 +290,15 @@
     width: 280px;
     padding: 25px 20px;
     min-height: 360px;
+  }
+
+  .imagePaperCard {
+    height: 392px;
+    min-height: 392px;
+    padding: 8px;
+  }
+
+  .verdictImage {
+    padding: 8px;
   }
 }

@@ -5,6 +5,18 @@ import styles from './Hero.module.css';
 const Hero = () => {
   return (
     <section className={styles.hero}>
+      <video
+        className={styles.heroVideo}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster="/images/hero_bg.png"
+        aria-hidden="true"
+      >
+        <source src="/video/hero.mp4" type="video/mp4" media="(min-width: 769px)" />
+      </video>
       <div className={styles.overlay}></div>
       <div className={`${styles.container} container`}>
         <div className={styles.content}>

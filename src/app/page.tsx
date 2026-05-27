@@ -3,12 +3,7 @@ import Stats from '@/components/Stats/Stats';
 import PracticeAreas from '@/components/PracticeAreas/PracticeAreas';
 import OrganicConnectivity from '@/components/OrganicConnectivity/OrganicConnectivity';
 import CustomerReviews from '@/components/CustomerReviews/CustomerReviews';
-import SuccessStories from '@/components/SuccessStories/SuccessStories';
-import LawyerProfiles from '@/components/LawyerProfiles/LawyerProfiles';
 import CTA from '@/components/CTA/CTA';
-import PhilosophyMessage from '@/components/PhilosophyMessage/PhilosophyMessage';
-import PartnersDetail from '@/components/PartnersDetail/PartnersDetail';
-import PartnerCarousel from '@/components/PartnerCarousel/PartnerCarousel';
 import LocationMap from '@/components/Location/LocationMap/LocationMap';
 import styles from './page.module.css';
 
@@ -21,12 +16,7 @@ export default function Home() {
         <PracticeAreas />
         <OrganicConnectivity />
         <CustomerReviews isMain={true} />
-        {/* <SuccessStories /> */}
-        {/* <LawyerProfiles /> */}
         <CTA />
-        {/* <PhilosophyMessage /> */}
-        {/* <PartnersDetail /> */}
-        {/* <PartnerCarousel /> */}
         
         {/* Location Section */}
         <div style={{ background: '#f9fafb', padding: '120px 0 0' }}>

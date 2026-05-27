@@ -1,4 +1,6 @@
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import styles from './CTA.module.css';
 
 const ctaItems = [
@@ -36,7 +38,13 @@ const CTA = () => {
           {ctaItems.map((item, index) => (
             <div key={index} className={styles.card}>
               <div className={styles.imageWrapper}>
-                <img src={item.image} alt={item.title} className={styles.cardImg} />
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className={styles.cardImg}
+                />
                 <div className={styles.overlay}>
                   <div className={styles.iconBox}>
                     <span className={styles.icon}>{item.icon}</span>
@@ -48,9 +56,9 @@ const CTA = () => {
                 <h3 className={styles.title}>{item.title}</h3>
                 <p className={styles.text}>{item.desc}</p>
                 <div className={styles.footer}>
-                  <a href={item.href} className={styles.moreBtn}>
+                  <Link href={item.href} className={styles.moreBtn}>
                     자세히보기
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

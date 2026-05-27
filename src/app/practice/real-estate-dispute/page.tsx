@@ -8,6 +8,7 @@ import VerdictSection from '@/components/VerdictSection/VerdictSection';
 import DefectStrategyGrid from '@/components/DefectStrategyGrid/DefectStrategyGrid';
 import DefectReviews from '@/components/DefectReviews/DefectReviews';
 import DefectFaq from '@/components/DefectFaq/DefectFaq';
+import { verdictImages } from '@/data/verdictImages';
 import styles from './page.module.css';
 
 
@@ -165,7 +166,10 @@ export default function RealEstateDisputePage() {
         />
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
-        <VerdictSection />
+        <VerdictSection
+          imageSources={verdictImages.realEstate}
+          imageAltPrefix="부동산분쟁 판결문"
+        />
 
 
 
@@ -176,7 +180,7 @@ export default function RealEstateDisputePage() {
           kicker="[법무법인 플로우만의 '부동산 분쟁' 필승 전략]"
           mainTitle={
             <>
-              "경험의 차이가 결과의 차이를 만듭니다"<br />
+              &quot;경험의 차이가 결과의 차이를 만듭니다&quot;<br />
               차별화된 전략과 남다른 통찰력으로 여러분을 조력합니다.
             </>
           }

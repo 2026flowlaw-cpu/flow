@@ -1,4 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { verdictImages } from '@/data/verdictImages';
 import styles from './ClassActionSuccess.module.css';
 
 const judgments = [
@@ -70,7 +73,6 @@ const judgments = [
 
 const ClassActionSuccess = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const sliderRef = useRef<HTMLDivElement>(null);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % judgments.length);
@@ -86,7 +88,7 @@ const ClassActionSuccess = () => {
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
-      nextSlide();
+      setCurrentIndex((prev) => (prev + 1) % judgments.length);
     }, 4000);
     return () => clearInterval(interval);
   }, [isPaused]);
@@ -129,9 +131,9 @@ const ClassActionSuccess = () => {
             </div>
 
             {/* More Button */}
-            <a href="/success-stories" className={styles.moreBtn}>
+            <Link href="/success-stories" className={styles.moreBtn}>
               더보기
-            </a>
+            </Link>
           </div>
 
           {/* Right Column: Sliding Scanned Court Documents */}
@@ -140,57 +142,72 @@ const ClassActionSuccess = () => {
               <div 
                 className={styles.sliderTrack}
                 style={{ transform: `translateX(-${currentIndex * (350 + 24)}px)` }}
-                ref={sliderRef}
               >
-                {judgments.map((item, idx) => (
-                  <div 
-                    key={idx} 
-                    className={`${styles.card} ${idx === currentIndex ? styles.activeCard : ''}`}
-                  >
-                    {/* Category tag */}
-                    <span className={styles.cardCategory}>{item.category}</span>
-                    
-                    {/* Short title description */}
-                    <h3 className={styles.cardTitle}>{item.title}</h3>
+                {judgments.map((item, idx) => {
+                  const imageSrc = verdictImages.classAction[idx % verdictImages.classAction.length];
 
-                    {/* High-fidelity scanned court decision mock paper inside the card */}
-                    <div className={styles.paperFrame}>
-                      {/* Document watermarked seal */}
-                      <div className={styles.paperSeal}>判</div>
+                  return (
+                    <div
+                      key={idx}
+                      className={`${styles.card} ${idx === currentIndex ? styles.activeCard : ''}`}
+                    >
+                      {/* Category tag */}
+                      <span className={styles.cardCategory}>{item.category}</span>
                       
-                      {/* Official Court Document Layout */}
-                      <div className={styles.docInnerHeader}>
-                        <span className={styles.docCourtName}>{item.court}</span>
-                        <span className={styles.docSubject}>판 결</span>
-                      </div>
-                      
-                      <div className={styles.docBody}>
-                        <div className={styles.docLine}>
-                          <span className={styles.docLabel}>사 건</span>
-                          <span className={styles.docVal}>{item.caseNo}</span>
-                        </div>
-                        <div className={styles.docLine}>
-                          <span className={styles.docLabel}>원 고</span>
-                          <span className={styles.docVal}>공동소송단 외 다수</span>
-                        </div>
-                        <div className={styles.docLine}>
-                          <span className={styles.docLabel}>피 고</span>
-                          <span className={styles.docVal}>주식회사 00건설 외</span>
-                        </div>
-                        
-                        <div className={styles.docDivider}></div>
-                        
-                        <span className={styles.docOrderLabel}>주 문</span>
-                        <p className={styles.docOrderText}>{item.docText}</p>
-                      </div>
+                      {/* Short title description */}
+                      <h3 className={styles.cardTitle}>{item.title}</h3>
 
-                      {/* Prominent Red Ink Seal Stamp Overlay in the center/bottom */}
-                      <div className={styles.redStamp}>
-                        <div className={styles.stampInner}>{item.stampText}</div>
+                      {/* High-fidelity scanned court decision inside the card */}
+                      <div className={styles.paperFrame}>
+                        {imageSrc ? (
+                          <Image
+                            src={imageSrc}
+                            alt={`집단소송 판결문 ${idx + 1}`}
+                            fill
+                            sizes="320px"
+                            className={styles.verdictImage}
+                          />
+                        ) : (
+                          <>
+                            {/* Document watermarked seal */}
+                            <div className={styles.paperSeal}>判</div>
+
+                            {/* Official Court Document Layout */}
+                            <div className={styles.docInnerHeader}>
+                              <span className={styles.docCourtName}>{item.court}</span>
+                              <span className={styles.docSubject}>판 결</span>
+                            </div>
+
+                            <div className={styles.docBody}>
+                              <div className={styles.docLine}>
+                                <span className={styles.docLabel}>사 건</span>
+                                <span className={styles.docVal}>{item.caseNo}</span>
+                              </div>
+                              <div className={styles.docLine}>
+                                <span className={styles.docLabel}>원 고</span>
+                                <span className={styles.docVal}>공동소송단 외 다수</span>
+                              </div>
+                              <div className={styles.docLine}>
+                                <span className={styles.docLabel}>피 고</span>
+                                <span className={styles.docVal}>주식회사 00건설 외</span>
+                              </div>
+
+                              <div className={styles.docDivider}></div>
+
+                              <span className={styles.docOrderLabel}>주 문</span>
+                              <p className={styles.docOrderText}>{item.docText}</p>
+                            </div>
+
+                            {/* Prominent Red Ink Seal Stamp Overlay in the center/bottom */}
+                            <div className={styles.redStamp}>
+                              <div className={styles.stampInner}>{item.stampText}</div>
+                            </div>
+                          </>
+                        )}
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
             

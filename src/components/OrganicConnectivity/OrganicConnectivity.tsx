@@ -50,7 +50,7 @@ const OrganicConnectivity = () => {
                   src={item.image} 
                   alt={item.title} 
                   fill
-                  priority={index === 0}
+                  sizes="(max-width: 1024px) 100vw, 55vw"
                 />
                 <div className={styles.imageOverlay}>
                   <p className={styles.overlayText}>

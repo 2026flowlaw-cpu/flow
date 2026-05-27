@@ -8,6 +8,7 @@ import VerdictSection from '@/components/VerdictSection/VerdictSection';
 import DefectStrategyGrid from '@/components/DefectStrategyGrid/DefectStrategyGrid';
 import DefectReviews from '@/components/DefectReviews/DefectReviews';
 import DefectFaq from '@/components/DefectFaq/DefectFaq';
+import { verdictImages } from '@/data/verdictImages';
 import styles from './page.module.css';
 
 
@@ -157,6 +158,8 @@ export default function GeneralCivilPage() {
           kicker="승소, 결코 우연이 아닙니다"
           mainTitle="모두가 불가능하다고 했던 사건, 법무법인 플로우는 결과로 증명했습니다!"
           descText="데이터가 증명하는 압도적 실력"
+          imageSources={verdictImages.civil}
+          imageAltPrefix="민사일반 판결문"
           verdicts={[
             {
               id: 1,

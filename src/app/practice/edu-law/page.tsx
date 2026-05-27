@@ -8,6 +8,7 @@ import VerdictSection from '@/components/VerdictSection/VerdictSection';
 import DefectStrategyGrid from '@/components/DefectStrategyGrid/DefectStrategyGrid';
 import DefectReviews from '@/components/DefectReviews/DefectReviews';
 import DefectFaq from '@/components/DefectFaq/DefectFaq';
+import { verdictImages } from '@/data/verdictImages';
 import styles from './page.module.css';
 
 export default function EduLawPage() {
@@ -160,6 +161,8 @@ export default function EduLawPage() {
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
         <VerdictSection 
+          imageSources={verdictImages.academy}
+          imageAltPrefix="에듀 법률 판결문"
           mainTitle={
             <>
               승소, 결코 우연이 아닙니다<br />
@@ -214,7 +217,7 @@ export default function EduLawPage() {
           kicker="[법무법인 플로우만의 '학원 분쟁' 필승 전략]"
           mainTitle={
             <>
-              "경험의 차이가 결과의 차이를 만듭니다"<br />
+              &quot;경험의 차이가 결과의 차이를 만듭니다&quot;<br />
               학생들 교육에만 전념하실 수 있도록! 복잡한 법률 문제는 플로우에 맡기세요
             </>
           }

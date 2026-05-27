@@ -10,6 +10,7 @@ import VerdictSection from '@/components/VerdictSection/VerdictSection';
 import DefectStrategyGrid from '@/components/DefectStrategyGrid/DefectStrategyGrid';
 import DefectReviews from '@/components/DefectReviews/DefectReviews';
 import DefectFaq from '@/components/DefectFaq/DefectFaq';
+import { verdictImages, type VerdictImageGroup } from '@/data/verdictImages';
 import styles from '../../defect-litigation/page.module.css';
 
 const centerData: Record<string, {
@@ -83,6 +84,7 @@ const centerData: Record<string, {
   verdictKicker?: string;
   verdictTitle?: string;
   verdictDesc?: string;
+  verdictImageGroup?: VerdictImageGroup;
   faqKicker?: string;
   faqTitle?: string;
   faqSubtitle?: string;
@@ -105,6 +107,7 @@ const centerData: Record<string, {
   'sex-offense': {
     title: '성범죄',
     subtitle: '성범죄 전담센터',
+    verdictImageGroup: 'sexCrime',
     heroTitleLine1: '성범죄 혐의,',
     heroTitleLine2: '첫 진술과 초기 대응이 결과를 바꿉니다.',
     heroDescLines: [
@@ -306,6 +309,7 @@ const centerData: Record<string, {
   'dui-traffic': {
     title: '음주·교통',
     subtitle: '음주·교통 전담센터',
+    verdictImageGroup: 'traffic',
     heroTitleLine1: '음주운전·교통사고,',
     heroTitleLine2: '첫 대응이 형사처벌과 면허 결과를 바꿉니다.',
     heroDescLines: [
@@ -545,6 +549,7 @@ const centerData: Record<string, {
   'drugs': {
     title: '마약',
     subtitle: '마약 전담센터',
+    verdictImageGroup: 'drug',
     heroTitleLine1: '마약 사건,',
     heroTitleLine2: '첫 대응이 처분과 구속 여부를 바꿉니다.',
     heroDescLines: [
@@ -782,6 +787,7 @@ const centerData: Record<string, {
   'voice-phishing': {
     title: '보이스피싱',
     subtitle: '보이스피싱 전담센터',
+    verdictImageGroup: 'voicePhishing',
     heroTitleLine1: '모르고 연루됐다면,',
     heroTitleLine2: '불기소·무죄 가능성은 있습니다.',
     heroDescLines: [
@@ -997,6 +1003,7 @@ const centerData: Record<string, {
   'construction': {
     title: '건설 형사',
     subtitle: '건설 형사 전담센터',
+    verdictImageGroup: 'constructionCriminal',
     heroTitleLine1: '건설사건은',
     heroTitleLine2: '실제 현장 구조를 알아야 대응할 수 있습니다.',
     heroDescLines: [
@@ -1206,6 +1213,7 @@ const centerData: Record<string, {
   'economic': {
     title: '경제 범죄',
     subtitle: '경제범죄 피의자 전담센터',
+    verdictImageGroup: 'economicCrime',
     heroTitleLine1: '돈을 돌려주지 못했다고',
     heroTitleLine2: '모두 사기죄가 되는 것은 아닙니다.',
     heroDescLines: [
@@ -1376,6 +1384,7 @@ const centerData: Record<string, {
   'juvenile': {
     title: '소년학폭',
     subtitle: '소년범죄·학교폭력 전담센터',
+    verdictImageGroup: 'juvenileSchool',
     heroTitleLine1: '아이의 미래,',
     heroTitleLine2: '지금 지켜야 합니다.',
     heroDescLines: [
@@ -1584,6 +1593,7 @@ const centerData: Record<string, {
   'general': {
     title: '일반 형사',
     subtitle: '일반형사 피의자 전담센터',
+    verdictImageGroup: 'generalCriminal',
     heroTitleLine1: '첫 경찰 조사 대응이,',
     heroTitleLine2: '불기소와 기소를 가릅니다.',
     heroDescLines: [
@@ -1907,6 +1917,8 @@ export default function CriminalCenterPage() {
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
         <VerdictSection 
           kicker={data.verdictKicker || "PROVEN RESULTS"}
+          imageSources={data.verdictImageGroup ? verdictImages[data.verdictImageGroup] : undefined}
+          imageAltPrefix={`${data.title} 판결문`}
           mainTitle={
             data.verdictTitle ? (
               typeof data.verdictTitle === 'string' ? (
@@ -2009,7 +2021,7 @@ export default function CriminalCenterPage() {
               )
             ) : (
               <>
-                "경험의 차이가 무죄와 유죄를 가릅니다"<br />
+                &quot;경험의 차이가 무죄와 유죄를 가릅니다&quot;<br />
                 절체절명의 위기, 형사전문 플로우에 맡기세요
               </>
             )

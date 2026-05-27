@@ -8,6 +8,7 @@ import VerdictSection from '@/components/VerdictSection/VerdictSection';
 import DefectStrategyGrid from '@/components/DefectStrategyGrid/DefectStrategyGrid';
 import DefectReviews from '@/components/DefectReviews/DefectReviews';
 import DefectFaq from '@/components/DefectFaq/DefectFaq';
+import { verdictImages } from '@/data/verdictImages';
 import styles from './page.module.css';
 
 interface DefectCaseItem {
@@ -99,7 +100,10 @@ export default function DefectLitigationPage() {
         <DefectCasesGrid />
 
         {/* 2.8. Verdict Proof Documents Grid (Gam-myeong reference style) */}
-        <VerdictSection />
+        <VerdictSection
+          imageSources={verdictImages.defect}
+          imageAltPrefix="하자소송 판결문"
+        />
 
 
 

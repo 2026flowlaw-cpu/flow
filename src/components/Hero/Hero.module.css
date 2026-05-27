@@ -5,11 +5,22 @@
   width: 100%;
   display: flex;
   align-items: center;
+  background-color: #050c1a;
   background-image: url('/images/hero_bg.png');
   background-size: cover;
   background-position: center;
   color: white;
   overflow: hidden;
+}
+
+.heroVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
 }
 
 .overlay {
@@ -102,10 +113,19 @@
     height: auto;
     padding: 120px 0;
   }
+  .heroVideo {
+    display: none;
+  }
   .title {
     font-size: 36px;
   }
   .ctaGroup {
     flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroVideo {
+    display: none;
   }
 }

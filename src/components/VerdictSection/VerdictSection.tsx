@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import styles from './VerdictSection.module.css';
 
 interface VerdictItem {
@@ -17,13 +18,17 @@ interface VerdictSectionProps {
   mainTitle?: React.ReactNode;
   descText?: React.ReactNode;
   verdicts?: VerdictItem[];
+  imageSources?: readonly string[];
+  imageAltPrefix?: string;
 }
 
 export default function VerdictSection({
   kicker = '',
   mainTitle = '모두가 불가능하다고 했던 사건, 법무법인 플로우는 결과로 증명했습니다!',
   descText,
-  verdicts: customVerdicts
+  verdicts: customVerdicts,
+  imageSources,
+  imageAltPrefix = '판결문'
 }: VerdictSectionProps) {
   const defaultVerdicts: VerdictItem[] = [
     {
@@ -61,6 +66,62 @@ export default function VerdictSection({
   ];
 
   const verdicts = customVerdicts || defaultVerdicts;
+  const hasImages = Boolean(imageSources?.length);
+  const imageLoopSources = imageSources
+    ? imageSources.length < 8
+      ? [...imageSources, ...imageSources]
+      : [...imageSources]
+    : [];
+  const textLoopVerdicts = [...verdicts, ...verdicts];
+
+  const renderImageCard = (src: string, idx: number, keyPrefix: string) => (
+    <div className={`${styles.paperCard} ${styles.imagePaperCard}`} key={`${keyPrefix}-${src}-${idx}`}>
+      <Image
+        src={src}
+        alt={`${imageAltPrefix} ${idx + 1}`}
+        fill
+        sizes="(max-width: 640px) 280px, 330px"
+        className={styles.verdictImage}
+      />
+    </div>
+  );
+
+  const renderTextCard = (item: VerdictItem, idx: number, keyPrefix: string) => (
+    <div className={styles.paperCard} key={`${keyPrefix}-${item.id}-${idx}`}>
+      {/* Paper Document Layout */}
+      <div className={styles.documentHeader}>
+        <span className={styles.courtBadge}>{item.court}</span>
+        <h4 className={styles.documentTitle}>判 決 書</h4>
+      </div>
+
+      <div className={styles.documentBody}>
+        <div className={styles.infoRow}>
+          <span className={styles.infoLabel}>사 건</span>
+          <span className={styles.infoValue}>{item.caseNo}</span>
+        </div>
+        <div className={styles.infoRow}>
+          <span className={styles.infoLabel}>원 고</span>
+          <span className={styles.infoValue}>{item.plaintiff}</span>
+        </div>
+        <div className={styles.infoRow}>
+          <span className={styles.infoLabel}>주 문</span>
+          <span className={styles.infoValue}>&quot;{item.orderText}&quot;</span>
+        </div>
+
+        <div className={styles.dummyTextLines}>
+          <div className={styles.dummyLine}></div>
+          <div className={styles.dummyLine}></div>
+          <div className={`${styles.dummyLine} ${styles.dummyLineShort}`}></div>
+        </div>
+      </div>
+
+      <div className={styles.stampBox}>
+        <div className={styles.stampSeal}>
+          {item.stampText}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section className={styles.sectionWrapper}>
@@ -85,86 +146,16 @@ export default function VerdictSection({
           <div className={styles.marqueeTrack}>
             {/* Set 1 */}
             <div className={styles.marqueeSet}>
-              {[...verdicts, ...verdicts].map((item, idx) => (
-                <div className={styles.paperCard} key={`set1-${item.id}-${idx}`}>
-                  {/* Paper Document Layout */}
-                  <div className={styles.documentHeader}>
-                    <span className={styles.courtBadge}>{item.court}</span>
-                    <h4 className={styles.documentTitle}>判 決 書</h4>
-                  </div>
-
-                  <div className={styles.documentBody}>
-                    <div className={styles.infoRow}>
-                      <span className={styles.infoLabel}>사 건</span>
-                      <span className={styles.infoValue}>{item.caseNo}</span>
-                    </div>
-                    <div className={styles.infoRow}>
-                      <span className={styles.infoLabel}>원 고</span>
-                      <span className={styles.infoValue}>{item.plaintiff}</span>
-                    </div>
-                    <div className={styles.infoRow}>
-                      <span className={styles.infoLabel}>주 문</span>
-                      <span className={styles.infoValue}>"{item.orderText}"</span>
-                    </div>
-
-                    {/* Simulated lines */}
-                    <div className={styles.dummyTextLines}>
-                      <div className={styles.dummyLine}></div>
-                      <div className={styles.dummyLine}></div>
-                      <div className={`${styles.dummyLine} ${styles.dummyLineShort}`}></div>
-                    </div>
-                  </div>
-
-                  {/* Red Stamp Overlay (Gam-myeong replica style) */}
-                  <div className={styles.stampBox}>
-                    <div className={styles.stampSeal}>
-                      {item.stampText}
-                    </div>
-                  </div>
-                </div>
-              ))}
+              {hasImages
+                ? imageLoopSources.map((src, idx) => renderImageCard(src, idx, 'set1'))
+                : textLoopVerdicts.map((item, idx) => renderTextCard(item, idx, 'set1'))}
             </div>
 
             {/* Set 2 (for infinite loop) */}
             <div className={styles.marqueeSet}>
-              {[...verdicts, ...verdicts].map((item, idx) => (
-                <div className={styles.paperCard} key={`set2-${item.id}-${idx}`}>
-                  {/* Paper Document Layout */}
-                  <div className={styles.documentHeader}>
-                    <span className={styles.courtBadge}>{item.court}</span>
-                    <h4 className={styles.documentTitle}>判 決 書</h4>
-                  </div>
-
-                  <div className={styles.documentBody}>
-                    <div className={styles.infoRow}>
-                      <span className={styles.infoLabel}>사 건</span>
-                      <span className={styles.infoValue}>{item.caseNo}</span>
-                    </div>
-                    <div className={styles.infoRow}>
-                      <span className={styles.infoLabel}>원 고</span>
-                      <span className={styles.infoValue}>{item.plaintiff}</span>
-                    </div>
-                    <div className={styles.infoRow}>
-                      <span className={styles.infoLabel}>주 문</span>
-                      <span className={styles.infoValue}>"{item.orderText}"</span>
-                    </div>
-
-                    {/* Simulated lines */}
-                    <div className={styles.dummyTextLines}>
-                      <div className={styles.dummyLine}></div>
-                      <div className={styles.dummyLine}></div>
-                      <div className={`${styles.dummyLine} ${styles.dummyLineShort}`}></div>
-                    </div>
-                  </div>
-
-                  {/* Red Stamp Overlay (Gam-myeong replica style) */}
-                  <div className={styles.stampBox}>
-                    <div className={styles.stampSeal}>
-                      {item.stampText}
-                    </div>
-                  </div>
-                </div>
-              ))}
+              {hasImages
+                ? imageLoopSources.map((src, idx) => renderImageCard(src, idx, 'set2'))
+                : textLoopVerdicts.map((item, idx) => renderTextCard(item, idx, 'set2'))}
             </div>
           </div>
         </div>

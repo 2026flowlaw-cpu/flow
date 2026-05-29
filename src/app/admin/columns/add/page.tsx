@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import styles from '../../youtube/admin-youtube.module.css';
 
@@ -44,7 +44,7 @@ function scheduleColumnFormScroll() {
   });
 }
 
-export default function AdminColumnAddPage() {
+function AdminColumnAddContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const draftId = searchParams.get('draft');
@@ -315,5 +315,13 @@ export default function AdminColumnAddPage() {
         </div>
       </form>
     </div>
+  );
+}
+
+export default function AdminColumnAddPage() {
+  return (
+    <Suspense fallback={<div className={styles.container}>칼럼 작성 화면을 불러오는 중입니다...</div>}>
+      <AdminColumnAddContent />
+    </Suspense>
   );
 }

@@ -47,8 +47,6 @@ const menuData = [
       { name: '언론보도', href: '/news/press' },
       { name: '유튜브', href: '/news/youtube' },
       { name: '법률칼럼', href: '/columns' },
-      { name: '법률 정보', href: '/news/legal-info' },
-      { name: '네이버 블로그', href: 'https://blog.naver.com/flowlaw' },
     ]
   },
   {
@@ -76,8 +74,11 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    setIsMobileMenuOpen(false);
-    document.body.style.overflow = 'unset';
+    const frameId = window.requestAnimationFrame(() => {
+      setIsMobileMenuOpen(false);
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
   }, [pathname]);
 
   // 관리자 페이지에서는 헤더를 렌더링하지 않습니다.
@@ -86,7 +87,7 @@ export default function Header() {
   const toggleMobileMenu = () => {
     const newState = !isMobileMenuOpen;
     setIsMobileMenuOpen(newState);
-    document.body.style.overflow = newState ? 'hidden' : 'unset';
+    document.body.style.overflow = newState ? 'hidden' : '';
   };
 
   const handleMobileSubmenu = (title: string) => {

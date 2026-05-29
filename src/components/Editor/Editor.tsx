@@ -1,16 +1,24 @@
 "use client";
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import dynamic from 'next/dynamic';
+import type ReactQuillDefault from 'react-quill-new';
+import styles from './Editor.module.css';
 import 'react-quill-new/dist/quill.snow.css';
 
-// 에디터를 클라이언트 환경에서만 부르도록 안전하게 설정 (next.js ssr 충돌 방지)
-const ReactQuill = dynamic(async () => {
+type ReactQuillForwardedProps = React.ComponentProps<typeof ReactQuillDefault> & {
+  forwardedRef?: React.Ref<ReactQuillDefault>;
+};
+
+const ReactQuill = dynamic<ReactQuillForwardedProps>(async () => {
   const { default: RQ } = await import('react-quill-new');
-  return RQ;
-}, { 
-  ssr: false, 
-  loading: () => <p style={{ padding: '20px', color: '#888' }}>에디터를 불러오는 중입니다...</p> 
+  const QuillEditor = ({ forwardedRef, ...props }: ReactQuillForwardedProps) => (
+    <RQ ref={forwardedRef} {...props} />
+  );
+  return QuillEditor;
+}, {
+  ssr: false,
+  loading: () => <p className={styles.loading}>에디터를 불러오는 중입니다...</p>
 });
 
 interface EditorProps {
@@ -18,33 +26,122 @@ interface EditorProps {
   onChange: (value: string) => void;
 }
 
+type QuillRange = {
+  index: number;
+  length: number;
+};
+
+type QuillEditor = {
+  getSelection: () => QuillRange | null;
+  getLine: (index: number) => [unknown, number];
+  getText: (index: number, length: number) => string;
+  deleteText: (index: number, length: number, source?: string) => void;
+  formatLine: (index: number, length: number, name: string, value: unknown, source?: string) => void;
+  history?: {
+    cutoff: () => void;
+  };
+  setSelection: (index: number, source?: string) => void;
+};
+
+function applyMarkdownBlock(quill: QuillEditor, range: QuillRange, marker: string) {
+  const trimmedMarker = marker.trim();
+  const start = range.index - marker.length;
+
+  quill.history?.cutoff();
+  quill.deleteText(start, marker.length, 'user');
+
+  if (trimmedMarker === '#') {
+    quill.formatLine(start, 1, 'header', 1, 'user');
+  } else if (trimmedMarker === '##') {
+    quill.formatLine(start, 1, 'header', 2, 'user');
+  } else if (trimmedMarker === '###') {
+    quill.formatLine(start, 1, 'header', 3, 'user');
+  } else if (trimmedMarker === '>') {
+    quill.formatLine(start, 1, 'blockquote', true, 'user');
+  } else if (trimmedMarker === '```') {
+    quill.formatLine(start, 1, 'code-block', true, 'user');
+  } else if (trimmedMarker === '-' || trimmedMarker === '*') {
+    quill.formatLine(start, 1, 'list', 'bullet', 'user');
+  } else if (trimmedMarker === '1.') {
+    quill.formatLine(start, 1, 'list', 'ordered', 'user');
+  }
+
+  quill.history?.cutoff();
+  quill.setSelection(start, 'silent');
+}
+
 export default function Editor({ value, onChange }: EditorProps) {
-  // 에디터 상단의 꾸미기 버튼들(Toolbar) 구성
+  const quillRef = useRef<ReactQuillDefault | null>(null);
+
   const modules = useMemo(() => ({
     toolbar: [
-      [{ 'header': [1, 2, 3, false] }], // 글씨 크기(제목)
-      ['bold', 'italic', 'underline', 'strike'], // 굵기, 기울임꼴, 밑줄, 취소선
-      [{ 'color': [] }, { 'background': [] }], // 글자색, 형광펜
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'align': [] }], // 번호 매기기, 점 매기기, 정렬
-      ['link', 'clean'] // 링크 삽입, 서식 지우기
+      [{ header: [1, 2, 3, false] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      ['blockquote', 'code-block'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ align: [] }],
+      ['link', 'image'],
+      ['clean']
     ],
+    clipboard: {
+      matchVisual: false,
+    },
+    history: {
+      delay: 800,
+      maxStack: 120,
+      userOnly: true,
+    },
   }), []);
 
+  const formats = useMemo(() => [
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'code-block',
+    'list',
+    'align',
+    'link',
+    'image',
+    'color',
+    'background',
+  ], []);
+
+  const handleMarkdownKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key !== ' ') return;
+
+    const quill = quillRef.current?.getEditor() as QuillEditor | undefined;
+    const range = quill?.getSelection();
+
+    if (!quill || !range || range.length > 0) return;
+
+    const [, offset] = quill.getLine(range.index);
+    const lineStart = range.index - offset;
+    const marker = quill.getText(lineStart, offset);
+
+    if (!/^\s*(#{1,3}|>|```|-|\*|1\.)$/.test(marker)) return;
+
+    event.preventDefault();
+    applyMarkdownBlock(quill, range, marker);
+  };
+
   return (
-    <div style={{ backgroundColor: '#fff', border: '1px solid #ccc', borderRadius: '4px', overflow: 'hidden' }}>
-      <style>{`
-        /* 에디터 내부의 하얀 도화지(입력창) 크기를 고정. */
-        .ql-editor {
-          min-height: 400px;
-          font-size: 16px;
-          line-height: 1.8;
-        }
-      `}</style>
-      <ReactQuill 
-        theme="snow" 
-        value={value} 
-        onChange={onChange} 
+    <div className={styles.editor}>
+      <ReactQuill
+        forwardedRef={quillRef}
+        theme="snow"
+        value={value}
+        placeholder="마크업으로 작성하세요. 예: # 제목, ## 소제목, - 목록, > 인용, ``` 코드"
+        onKeyDown={handleMarkdownKeyDown}
+        onChange={(content: string, _delta: unknown, source: string) => {
+          if (source === 'user') {
+            onChange(content);
+          }
+        }}
         modules={modules}
+        formats={formats}
       />
     </div>
   );

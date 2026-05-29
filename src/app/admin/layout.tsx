@@ -17,12 +17,15 @@ export default function AdminLayout({
   }
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex', height: '100dvh', overflow: 'hidden', background: '#f8fafc' }}>
       <AdminSidebar />
       <main style={{ 
         flex: 1, 
         marginLeft: '260px', 
-        minHeight: '100vh',
+        height: '100dvh',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        WebkitOverflowScrolling: 'touch',
         background: '#f8fafc' 
       }}>
         {children}

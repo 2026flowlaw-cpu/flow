@@ -6,6 +6,27 @@ import styles from '../../../youtube/admin-youtube.module.css';
 import { uploadImage } from '@/lib/upload';
 import Editor from '@/components/Editor/Editor';
 import { supabase } from '@/lib/supabase';
+import { COLUMN_PUBLISH_CATEGORIES, DEFAULT_COLUMN_CATEGORY, normalizeColumnCategory } from '@/lib/columnCategories';
+
+type ColumnRecord = {
+  id: string | number;
+  title?: string;
+  summary?: string;
+  content?: string;
+  category?: string;
+  author_name?: string;
+  image_url?: string;
+  custom_meta?: string;
+};
+
+function hasSuperAdminRole(session: unknown) {
+  const role = (session as { user?: { user_metadata?: { role?: string } } } | null)?.user?.user_metadata?.role;
+  return role === 'super_admin';
+}
+
+function getErrorMessage(error: unknown) {
+  return error instanceof Error ? error.message : String(error);
+}
 
 export default function AdminColumnEditPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
@@ -18,7 +39,7 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
     title: '',
     summary: '',
     content: '',
-    category: '법률칼럼',
+    category: DEFAULT_COLUMN_CATEGORY,
     author_name: '대표변호사',
     image_url: '',
     custom_meta: '' // 🚀 슈퍼 어드민 전용 메타 코드
@@ -33,8 +54,8 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
     if (!supabase) return;
 
     // 1. 실시간 권한 감지
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
-      if (session?.user?.user_metadata?.role === 'super_admin') {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: unknown, session: unknown) => {
+      if (hasSuperAdminRole(session)) {
         setIsSuperAdmin(true);
       }
     });
@@ -43,22 +64,24 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
     const fetchData = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
-        if (session?.user?.user_metadata?.role === 'super_admin') {
+        if (hasSuperAdminRole(session)) {
           setIsSuperAdmin(true);
         }
 
         const res = await fetch('/api/columns');
-        const data = await res.json();
-        const currentCol = data.find((c: any) => c.id.toString() === colId.toString());
+        const data = await res.json() as ColumnRecord[];
+        const currentCol = Array.isArray(data)
+          ? data.find((column) => column.id.toString() === colId.toString())
+          : undefined;
         
         if (currentCol) {
           setFormData({
-            id: currentCol.id,
-            title: currentCol.title,
+            id: String(currentCol.id),
+            title: currentCol.title || '',
             summary: currentCol.summary || '',
-            content: currentCol.content,
-            category: currentCol.category,
-            author_name: currentCol.author_name,
+            content: currentCol.content || '',
+            category: normalizeColumnCategory(currentCol.category),
+            author_name: currentCol.author_name || '대표변호사',
             image_url: currentCol.image_url || '',
             custom_meta: currentCol.custom_meta || ''
           });
@@ -106,8 +129,8 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
         const errorData = await res.json();
         setStatusMsg({ type: 'error', text: `수정 실패: ${errorData.error || '데이터베이스 필드를 확인해주세요.'}` });
       }
-    } catch (err: any) {
-      setStatusMsg({ type: 'error', text: '네트워크 오류 발생: ' + err.message });
+    } catch (err: unknown) {
+      setStatusMsg({ type: 'error', text: '네트워크 오류 발생: ' + getErrorMessage(err) });
     } finally {
       setIsSaving(false);
     }
@@ -177,9 +200,11 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
                 value={formData.category}
                 onChange={(e) => setFormData({...formData, category: e.target.value})}
               >
-                <option>법률칼럼</option>
-                <option>부동산 소식</option>
-                <option>하자기술정보</option>
+                {COLUMN_PUBLISH_CATEGORIES.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
               </select>
             </div>
             <div className={styles.inputGroup} style={{ flex: 1 }}>

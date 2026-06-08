@@ -1,7 +1,7 @@
 .hero {
   position: relative;
-  height: 90vh;
-  min-height: 700px;
+  height: 45vh;
+  min-height: 360px;
   display: flex;
   align-items: center;
   background-image: url('/location_hero_bg_1776063926973.webp');
@@ -31,22 +31,22 @@
   font-weight: 600;
   letter-spacing: 4px;
   color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   display: block;
 }
 
 .title {
-  font-size: 72px;
+  font-size: 52px;
   font-weight: 600;
   line-height: 1.1;
-  margin-bottom: 40px;
+  margin: 0 0 28px;
 }
 
 .title span {
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 400;
   display: block;
-  margin-top: 20px;
+  margin-top: 14px;
   color: rgba(255, 255, 255, 0.9);
 }
 
@@ -59,7 +59,7 @@
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: white;
-  padding: 16px 40px;
+  padding: 13px 32px;
   font-size: 16px;
   font-weight: 600;
   backdrop-filter: blur(10px);
@@ -71,7 +71,7 @@
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: white;
-  padding: 16px 40px;
+  padding: 13px 32px;
   font-size: 16px;
   font-weight: 600;
   backdrop-filter: blur(10px);
@@ -87,20 +87,20 @@
 
 @media (max-width: 1024px) {
   .title {
-    font-size: 56px;
+    font-size: 44px;
   }
 }
 
 @media (max-width: 768px) {
   .hero {
-    height: 70vh;
-    min-height: 500px;
+    height: 46vh;
+    min-height: 340px;
   }
   .title {
-    font-size: 42px;
+    font-size: 34px;
   }
   .title span {
-    font-size: 20px;
+    font-size: 19px;
   }
   .actions {
     flex-direction: column;

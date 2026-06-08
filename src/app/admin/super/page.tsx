@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { getSafeUser, supabase } from '@/lib/supabase';
 import styles from './page.module.css';
 
 export default function SuperAdminPage() {
@@ -14,7 +14,7 @@ export default function SuperAdminPage() {
     async function checkAuth() {
       if (!supabase) return;
       
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getSafeUser();
       
       // 🛡️ [강력한 보안] 슈퍼 어드민 권한이 없으면 대시보드로 즉시 추방
       if (!user || user.user_metadata?.role !== 'super_admin') {

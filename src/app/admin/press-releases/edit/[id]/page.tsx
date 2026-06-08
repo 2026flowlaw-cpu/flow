@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import styles from '../../../youtube/admin-youtube.module.css';
 import { uploadImage } from '@/lib/upload';
 import Editor from '@/components/Editor/Editor';
-import { supabase } from '@/lib/supabase';
+import { getSafeUser, supabase } from '@/lib/supabase';
 
 export default function AdminPressEditPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
@@ -28,7 +28,7 @@ export default function AdminPressEditPage({ params: paramsPromise }: { params: 
   useEffect(() => {
     async function checkRole() {
       if (!supabase) return;
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getSafeUser();
       if (user?.user_metadata?.role === 'super_admin') {
         setIsSuperAdmin(true);
       }

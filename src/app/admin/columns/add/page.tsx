@@ -6,7 +6,7 @@ import styles from '../../youtube/admin-youtube.module.css';
 
 import { uploadImage } from '@/lib/upload';
 import Editor from '@/components/Editor/Editor';
-import { supabase } from '@/lib/supabase';
+import { getSafeSession, supabase } from '@/lib/supabase';
 import { COLUMN_PUBLISH_CATEGORIES, DEFAULT_COLUMN_CATEGORY, normalizeColumnCategory } from '@/lib/columnCategories';
 
 type ColumnDraft = {
@@ -75,7 +75,7 @@ function AdminColumnAddContent() {
 
     // 초기 로드 시에도 확인
     const checkInitialSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const session = await getSafeSession();
       if (hasSuperAdminRole(session)) {
         setIsSuperAdmin(true);
       }

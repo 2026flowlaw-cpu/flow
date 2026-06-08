@@ -1,6 +1,6 @@
 .mapSection {
-  padding: 100px 0 120px;
-  background-color: #f8fafc; /* Luxury soft background */
+  padding: 56px 0 80px;
+  background-color: transparent;
   position: relative;
   overflow: hidden;
 }
@@ -11,21 +11,21 @@
   align-items: center;
   justify-content: center;
   max-width: 1200px;
-  margin: 0 auto 60px;
+  margin: 0 auto 36px;
   padding: 0 20px;
 }
 
 .dividerLine {
   height: 1px;
   flex-grow: 1;
-  background: linear-gradient(to right, transparent, rgba(10, 27, 57, 0.18), transparent);
+  background: linear-gradient(to right, transparent, rgba(10, 27, 57, 0.2), transparent);
 }
 
 .dividerBadge {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #f8fafc;
+  background: #e8f0f5;
   padding: 0 24px;
   font-size: 11px;
   font-weight: 600;
@@ -37,34 +37,41 @@
 .grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
-  gap: 50px;
+  gap: 40px;
   align-items: stretch;
   position: relative;
   z-index: 1;
+  min-height: 620px;
 }
 
 .mapWrapper {
-  height: 660px;
-  border-radius: 30px;
+  height: 100%;
+  min-height: 620px;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 30px 60px rgba(10, 27, 57, 0.08);
-  border: 1px solid rgba(10, 27, 57, 0.05);
+  box-shadow: 0 26px 56px rgba(10, 27, 57, 0.13);
+  border: 1px solid rgba(10, 27, 57, 0.1);
   background: white;
 }
 
 .info {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 18px;
+  height: 100%;
 }
 
 .addressBox {
   background: #ffffff;
-  padding: 35px;
-  border-radius: 24px;
-  box-shadow: 0 10px 30px rgba(10, 27, 57, 0.03);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 18px 42px rgba(10, 27, 57, 0.08);
   border: 1px solid rgba(10, 27, 57, 0.12);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .addressBox:hover {
@@ -86,7 +93,7 @@
   background: rgba(10, 27, 57, 0.06);
   border: 1px solid rgba(10, 27, 57, 0.08);
   color: #0A1B39;
-  border-radius: 14px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,7 +104,7 @@
   font-size: 18px;
   font-weight: 600;
   color: #0A1B39; /* Deep Navy */
-  letter-spacing: -0.5px;
+  letter-spacing: 0;
 }
 
 .carDetails {
@@ -117,7 +124,7 @@
 .buildingName {
   display: block;
   font-size: 14px;
-  font-weight: 400500;
+  font-weight: 500;
   color: #64748b;
   margin-top: 4px;
 }
@@ -128,7 +135,7 @@
   align-items: center;
   background: rgba(10, 27, 57, 0.025);
   padding: 12px 20px;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid rgba(10, 27, 57, 0.08);
 }
 
@@ -160,7 +167,7 @@
   color: white;
   text-align: center;
   padding: 14px;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
@@ -177,11 +184,15 @@
 /* 2. Subway Card (지하철) - Clean White Card with Timeline */
 .subwayCard {
   background: white;
-  padding: 35px;
-  border-radius: 24px;
-  border: 1px solid #e2e8f0;
+  padding: 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(10, 27, 57, 0.12);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 18px 42px rgba(10, 27, 57, 0.08);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .subwayCard:hover {
@@ -195,7 +206,7 @@
   height: 46px;
   background: rgba(10, 27, 57, 0.04);
   color: #0A1B39;
-  border-radius: 14px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -212,7 +223,7 @@
   font-size: 18px;
   font-weight: 600;
   color: #0A1B39;
-  letter-spacing: -0.5px;
+  letter-spacing: 0;
 }
 
 /* Timeline Layout */
@@ -284,17 +295,21 @@
 .timelineDesc {
   font-size: 14px;
   color: #64748b;
-  font-weight: 400500;
+  font-weight: 500;
 }
 
 /* 3. Bus Card (버스) - Grid pills card */
 .busCard {
   background: white;
-  padding: 35px;
-  border-radius: 24px;
-  border: 1px solid #e2e8f0;
+  padding: 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(10, 27, 57, 0.12);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 18px 42px rgba(10, 27, 57, 0.08);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .busCard:hover {
@@ -308,7 +323,7 @@
   height: 46px;
   background: rgba(10, 27, 57, 0.04);
   color: #0A1B39;
-  border-radius: 14px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -328,7 +343,7 @@
   margin: 15px 0 20px 0;
   padding-bottom: 12px;
   border-bottom: 1px dashed #e2e8f0;
-  letter-spacing: -0.2px;
+  letter-spacing: 0;
 }
 
 .busRoutes {
@@ -408,18 +423,28 @@
   .grid {
     grid-template-columns: 1fr;
     gap: 40px;
+    min-height: 0;
   }
   .mapWrapper {
     height: 450px;
+    min-height: 450px;
+  }
+  .info {
+    height: auto;
+  }
+  .addressBox,
+  .subwayCard,
+  .busCard {
+    flex: initial;
   }
 }
 
 @media (max-width: 768px) {
   .mapSection {
-    padding: 80px 20px;
+    padding: 48px 20px 64px;
   }
   .sectionDivider {
-    margin-bottom: 40px;
+    margin-bottom: 28px;
   }
   .addressBox, .subwayCard, .busCard {
     padding: 24px;

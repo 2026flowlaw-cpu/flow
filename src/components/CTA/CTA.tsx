@@ -25,7 +25,7 @@ const ctaItems = [
     desc: '방문을 하실 때 사건과 관련된 서류나 증거 등을 가지고 오시면 보다 정확한 법률상담이 가능합니다.',
     icon: '📍',
     label: 'VISIT',
-    image: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?auto=format&fit=crop&q=80',
+    image: '/images/visit_consultation.png',
     href: '/about/location'
   }
 ];

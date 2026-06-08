@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { getSafeSession, supabase } from '@/lib/supabase';
 import styles from './page.module.css';
 
 export default function AdminLoginPage() {
@@ -17,7 +17,7 @@ export default function AdminLoginPage() {
   useEffect(() => {
     // 세션이 이미 있는지 확인
     const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const session = await getSafeSession();
       if (session) {
         router.push('/admin/dashboard');
       }

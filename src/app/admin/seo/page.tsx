@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { getSafeUser, supabase } from '@/lib/supabase';
 import styles from './page.module.css';
 import { Globe, Search, MapPin, Code, Save, ShieldCheck } from 'lucide-react';
 
@@ -32,7 +32,7 @@ export default function AdminSeoPage() {
   useEffect(() => {
     async function checkAuth() {
       if (!supabase) return;
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getSafeUser();
       
       if (user?.user_metadata?.role !== 'super_admin') {
         console.warn('Super Admin access required');

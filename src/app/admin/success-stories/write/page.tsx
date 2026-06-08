@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { getSafeUser, supabase } from '@/lib/supabase';
 import styles from './write.module.css';
 
 const CATEGORIES = ['분양계약해제', '건설', '부동산', '임대차', 'HR', '민사 일반', '성범죄', '음주교통', '마약', '보이스피싱', '건설형사', '경제범죄', '소년학폭', '일반형사'];
@@ -25,7 +25,7 @@ export default function SuccessStoryWritePage() {
   // Admin check
   useEffect(() => {
     const checkUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getSafeUser();
       if (!user) {
         alert('관리자 로그인이 필요합니다.');
         router.push('/admin/login');

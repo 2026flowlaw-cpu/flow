@@ -19,19 +19,12 @@ export default function Home() {
         <CTA />
         
         {/* Location Section */}
-        <div style={{ background: '#f9fafb', padding: '120px 0 0' }}>
+        <section className={styles.locationSection}>
           <div className="container">
-            <h2 style={{ 
-              fontSize: '48px', 
-              fontWeight: 600, 
-              textAlign: 'center', 
-              marginBottom: '80px',
-              color: '#0A1B39',
-              letterSpacing: '-1.5px'
-            }}>오시는 길</h2>
+            <h2 className={styles.locationTitle}>오시는 길</h2>
           </div>
           <LocationMap />
-        </div>
+        </section>
       </main>
     </div>
   );

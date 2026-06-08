@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { supabase } from '@/lib/supabase';
+import { getSafeUser, supabase } from '@/lib/supabase';
 import styles from '../../add/page.module.css'; // Reusing add page styles
 
 export default function AdminSuccessStoryEditPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
@@ -33,7 +33,7 @@ export default function AdminSuccessStoryEditPage({ params: paramsPromise }: { p
   
   useEffect(() => {
     async function checkRole() {
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getSafeUser();
       if (user?.user_metadata?.role === 'super_admin') {
         setIsSuperAdmin(true);
       }

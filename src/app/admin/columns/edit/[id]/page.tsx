@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import styles from '../../../youtube/admin-youtube.module.css';
 import { uploadImage } from '@/lib/upload';
 import Editor from '@/components/Editor/Editor';
-import { supabase } from '@/lib/supabase';
+import { getSafeSession, supabase } from '@/lib/supabase';
 import { COLUMN_PUBLISH_CATEGORIES, DEFAULT_COLUMN_CATEGORY, normalizeColumnCategory } from '@/lib/columnCategories';
 
 type ColumnRecord = {
@@ -63,7 +63,7 @@ export default function AdminColumnEditPage({ params: paramsPromise }: { params:
     // 2. 초기 로드 및 데이터 페칭
     const fetchData = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
+        const session = await getSafeSession();
         if (hasSuperAdminRole(session)) {
           setIsSuperAdmin(true);
         }

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { getSafeUser, supabase } from '@/lib/supabase';
 import styles from './AdminSidebar.module.css';
 
 import { 
@@ -38,7 +38,7 @@ export default function AdminSidebar() {
   useEffect(() => {
     async function checkRole() {
       if (!supabase) return;
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getSafeUser();
       // 유저 메타데이터에서 super_admin 권한 확인
       if (user?.user_metadata?.role === 'super_admin') {
         setIsSuperAdmin(true);

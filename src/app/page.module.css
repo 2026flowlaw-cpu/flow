@@ -4,6 +4,25 @@
   min-height: 100vh;
 }
 
+.locationSection {
+  background:
+    linear-gradient(180deg, #eef4f8 0%, #e8f0f5 54%, #f5f8fb 100%);
+  padding-top: 72px;
+  border-top: 1px solid rgba(10, 27, 57, 0.06);
+  border-bottom: 1px solid rgba(10, 27, 57, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.locationTitle {
+  color: var(--primary);
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.15;
+  margin: 0;
+  text-align: center;
+}
+
 .footer {
   background: white;
   padding: 80px 0 40px;
@@ -80,6 +99,14 @@
 }
 
 @media (max-width: 768px) {
+  .locationSection {
+    padding-top: 52px;
+  }
+
+  .locationTitle {
+    font-size: 36px;
+  }
+
   .footerGrid {
     grid-template-columns: 1fr;
   }

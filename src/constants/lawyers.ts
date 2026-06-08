@@ -25,7 +25,7 @@ export const lawyers: Lawyer[] = [
       '부산지방검찰청 부장검사 경력',
       '대한변호사협회 등록 형사법 전문 변호사'
     ],
-    image: '/images/lawyer1.png',
+    image: '/images/lawyer1.webp',
     history: [
       '대한변호사협회 등록 형사법 전문 변호사',
       '서울지방검찰청 검사',
@@ -54,17 +54,17 @@ export const lawyers: Lawyer[] = [
       {
         title: '관련된 사건 블로그',
         content: '아파트 하자소송 판결금 증액 성공 사례 - 정밀 감정과 계산사 수행팀의 시너지',
-        image: '/images/lawyer1.png'
+        image: '/images/lawyer1.webp'
       },
       {
         title: '관련된 사건 블로그',
         content: '건설사 지체상금 청구 방어 전략 - 현장 분석을 통한 책임 비율 조정',
-        image: '/images/lawyer1.png'
+        image: '/images/lawyer1.webp'
       },
       {
         title: '관련된 사건 블로그',
         content: '누수 피해 보상 집단 소송 승소 보고 - 입주민의 권리를 지키는 확실한 법로',
-        image: '/images/lawyer1.png'
+        image: '/images/lawyer1.webp'
       }
     ]
   },
@@ -78,7 +78,7 @@ export const lawyers: Lawyer[] = [
       '서울중앙지방법원 조정위원 경력',
       '국토교통부 하자심사분쟁조정위원회 자문'
     ],
-    image: '/images/lawyer2.png',
+    image: '/images/lawyer2.webp',
     history: [
       '법무법인 플로우 하자소송 전담팀장',
       '서울중앙지방법원 민사조정위원',
@@ -96,17 +96,17 @@ export const lawyers: Lawyer[] = [
       {
         title: '관련된 사건 블로그',
         content: '대규모 아파트 단지 균열 및 누수 하자 판결 성공 사례',
-        image: '/images/lawyer2.png'
+        image: '/images/lawyer2.webp'
       },
       {
         title: '관련된 사건 블로그',
         content: '건설사 상대 미시공/오시공 손해배상 청구 승소',
-        image: '/images/lawyer2.png'
+        image: '/images/lawyer2.webp'
       },
       {
         title: '관련된 사건 블로그',
         content: '단지 내 부대시설 하자 보수 이행 강제 사례',
-        image: '/images/lawyer2.png'
+        image: '/images/lawyer2.webp'
       }
     ]
   },
@@ -121,7 +121,7 @@ export const lawyers: Lawyer[] = [
       'A건설사 법무팀 자문 변호사',
       '대한변호사협회 등록 건설 전문 변호사'
     ],
-    image: '/images/lawyer3.png',
+    image: '/images/lawyer3.webp',
     history: ['건설법무 대학원 석사 졸업', 'A건설사 법무팀 자문 변호사'],
     activities: ['고려대학교 법과대학 졸업'],
     blogs: []
@@ -136,7 +136,7 @@ export const lawyers: Lawyer[] = [
       '부동산 인도 및 소유권 분쟁 다수 수행',
       '공사대금 청구 소송 전문 변론'
     ],
-    image: '/images/lawyer1.png',
+    image: '/images/lawyer1.webp',
     history: ['사법연수원 42기 수료'],
     activities: ['성균관대학교 법학과 졸업'],
     blogs: []
@@ -151,7 +151,7 @@ export const lawyers: Lawyer[] = [
       '아파트 입주자대표회의 상시 법률 자문',
       '민사 집행 및 채권 회수 전략 상담'
     ],
-    image: '/images/lawyer2.png',
+    image: '/images/lawyer2.webp',
     history: ['법학전문대학원 졸업'],
     activities: ['한양대학교 법학전문대학원 졸업'],
     blogs: []
@@ -166,7 +166,7 @@ export const lawyers: Lawyer[] = [
       '재건축 및 재개발 정비사업 분쟁 자문',
       '하자 진단 보고서 정밀 법리 분석'
     ],
-    image: '/images/lawyer3.png',
+    image: '/images/lawyer3.webp',
     history: ['한국건설법학회 정회원'],
     activities: ['이화여자대학교 법학과 졸업'],
     blogs: []
@@ -181,7 +181,7 @@ export const lawyers: Lawyer[] = [
       '건설 소송 분석 및 전략 수립 고문',
       '중대재해처벌법 및 건설 현장 안전 자문'
     ],
-    image: '/images/lawyer1.png',
+    image: '/images/lawyer1.webp',
     history: ['전 서울고등법원 판사'],
     activities: ['서울대학교 법법대학 졸업'],
     blogs: []
@@ -196,7 +196,7 @@ export const lawyers: Lawyer[] = [
       '손해배상액 산정 및 감정 대응 전문',
       '조세 및 건설 금융 분쟁 상담'
     ],
-    image: '/images/lawyer2.png',
+    image: '/images/lawyer2.webp',
     history: ['계산사 수행팀 법률 검토 전담'],
     activities: ['경희대학교 법학과 졸업'],
     blogs: []

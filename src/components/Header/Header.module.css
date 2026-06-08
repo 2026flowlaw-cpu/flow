@@ -110,7 +110,7 @@
 }
 
 .consultButton {
-  background: linear-gradient(135deg, var(--accent), #D4AF37);
+  background: var(--primary);
   color: white;
   padding: 12px 28px;
   border-radius: 50px;
@@ -118,12 +118,13 @@
   font-weight: 600;
   font-size: 15px;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+  box-shadow: 0 4px 15px rgba(10, 27, 57, 0.18);
 }
 
 .consultButton:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(197, 160, 89, 0.4);
+  background: var(--primary-light);
+  box-shadow: 0 8px 25px rgba(10, 27, 57, 0.24);
 }
 
 .loginBtn {

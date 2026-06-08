@@ -158,7 +158,7 @@ export default function AdminColumnsListingPage() {
                 <div key={draft.id} className={styles.draftCard}>
                   <div className={styles.draftThumb}>
                     <Image
-                      src={draft.image_url || '/images/philosophy_bg.png'}
+                      src={draft.image_url || '/images/philosophy_bg.webp'}
                       alt={draft.title}
                       fill
                       style={{ objectFit: 'cover' }}
@@ -222,7 +222,7 @@ export default function AdminColumnsListingPage() {
                     <td>
                       <div className={styles.thumbnail}>
                         <Image 
-                          src={col.image_url || '/images/philosophy_bg.png'}
+                          src={col.image_url || '/images/philosophy_bg.webp'}
                           alt={col.title} 
                           fill 
                           style={{ objectFit: 'cover' }}

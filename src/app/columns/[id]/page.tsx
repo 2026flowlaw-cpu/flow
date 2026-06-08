@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import { preferWebpImageUrl, preferWebpInHtml } from '@/lib/imageOptimization';
 import { Metadata } from 'next';
 import styles from './page.module.css';
 import ColumnScrollGuard from '@/components/ColumnScrollGuard/ColumnScrollGuard';
@@ -12,12 +13,14 @@ type ArticleHeading = {
   text: string;
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ilshin-law.com';
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'http://flowlaw.kr').replace(/\/$/, '');
 
 function absoluteUrl(url?: string | null) {
-  if (!url) return `${siteUrl}/images/default_column.png`;
-  if (url.startsWith('http://') || url.startsWith('https://')) return url;
-  return `${siteUrl}${url.startsWith('/') ? url : `/${url}`}`;
+  const optimizedUrl = preferWebpImageUrl(url, siteUrl);
+
+  if (!optimizedUrl) return `${siteUrl}/images/philosophy_bg.webp`;
+  if (optimizedUrl.startsWith('http://') || optimizedUrl.startsWith('https://')) return optimizedUrl;
+  return `${siteUrl}${optimizedUrl.startsWith('/') ? optimizedUrl : `/${optimizedUrl}`}`;
 }
 
 function extractJsonLdScripts(html: string) {
@@ -184,12 +187,8 @@ export default async function ColumnDetailPage({ params: paramsPromise }: { para
   const canonicalUrl = `${siteUrl}/columns/${colId}`;
   const seoData = parseColumnSeo(column.custom_meta);
   const articleHeadings = extractArticleHeadings(column.content);
-  const articleContent = addHeadingIds(column.content || '', articleHeadings);
-  const publishedDate = new Date(column.created_at).toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const articleContent = preferWebpInHtml(addHeadingIds(column.content || '', articleHeadings), siteUrl);
+  const heroImage = preferWebpImageUrl(column.image_url, siteUrl) || '/images/philosophy_bg.webp';
 
   // 🧠 [구조화 데이터] 구글 검색 결과에서 리치 스니펫(Rich Snippet)을 노출하기 위한 JSON-LD
   const articleJsonLd = {
@@ -209,7 +208,7 @@ export default async function ColumnDetailPage({ params: paramsPromise }: { para
       "name": "법무법인 플로우",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://ilshin-law.com/logo.png"
+        "url": `${siteUrl}/logo.png`
       }
     },
     "datePublished": column.created_at,
@@ -267,9 +266,11 @@ export default async function ColumnDetailPage({ params: paramsPromise }: { para
       
       <main className={styles.main}>
         <article className={styles.articleShell} itemScope itemType="https://schema.org/LegalArticle">
+          <meta itemProp="datePublished" content={column.created_at} />
+          <meta itemProp="dateModified" content={column.updated_at || column.created_at} />
           <header className={styles.hero}>
             <Image
-              src={column.image_url || '/images/philosophy_bg.png'}
+              src={heroImage}
               alt={column.title}
               fill
               className={styles.heroImg}
@@ -293,12 +294,6 @@ export default async function ColumnDetailPage({ params: paramsPromise }: { para
                   <dt>작성자</dt>
                   <dd itemProp="author" itemScope itemType="https://schema.org/Person">
                     <span itemProp="name">{column.author_name} 변호사</span>
-                  </dd>
-                </div>
-                <div>
-                  <dt>작성일</dt>
-                  <dd>
-                    <time itemProp="datePublished" dateTime={column.created_at}>{publishedDate}</time>
                   </dd>
                 </div>
               </dl>

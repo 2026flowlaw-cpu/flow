@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Header from '@/components/Header/Header';
-import RealFooter from '@/components/Footer/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './page.module.css';
@@ -40,8 +38,6 @@ export default function YouTubePage() {
 
   return (
     <div className={styles.page}>
-      <Header />
-      
       <main>
         {/* Hero Section */}
         <section className={styles.hero}>
@@ -52,10 +48,10 @@ export default function YouTubePage() {
               <Link href="/consult" className={styles.heroBtnOutline}>문의하기</Link>
             </div>
           </div>
-          <Image 
-            src="/images/philosophy_bg.png" 
-            alt="Hero Background" 
-            fill 
+          <Image
+            src="/images/philosophy_bg.webp"
+            alt="Hero Background"
+            fill
             className={styles.heroImg}
             priority
           />
@@ -67,24 +63,24 @@ export default function YouTubePage() {
           <div style={{ padding: '100px 0', textAlign: 'center', fontSize: '20px' }}>영상을 불러오는 중입니다...</div>
         ) : categories.length > 0 ? (
           categories.map((cat, idx) => (
-            <section 
-              key={cat} 
+            <section
+              key={cat}
               className={`${styles.section} ${groupedVideos[cat][0]?.theme === 'dark' ? styles.darkTheme : ''}`}
             >
               <div className="container">
                 <h2 className={styles.sectionHeading}>{cat}</h2>
                 <div className={styles.grid}>
                   {groupedVideos[cat].map((video: any) => (
-                    <a 
-                      key={video.id} 
-                      href={`https://www.youtube.com/watch?v=${video.youtube_id}`} 
+                    <a
+                      key={video.id}
+                      href={`https://www.youtube.com/watch?v=${video.youtube_id}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={styles.videoCard}
                     >
                       <div className={styles.thumbnailArea}>
-                        <Image 
-                          src={`https://img.youtube.com/vi/${video.youtube_id}/maxresdefault.jpg`} 
+                        <Image
+                          src={`https://img.youtube.com/vi/${video.youtube_id}/maxresdefault.jpg`}
                           alt={video.title}
                           fill
                           className={styles.thumbImg}
@@ -129,7 +125,6 @@ export default function YouTubePage() {
         </section>
       </main>
 
-      <RealFooter />
     </div>
   );
 }

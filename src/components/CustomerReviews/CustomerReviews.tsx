@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import styles from './CustomerReviews.module.css';
 
@@ -50,21 +49,18 @@ const mainReviews = [
     id: 1,
     name: '황**',
     category: '폭행 / 피의자',
-    avatarIcon: 'female',
     content: '갑자기 수사기관 경찰 조사를 받게 되었습니다. 상대방이 과장하여 합의를 요구해 막막했는데, 변호사님의 CCTV 분석과 객관적인 변론 덕분에 무혐의 처분을 받았습니다. 덕분에 긴 고통의 시간에서 조기에 벗어날 수 있었습니다.'
   },
   {
     id: 2,
     name: '임**',
     category: '횡령·배임 / 피해자',
-    avatarIcon: 'male1',
     content: '믿었던 직원들의 횡령으로 배신감이 컸습니다. 증거가 부족해 막막했는데, 변호사님이 철저한 자금 추적과 회계 사실 분석을 통해 법정에 기소해주셨습니다. 덕분에 형사 처벌과 민사 소송을 함께 진행해 피해를 회복할 수 있었습니다.'
   },
   {
     id: 3,
     name: '박**',
     category: '명예훼손 / 피고인',
-    avatarIcon: 'male2',
     content: '인터넷에 쓴 댓글로 고소를 당해 당황스러웠습니다. 변호사님이 제 글이 비방 목적이 아닌 공익을 위한 사실이라는 점을 조목조목 짚어주셨습니다. 최종 법원에서 무죄 판결을 받아 억울한 누명을 벗을 수 있었습니다.'
   }
 ];
@@ -88,40 +84,8 @@ const CustomerReviews = ({ isMain = false }: CustomerReviewsProps) => {
           <div className={styles.mainGrid}>
             {mainReviews.map((review) => (
               <Link href={`/success-stories/${review.id}`} key={review.id} className={styles.mainCard}>
-                <div className={styles.mainAvatarContainer}>
-                  {review.avatarIcon === 'female' && (
-                    <svg viewBox="0 0 100 100" className={styles.avatarSvg}>
-                      <circle cx="50" cy="50" r="50" fill="#FEF08A" />
-                      <path d="M25,50 C25,25 75,25 75,50 V70 H25 Z" fill="#FCD34D" />
-                      <rect x="44" y="55" width="12" height="15" fill="#FDBA74" />
-                      <circle cx="50" cy="45" r="20" fill="#FDBA74" />
-                      <path d="M30,35 C40,25 60,25 70,35 C65,30 35,30 30,35 Z" fill="#F59E0B" />
-                      <path d="M25,80 C25,65 75,65 75,80 V100 H25 Z" fill="#3B82F6" />
-                      <path d="M42,65 L50,75 L58,65 Z" fill="#FDBA74" />
-                    </svg>
-                  )}
-                  {review.avatarIcon === 'male1' && (
-                    <svg viewBox="0 0 100 100" className={styles.avatarSvg}>
-                      <circle cx="50" cy="50" r="50" fill="#A7F3D0" />
-                      <rect x="44" y="55" width="12" height="15" fill="#FDBA74" />
-                      <circle cx="50" cy="42" r="18" fill="#FDBA74" />
-                      <path d="M30,35 C30,20 70,20 70,35 C65,28 35,28 30,35 Z" fill="#78350F" />
-                      <path d="M32,32 C35,22 65,22 68,32" fill="#78350F" />
-                      <path d="M25,80 C25,65 75,65 75,80 V100 H25 Z" fill="#4B5563" />
-                      <path d="M40,65 L50,80 L60,65 Z" fill="#FFFFFF" />
-                      <path d="M48,80 L50,100 L52,80 Z" fill="#3B82F6" />
-                    </svg>
-                  )}
-                  {review.avatarIcon === 'male2' && (
-                    <svg viewBox="0 0 100 100" className={styles.avatarSvg}>
-                      <circle cx="50" cy="50" r="50" fill="#FECACA" />
-                      <rect x="44" y="55" width="12" height="15" fill="#FDBA74" />
-                      <circle cx="50" cy="42" r="18" fill="#FDBA74" />
-                      <path d="M30,32 C35,22 65,22 70,32" fill="#451A03" stroke="#451A03" strokeWidth="6" strokeLinecap="round" />
-                      <path d="M25,80 C25,65 75,65 75,80 V100 H25 Z" fill="#10B981" />
-                      <path d="M42,65 L50,75 L58,65 Z" fill="#FDBA74" />
-                    </svg>
-                  )}
+                <div className={styles.mainCaseBadge}>
+                  CASE {String(review.id).padStart(2, '0')}
                 </div>
                 <div className={styles.mainCardContent}>
                   <h3 className={styles.mainName}>{review.name}</h3>

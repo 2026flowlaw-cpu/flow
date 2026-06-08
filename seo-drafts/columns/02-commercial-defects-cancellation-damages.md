@@ -9,20 +9,16 @@ category: "건설"
 author_name: "대표변호사"
 keywords: "상가 누수, 부실시공 하자, 미시공 오시공, 분양계약해제, 집합건물법 제9조, 하자담보책임, 하자보수비, 손해배상청구"
 images:
-  - src: "/seo/articles/commercial-defects-cancellation-damages/image-01.png"
-    alt: "상가 누수와 집합건물 하자 대표 이미지"
-  - src: "/seo/articles/commercial-defects-cancellation-damages/image-02.png"
-    alt: "집합건물법 제9조 담보책임 안내 이미지"
-  - src: "/seo/articles/commercial-defects-cancellation-damages/image-03.png"
-    alt: "상가 하자 감정 관련 참고 이미지"
-  - src: "/seo/articles/commercial-defects-cancellation-damages/image-04.png"
-    alt: "집합건물 하자로 인한 분양계약해제 기준 이미지"
-  - src: "/seo/articles/commercial-defects-cancellation-damages/image-05.jpg"
-    alt: "상가 하자 현장 사진 1"
-  - src: "/seo/articles/commercial-defects-cancellation-damages/image-06.jpg"
-    alt: "상가 하자 현장 사진 2"
-  - src: "/seo/articles/commercial-defects-cancellation-damages/image-07.png"
-    alt: "분양계약해제와 집합건물법 안내 이미지"
+  - src: "/seo/articles/commercial-defects-cancellation-damages/image-01.webp"
+    alt: "미시공, 오시공, 부실시공 하자 관련 법률칼럼 이미지 1"
+  - src: "/seo/articles/commercial-defects-cancellation-damages/image-02.webp"
+    alt: "미시공, 오시공, 부실시공 하자 관련 법률칼럼 이미지 2"
+  - src: "/seo/articles/commercial-defects-cancellation-damages/image-03.webp"
+    alt: "미시공, 오시공, 부실시공 하자 관련 법률칼럼 이미지 3"
+  - src: "/seo/articles/commercial-defects-cancellation-damages/image-04.webp"
+    alt: "미시공, 오시공, 부실시공 하자 관련 법률칼럼 이미지 4"
+  - src: "/seo/articles/commercial-defects-cancellation-damages/image-05.webp"
+    alt: "미시공, 오시공, 부실시공 하자 관련 법률칼럼 이미지 5"
 status: "draft"
 created_at: "2026-05-29"
 ---
@@ -50,7 +46,7 @@ created_at: "2026-05-29"
   <p><strong>신축 상가라고 해서 하자 문제가 없는 것은 아닙니다.</strong> 누수, 균열, 결로, 설비 오시공, 도면과 다른 시공, 알람밸브실이나 설비공간으로 인한 사용 제한이 발생하면 수분양자는 분양계약해제와 손해배상 중 어떤 청구가 가능한지 고민하게 됩니다.</p>
   <p>하지만 하자가 있다는 이유만으로 곧바로 계약을 해제할 수 있는 것은 아닙니다. 법원은 보수 가능성, 하자의 중대성, 사용·수익 가능성, 계약 목적 달성 여부를 종합해 판단합니다. 따라서 하자 사건은 법률 검토와 기술 검토를 함께 진행해야 합니다.</p>
   <figure>
-    <img src="/seo/articles/commercial-defects-cancellation-damages/image-01.png" width="966" height="966" loading="eager" alt="상가 누수와 집합건물 하자 대표 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/commercial-defects-cancellation-damages/image-01.webp" width="800" height="800" loading="eager" alt="미시공, 오시공, 부실시공 하자 관련 법률칼럼 이미지 1" style="width:100%;height:auto;" />
     <figcaption>신축 상가 누수와 부실시공 하자는 분양계약해제와 손해배상 가능성을 함께 검토해야 합니다.</figcaption>
   </figure>
 </section>
@@ -76,11 +72,11 @@ created_at: "2026-05-29"
     <li>하자보수를 반복해도 동일 문제가 재발하는 경우</li>
   </ul>
   <figure>
-    <img src="/seo/articles/commercial-defects-cancellation-damages/image-05.jpg" width="966" height="725" loading="lazy" alt="상가 하자 현장 사진 1" style="width:100%;height:auto;" />
+    <img src="/seo/articles/commercial-defects-cancellation-damages/image-02.webp" width="800" height="800" loading="lazy" alt="미시공, 오시공, 부실시공 하자 관련 법률칼럼 이미지 2" style="width:100%;height:auto;" />
     <figcaption>누수와 균열은 발생 부위, 범위, 반복 여부를 사진으로 남겨두는 것이 중요합니다.</figcaption>
   </figure>
   <figure>
-    <img src="/seo/articles/commercial-defects-cancellation-damages/image-06.jpg" width="966" height="725" loading="lazy" alt="상가 하자 현장 사진 2" style="width:100%;height:auto;" />
+    <img src="/seo/articles/commercial-defects-cancellation-damages/image-03.webp" width="800" height="800" loading="lazy" alt="미시공, 오시공, 부실시공 하자 관련 법률칼럼 이미지 3" style="width:100%;height:auto;" />
     <figcaption>현장 사진은 감정 단계에서 하자 발생 위치와 보수 범위를 설명하는 기초 자료가 됩니다.</figcaption>
   </figure>
 </section>
@@ -96,11 +92,11 @@ created_at: "2026-05-29"
   <p>집합건물법 제9조는 집합건물을 건축해 분양한 자 등의 담보책임을 정하고 있고, 민법상 수급인의 담보책임 규정이 준용될 수 있습니다. 민법 제667조는 하자보수와 손해배상청구를, 민법 제668조는 하자로 인해 계약 목적을 달성할 수 없는 경우의 해제권을 규정합니다.</p>
   <p>다만 건물 하자 사건에서는 조문만으로 결론이 나지 않습니다. 실제로는 하자의 범위, 보수 가능성, 보수비 규모, 영업 제한 정도, 감정인의 판단이 함께 고려됩니다.</p>
   <figure>
-    <img src="/seo/articles/commercial-defects-cancellation-damages/image-02.png" width="966" height="966" loading="lazy" alt="집합건물법 제9조 담보책임 안내 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/commercial-defects-cancellation-damages/image-04.webp" width="459" height="383" loading="lazy" alt="미시공, 오시공, 부실시공 하자 관련 법률칼럼 이미지 4" style="width:100%;height:auto;" />
     <figcaption>집합건물 하자 사건은 집합건물법 제9조와 민법상 하자담보책임을 함께 검토합니다.</figcaption>
   </figure>
   <figure>
-    <img src="/seo/articles/commercial-defects-cancellation-damages/image-07.png" width="966" height="966" loading="lazy" alt="분양계약해제와 집합건물법 안내 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/commercial-defects-cancellation-damages/image-05.webp" width="800" height="800" loading="lazy" alt="미시공, 오시공, 부실시공 하자 관련 법률칼럼 이미지 5" style="width:100%;height:auto;" />
     <figcaption>분양계약해제 가능성은 하자의 존재뿐 아니라 계약 목적 달성 가능성까지 종합해 판단합니다.</figcaption>
   </figure>
 </section>
@@ -156,11 +152,11 @@ created_at: "2026-05-29"
   <p>상가 하자 사건에서는 주위적으로 분양계약해제와 분양대금 반환을 청구하고, 예비적으로 하자보수비와 손해배상을 청구하는 구조를 검토하는 경우가 많습니다. 계약해제가 받아들여지지 않더라도 손해배상으로 실질적인 회복을 도모하기 위해서입니다.</p>
   <p>중요한 것은 처음부터 하자 항목을 넓고 정확하게 정리하는 것입니다. 소송 중 감정 절차에서 누락된 하자는 나중에 반영하기 어려울 수 있으므로, 현장조사 단계에서 건축적 검토와 법률적 검토를 함께 해야 합니다.</p>
   <figure>
-    <img src="/seo/articles/commercial-defects-cancellation-damages/image-03.png" width="459" height="383" loading="lazy" alt="상가 하자 감정 관련 참고 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/commercial-defects-cancellation-damages/image-01.webp" width="800" height="800" loading="lazy" alt="미시공, 오시공, 부실시공 하자 관련 법률칼럼 이미지 1" style="width:100%;height:auto;" />
     <figcaption>하자 항목 정리와 감정 준비는 손해배상 범위 산정에 직접 영향을 줍니다.</figcaption>
   </figure>
   <figure>
-    <img src="/seo/articles/commercial-defects-cancellation-damages/image-04.png" width="966" height="966" loading="lazy" alt="집합건물 하자로 인한 분양계약해제 기준 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/commercial-defects-cancellation-damages/image-02.webp" width="800" height="800" loading="lazy" alt="미시공, 오시공, 부실시공 하자 관련 법률칼럼 이미지 2" style="width:100%;height:auto;" />
     <figcaption>계약해제와 손해배상을 함께 설계하면 주된 청구가 받아들여지지 않는 경우에도 회복 가능성을 남길 수 있습니다.</figcaption>
   </figure>
 </section>

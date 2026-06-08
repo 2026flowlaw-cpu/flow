@@ -1,8 +1,6 @@
 import React from 'react';
 import fs from 'fs';
 import path from 'path';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './page.module.css';
@@ -30,8 +28,6 @@ export default async function LawyersPage() {
 
   return (
     <div className={styles.page}>
-      <Header />
-      
       <main className={styles.main}>
         {/* Title Section */}
         <section className={styles.titleSection}>
@@ -45,16 +41,16 @@ export default async function LawyersPage() {
           <div className="container">
             <div className={styles.lawyerGrid}>
               {lawyers.map((lawyer: any) => (
-                <Link 
-                  key={lawyer.id} 
-                  href={`/lawyers/profiles/${lawyer.slug}`} 
+                <Link
+                  key={lawyer.id}
+                  href={`/lawyers/profiles/${lawyer.slug}`}
                   className={styles.lawyerCard}
                 >
                   <div className={styles.imageWrapper}>
-                    <Image 
-                      src={lawyer.image || '/images/lawyer1.png'} 
-                      alt={lawyer.name} 
-                      fill 
+                    <Image
+                      src={lawyer.image || '/images/lawyer1.webp'}
+                      alt={lawyer.name}
+                      fill
                       style={{ objectFit: 'cover' }}
                     />
                   </div>
@@ -105,7 +101,6 @@ export default async function LawyersPage() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

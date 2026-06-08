@@ -65,10 +65,10 @@ export default function AdminSuccessStoriesListingPage() {
                   <tr key={story.id}>
                     <td>
                       <div className={styles.thumbnail}>
-                        <Image 
-                          src={story.image || '/images/hero_bg.png'} 
-                          alt={story.title} 
-                          fill 
+                        <Image
+                          src={story.image || '/images/hero_bg.webp'}
+                          alt={story.title}
+                          fill
                           style={{ objectFit: 'cover' }}
                         />
                       </div>
@@ -79,10 +79,10 @@ export default function AdminSuccessStoriesListingPage() {
                     <td><span className={styles.badge}>{story.badge}</span></td>
                     <td>
                       <div className={styles.rowActions}>
-                        <a 
-                          href={`/success-stories/${story.id}`} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
+                        <a
+                          href={`/success-stories/${story.id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className={styles.viewBtn}
                         >
                           보기
@@ -90,8 +90,8 @@ export default function AdminSuccessStoriesListingPage() {
                         <Link href={`/admin/success-stories/edit/${story.id}`} className={styles.editBtn}>
                           수정
                         </Link>
-                        <button 
-                          onClick={() => handleDelete(story.id, story.title)} 
+                        <button
+                          onClick={() => handleDelete(story.id, story.title)}
                           className={styles.deleteBtn}
                         >
                           삭제

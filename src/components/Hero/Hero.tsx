@@ -12,10 +12,10 @@ const Hero = () => {
         loop
         playsInline
         preload="metadata"
-        poster="/images/hero_bg.png"
+        poster="/images/hero_bg.webp"
         aria-hidden="true"
       >
-        <source src="/video/hero.mp4" type="video/mp4" media="(min-width: 769px)" />
+        <source src="/video/hero.mp4" type="video/mp4" />
       </video>
       <div className={styles.overlay}></div>
       <div className={`${styles.container} container`}>

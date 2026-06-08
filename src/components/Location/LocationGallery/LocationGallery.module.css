@@ -30,9 +30,9 @@
   transform: scale(1.05);
 }
 
-.img1 { background-image: url('/office_hallway_premium_1776064223861.png'); }
-.img2 { background-image: url('/office_interior_gallery_1776063960533.png'); background-position: left; }
-.img3 { background-image: url('/office_interior_gallery_1776063960533.png'); background-position: right; }
+.img1 { background-image: url('/office_hallway_premium_1776064223861.webp'); }
+.img2 { background-image: url('/office_interior_gallery_1776063960533.webp'); background-position: left; }
+.img3 { background-image: url('/office_interior_gallery_1776063960533.webp'); background-position: right; }
 
 @media (max-width: 768px) {
   .grid {

@@ -60,10 +60,10 @@ export default function AdminPressListingPage() {
                   <tr key={item.id}>
                     <td>
                       <div className={styles.thumbnail}>
-                        <Image 
-                          src={item.image_url || '/images/hero_bg.png'} 
-                          alt={item.title} 
-                          fill 
+                        <Image
+                          src={item.image_url || '/images/hero_bg.webp'}
+                          alt={item.title}
+                          fill
                           style={{ objectFit: 'cover' }}
                         />
                       </div>
@@ -73,9 +73,9 @@ export default function AdminPressListingPage() {
                     <td>{item.publish_date}</td>
                     <td>
                       <div className={styles.rowActions}>
-                        <Link 
-                          href={`/news/press/${item.id}`} 
-                          target="_blank" 
+                        <Link
+                          href={`/news/press/${item.id}`}
+                          target="_blank"
                           className={styles.viewBtn}
                         >
                           기사보기
@@ -83,8 +83,8 @@ export default function AdminPressListingPage() {
                         <Link href={`/admin/press-releases/edit/${item.id}`} className={styles.editBtn}>
                           수정
                         </Link>
-                        <button 
-                          onClick={() => handleDelete(item.id, item.title)} 
+                        <button
+                          onClick={() => handleDelete(item.id, item.title)}
                           className={styles.deleteBtn}
                         >
                           삭제

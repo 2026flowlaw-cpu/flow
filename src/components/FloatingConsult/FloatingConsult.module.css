@@ -27,13 +27,13 @@
 .icon {
   width: 44px;
   height: 44px;
-  background: #C5A059;
+  background: #0A1B39;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
+  box-shadow: 0 4px 10px rgba(10, 27, 57, 0.18);
 }
 
 .text {
@@ -44,12 +44,12 @@
 
 .button:hover {
   transform: scale(1.05) translateX(-5px);
-  border-color: #C5A059;
+  border-color: rgba(10, 27, 57, 0.18);
   box-shadow: 0 15px 40px rgba(10, 27, 57, 0.2);
 }
 
 .button:hover .icon {
-  background: #0A1B39;
+  background: #162C52;
   transform: rotate(15deg);
 }
 

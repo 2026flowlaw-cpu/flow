@@ -9,20 +9,16 @@ category: "분양계약해제"
 author_name: "대표변호사"
 keywords: "상가 분양계약해제, 중요사항 미고지, 분양계약 취소, 분양대금 반환, 바닥 단차, 낮은 층고, 내부 기둥, 상가분양 변호사"
 images:
-  - src: "/seo/articles/commercial-unit-nondisclosure/image-01.png"
-    alt: "상가 분양계약 중요사항 미고지 대표 이미지"
-  - src: "/seo/articles/commercial-unit-nondisclosure/image-02.png"
-    alt: "고지의무와 신의칙상 설명의무 안내 이미지"
-  - src: "/seo/articles/commercial-unit-nondisclosure/image-03.jpg"
-    alt: "상가 내부 구조와 시공 상태 확인 사진 1"
-  - src: "/seo/articles/commercial-unit-nondisclosure/image-04.jpg"
-    alt: "상가 내부 구조와 시공 상태 확인 사진 2"
-  - src: "/seo/articles/commercial-unit-nondisclosure/image-05.jpg"
-    alt: "상가 현장 구조 확인 사진"
-  - src: "/seo/articles/commercial-unit-nondisclosure/image-06.png"
-    alt: "분양계약해제 절차 안내 이미지"
-  - src: "/seo/articles/commercial-unit-nondisclosure/image-07.png"
-    alt: "계약해제 승소 사례 이미지"
+  - src: "/seo/articles/commercial-unit-nondisclosure-cancellation/image-01.webp"
+    alt: "거래 중요사항 미고지 관련 법률칼럼 이미지 1"
+  - src: "/seo/articles/commercial-unit-nondisclosure-cancellation/image-02.webp"
+    alt: "거래 중요사항 미고지 관련 법률칼럼 이미지 2"
+  - src: "/seo/articles/commercial-unit-nondisclosure-cancellation/image-03.webp"
+    alt: "거래 중요사항 미고지 관련 법률칼럼 이미지 3"
+  - src: "/seo/articles/commercial-unit-nondisclosure-cancellation/image-04.webp"
+    alt: "거래 중요사항 미고지 관련 법률칼럼 이미지 4"
+  - src: "/seo/articles/commercial-unit-nondisclosure-cancellation/image-05.webp"
+    alt: "거래 중요사항 미고지 관련 법률칼럼 이미지 5"
 status: "draft"
 created_at: "2026-05-29"
 ---
@@ -50,7 +46,7 @@ created_at: "2026-05-29"
   <p><strong>상가 분양계약은 도면과 홍보자료만 보고 결정되는 경우가 많습니다.</strong> 그런데 막상 현장을 확인했더니 바닥이 외부 지면보다 낮거나, 내부에 기둥이 있어 시야와 동선이 막히거나, 예상보다 층고가 낮아 영업 활용도가 떨어지는 경우가 있습니다. 이런 사정은 단순한 불만이 아니라 계약 체결 여부를 좌우할 수 있는 핵심 정보가 될 수 있습니다.</p>
   <p>특히 1층 상가는 외부 노출, 접근성, 출입 편의성, 내부 시야가 분양가와 영업성에 직접 영향을 줍니다. 따라서 분양자가 이러한 구조적 제약을 알고도 충분히 설명하지 않았다면, 수분양자는 <a href="/practice/resale-cancellation">분양계약해제 또는 계약취소</a>와 분양대금 반환 가능성을 검토해야 합니다.</p>
   <figure>
-    <img src="/seo/articles/commercial-unit-nondisclosure/image-01.png" width="966" height="966" loading="eager" alt="상가 분양계약 중요사항 미고지 대표 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/commercial-unit-nondisclosure-cancellation/image-01.webp" width="800" height="800" loading="eager" alt="거래 중요사항 미고지 관련 법률칼럼 이미지 1" style="width:100%;height:auto;" />
     <figcaption>상가 분양계약에서 단차, 층고, 내부 기둥처럼 영업성과 사용가치에 영향을 주는 요소는 계약 전 고지 여부가 중요합니다.</figcaption>
   </figure>
 </section>
@@ -76,11 +72,11 @@ created_at: "2026-05-29"
     <li>분양자료나 상담 과정에서 위와 같은 사정이 명확히 표시되지 않은 경우</li>
   </ul>
   <figure>
-    <img src="/seo/articles/commercial-unit-nondisclosure/image-03.jpg" width="966" height="724" loading="lazy" alt="상가 내부 구조와 시공 상태 확인 사진 1" style="width:100%;height:auto;" />
+    <img src="/seo/articles/commercial-unit-nondisclosure-cancellation/image-02.webp" width="800" height="800" loading="lazy" alt="거래 중요사항 미고지 관련 법률칼럼 이미지 2" style="width:100%;height:auto;" />
     <figcaption>현장 사진은 계약 당시 설명된 구조와 실제 시공 상태의 차이를 보여주는 핵심 자료가 될 수 있습니다.</figcaption>
   </figure>
   <figure>
-    <img src="/seo/articles/commercial-unit-nondisclosure/image-04.jpg" width="966" height="724" loading="lazy" alt="상가 내부 구조와 시공 상태 확인 사진 2" style="width:100%;height:auto;" />
+    <img src="/seo/articles/commercial-unit-nondisclosure-cancellation/image-03.webp" width="400" height="267" loading="lazy" alt="거래 중요사항 미고지 관련 법률칼럼 이미지 3" style="width:100%;height:auto;" />
     <figcaption>단차, 기둥, 층고 제한처럼 사용가치에 영향을 주는 요소는 사진과 도면을 함께 비교해야 합니다.</figcaption>
   </figure>
 </section>
@@ -90,7 +86,7 @@ created_at: "2026-05-29"
   <p>계약 중요사항 미고지 사건에서는 단순히 “마음에 들지 않는다”는 주장만으로는 부족합니다. 보통 법원은 해당 정보가 계약 체결 여부와 가격 결정에 얼마나 영향을 미쳤는지, 분양자가 이를 설명할 수 있었는지, 수분양자가 일반적인 확인만으로 알 수 있었는지 등을 함께 봅니다.</p>
   <p>민법 제110조는 사기나 강박에 의한 의사표시의 취소를 규정하고 있습니다. 또한 판례상 거래관계에서 신의칙상 알려야 할 중요한 사정을 알리지 않은 경우, 그 불고지가 기망행위로 평가될 수 있습니다. 따라서 분양자가 구조적 제약을 알면서도 수분양자에게 충분히 알리지 않았다는 점을 입증하는 것이 핵심입니다.</p>
   <figure>
-    <img src="/seo/articles/commercial-unit-nondisclosure/image-02.png" width="966" height="966" loading="lazy" alt="고지의무와 신의칙상 설명의무 안내 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/commercial-unit-nondisclosure-cancellation/image-04.webp" width="395" height="395" loading="lazy" alt="거래 중요사항 미고지 관련 법률칼럼 이미지 4" style="width:100%;height:auto;" />
     <figcaption>고지의무 위반은 단순한 설명 부족이 아니라, 계약 체결 의사결정에 영향을 준 중요사항인지가 핵심입니다.</figcaption>
   </figure>
 </section>
@@ -114,11 +110,11 @@ created_at: "2026-05-29"
   <p>둘째, 분양자가 고지하지 않은 사실과 수분양자가 착오에 빠진 과정을 연결해야 합니다. “몰랐다”는 말만으로는 부족하고, 분양자료에 표시되지 않았거나 상담 과정에서 설명되지 않았다는 점을 객관자료로 보여줘야 합니다.</p>
   <p>셋째, 내용증명 발송 시점과 문구가 중요합니다. 계약취소, 해제, 손해배상 중 어떤 법률효과를 주장할지 사건 초기부터 정리하지 않으면 이후 소송에서 주장이 흔들릴 수 있습니다.</p>
   <figure>
-    <img src="/seo/articles/commercial-unit-nondisclosure/image-06.png" width="966" height="966" loading="lazy" alt="분양계약해제 절차 안내 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/commercial-unit-nondisclosure-cancellation/image-05.webp" width="800" height="800" loading="lazy" alt="거래 중요사항 미고지 관련 법률칼럼 이미지 5" style="width:100%;height:auto;" />
     <figcaption>분양계약해제 사건은 계약서 검토, 현장 확인, 내용증명, 증거 정리 순서가 중요합니다.</figcaption>
   </figure>
   <figure>
-    <img src="/seo/articles/commercial-unit-nondisclosure/image-07.png" width="966" height="966" loading="lazy" alt="계약해제 승소 사례 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/commercial-unit-nondisclosure-cancellation/image-01.webp" width="800" height="800" loading="lazy" alt="거래 중요사항 미고지 관련 법률칼럼 이미지 1" style="width:100%;height:auto;" />
     <figcaption>계약 중요사항 미고지 사건은 실제 판결과 유사 쟁점을 비교해 청구 구조를 설계해야 합니다.</figcaption>
   </figure>
 </section>

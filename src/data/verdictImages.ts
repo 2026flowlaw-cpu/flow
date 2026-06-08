@@ -1,6 +1,6 @@
 const range = (group: string, count: number) =>
   Array.from({ length: count }, (_, index) => (
-    `/verdicts/${group}/${group}-${String(index + 1).padStart(2, '0')}.png`
+    `/verdicts/${group}/${group}-${String(index + 1).padStart(2, '0')}.webp`
   ));
 
 const stalking = range('stalking', 6);

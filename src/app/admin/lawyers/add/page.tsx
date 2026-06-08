@@ -42,7 +42,7 @@ export default function AdminLawyerAddPage() {
         experience: formData.experience.split('\n').filter(s => s.trim()),
         history: formData.history.split('\n').filter(s => s.trim()),
         activities: formData.activities.split('\n').filter(s => s.trim()),
-        image: imagePreview || '/images/lawyer1.png' // Default image
+        image: imagePreview || '/images/lawyer1.webp' // Default image
       };
 
       const res = await fetch('/api/lawyers', {

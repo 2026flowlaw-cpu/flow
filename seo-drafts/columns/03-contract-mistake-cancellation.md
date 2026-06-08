@@ -9,26 +9,16 @@ category: "분양계약해제"
 author_name: "대표변호사"
 keywords: "동기의 착오, 착오취소, 민법 제109조, 부동산 매매계약 취소, 계약취소, 기망 취소, 중요부분의 착오, 중대한 과실, 매수 동기, 계약금 반환"
 images:
-  - src: "/seo/articles/contract-mistake-cancellation/image-01.png"
-    alt: "민법 제109조 동기의 착오 계약취소 대표 이미지"
-  - src: "/seo/articles/contract-mistake-cancellation/image-02.png"
-    alt: "중요부분의 착오 판단 기준 이미지"
-  - src: "/seo/articles/contract-mistake-cancellation/image-03.png"
-    alt: "부동산 전문 변호사 상담 이미지"
-  - src: "/seo/articles/contract-mistake-cancellation/image-04.jpg"
-    alt: "부동산 계약 법률상담 현장 이미지 1"
-  - src: "/seo/articles/contract-mistake-cancellation/image-05.jpg"
-    alt: "부동산 계약 법률상담 현장 이미지 2"
-  - src: "/seo/articles/contract-mistake-cancellation/image-06.jpg"
-    alt: "부동산 계약 법률상담 현장 이미지 3"
-  - src: "/seo/articles/contract-mistake-cancellation/image-07.png"
-    alt: "동기의 착오 계약취소 요건 이미지"
-  - src: "/seo/articles/contract-mistake-cancellation/image-08.png"
-    alt: "부동산 계약해지 변호사 안내 이미지"
-  - src: "/seo/articles/contract-mistake-cancellation/image-09.png"
-    alt: "착오와 중대한 과실 판단 이미지"
-  - src: "/seo/articles/contract-mistake-cancellation/image-10.png"
-    alt: "상대방에 의해 유발된 착오 판단 이미지"
+  - src: "/seo/articles/contract-mistake-cancellation/image-01.webp"
+    alt: "착오· 기망에 의한 계약취소 관련 법률칼럼 이미지 1"
+  - src: "/seo/articles/contract-mistake-cancellation/image-02.webp"
+    alt: "착오· 기망에 의한 계약취소 관련 법률칼럼 이미지 2"
+  - src: "/seo/articles/contract-mistake-cancellation/image-03.webp"
+    alt: "착오· 기망에 의한 계약취소 관련 법률칼럼 이미지 3"
+  - src: "/seo/articles/contract-mistake-cancellation/image-04.webp"
+    alt: "착오· 기망에 의한 계약취소 관련 법률칼럼 이미지 4"
+  - src: "/seo/articles/contract-mistake-cancellation/image-05.webp"
+    alt: "착오· 기망에 의한 계약취소 관련 법률칼럼 이미지 5"
 status: "draft"
 created_at: "2026-05-29"
 ---
@@ -59,7 +49,7 @@ created_at: "2026-05-29"
     <p><strong>핵심 쟁점:</strong> 매수 동기가 상대방에게 표시되고 계약의 전제가 되었다면, 그 동기의 착오도 계약취소 사유가 될 수 있습니다.</p>
   </blockquote>
   <figure>
-    <img src="/seo/articles/contract-mistake-cancellation/image-01.png" width="966" height="966" loading="eager" alt="민법 제109조 동기의 착오 계약취소 대표 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/contract-mistake-cancellation/image-01.webp" width="800" height="800" loading="eager" alt="착오· 기망에 의한 계약취소 관련 법률칼럼 이미지 1" style="width:100%;height:auto;" />
     <figcaption>동기의 착오로 계약취소를 주장하려면 매수 목적, 상대방 고지, 계약 체결 경위가 함께 정리되어야 합니다.</figcaption>
   </figure>
 </section>
@@ -80,7 +70,7 @@ created_at: "2026-05-29"
   <p>민법 제109조는 의사표시의 중요부분에 착오가 있는 경우 취소할 수 있다고 정합니다. 다만 그 착오가 표의자의 중대한 과실로 인한 경우에는 원칙적으로 취소할 수 없습니다.</p>
   <p>따라서 부동산 계약에서 착오취소를 주장하려면 “계약 내용의 중요한 부분을 잘못 알았다”는 점과 “조금만 주의했으면 알 수 있었던 사안이 아니었다”는 점을 함께 설명해야 합니다.</p>
   <figure>
-    <img src="/seo/articles/contract-mistake-cancellation/image-02.png" width="966" height="966" loading="lazy" alt="중요부분의 착오 판단 기준 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/contract-mistake-cancellation/image-02.webp" width="800" height="800" loading="lazy" alt="착오· 기망에 의한 계약취소 관련 법률칼럼 이미지 2" style="width:100%;height:auto;" />
     <figcaption>착오가 계약의 중요부분에 관한 것인지가 첫 번째 관문입니다.</figcaption>
   </figure>
 </section>
@@ -93,7 +83,7 @@ created_at: "2026-05-29"
     <p>매수 목적이 계약서나 특약에 적혀 있지 않더라도, 계약 전 협의 과정에서 반복적으로 언급되고 상대방도 이를 전제로 설명했다면 계약 내용으로 편입되었다고 주장할 여지가 있습니다.</p>
   </blockquote>
   <figure>
-    <img src="/seo/articles/contract-mistake-cancellation/image-07.png" width="966" height="966" loading="lazy" alt="동기의 착오 계약취소 요건 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/contract-mistake-cancellation/image-03.webp" width="800" height="800" loading="lazy" alt="착오· 기망에 의한 계약취소 관련 법률칼럼 이미지 3" style="width:100%;height:auto;" />
     <figcaption>동기의 착오가 인정되려면 목적의 표시와 계약 내용 편입 여부가 중요합니다.</figcaption>
   </figure>
 </section>
@@ -106,7 +96,7 @@ created_at: "2026-05-29"
     <p><strong>판단의 방향:</strong> 매수 목적이 상대방에게 표시되어 계약 내용으로 들어왔고, 그 목적이 불가능하다는 사실을 알았다면 계약하지 않았을 사정이라면 중요부분의 착오가 될 수 있습니다.</p>
   </blockquote>
   <figure>
-    <img src="/seo/articles/contract-mistake-cancellation/image-08.png" width="966" height="966" loading="lazy" alt="부동산 계약해지 변호사 안내 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/contract-mistake-cancellation/image-04.webp" width="400" height="300" loading="lazy" alt="착오· 기망에 의한 계약취소 관련 법률칼럼 이미지 4" style="width:100%;height:auto;" />
     <figcaption>계약취소 가능성은 계약서 문구뿐 아니라 계약 체결 전후의 설명과 대화까지 함께 보아야 합니다.</figcaption>
   </figure>
 </section>
@@ -116,7 +106,7 @@ created_at: "2026-05-29"
   <p>착오가 중요부분에 관한 것이라고 해도 매수인에게 중대한 과실이 있으면 취소가 제한될 수 있습니다. 부동산 계약에서는 토지이용계획확인원, 건축 가능 여부, 용도지역, 인허가 제한, 현황 조사 등 기본 확인을 했는지가 문제됩니다.</p>
   <p>다만 상대방의 설명이 착오를 유발했거나, 일반인이 통상 확인하기 어려운 사정이 있었거나, 중개인과 매도인이 특정 용도 가능성을 적극적으로 설명했다면 중대한 과실 판단은 달라질 수 있습니다.</p>
   <figure>
-    <img src="/seo/articles/contract-mistake-cancellation/image-09.png" width="966" height="966" loading="lazy" alt="착오와 중대한 과실 판단 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/contract-mistake-cancellation/image-05.webp" width="400" height="300" loading="lazy" alt="착오· 기망에 의한 계약취소 관련 법률칼럼 이미지 5" style="width:100%;height:auto;" />
     <figcaption>착오취소 사건에서는 매수인이 어떤 자료를 확인했고 어떤 설명을 들었는지까지 함께 검토합니다.</figcaption>
   </figure>
 </section>
@@ -130,7 +120,7 @@ created_at: "2026-05-29"
     <li><strong>손해배상:</strong> 계약취소와 별개로 상대방의 위법한 설명, 고지의무 위반, 불법행위가 있었는지 검토합니다.</li>
   </ul>
   <figure>
-    <img src="/seo/articles/contract-mistake-cancellation/image-10.png" width="966" height="966" loading="lazy" alt="상대방에 의해 유발된 착오 판단 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/contract-mistake-cancellation/image-01.webp" width="800" height="800" loading="lazy" alt="착오· 기망에 의한 계약취소 관련 법률칼럼 이미지 1" style="width:100%;height:auto;" />
     <figcaption>상대방 설명으로 착오가 유발된 경우에는 착오와 기망의 법리를 함께 검토해야 합니다.</figcaption>
   </figure>
 </section>
@@ -146,7 +136,7 @@ created_at: "2026-05-29"
     <li><strong>대금 지급 자료:</strong> 계약금, 중도금, 잔금, 반환 요구 내역을 정리합니다.</li>
   </ol>
   <figure>
-    <img src="/seo/articles/contract-mistake-cancellation/image-03.png" width="966" height="966" loading="lazy" alt="부동산 전문 변호사 상담 이미지" style="width:100%;height:auto;" />
+    <img src="/seo/articles/contract-mistake-cancellation/image-02.webp" width="800" height="800" loading="lazy" alt="착오· 기망에 의한 계약취소 관련 법률칼럼 이미지 2" style="width:100%;height:auto;" />
     <figcaption>계약 전 설명과 자료를 시간순으로 정리하면 착오취소 가능성을 더 정확히 판단할 수 있습니다.</figcaption>
   </figure>
 </section>

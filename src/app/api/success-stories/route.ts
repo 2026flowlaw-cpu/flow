@@ -32,7 +32,7 @@ export async function GET() {
 
     const formattedDbStories = (dbStories || []).map((story: any) => ({
       ...story,
-      image: story.image_url || '/images/success_apartment.png',
+      image: story.image_url || '/images/success_apartment.webp',
       lawyer: { name: story.lawyer_name }
     }));
 

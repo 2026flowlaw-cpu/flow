@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
 import InquiryForm from '@/components/Location/InquiryForm/InquiryForm';
 import Image from 'next/image';
 import fs from 'fs';
@@ -30,8 +28,6 @@ export default async function LawyerDetailPage({ params }: PageProps) {
 
   return (
     <div className={styles.page}>
-      <Header />
-      
       <main className={styles.main}>
         {/* Top Profile Section */}
         <section className={styles.profileSection}>
@@ -113,7 +109,6 @@ export default async function LawyerDetailPage({ params }: PageProps) {
         <InquiryForm />
       </main>
 
-      <Footer />
     </div>
   );
 }

@@ -1,8 +1,6 @@
 "use client";
 
 import React from 'react';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
 import Image from 'next/image';
 import useSWR from 'swr';
 import styles from './page.module.css';
@@ -15,16 +13,14 @@ export default function PublicPressPage() {
 
   return (
     <div className={styles.page}>
-      <Header />
-      
       <main>
         {/* Banner */}
         <section className={styles.hero}>
           <div className={styles.heroImg}>
-            <Image 
-              src="/images/philosophy_bg.png" 
-              alt="Press Banner" 
-              fill 
+            <Image
+              src="/images/philosophy_bg.webp"
+              alt="Press Banner"
+              fill
               style={{ objectFit: 'cover' }}
               priority
             />
@@ -42,14 +38,14 @@ export default function PublicPressPage() {
           ) : articles && articles.length > 0 ? (
             <div className={styles.grid}>
               {articles.map((item: any) => (
-                <a 
-                  key={item.id} 
-                  href={`/news/press/${item.id}`} 
+                <a
+                  key={item.id}
+                  href={`/news/press/${item.id}`}
                   className={styles.card}
                 >
                   <div className={styles.imageBox}>
-                    <Image 
-                      src={item.image_url || '/images/hero_bg.png'} 
+                    <Image
+                      src={item.image_url || '/images/hero_bg.webp'}
                       alt={item.title}
                       fill
                       style={{ objectFit: 'cover' }}
@@ -70,7 +66,6 @@ export default function PublicPressPage() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

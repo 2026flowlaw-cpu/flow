@@ -9,7 +9,7 @@
 
 /* Hero Section */
 .heroSection {
-  background: linear-gradient(rgba(10, 27, 57, 0.9), rgba(10, 27, 57, 0.95)), url('/images/hero_bg.png');
+  background: linear-gradient(rgba(10, 27, 57, 0.9), rgba(10, 27, 57, 0.95)), url('/images/hero_bg.webp');
   background-size: cover;
   background-position: center;
   padding: 180px 20px 120px;

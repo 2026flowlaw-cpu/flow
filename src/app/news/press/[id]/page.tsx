@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
 import { supabase } from '@/lib/supabase';
 import { Metadata } from 'next';
 import styles from './page.module.css';

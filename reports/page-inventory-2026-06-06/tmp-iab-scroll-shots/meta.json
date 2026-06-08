@@ -1,0 +1,64 @@
+{
+  "verify": {
+    "firstHeading": "공개 페이지 34개",
+    "h": 8294,
+    "hasMemberDetail": false,
+    "imagesBroken": 0,
+    "innerH": 1255,
+    "innerW": 1326,
+    "maxY": 7039,
+    "summary": [
+      "53\n보고서 포함 화면",
+      "34\n공개 페이지",
+      "19\n관리자 페이지",
+      "17\n업무분야 항목"
+    ],
+    "w": 1311
+  },
+  "dims": {
+    "w": 1311,
+    "h": 8294,
+    "innerW": 1326,
+    "innerH": 1255,
+    "maxY": 7039
+  },
+  "positions": [
+    0,
+    1255,
+    2510,
+    3765,
+    5020,
+    6275,
+    7039
+  ],
+  "shots": [
+    {
+      "file": "/Users/sachaone/Desktop/법무법인 일신/reports/page-inventory-2026-06-06/tmp-iab-scroll-shots/00-392.png",
+      "y": 392
+    },
+    {
+      "file": "/Users/sachaone/Desktop/법무법인 일신/reports/page-inventory-2026-06-06/tmp-iab-scroll-shots/01-1696.png",
+      "y": 1696
+    },
+    {
+      "file": "/Users/sachaone/Desktop/법무법인 일신/reports/page-inventory-2026-06-06/tmp-iab-scroll-shots/02-3787.png",
+      "y": 3787
+    },
+    {
+      "file": "/Users/sachaone/Desktop/법무법인 일신/reports/page-inventory-2026-06-06/tmp-iab-scroll-shots/03-4791.png",
+      "y": 4791
+    },
+    {
+      "file": "/Users/sachaone/Desktop/법무법인 일신/reports/page-inventory-2026-06-06/tmp-iab-scroll-shots/04-7039.png",
+      "y": 7039
+    },
+    {
+      "file": "/Users/sachaone/Desktop/법무법인 일신/reports/page-inventory-2026-06-06/tmp-iab-scroll-shots/05-7039.png",
+      "y": 7039
+    },
+    {
+      "file": "/Users/sachaone/Desktop/법무법인 일신/reports/page-inventory-2026-06-06/tmp-iab-scroll-shots/06-7001.png",
+      "y": 7001
+    }
+  ]
+}

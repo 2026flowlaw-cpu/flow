@@ -46,8 +46,8 @@ const LawyerCarousel = ({ lawyers }: LawyerCarouselProps) => {
 
   return (
     <div className={styles.carouselContainer}>
-      <button 
-        className={`${styles.navBtn} ${styles.prevBtn}`} 
+      <button
+        className={`${styles.navBtn} ${styles.prevBtn}`}
         onClick={() => scroll('left')}
         style={{ display: showLeftArrow ? 'flex' : 'none' }}
         aria-label="Previous"
@@ -58,14 +58,14 @@ const LawyerCarousel = ({ lawyers }: LawyerCarouselProps) => {
       <div className={styles.scrollArea} ref={scrollRef}>
         {lawyers.map((lawyer, index) => (
           <div key={lawyer.id || index} className={styles.cardWrapper}>
-            <Link 
+            <Link
               href={`/lawyers/profiles/${lawyer.slug}`}
               className={styles.card}
             >
               <div className={styles.imageWrapper}>
-                <Image 
-                  src={lawyer.image || '/images/lawyer1.png'} 
-                  alt={lawyer.name} 
+                <Image
+                  src={lawyer.image || '/images/lawyer1.webp'}
+                  alt={lawyer.name}
                   fill
                   style={{ objectFit: 'cover' }}
                   className={styles.image}
@@ -84,8 +84,8 @@ const LawyerCarousel = ({ lawyers }: LawyerCarouselProps) => {
         ))}
       </div>
 
-      <button 
-        className={`${styles.navBtn} ${styles.nextBtn}`} 
+      <button
+        className={`${styles.navBtn} ${styles.nextBtn}`}
         onClick={() => scroll('right')}
         style={{ display: showRightArrow ? 'flex' : 'none' }}
         aria-label="Next"

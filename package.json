@@ -5,6 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "optimize:images": "node scripts/generate-webp.mjs",
+    "columns:extract-sources": "python3 scripts/extract-column-sources.py",
+    "columns:scrape-sources": "node scripts/scrape-column-sources.mjs",
+    "columns:generate-drafts": "node scripts/generate-column-drafts.mjs",
+    "columns:import-source-images": "node scripts/import-source-images.mjs",
+    "columns:audit-seo": "node scripts/audit-column-seo.mjs",
+    "columns:seo-batch": "npm run columns:extract-sources && npm run columns:scrape-sources && npm run columns:generate-drafts && npm run columns:audit-seo",
     "start": "next start",
     "lint": "eslint"
   },

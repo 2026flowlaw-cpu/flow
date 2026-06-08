@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Header from '@/components/Header/Header';
-import RealFooter from '@/components/Footer/Footer';
 import { supabase } from '@/lib/supabase';
 import styles from './page.module.css';
 
@@ -39,7 +37,7 @@ export default function SuccessStoriesPage() {
 
         const formattedDbStories = (dbStories || []).map((story: any) => ({
           ...story,
-          image: story.image_url || '/images/success_apartment.png',
+          image: story.image_url || '/images/success_apartment.webp',
           displayId: `Case #DB-${story.id}`,
           lawyer: { name: story.lawyer_name }
         }));
@@ -95,8 +93,6 @@ export default function SuccessStoriesPage() {
 
   return (
     <div className={styles.page}>
-      <Header />
-      
       <main>
         {/* Hero Section */}
         <section className={styles.hero}>
@@ -117,10 +113,10 @@ export default function SuccessStoriesPage() {
             </p>
           </div>
           <div className={styles.heroBg}></div>
-          <Image 
-            src="/images/philosophy_bg.png" 
-            alt="Hero Background" 
-            fill 
+          <Image
+            src="/images/philosophy_bg.webp"
+            alt="Hero Background"
+            fill
             className={styles.heroImg}
             priority
           />
@@ -131,8 +127,8 @@ export default function SuccessStoriesPage() {
           <div className={styles.filterContainer}>
             <div className={styles.filterTabs}>
               {tabCategories.map((cat) => (
-                <button 
-                  key={cat} 
+                <button
+                  key={cat}
                   onClick={() => setActiveCategory(cat)}
                   className={`${styles.filterTab} ${cat === activeCategory ? styles.activeTab : ''}`}
                 >
@@ -160,7 +156,7 @@ export default function SuccessStoriesPage() {
                     </div>
                     <h3 className={styles.cardTitle}>{item.title}</h3>
                     <p className={styles.cardDesc}>{(item.description || '').substring(0, 150)}...</p>
-                    
+
                     <div className={styles.lawyerProfile}>
                       <div className={styles.lawyerInfo}>
                         <div className={styles.lawyerAvatar}>{item.lawyer?.name?.[0] || '일'}</div>
@@ -197,7 +193,6 @@ export default function SuccessStoriesPage() {
         </section>
       </main>
 
-      <RealFooter />
     </div>
   );
 }

@@ -1,0 +1,104 @@
+[
+  {
+    "no": 1,
+    "section": "민사·부동산·건설",
+    "name": "분양계약해제센터",
+    "image": "images/10-분양계약해제센터.png"
+  },
+  {
+    "no": 2,
+    "section": "민사·부동산·건설",
+    "name": "전세사기센터",
+    "image": "images/11-전세사기센터.png"
+  },
+  {
+    "no": 3,
+    "section": "민사·부동산·건설",
+    "name": "부동산분쟁센터",
+    "image": "images/12-부동산분쟁센터.png"
+  },
+  {
+    "no": 4,
+    "section": "민사·부동산·건설",
+    "name": "건설분쟁센터",
+    "image": "images/13-건설분쟁센터.png"
+  },
+  {
+    "no": 5,
+    "section": "민사·부동산·건설",
+    "name": "하자소송센터",
+    "image": "images/14-하자소송센터.png"
+  },
+  {
+    "no": 6,
+    "section": "민사·부동산·건설",
+    "name": "집단소송센터",
+    "image": "images/15-집단소송센터.png"
+  },
+  {
+    "no": 7,
+    "section": "민사·부동산·건설",
+    "name": "민사일반센터",
+    "image": "images/16-민사일반센터.png"
+  },
+  {
+    "no": 8,
+    "section": "민사·부동산·건설",
+    "name": "에듀법률센터",
+    "image": "images/17-에듀법률센터.png"
+  },
+  {
+    "no": 9,
+    "section": "형사 업무분야",
+    "name": "형사소송센터",
+    "image": "images/18-형사소송센터.png"
+  },
+  {
+    "no": 10,
+    "section": "형사 업무분야",
+    "name": "성범죄센터",
+    "image": "images/business-10-성범죄센터.png"
+  },
+  {
+    "no": 11,
+    "section": "형사 업무분야",
+    "name": "음주·교통센터",
+    "image": "images/business-11-음주-교통센터.png"
+  },
+  {
+    "no": 12,
+    "section": "형사 업무분야",
+    "name": "마약센터",
+    "image": "images/business-12-마약센터.png"
+  },
+  {
+    "no": 13,
+    "section": "형사 업무분야",
+    "name": "보이스피싱센터",
+    "image": "images/business-13-보이스피싱센터.png"
+  },
+  {
+    "no": 14,
+    "section": "형사 업무분야",
+    "name": "건설형사센터",
+    "image": "images/business-14-건설형사센터.png"
+  },
+  {
+    "no": 15,
+    "section": "형사 업무분야",
+    "name": "경제범죄센터",
+    "image": "images/business-15-경제범죄센터.png"
+  },
+  {
+    "no": 16,
+    "section": "형사 업무분야",
+    "name": "소년학폭센터",
+    "image": "images/business-16-소년학폭센터.png"
+  },
+  {
+    "no": 17,
+    "section": "형사 업무분야",
+    "name": "일반형사센터",
+    "image": "images/business-17-일반형사센터.png"
+  }
+]

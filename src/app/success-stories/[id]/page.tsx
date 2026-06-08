@@ -2,8 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
 import { supabase } from '@/lib/supabase';
 import { Metadata } from 'next';
 import styles from './page.module.css';
@@ -41,7 +39,7 @@ async function getCaseData(id: string) {
         id: `Case #${data.id}`,
         badge: data.badge || '승소',
         title: data.title,
-        image: data.image_url || '/images/success_apartment.png',
+        image: data.image_url || '/images/success_apartment.webp',
         category: data.category,
         lawyer_name: data.lawyer_name,
         custom_meta: data.custom_meta,
@@ -76,7 +74,7 @@ async function getCaseData(id: string) {
       id: 'Case No. 2023-가합-589212',
       badge: 'FULL WIN',
       title: '송도 OO아파트 전 세대 공용부분 하자보수 청구 승소',
-      image: '/images/success_apartment.png',
+      image: '/images/success_apartment.webp',
       overview: {
         text1: "본 사건의 의뢰인들은 인천 송도국제도시에 위치한 'OO아파트' 입주자대표회의로, 준공 후 3년 차에 접어들며 단지 내 지하주차장 균열, 외벽 누수, 그리고 공용부분 승강기 오작동 등 심각한 구조적 하자가 발생하여 시공사에 보수를 요청하였습니다.",
         text2: "그러나 시공사는 '관리 부실'을 이유로 면책을 주장하며 보수를 거부하였고, 입주민들은 생활의 안전을 위협받는 긴박한 상황에서 법무법인 플로우를 찾았습니다."

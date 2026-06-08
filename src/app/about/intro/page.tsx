@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '@/components/Header/Header';
 import PartnerCarousel from '@/components/PartnerCarousel/PartnerCarousel';
 import Image from 'next/image';
 import styles from './page.module.css';
@@ -11,10 +10,10 @@ export default function AboutIntroPage() {
         {/* Section 2: Sub-Hero */}
         <section className={styles.subHero}>
           <div className={styles.heroOverlay}></div>
-          <Image 
-            src="/images/subhero_intro.png" 
-            alt="About Intro Hero" 
-            fill 
+          <Image
+            src="/images/subhero_intro.webp"
+            alt="About Intro Hero"
+            fill
             style={{ objectFit: 'cover' }}
             priority
           />
@@ -41,11 +40,11 @@ export default function AboutIntroPage() {
                 <div className={styles.textBlock}>
                   <p>법무법인 플로우를 찾아주신 의뢰인 여러분, 안녕하십니까.</p>
                   <p>
-                    많은 분들이 건설 분쟁과 하자 소송이라는 예기치 못한 어려움 앞에서 막막해하십니다. 
+                    많은 분들이 건설 분쟁과 하자 소송이라는 예기치 못한 어려움 앞에서 막막해하십니다.
                     복잡한 도면과 공사 기록, 난해한 법리 지식이 얽혀 있는 건설 소송은 일반적인 법리만으로는 해결하기 어려운 분야입니다.
                   </p>
                   <p>
-                    저희 법무법인 플로우는 단순한 법률 자문을 넘어, 건설 현장의 실무 경험과 정교한 계산사 수행팀의 시너지를 통해 
+                    저희 법무법인 플로우는 단순한 법률 자문을 넘어, 건설 현장의 실무 경험과 정교한 계산사 수행팀의 시너지를 통해
                     의뢰인이 잃어버린 권리를 완벽하게 되찾아 드리는 것을 사명으로 삼고 있습니다.
                   </p>
                   <p>
@@ -114,10 +113,10 @@ export default function AboutIntroPage() {
         {/* Section 6: Reason */}
         <section className={styles.splitSection}>
           <div className={styles.splitImage}>
-            <Image 
-              src="/images/intro_reason.png" 
-              alt="Professional Office" 
-              fill 
+            <Image
+              src="/images/intro_reason.webp"
+              alt="Professional Office"
+              fill
               style={{ objectFit: 'cover' }}
             />
           </div>
@@ -127,12 +126,12 @@ export default function AboutIntroPage() {
               <div className={styles.textBlock}>
                 <p>우리는 단순히 법조문을 읽는 사람이 아닙니다.</p>
                 <p>
-                  누군가에게는 평생을 일구어 마련한 소중한 보금자리를 지키고, 
+                  누군가에게는 평생을 일구어 마련한 소중한 보금자리를 지키고,
                   또 누군가에게는 공정한 건설 문태를 정착시키기 위한 투쟁의 최전선에 서 있습니다.
                 </p>
                 <p>
-                  법무법인 플로우의 존재 이유는 명확합니다. 
-                  가장 힘든 순간에 가장 믿음직한 방패가 되어 드리는 것, 
+                  법무법인 플로우의 존재 이유는 명확합니다.
+                  가장 힘든 순간에 가장 믿음직한 방패가 되어 드리는 것,
                   그것이 우리가 존재하는 이유이자 유일한 가치입니다.
                 </p>
               </div>

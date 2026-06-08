@@ -225,25 +225,39 @@
   }
 }
 
-/* Dark Mode Main Page Review Variant */
 .mainSection {
-  background-color: #1e1e1e; /* Premium dark theme background */
-  padding: 120px 0 160px;
+  background:
+    linear-gradient(135deg, rgba(10, 27, 57, 0.98) 0%, rgba(13, 34, 73, 0.96) 100%),
+    var(--primary);
+  padding: 120px 0 130px;
   color: #ffffff;
   overflow: hidden;
+  position: relative;
+}
+
+.mainSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(197, 160, 89, 0.08), transparent 32%, transparent 68%, rgba(197, 160, 89, 0.06)),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 120px);
+  pointer-events: none;
 }
 
 .mainHeader {
+  position: relative;
+  z-index: 1;
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 64px;
 }
 
 .mainSubtitle {
-  font-size: 22px;
-  font-weight: 400500;
-  color: #e2e8f0;
-  margin: 0 0 10px 0;
-  letter-spacing: -0.5px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 14px 0;
+  letter-spacing: 0.08em;
 }
 
 .mainTitle {
@@ -256,71 +270,65 @@
 }
 
 .highlight {
-  color: #10b981; /* Vibrant emerald green highlight */
+  color: var(--accent);
 }
 
 .mainGrid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  gap: 28px;
   max-width: 1100px;
   margin: 0 auto;
 }
 
-/* Staggered visual effect - center card shifted lower */
 .mainGrid > a:nth-child(2) {
-  transform: translateY(30px);
+  transform: none;
 }
 
 .mainCard {
-  background-color: #262626; /* Dark cards */
-  border: 1px solid #333333;
-  border-radius: 16px;
-  padding: 50px 30px 40px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(197, 160, 89, 0.24);
+  border-radius: 6px;
+  padding: 34px 30px 36px;
   position: relative;
-  margin-top: 40px; /* Room for overlapping avatar */
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  min-height: 285px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.16);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
 
 .mainCard:hover {
   transform: translateY(-5px);
-  border-color: #444444;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(197, 160, 89, 0.52);
+  box-shadow: 0 24px 46px rgba(0, 0, 0, 0.24);
 }
 
-/* Specific hover restore for staggered middle card so it keeps hover animation from its offset */
 .mainGrid > a:nth-child(2):hover {
-  transform: translateY(25px);
+  transform: translateY(-5px);
 }
 
-.mainAvatarContainer {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 84px;
-  height: 84px;
-  border-radius: 50%;
-  border: 4px solid #1e1e1e; /* Cuts into card beautifully */
-  background-color: #262626;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.avatarSvg {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  display: block;
+.mainCaseBadge {
+  width: fit-content;
+  margin-bottom: 26px;
+  padding: 7px 12px;
+  border: 1px solid rgba(197, 160, 89, 0.5);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
 }
 
 .mainCardContent {
-  text-align: center;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .mainName {
@@ -333,22 +341,23 @@
 .mainCategory {
   font-size: 14px;
   font-weight: 600;
-  color: #94a3b8; /* Muted role/category label */
-  margin: 0 0 20px 0;
+  color: rgba(197, 160, 89, 0.9);
+  margin: 0 0 22px 0;
 }
 
 .mainText {
   font-size: 15px;
-  line-height: 1.7;
-  color: #d1d5db; /* Highly readable body text */
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.78);
   margin: 0;
-  text-align: center;
+  text-align: left;
+  word-break: keep-all;
 }
 
 @media (max-width: 1024px) {
   .mainGrid {
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 22px;
     padding: 0 20px;
   }
   
@@ -361,7 +370,6 @@
   }
   
   .mainSection {
-    padding: 80px 0 100px;
+    padding: 80px 0 92px;
   }
 }
-

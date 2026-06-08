@@ -60,7 +60,7 @@ export default function AdminSuccessStoryAddPage() {
       const payload = {
         ...formData,
         id: formData.id || `CASE-${Date.now()}`,
-        image: imagePreview || '/images/hero_bg.png',
+        image: imagePreview || '/images/hero_bg.webp',
         lawyer: {
           name: formData.lawyerName,
           initials: selectedLawyer ? selectedLawyer.name.substring(0, 2).toUpperCase() : 'JD'

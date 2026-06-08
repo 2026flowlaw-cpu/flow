@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   background-color: #050c1a;
-  background-image: url('/images/hero_bg.png');
+  background-image: url('/images/hero_bg.webp');
   background-size: cover;
   background-position: center;
   color: white;
@@ -112,9 +112,6 @@
   .hero {
     height: auto;
     padding: 120px 0;
-  }
-  .heroVideo {
-    display: none;
   }
   .title {
     font-size: 36px;

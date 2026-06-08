@@ -78,14 +78,14 @@ export default function AdminLawyersListingPage() {
                   <tr key={lawyer.id}>
                     <td>
                       <div className={styles.orderControls}>
-                        <button 
+                        <button
                           onClick={() => handleReorder(lawyer.id, 'up')}
                           disabled={index === 0}
                           className={styles.orderBtn}
                         >
                           🔼
                         </button>
-                        <button 
+                        <button
                           onClick={() => handleReorder(lawyer.id, 'down')}
                           disabled={index === lawyers.length - 1}
                           className={styles.orderBtn}
@@ -96,10 +96,10 @@ export default function AdminLawyersListingPage() {
                     </td>
                     <td>
                       <div className={styles.avatar}>
-                        <Image 
-                          src={lawyer.image || '/images/lawyer1.png'} 
-                          alt={lawyer.name} 
-                          fill 
+                        <Image
+                          src={lawyer.image || '/images/lawyer1.webp'}
+                          alt={lawyer.name}
+                          fill
                           style={{ objectFit: 'cover' }}
                         />
                       </div>
@@ -118,8 +118,8 @@ export default function AdminLawyersListingPage() {
                         <Link href={`/admin/lawyers/edit/${lawyer.slug}`} className={styles.editBtn}>
                           수정
                         </Link>
-                        <button 
-                          onClick={() => handleDelete(lawyer.id, lawyer.name)} 
+                        <button
+                          onClick={() => handleDelete(lawyer.id, lawyer.name)}
                           className={styles.deleteBtn}
                         >
                           삭제

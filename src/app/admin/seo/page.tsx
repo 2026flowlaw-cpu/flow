@@ -17,7 +17,7 @@ export default function AdminSeoPage() {
     title: '법무법인 플로우 - 건설/부동산 전문 법률 그룹',
     description: '건축구조기술사와 변호사의 협업으로 하자소송의 새로운 패러다임을 제시합니다.',
     keywords: '법무법인플로우, 하자소송, 건설분쟁, 부동산변호사, 집단소송',
-    og_image: '/images/og_image.png',
+    og_image: '/office_hallway_premium_1776064223861.webp',
     geo_region: 'KR-11',
     geo_placename: 'Seoul',
     geo_position: '37.4918;127.0125',
